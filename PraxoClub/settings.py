@@ -24,7 +24,8 @@ SECRET_KEY = 'nk#i^g(z94b9r@x_!$#$fz%4%do70mfz_6bgr4lw#a%&7tcor9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ASGI_APPLICATION = 'chatbot_website.wsgi.application'
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*', '192.168.1.51']
 
 # Application definition
 
@@ -35,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'channels',
+    'rest_framework', #django Rest framework app
 ]
 
 MIDDLEWARE = [
@@ -81,6 +84,33 @@ DATABASES = {
     }
 }
 
+# Necessary Configuration for Django 
+# Channel http://channels.readthedocs.io/en/latest/installation.html
+# And / &&
+# Redis Server Communication
+# Amir Hossein (https://realpython.com/getting-started-with-django-channels/)
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'CONFIG': {
+            #'hosts': [('localhost', 6379)],
+             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+        },
+        'ROUTING': 'example_channels.routing.channel_routing',
+        #"ROUTING": "club.routing.channel_routing",
+    }
+}
+
+# Rest Framework Configuration Dictionary
+# Amir Hossein (http://www.django-rest-framework.org/#installation)
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 
@@ -118,3 +148,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
