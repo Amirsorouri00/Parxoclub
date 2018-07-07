@@ -1,0 +1,5 @@
+{
+    "python.linting.enabled": false,
+    "python.pythonPath": "${workspaceFolder}\\club_env\\Scripts\\python.exe",
+    "cSpell.language": "en"
+}
