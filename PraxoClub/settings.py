@@ -35,7 +35,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    #'stream.apps.StreamConfig',
     'django.contrib.staticfiles',
+    'PatientDoc',
+    'Member',
+    'Chat',
+    'Common',
     #'channels',
     'rest_framework', #django Rest framework app
 ]
