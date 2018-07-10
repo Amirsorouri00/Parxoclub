@@ -24,7 +24,8 @@ SECRET_KEY = 'nk#i^g(z94b9r@x_!$#$fz%4%do70mfz_6bgr4lw#a%&7tcor9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ASGI_APPLICATION = 'chatbot_website.wsgi.application'
+#see
+#ASGI_APPLICATION = 'chatbot_website.wsgi.application'
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*', '192.168.1.51']
 
 # Application definition

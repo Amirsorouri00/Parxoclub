@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.postgres.fields import JSONField
 #from django_mysql.models import JSONField, Model
 
 # Create your models here.
@@ -13,7 +14,7 @@ class Profile(models.Model):
     gender = models.BooleanField(default=True)
     mobile = models.CharField(max_length=20, blank=True, null=True)
     address = models.CharField(max_length=500, blank=True, null=True)
-    #photo = JSONField(blank=True)
+    photo = JSONField(blank=True)
 
 class Memberships(models.Model):
     name = models.CharField(max_length=50)
@@ -34,13 +35,28 @@ class Physicians(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.PROTECT)
     prefix = models.ForeignKey(Prefixes, on_delete=models.PROTECT)
 
-class Group(models.Model):
+class Group_Have_Perm(models.Model):
+    name = models.CharField(max_length=50)
+    index = models.IntegerField(default=0)
+    # Foreign Keys
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+
+class Group_Give_Perm(models.Model):
     name = models.CharField(max_length=50)
     index = models.IntegerField(default=0)
     # Foreign Keys
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
 class UserGroup(models.Model):
+    class Meta:
+        unique_together = (('user_id', 'haveOrGive'))
     # Foreign Keys
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.PROTECT)
-    Group = models.ForeignKey(Group, on_delete=models.PROTECT)
+    user_id = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    HAVE = 'have'
+    GIVE = 'give'
+    GROUP_CHOICES = ((HAVE,'have'), (GIVE, 'give'))
+    haveOrGive = models.CharField(max_length = 5 ,choices = GROUP_CHOICES, null = False)
+    groupH = models.ForeignKey(Group_Have_Perm, on_delete=models.PROTECT)
+    groupG = models.ForeignKey(Group_Give_Perm, on_delete=models.PROTECT)
+    def is_have(self):
+        return self.GROUP_CHOICES in (self.HAVE, self.GIVE)
