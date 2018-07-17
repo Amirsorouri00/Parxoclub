@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.postgres.fields import JSONField
-#from django_mysql.models import JSONField, Model
+#from django.contrib.postgres.fields import JSONField
+from django_mysql.models import JSONField, Model
 
 # Create your models here.
 

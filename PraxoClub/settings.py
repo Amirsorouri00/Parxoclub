@@ -81,13 +81,30 @@ WSGI_APPLICATION = 'PraxoClub.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
+    #    'ENGINE': 'django.db.backends.postgresql',
+    #    'USER': 'postgres',
+    #    'PASSWORD': '123456',
+    #    'HOST': 'localhost',
+    #    'PORT': '5433',
+    #    'NAME': 'PraxoClub',
+
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'root',
         'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '5433',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+            # Tell MySQLdb to connect with 'utf8mb4' character set
+            'charset': 'utf8mb4',
+         },
         'NAME': 'PraxoClub',
+        'PraxoClub': {
+            'CHARSET': 'utf8mb4',
+            'COLLATION': 'utf8mb4_unicode_ci',
+         }
+
     }
+
 }
 
 # Necessary Configuration for Django 

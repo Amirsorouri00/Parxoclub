@@ -65,4 +65,3 @@ class GroupDoesntHavePermission(models.Model):
     groupHavePerm = models.ForeignKey(GH, on_delete=models.PROTECT)
     groupGivePerm = models.ForeignKey(GG, on_delete=models.PROTECT)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-    
