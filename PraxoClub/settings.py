@@ -47,13 +47,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'django.middleware.security.SecurityMiddleware',
+    #'django.contrib.sessions.middleware.SessionMiddleware',
+    #'django.middleware.common.CommonMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.contrib.auth.middleware.AuthenticationMiddleware',
+    #'django.contrib.messages.middleware.MessageMiddleware',
+    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'PraxoClub.urls'
@@ -173,3 +173,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+STATIC_URL = '/static/'
+PIC_UPLOAD_URL = './common/static/uploads/profilePics/'
+DOC_UPLOAD_URL = './common/static/uploads/docs/'
+
+STATICFILES_DIRS = [
+   # os.path.join(BASE_DIR, "static"),
+   os.path.join("D:/Farzad/Projects/Nikan/Web/Source/Django/Nikan/common/", "static"),
+]
