@@ -38,12 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     #'stream.apps.StreamConfig',
     'django.contrib.staticfiles',
+    'channels', # Required for ChatApp
     'PatientDoc',
     'Member',
     'Chat',
     'Common',
-    #'channels',
-    'rest_framework', #django Rest framework app
+    'rest_framework', # Django Rest framework app
 ]
 
 MIDDLEWARE = [
@@ -75,6 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'PraxoClub.wsgi.application'
+ASGI_APPLICATION = "Chat.routing.application"
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases

@@ -1,6 +1,7 @@
 import os, datetime
 # Django
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, Http404
 # Models
@@ -9,35 +10,14 @@ from Member.models import Members, Memberships
 # Rest_Framework
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from rest_framework import serializers
 from .models import DocCatSubmenu
+# Serializers
+from .serializer import DocCategoriesSerializer, DocCategoriesSubMenuSerializer, DocumentsSerializer
+from Member.serializer import MemberSerializer, UserSerializer
 # Forms
 from .forms import DocumentForm
 
 # Create your views here.
-
-class DocCategoriesSubMenuSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DocCatSubmenu
-        fields = ('id', 'name', 'index', 'icon')
-
-class DocCategoriesSerializer(serializers.ModelSerializer):
-    #sub_menu = serializers.StringRelatedField(many=True, allow_null=True)
-    sub_menu = DocCategoriesSubMenuSerializer(many=True)
-    class Meta:
-        model = DocCategories
-        fields = ('id', 'name', 'index', 'icon', 'sub_menu')
-
-class MemberSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Members
-        fields = ('code', 'user_id', 'membership_id')
-
-class DocumentsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Documents
-        fields = ('id', 'title', 'date', 'attachment', 'comment'
-            , 'category_id', 'physician_id', 'user_id', 'doccatsubmenu_id')
 
 #TODO list attache files should be concatenated with the json response
 def list_atch_files(record_id):
@@ -68,6 +48,35 @@ def Categories(request):
         return HttpResponse(content)
     else:
         return Http404
+
+def DocsMem(request, user_id):
+    member_info = get_object_or_404(User, id=user_id)
+    #cats = DocCategories.objects.all()
+    docs = Documents.objects.filter(user_id=user_id).order_by('date')
+    record_id = 0
+    if docs:
+        atch_files = list_atch_files(docs[0].id)
+
+    if request.is_ajax():
+        #catSerializer = DocCategoriesSerializer(cats)
+        docSerializer = DocumentsSerializer(docs, many = True)
+        memSerializer = UserSerializer(member_info)
+        #return HttpResponse(memSerializer)
+        json = {'Docs': docSerializer.data,
+            'MemberInfo': memSerializer.data}
+        content = JSONRenderer().render(json)
+        #return JsonResponse(json, safe=False)
+        return HttpResponse(content)
+        '''
+        return render(request, 'club/members/document/content.html', { 
+            'member_info': member_info,
+            'category_info': category_info, 
+            'category_records': category_records,
+            'record_id': record_id,
+            'atch_files': atch_files,
+        })'''  
+    else:
+        raise Http404
 
 def DocCatMem(request, _id, _cat):
     member_info = get_object_or_404(Members, user_id=_id)
