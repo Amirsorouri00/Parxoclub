@@ -1,6 +1,17 @@
 from django.shortcuts import render
-
+from .models import Profile
+from Common import security, constants
+from django.http.response import HttpResponse
 # Controller functions handle members actions and activities
+
+def AddProfilePkey(request, userId):
+    userProfile = Profile.objects.get(user_id = userId)
+    userProfile.pkey = security.Encrypt(constants.USER_STRING, userId)
+    userProfile.save()
+    return HttpResponse('done')
+def testDecrypt(request, temp):
+    result1 = security.Decrypt(temp).decode("utf-8").split('_')
+    return HttpResponse(result1[0]+'/n'+result1[1]+'/n'+result1[2])
 
 '''
 def member_search(request):

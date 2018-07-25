@@ -75,7 +75,31 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'PraxoClub.wsgi.application'
-ASGI_APPLICATION = "Chat.routing.application"
+ASGI_APPLICATION = 'PraxoClub.routing.application'
+
+# Necessary Configuration for Django 
+# Channel http://channels.readthedocs.io/en/latest/installation.html
+# And / &&
+# Redis Server Communication
+# Amir Hossein (https://realpython.com/getting-started-with-django-channels/)
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+    #'default': {
+    #    'BACKEND': 'asgi_redis.RedisChannelLayer',
+    #    'CONFIG': {
+            #'hosts': [('localhost', 6379)],
+    #         "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+    #    },
+    #    'ROUTING': 'example_channels.routing.channel_routing',
+        #"ROUTING": "club.routing.channel_routing",
+    #}
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
@@ -88,7 +112,6 @@ DATABASES = {
     #    'HOST': 'localhost',
     #    'PORT': '5433',
     #    'NAME': 'PraxoClub',
-
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'root',
         'PASSWORD': '123456',
@@ -103,25 +126,6 @@ DATABASES = {
             'CHARSET': 'utf8mb4',
             'COLLATION': 'utf8mb4_unicode_ci',
          }
-
-    }
-
-}
-
-# Necessary Configuration for Django 
-# Channel http://channels.readthedocs.io/en/latest/installation.html
-# And / &&
-# Redis Server Communication
-# Amir Hossein (https://realpython.com/getting-started-with-django-channels/)
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'asgi_redis.RedisChannelLayer',
-        'CONFIG': {
-            #'hosts': [('localhost', 6379)],
-             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
-        },
-        'ROUTING': 'example_channels.routing.channel_routing',
-        #"ROUTING": "club.routing.channel_routing",
     }
 }
 
@@ -152,7 +156,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/

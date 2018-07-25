@@ -1,5 +1,20 @@
 from django.shortcuts import render
 
+# Tested Basic tutorial chat project View
+from django.shortcuts import render
+from django.utils.safestring import mark_safe
+import json
+# Create your views here.
+
+def index(request):
+    return render(request, 'chat/index.html', {})
+
+def room(request, privatekey, senderprivatekey):
+    return render(request, 'chat/room.html', {
+        'privatekey': mark_safe(json.dumps(privatekey)),
+        'senderprivatekey': mark_safe(json.dumps(senderprivatekey))
+    })
+
 # Create your views here.
 '''
 def get_room_list(user_id):

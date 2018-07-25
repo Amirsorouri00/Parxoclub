@@ -1,12 +1,12 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+import datetime
 # Create your models here.
-
 
 class Room(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-    created_at = models.DateField()
+    created_at = models.DateField(default=datetime.date.today)
     label = models.SlugField(max_length=100)
     group = models.BooleanField(default=False)
     pkey = models.CharField(max_length=100, blank=False, null=False)
