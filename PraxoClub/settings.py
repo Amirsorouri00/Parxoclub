@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Member',
     'Chat',
     'Common',
+    'Log',
     'rest_framework', # Django Rest framework app
 ]
 
