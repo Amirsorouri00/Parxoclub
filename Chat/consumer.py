@@ -1,24 +1,23 @@
 import json
 import datetime
-# chat/consumers.py
-from channels.generic.websocket import AsyncWebsocketConsumer
 # Channel
 from channels.exceptions import AcceptConnection, DenyConnection, InvalidChannelLayerError
+from channels.generic.websocket import AsyncWebsocketConsumer, AsyncJsonWebsocketConsumer
 # Common
 from Common import constants, security
 # Models
-from django.db.models import Count
 from .models import Room, RoomUsers, RoomMessages
-from django.http.response import HttpResponse
 # Django
+from django.db.models import Count
 from django.core.cache import cache
-from django.utils import timezone, dateformat
 from django.conf import settings
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
-CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+# Serializer
+from .serializer import ChatMessageObject, ChatMessageObjectSerializer
+# Rest_Framework
+from rest_framework.renderers import JSONRenderer
 
-class ChatConsumer(AsyncWebsocketConsumer):
-    
+class ChatConsumer(AsyncJsonWebsocketConsumer):
+
     def CheckExistant(self, typeOf, sender_id, contact_or_room_id):
         if typeOf == constants.USER_CONTACT_HAVE_ROOM:
             room = RoomUsers.objects.values("room_id")\
@@ -42,7 +41,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     def CreateRoom(self, sender_id, contact_id):
         # Create new chat room 
         date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        cache.set('CreateRoom: '+date, 'hello', timeout=CACHE_TTL)
+        cache.set('CreateRoom: '+date, 'hello', timeout=constants.CACHE_TTL)
         chat_room = Room.objects.create(creator_id = sender_id,group=False)
         chat_room.save()
         room_id = chat_room.id
@@ -62,7 +61,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     def AddToRoom(self, sender_id, temp_room_id):
         date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        cache.set('AddToRoom: '+date, 'hello', timeout=CACHE_TTL)
+        cache.set('AddToRoom: '+date, 'hello', timeout=constants.CACHE_TTL)
         room_user = None
         room_user = RoomUsers.objects.create(room_id = temp_room_id, user_id = sender_id)
         room_user.save()
@@ -76,13 +75,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     def CreateRoomMessage(self, Message):
         date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        cache.set('CreateRoomMessage: '+date, 'hello', timeout=CACHE_TTL)
+        cache.set('CreateRoomMessage: '+date, 'hello', timeout=constants.CACHE_TTL)
         roomMessages = RoomMessages.objects.create(message = Message, room_id = self.room_name, sender_id = self.sender_id)
         roomMessages.save()
         
     async def connect(self):
         date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        cache.set('Connect: '+date, 'hello', timeout=CACHE_TTL)
+        cache.set('Connect: '+date, 'hello', timeout=constants.CACHE_TTL)
         #self.room_name = self.scope['url_route']['kwargs']['room_name']
         #self.user_id = self.scope['url_route']['kwargs']['user_id']
         
@@ -135,7 +134,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def disconnect(self, close_code):
         date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        cache.set('Disconnect: '+date, 'hello', timeout=CACHE_TTL)
+        cache.set('Disconnect: '+date, 'hello', timeout=constants.CACHE_TTL)
         # Leave room group
         await self.channel_layer.group_discard(
             self.room_group_name,
@@ -145,29 +144,31 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        cache.set('received Data at: '+date+ '.../n Received: '+text_data, 'hello', timeout=CACHE_TTL)
+        cache.set('received Data at: '+date+ '.../n Received: '+text_data, 'hello', timeout=constants.CACHE_TTL)
         text_data_json = json.loads(text_data)
-        #cache.set('receive:after: '+text_data, 'hello', timeout=CACHE_TTL)
+        #cache.set('receive:after: '+text_data, 'hello', timeout=constants.CACHE_TTL)
         message = text_data_json['message']
-        
         self.CreateRoomMessage(message)
         # Send message to room group
         await self.channel_layer.group_send(
             self.room_group_name,
             {
-                'type': 'chat_message',
+                'type': 'ChatMessageSendToAll',
                 'message': message
             }
         )
 
     # Receive message from room group
-    async def chat_message(self, event):
+    async def ChatMessageSendToAll(self, event):
         message = event['message']
-
+        chatMessage = ChatMessageObject('SendToAll', message, self.sender_id)
+        chatMessageSerialized = ChatMessageObjectSerializer(chatMessage)
+        #json = JSONRenderer().render(chatMessageSerialized.data)
         # Send message to WebSocket
-        await self.send(text_data=json.dumps({
-            'message': message
-        }))
+        await self.send_json(chatMessageSerialized.data)
+        # await self.send(text_data=json.dumps({
+        #     'message': message
+        # }))
 
 # Synchronous Tutorial Version
 
