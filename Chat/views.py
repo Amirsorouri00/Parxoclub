@@ -1,9 +1,15 @@
 from django.shortcuts import render
-
 # Tested Basic tutorial chat project View
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
 import json
+from .models import RoomUsers, Room
+# Rest_Framework
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+# Serializer
+from .serializer import RoomSerializer
+from django.http.response import HttpResponse
 # Create your views here.
 
 def index(request):
@@ -14,7 +20,19 @@ def room(request, privatekey, senderprivatekey):
         'privatekey': mark_safe(json.dumps(privatekey)),
         'senderprivatekey': mark_safe(json.dumps(senderprivatekey))
     })
-
+def UserChats(request, userId):
+    if request.is_ajax():
+        room_ids = RoomUsers.objects.filter(user_id = userId)
+        room_array = list()
+        for ids in room_ids:
+            result = getattr(ids, 'room_id')
+            room_array.append(result)
+        rooms = Room.objects.filter(id__in = room_array)
+        roomSerialized = RoomSerializer(rooms, many = True)
+        json = {'UserChats': roomSerialized.data}
+        content = JSONRenderer().render(json)
+        #return JsonResponse(json, safe=False)
+        return HttpResponse(content)
 # Create your views here.
 '''
 def get_room_list(user_id):
