@@ -10,16 +10,17 @@ from django.db.models import Count
 
 class ConsumerHandler():
     
-    def CheckExistant(self, typeOf, sender_id, contact_or_room_id):
+    def CheckExistant(self, typeOf, sender_id, contact_or_room_id):  
+        room_id = None
         if typeOf == constants.USER_CONTACT_HAVE_ROOM:
             room = RoomUsers.objects.values("room_id")\
             .filter(user_id__in=[sender_id, contact_or_room_id])\
             .annotate(room_count=Count("room_id"))\
             .filter(room_count=2)[:1]
-        room_id = None
-        if room:
-            room_id = room[0]['room_id']
-            return room_id
+            if room:
+                room_id = room[0]['room_id']
+                return room_id
+            else: return None
         elif typeOf == constants.USER_EXIST_IN_ROOM:
             #print('checkAndaddmetoroom')
             result = RoomUsers.objects.filter(room_id = contact_or_room_id)\
@@ -27,7 +28,6 @@ class ConsumerHandler():
             if result:
                 return True
             else: return False
-        else: return None
 
     #@transaction.atomic
     def CreateRoom(self, sender_id, contact_id):
@@ -75,6 +75,7 @@ class ConsumerHandler():
         sender_user_or_room = temp[0] 
         self.sender_id = temp[1]
         if sender_user_or_room == constants.ROOM_STRING:
+            ConsumerLog('error,  ', True, ' hello')
             print('error')
             return None
 
@@ -102,9 +103,10 @@ class ConsumerHandler():
                     return room_id
                     #self.send({'message':'good'})
                 else:
-                    return None
+                    #return None
                     #print('error')
-                    #raise DenyConnection
+                    raise DenyConnection
+            else: return room_id
         else:
             print('error')
             return None

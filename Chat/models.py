@@ -15,7 +15,7 @@ class Room(models.Model):
 
 class RoomUsers(models.Model):
     # Foreign Keys
-    room = models.ForeignKey(Room, on_delete=models.PROTECT)
+    room = models.ForeignKey(Room, on_delete=models.PROTECT, related_name='room_users')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
     def __unicode__(self):
@@ -25,8 +25,9 @@ class RoomMessages(models.Model):
     message = models.TextField()
     timestamp = models.DateTimeField(default=timezone.now, db_index=True)
     # Foreign Keys
-    room = models.ForeignKey(Room, on_delete=models.PROTECT, related_name='messages')
+    room = models.ForeignKey(Room, on_delete=models.PROTECT, related_name='room_messages')
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    reply_to = models.ForeignKey('self', on_delete=models.PROTECT, related_name='replyTo', blank = True, null = True)
 
     def __unicode__(self):
         return '[{timestamp}] {sender}: {message}'.format(**self.as_dict())
@@ -37,3 +38,4 @@ class RoomMessages(models.Model):
     
     def as_dict(self):
         return {'sender': self.sender.profile.pkey, 'message': self.message, 'timestamp': self.formatted_timestamp}
+

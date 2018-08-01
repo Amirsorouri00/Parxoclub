@@ -16,7 +16,6 @@ from .serializer import DocCategoriesSerializer, DocCategoriesSubMenuSerializer,
 from Member.serializer import MemberSerializer, UserSerializer
 # Forms
 from .forms import DocumentForm
-
 # Create your views here.
 
 #TODO list attache files should be concatenated with the json response

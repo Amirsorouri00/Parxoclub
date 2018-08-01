@@ -1,7 +1,5 @@
 import datetime
 # Rest_Framework
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
 from rest_framework import serializers
 # Models
 from Member.models import Members
@@ -21,3 +19,29 @@ class ChatMessageObjectSerializer(serializers.Serializer):
     message = serializers.CharField(max_length=1000)
     sender = serializers.IntegerField()
     created = serializers.DateTimeField()
+
+class ReplyMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoomMessages
+        fields = ('id', 'message', 'timestamp', 'room')
+
+class RoomMessagesSerializer(serializers.ModelSerializer):
+    #sub_menu = serializers.StringRelatedField(many=True, allow_null=True)
+    reply_to = ReplyMessageSerializer()
+    class Meta:
+        model = RoomMessages
+        fields = ('id', 'message', 'timestamp', 'room', 'sender_id', 'reply_to')
+
+class RoomUsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoomUsers
+        fields = ('id', 'user_id')
+
+class RoomSerializer(serializers.ModelSerializer):
+    room_messages = RoomMessagesSerializer(many = True)
+    room_users = RoomUsersSerializer(many = True)
+    class Meta:
+        model = Room
+        fields = ('id', 'creator_id', 'created_at', 'label', 'group',
+             'pk', 'room_messages', 'room_users')
+
