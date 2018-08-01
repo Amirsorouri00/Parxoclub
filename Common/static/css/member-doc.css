@@ -1,0 +1,613 @@
+/*
+ *** Doc create/edit form
+ */
+
+.btn-new-doc-container {
+    width: 100%;
+    height: 43px;
+    min-height: 43px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px -2px 3px 0px rgba(9, 32, 36, 0.04);
+    display: flex;
+    order: 2;
+    cursor: pointer;
+    position: relative;
+    overflow: auto;
+}
+
+.btn-new-doc {
+    width: 100%;
+    height: 43px;
+    min-height: 43px;
+    box-sizing: border-box;
+    position: absolute;
+    overflow: hidden;
+    background-image: url('../img/tableAdd.svg');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+}
+
+.doc-input-base {
+    min-width: 320px;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    order: 1;
+    box-sizing: border-box;
+    flex-flow: column;
+}
+
+
+
+.doc-input-container {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-flow: column;
+    order: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 30px;
+}
+
+.doc-input-base-padding {
+    width: 100%;
+    height: 30px;
+    display: flex;
+}
+
+.doc-buttons-base {
+    width: 100%;
+    height: 80px;
+    min-height: 80px;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+    display: flex;
+    order: 2;
+    z-index: 1;
+    margin-top: auto;
+    flex-flow: row;
+    border-top: 1px solid #dfe8f1;
+    align-items: center;
+}
+
+
+
+
+.doc-upload-btn-base {
+    width: 100%;
+    height: 100%;
+    margin: auto 0px auto 0px;
+    position: relative;
+    display: flex;
+    flex-flow: row-reverse;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+
+
+.doc-upload-base {
+    width: 60%;
+    height: 100%;
+    background-color: #f0f5f9;
+    display: flex;
+    flex-flow: column;
+    order: 2;
+    box-sizing: border-box;
+    border-left: 1px solid #dfe8f1;
+    background-image: url('../img/uploadPattern.svg');
+    background-size: 120%;
+    background-repeat: no-repeat;
+    background-position: 80% 50%;
+    justify-content: flex-start;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.doc-upload-btn {
+    width: 140px;
+    height: 160px;
+    background-image: url('../img/uploadButt.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 112px auto;
+    cursor: pointer;
+    outline: 0;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    background-color: red;
+}
+.doc-upload-btn:hover .doc-upload-btn-frame {
+    opacity: 1;
+}
+
+.doc-upload-input:focus~.doc-upload-btn-frame {
+    opacity: 1;
+}
+
+.doc-upload-input {
+    width: 140px;
+    height: 160px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+    outline: 0;
+}
+
+.doc-upload-btn-frame {
+    width: 140px;
+    height: 160px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    background-image: url('../img/uploadButtFrame.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 112px auto;
+    opacity: .3;
+    transition: 400ms ease;
+    pointer-events: none;
+}
+
+@keyframes uploadBlinker {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+.doc-upload-btn-blinker {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(131, 226, 235, .2);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    border-radius: 35px;
+    transition: 400ms ease;
+    animation: uploadBlinker 2s linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+}
+
+.doc-upload-btn-blinker2 {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(131, 226, 235, .2);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    border-radius: 35px;
+    transition: 400ms ease;
+    animation: uploadBlinkerII 1s linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+}
+
+@keyframes uploadBlinkerII {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}*/
+
+.doc-upload-btn {
+    width: 100%;
+    height: 80px;
+    min-height: 80px;
+    display: flex;
+    flex-flow: row;
+    order: 1;
+    top: 0px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, .5);
+    box-shadow: 0px 2px 3px 0px rgba(9, 32, 36, 0.04);
+    z-index: 2;
+}
+
+.doc-upload-input {
+    width: 100%;
+    height: 80px;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    outline: 0;
+    display: flex;
+}
+
+.doc-upload-btn-frame {
+    width: 320px;
+    height: 80px;
+    position: absolute;
+    background-image: url('../img/uploadFileButt.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 320px auto;
+    transition: 400ms ease;
+    pointer-events: none;
+}
+
+
+.doc-upload-btn-blinker {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(131, 226, 235, .2);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    border-radius: 35px;
+    transition: 400ms ease;
+    animation: uploadBlinker 2s linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+}
+
+.doc-upload-btn-blinker2 {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(131, 226, 235, .2);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    border-radius: 35px;
+    transition: 400ms ease;
+    animation: uploadBlinkerII 1s linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+}
+
+@keyframes uploadBlinker {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+@keyframes uploadBlinkerII {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+
+
+.upload-files-container {
+    width: 100%;
+    height: calc(100% - 80px);
+    display: flex;
+    flex-flow: column;
+    order: 2;
+}
+
+.file-upload-row {
+    width: 100%;
+    height: 120px;
+    min-height: 120px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.server-storage {
+    background-color: rgba(210,215,220,.5) !important;
+    border-bottom: 1px solid #d0d6db;
+}
+
+.local-storage {
+    background-color: rgba(210,215,220,.2) !important;
+    border-bottom: 1px solid #dfe8f1;
+}
+
+.file-upload-stored {
+    width: 30px;
+    min-width: 30px;
+    height: 100%;
+    display: flex;
+    font-size: 16px;
+    line-height: 120px;
+    text-align: center;
+    justify-content: center;
+    color: rgba(168, 176, 185, 1);
+    transition: 400ms ease;
+}
+
+.thumbnail-container {
+    width: 120px;
+    min-width: 120px;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-right: auto;
+}
+
+.thumbnail-container img {
+    max-width: 100px;
+    max-height: 100px;
+    display: flex;
+}
+
+.file-upload-name {
+    font-family: SFLight;
+    font-size: 14px;
+    color: rgba(168, 176, 185, 1);
+    padding-left: 10px;
+    display: flex;
+    margin-right: auto;
+    max-width: 100px;
+    min-width: 100px;
+    text-overflow: ellipsis;
+}
+
+.file-upload-name span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-upload-size {
+    font-family: SFLight;
+    font-size: 14px;
+    color: rgba(168, 176, 185, 1);
+    padding-left: 10px;
+    display: flex;
+    margin-right: auto;
+}
+
+.file-upload-size span {
+    margin-left: 5px;
+}
+
+
+
+.file-upload-revert {
+    width: 50px;
+    min-width: 50px;
+    height: 100%;
+    display: flex;
+    line-height: 120px;
+    text-align: center;
+    color: rgba(168, 176, 185, 1);
+    cursor: pointer;
+    transition: 400ms ease;
+    justify-content: center;
+    margin-left: auto;
+    font-size: 22px;
+    color: rgba(255, 255, 255, 1);
+    box-shadow: inset 2px 0px 3px 0px rgba(9, 32, 36, 0.3);
+}
+
+.file-upload-trash {
+    width: 50px;
+    min-width: 50px;
+    height: 100%;
+    display: flex;
+    line-height: 120px;
+    text-align: center;
+    color: rgba(168, 176, 185, 1);
+    cursor: pointer;
+    transition: 400ms ease;
+    justify-content: center;
+    margin-left: auto;
+    font-size: 18px;
+}
+
+.file-upload-remove {
+    width: 50px;
+    min-width: 50px;
+    height: 100%;
+    display: flex;
+    line-height: 120px;
+    text-align: center;
+    color: rgba(168, 176, 185, 1);
+    cursor: pointer;
+    transition: 400ms ease;
+    justify-content: center;
+    margin-left: auto;
+    font-size: 18px;
+}
+
+.file-upload-remove:hover {
+    color: #e74c3c;
+}
+
+.file-upload-trash:hover {
+    color: #e74c3c;
+}
+
+
+
+
+
+
+
+
+
+/*
+
+.img-thumbnail {
+    max-height: 100px;
+    margin: 10px;
+    pointer-events: none;
+}
+.doc-upload-list {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    transition: 400ms ease;
+    pointer-events: none;
+}
+.doc-thumbnail-container {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+    pointer-events: auto;
+}
+.doc-thumbnail-container:hover .img-thumbnail-clear {
+    opacity: .5;
+}
+.doc-thumbnail-container.active {
+    display: none;
+}
+.img-thumbnail-clear {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background-image: url('../img/clearThumbnail.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    transition: 400ms ease;
+    pointer-events: none;
+}
+
+*/
+
+
+/* --- @media --- */
+
+@media screen and (max-width: 850px) {
+    .doc-input-base {
+        width: 100%;
+        height: 60%;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid #dfe8f1;
+    }
+
+    .doc-upload-base {
+        width: 100%;
+        height: 40%;
+    }
+    .file-upload-size{
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- @media --- iPhone 5 and 5S --- */
+
+
+/* Portrait */
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    .doc-upload-btn {
+        transform: scale(.6);
+        transform-origin: 50% 0%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- @media --- iPhone 6 --- */
+
+
+/* Landscape */
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+    .doc-upload-btn {
+        transform: scale(1);
+        transform-origin: 50% 0%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* END */
