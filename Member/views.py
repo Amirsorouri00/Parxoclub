@@ -2,6 +2,9 @@ from django.shortcuts import render
 from .models import Profile
 from Common import security, constants
 from django.http.response import HttpResponse
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
+from django.contrib.auth.models import User
 # Controller functions handle members actions and activities
 
 def AddProfilePkey(request, userId):
@@ -9,9 +12,31 @@ def AddProfilePkey(request, userId):
     userProfile.pkey = security.Encrypt(constants.USER_STRING, userId)
     userProfile.save()
     return HttpResponse('done')
-def testDecrypt(request, temp):
+
+def TestDecrypt(request, temp):
     result1 = security.Decrypt(temp).decode("utf-8").split('_')
     return HttpResponse(result1[0]+'/n'+result1[1]+'/n'+result1[2])
+
+def Login(request):
+    if request.user.is_authenticated:
+        return HttpResponse('already login')
+    elif request.method == 'POST':
+        nextURL = request.POST.get(REDIRECT_FIELD_NAME, '/')
+        # user = User.objects.get(username = request.POST['username'])
+        # user.set_password(request.POST['password'])
+        # user.save()
+        user2 = authenticate(username=request.POST['username'], password=request.POST['password'])
+        if user2 is not None:
+            return HttpResponse('authenticated:'+request.POST['username']+':'+request.POST['password'])
+            login(request, user2)
+            return redirect(nextURL)
+        else:
+            return HttpResponse('not authenticated:'+request.POST['username']+':'+request.POST['password'])
+            # Dont know how to path "next" here!
+            return redirect('/')
+    else:
+        context = { REDIRECT_FIELD_NAME: request.GET.get(REDIRECT_FIELD_NAME, '/')}
+        return render(request, 'member/login.html', context)
 
 '''
 def member_search(request):

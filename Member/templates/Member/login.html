@@ -1,0 +1,49 @@
+{% extends "member/base.html" %}
+
+{% block title %} | Login{% endblock %}
+
+{% block content %}
+<div class="main">
+    <div class="login-base">
+        <div class="login-pattern">
+            <div class="login-back-overlay">
+                <div class="login-container">
+                    <div class="login-logo"></div>
+                    <div class="login-text">Welcome to PR&#923XO panel. please input your username and password to reach out your dashboard section. </div>
+                    <div class="login-input-container">
+                        <form action="{% url 'login' %}" method="post">
+							{% csrf_token %}
+                            <!-- Username -->
+                            <div class="login-input input-username">
+                                <input class="login-inputbox" type="text" name="username" id="idUsername" required="" tabindex="1">
+                                <label class="login-label"><span class="icon-member"></span>Username</label>
+                                <label class="login-border"></label>
+                                <div class="login-input-validation clr-gray04">
+                                	Your Email/Membership ID
+                                </div>
+                            </div>
+                            <!-- Password -->
+                            <div class="login-input input-password">
+                                <input class="login-inputbox" type="password" name="password" id="idPassword" required="" tabindex="1">
+                                <label class="login-label"><span class="icon-password"></span>Password</label>
+                                <label class="login-border"></label>
+                            </div>
+                            <div class="login-forget"><span>Forgot password?</span></div>
+
+                            <input type="hidden" name="next" id="idNext" value="{{ next }}"/>
+
+                            <div class="login-submit">
+                            	<button type="submit" class="login-btn btn-taint">
+									Login
+								</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="login-copyright">© 2017 PR&#923XO. All rights reserved.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
