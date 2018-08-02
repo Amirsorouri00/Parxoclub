@@ -2,6 +2,7 @@
 
 {% block title %} | Login{% endblock %}
 
+
 {% block content %}
 <div class="main">
     <div class="login-base">
@@ -46,4 +47,79 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+        console.log('hello');
+        $("#idUsername").change(function () {
+            console.log( $(this).val() );
+            var username = $(this).val();
+            $.ajax({
+                url: '/ajax/member/validate_username/',
+                data: {
+                  'username': username
+                },
+                dataType: 'json',
+                success: function (data) {
+                  if (data.is_taken) {
+                    alert(alert(data.error_message));
+                  }
+                }
+            });
+        });
+
+        $('form').submit(function(event) {
+            // do stuff
+            event.preventDefault();
+            var context = '{{context}}';
+            var username = $("#idUsername").val();
+            var password = $("#idPassword").val();
+            
+            if ((username != "") && (password != "")) {
+                //hide(); //hide pop ups about empty field
+                type = 'POST';
+                url = '/ajax/member/login/';
+                data= { username:username, password:password, context:context};//It would be best to put it like that, make it the same name so it wouldn't be confusing
+                console.log(password);
+                /*$.ajax({
+                    type: type,
+                    url: url,
+                    data: data,
+                    success: function(data){
+                        console.log(data);
+                        alert(data);
+                        if (data.is_taken) {
+                            alert(alert(data.error_message));
+                        }
+                    },
+                });*/
+                sendData(type, url, data); // Pass the variables here as a parameter
+                
+            } else { 
+                $("#empty").show(); 
+            } // pop ups 
+            return false;
+        });
+    });
+    function sendData(type, url, data) {
+        $.ajax({
+            type: type,
+            url: url,
+            data: data,
+            success: function(data){
+                console.log(data);
+                alert(data);
+                if (data.context) {
+                    // data.redirect contains the string URL to redirect to
+                    window.location.href = data.context;
+                }
+                if (data.is_taken) {
+                    alert(alert(data.error_message));
+                }
+            },
+        });
+    };
+  </script>
 {% endblock %}

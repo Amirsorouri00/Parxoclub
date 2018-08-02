@@ -1,0 +1,44 @@
+{% load static %}
+
+<div class="modal-remove-doc">
+    <form action="{% url 'document_delete' category_record.id %}" method="post"
+        show-spinner data-pjax data-pjax-push="false" data-pjax-container="modal" data-pjax-success="successCallback">
+        {% csrf_token %}
+        <div class="modal-message">Are you sure you want to delete this record?</div>
+        <div class="submit-remove-doc">
+            <div class="cancel-btn-container">
+                <div class="cancel-btn" tabindex="1" modal-close></div>
+            </div>
+            <div class="ok-btn-container">
+                <button type="submit" class="ok-btn" tabindex="1" >
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="spinner-base">
+        <div class="spinner-pattern-container">
+            <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern1">
+            <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern2">
+            <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern3"> 
+            <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern4">  
+            <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern5"> 
+            <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern6"> 
+            <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern7">                                     
+        </div>
+        <div class="spinner-container">
+            <div class="spinner-logo"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function successCallback(options) {
+        $.pjax({
+            push: false,
+            url: "{% url 'doc_cat' category_record.user_id category_record.category_id %}", 
+            container: "#idDocCat",
+            successCallback: "initCarousel",
+        });
+    }
+</script>
