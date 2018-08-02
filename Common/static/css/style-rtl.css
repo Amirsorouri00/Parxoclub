@@ -6594,7 +6594,7 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88    8b. .88      88 Y8'' .8P
         height: 100%;
         max-width: 100%;
         max-height: 100%;
-        background-image: url('../img/ErrorBack.svg');
+        /*background-image: url('../img/ErrorBack.svg');*/
         background-size: cover;
         background-repeat: no-repeat;
     }

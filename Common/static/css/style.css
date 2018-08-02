@@ -9103,7 +9103,7 @@ a88aaaa    88d888b. 88d888b. .d8888b. 88d888b.
     box-sizing: border-box;
     display: flex;
     flex-flow: column;
-    background-image: url('../img/ErrorBack.svg');
+    /*background-image: url('../img/ErrorBack.svg');*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -15646,7 +15646,7 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88    8b. .88      88 Y8'' .8P
         height: 100%;
         max-width: 100%;
         max-height: 100%;
-        background-image: url('../img/ErrorBack.svg');
+        /*background-image: url('../img/ErrorBack.svg');*/
         background-size: cover;
         background-repeat: no-repeat;
     }
