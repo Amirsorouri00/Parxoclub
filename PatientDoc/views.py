@@ -115,6 +115,9 @@ def DocCatMem(request, _id, _cat):
             'atch_files': atch_files,
         })'''
 
+def Dashboard(request, user_id):
+    return render(request, 'patientdoc/dashboard.html')
+
 # returns response to the ajax request sending from template attachment tag
 def record_atch(request, _id):
     atch_files = os.listdir(settings.DOC_UPLOAD_URL + '{}/'.format(_id))
@@ -296,7 +299,6 @@ def mohsenTest(request):
     content = JSONRenderer().render(menuList)
     #return JsonResponse(json, safe=False)
     return HttpResponse(content)
-
 
 '''
 def document_update(request, record_id):

@@ -5,6 +5,8 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.contrib.auth import logout
 # Controller functions handle members actions and activities
 
 def AddProfilePkey(request, userId):
@@ -21,22 +23,48 @@ def Login(request):
     if request.user.is_authenticated:
         return HttpResponse('already login')
     elif request.method == 'POST':
-        nextURL = request.POST.get(REDIRECT_FIELD_NAME, '/')
+        #nextURL = request.POST.get(REDIRECT_FIELD_NAME, '/')
         # user = User.objects.get(username = request.POST['username'])
         # user.set_password(request.POST['password'])
         # user.save()
-        user2 = authenticate(username=request.POST['username'], password=request.POST['password'])
+        next_url = request.POST.get('context', None)
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+        user2 = authenticate(username=username, password=password)
         if user2 is not None:
-            return HttpResponse('authenticated:'+request.POST['username']+':'+request.POST['password'])
             login(request, user2)
-            return redirect(nextURL)
+            data = {
+                'logged_in': True,
+                'Error': None,
+                'context': '/patientdoc/dashboard/'+str(user2.id)+'/'
+            }
+            return JsonResponse(data)
+            #return redirect(nextURL)
         else:
-            return HttpResponse('not authenticated:'+request.POST['username']+':'+request.POST['password'])
-            # Dont know how to path "next" here!
-            return redirect('/')
+            data = {
+                'logged_in': False,
+                'Error': None,
+                'context': '/authenticate/logout/'
+            }
+            return JsonResponse(data)
     else:
         context = { REDIRECT_FIELD_NAME: request.GET.get(REDIRECT_FIELD_NAME, '/')}
         return render(request, 'member/login.html', context)
+
+def LoginPageUsernameValidation(request):
+    username = request.GET.get('username', None)
+    data = {
+        'is_taken': User.objects.filter(username__iexact=username).exists()
+    }
+    if data['is_taken']:
+        data['error_message'] = 'A user with this username already exists.'
+    return JsonResponse(data)
+
+def Logout(request):
+    if request.user.is_authenticated == False:
+        return HttpResponse('already loggedout')
+    logout(request)
+    #return HttpResponse('logged out')
 
 '''
 def member_search(request):
