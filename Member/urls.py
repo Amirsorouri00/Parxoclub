@@ -1,5 +1,6 @@
 from django.urls import path, include
-from .views import AddProfilePkey, TestDecrypt, Login, LoginPageUsernameValidation, Logout
+from .views import AddProfilePkey, TestDecrypt, Login, LoginPageUsernameValidation, Logout, MemberSearch
+from rest_framework.authtoken import views
 from django.conf.urls import url
 urlpatterns = [
     # Test
@@ -8,8 +9,9 @@ urlpatterns = [
     # Login
     path('login/', Login, name = 'login'),
     path('logout/', Logout, name = 'logout'),
-    # Ajax
     url(r'^validate_username/$', LoginPageUsernameValidation, name='validate_username'),
+    url(r'^api-token-auth/', views.obtain_auth_token),
+    path('search/', MemberSearch, name = 'mem_search'),
 
 
     #path('admin/', admin.site.urls),

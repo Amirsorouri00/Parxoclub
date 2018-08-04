@@ -1,9 +1,16 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
 #from django.contrib.postgres.fields import JSONField
 from django_mysql.models import JSONField, Model
 
-# Create your models here.
+# rest_framework Post-Save token generator
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 class Profile(models.Model):
     # Foreign Keys
@@ -26,7 +33,7 @@ class Members(models.Model):
     # Foreign Keys
     user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.PROTECT)
     membership = models.ForeignKey(Memberships, on_delete=models.PROTECT)
-    
+
 class Prefixes(models.Model):
     name = models.CharField(max_length=50)
 

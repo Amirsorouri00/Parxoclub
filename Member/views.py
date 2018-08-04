@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from .models import Profile
+from django.http import Http404
 from Common import security, constants
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
+from django.db.models import Q, Max
 from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.http import JsonResponse
@@ -32,6 +34,7 @@ def Login(request):
         password = request.POST.get('password', None)
         user2 = authenticate(username=username, password=password)
         if user2 is not None:
+            request.session.set_expiry(300)
             login(request, user2)
             data = {
                 'logged_in': True,
@@ -66,8 +69,7 @@ def Logout(request):
     logout(request)
     #return HttpResponse('logged out')
 
-'''
-def member_search(request):
+def MemberSearch(request):
     if request.is_ajax():
         search_filter = ''
         if request.method == 'GET':
@@ -77,12 +79,18 @@ def member_search(request):
         if search_filter.isdigit():
             condition = Q(code=search_filter)
         else:
-            condition = Q(user__last_name__icontains=search_filter) | Q(user__first_name__icontains=search_filter)
+            condition = Q(last_name__icontains=search_filter) | Q(first_name__icontains=search_filter)
 
-        search_result = Members.objects.filter(condition)
-        return render(request, 'club/members/member_list.html', { 'search_result': search_result })
+        search_result = {
+            'users': User.objects.filter(condition)[0].id
+        }
+        #search_result = User.objects.filter(condition)
+        return JsonResponse(search_result)
+        #return render(request, 'club/members/member_list.html', { 'search_result': search_result })
     else:
         raise Http404
+
+'''
 
 @transaction.atomic
 def member_update(request, user_id):
