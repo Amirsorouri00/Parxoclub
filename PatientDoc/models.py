@@ -13,6 +13,7 @@ class DocCategories(models.Model):
     # Integer field for icon uses icon names
     # which are integers to gets icon's paths
     icon = models.PositiveIntegerField(blank=True, null=True)
+    icon_name = models.CharField(max_length=50, blank=True, null=True)
 
 class DocCatSubmenu(models.Model):
     name = models.CharField(max_length=50)

@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    path('userchats/<int:userId>', views.UserChats, name = 'reactWholeChat'),
+    path('userchats/<int:userId>/', views.UserChats, name = 'reactWholeChat'),
+    path('panel/', views.Chat, name = 'chat'),
     url(r'^(?P<privatekey>[^/]+)/(?P<senderprivatekey>[^/]+)$', views.room, name='room'),
 ]

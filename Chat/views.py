@@ -20,6 +20,7 @@ def room(request, privatekey, senderprivatekey):
         'privatekey': mark_safe(json.dumps(privatekey)),
         'senderprivatekey': mark_safe(json.dumps(senderprivatekey))
     })
+
 def UserChats(request, userId):
     if request.is_ajax():
         room_ids = RoomUsers.objects.filter(user_id = userId)
@@ -34,6 +35,10 @@ def UserChats(request, userId):
         #return JsonResponse(json, safe=False)
         return HttpResponse(content)
 # Create your views here.
+def Chat(request):
+    return render(request, 'chat/chats.html')
+
+
 '''
 def get_room_list(user_id):
     user_rooms = RoomUsers.objects.values_list('room_id').filter(user=user_id)

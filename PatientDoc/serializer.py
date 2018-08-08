@@ -15,7 +15,7 @@ class DocCategoriesSerializer(serializers.ModelSerializer):
     sub_menu = DocCategoriesSubMenuSerializer(many=True)
     class Meta:
         model = DocCategories
-        fields = ('id', 'name', 'index', 'icon', 'sub_menu')
+        fields = ('id', 'name', 'index', 'icon', 'icon_name','sub_menu')
 
 class DocumentsSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,4 +1,4 @@
-import os, datetime
+clu import os, datetime
 # Django
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -39,7 +39,7 @@ def handle_uploaded_doc_files(record_id, files):
 
 def Categories(request):
     if request.is_ajax():
-        cats = DocCategories.objects.all()
+        cats = DocCategories.objects.all().order_by('index')
         catSerializer = DocCategoriesSerializer(cats, many=True)
         #return HttpResponse(catSerializer)
         json = {'DocCats': catSerializer.data}
@@ -48,7 +48,18 @@ def Categories(request):
     else:
         return Http404
 
-def DocsMem(request, user_id):
+def SpecialistsHistory(request):
+    if request.is_ajax():
+        cats = DocCategories.objects.all().order_by('index')
+        catSerializer = DocCategoriesSerializer(cats, many=True)
+        #return HttpResponse(catSerializer)
+        json = {'DocCats': catSerializer.data}
+        content = JSONRenderer().render(json)
+        return HttpResponse(content)
+    else:
+        return Http404
+
+def MemberDocuments(request, user_id):
     member_info = get_object_or_404(User, id=user_id)
     #cats = DocCategories.objects.all()
     docs = Documents.objects.filter(user_id=user_id).order_by('date')
@@ -60,22 +71,22 @@ def DocsMem(request, user_id):
         #catSerializer = DocCategoriesSerializer(cats)
         docSerializer = DocumentsSerializer(docs, many = True)
         memSerializer = UserSerializer(member_info)
-        #return HttpResponse(memSerializer)
         json = {'Docs': docSerializer.data,
             'MemberInfo': memSerializer.data}
         content = JSONRenderer().render(json)
         #return JsonResponse(json, safe=False)
-        return HttpResponse(content)
-        '''
-        return render(request, 'club/members/document/content.html', { 
-            'member_info': member_info,
-            'category_info': category_info, 
-            'category_records': category_records,
-            'record_id': record_id,
-            'atch_files': atch_files,
-        })'''  
+        return HttpResponse(content) 
     else:
         raise Http404
+
+def Dashboard(request):
+    return render(request, 'patientdoc/dashboard.html')
+
+def Member(request):
+    return render(request, 'member/member.html')
+
+def MemberFemale(request, user_id):
+    return render(request, 'member/member-female.html')
 
 def DocCatMem(request, _id, _cat):
     member_info = get_object_or_404(Members, user_id=_id)
@@ -94,29 +105,9 @@ def DocCatMem(request, _id, _cat):
             'MemberInfo': memSerializer.data}
         content = JSONRenderer().render(json)
         #return JsonResponse(json, safe=False)
-        return HttpResponse(content)
-        '''
-        return render(request, 'club/members/document/content.html', { 
-            'member_info': member_info,
-            'category_info': category_info, 
-            'category_records': category_records,
-            'record_id': record_id,
-            'atch_files': atch_files,
-        })'''  
+        return HttpResponse(content) 
     else:
         raise Http404
-
-    '''else:
-        return render(request, 'club/members/index.html', { 
-            'member_info': member_info, 
-            'category_info': category_info, 
-            'category_records': category_records, 
-            'record_id': record_id,
-            'atch_files': atch_files,
-        })'''
-
-def Dashboard(request, user_id):
-    return render(request, 'patientdoc/dashboard.html')
 
 # returns response to the ajax request sending from template attachment tag
 def record_atch(request, _id):

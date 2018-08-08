@@ -1,14 +1,16 @@
-from django.shortcuts import render
 from .models import Profile
 from django.http import Http404
 from Common import security, constants
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
-from django.db.models import Q, Max
+from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
+from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.contrib.auth import logout
+# Rest_Framework
+from rest_framework.renderers import JSONRenderer
+from .serializer import UserSerializer
 # Controller functions handle members actions and activities
 
 def AddProfilePkey(request, userId):
@@ -29,17 +31,17 @@ def Login(request):
         # user = User.objects.get(username = request.POST['username'])
         # user.set_password(request.POST['password'])
         # user.save()
-        next_url = request.POST.get('context', None)
+        #next_url = request.POST.get('context', None)
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
         user2 = authenticate(username=username, password=password)
         if user2 is not None:
-            request.session.set_expiry(300)
+            request.session.set_expiry(3)
             login(request, user2)
             data = {
                 'logged_in': True,
                 'Error': None,
-                'context': '/patientdoc/dashboard/'+str(user2.id)+'/'
+                'context': '/patientdoc/dashboard/'
             }
             return JsonResponse(data)
             #return redirect(nextURL)
@@ -81,17 +83,21 @@ def MemberSearch(request):
         else:
             condition = Q(last_name__icontains=search_filter) | Q(first_name__icontains=search_filter)
 
+        data = UserSerializer(User.objects.filter(condition), many = True)
+        json = {'users': data.data}
+        content = JSONRenderer().render(json)
         search_result = {
-            'users': User.objects.filter(condition)[0].id
+            'users': User.objects.filter(condition)
         }
-        #search_result = User.objects.filter(condition)
-        return JsonResponse(search_result)
-        #return render(request, 'club/members/member_list.html', { 'search_result': search_result })
+        #return JsonResponse(search_result)
+        return HttpResponse(content)
     else:
         raise Http404
 
-'''
+def Maintenance(request):
+    return render(request, 'member/maintenance.html')
 
+'''
 @transaction.atomic
 def member_update(request, user_id):
     user = get_object_or_404(User, id=user_id)
