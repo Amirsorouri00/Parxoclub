@@ -1,0 +1,65 @@
+{% extends "common/index.html" %} {% load static %} {% block IndexCss %}
+<link rel="stylesheet" href="{% static 'css/praxo-dr-font.css' %}">
+<link rel="stylesheet" href="{% static 'css/slick.css' %}" />
+<link rel="stylesheet" href="{% static 'css/slick-theme.css' %}" />
+<link rel="stylesheet" href="{% static 'css/quills.css' %}"> {% endblock %}
+<!-- Title Block -->
+{% block title %} | Member{% endblock %}
+<!-- After Side Nav Block Objects in index.html -->
+{% block after_side_nav_content %}
+<!-- Float Chat -->
+{% include 'chat/float-chat-chat-drag.html' %}
+<!-- Float Calender -->
+{% include 'calender/float-calender-calender-drag.html' %}
+<!-- Member Content -->
+{% include 'member/member-content.html' %}
+<!-- Member Search Panel -->
+{% include 'member/member-search-result-panel.html' %}
+<!-- Member Search Plane -->
+{% include 'member/member-plane-search.html' %}
+<!-- Member Detail History -->
+{% include 'member/member-detail-history.html' %} {% endblock %}
+<!-- After mobile menu back Block Objects in index.html  -->
+{% block menu-back-after-content %}
+<!-- Modal -->
+{% include 'member/member-newdoc-modal.html' %}
+<!-- Member Options Modal -->
+{% include 'member/member-edit-members(options,membership)-modal.html' %}
+<!-- Remove Doc Modal -->
+{% include 'member/member-remove-document-modal.html' %}
+<!-- Change Photo -->
+{% include 'member/member-change-photo-modal.html' %}
+<!-- Show Event Modal -->
+{% include 'member/member-show-event-modal.html' %}
+<!-- Add Event Modal -->
+{% include 'member/member-add-event-modal.html' %}
+<!-- Edit Event Modal -->
+{% include 'member/member-edit-event-modal.html' %}
+<!-- Remove Event Modal -->
+{% include 'member/member-remove-event-modal.html' %}
+<!-- Chat Upload Modal -->
+{% include 'chat/chat-chat-upload-modal.html' %}
+<!-- Remove Chat Modal -->
+{% include 'chat/chat-remove-chat-modal.html' %}
+<!-- Modal Member Info -->
+{% include 'member/member-member-info-modal.html' %}
+<!-- Edit History Modal -->
+{% include 'patientdoc/patientdoc-edit-history-modal.html' %} {% endblock %} {% block EndJavascript %}
+<script src="{% static 'js/carousel.js' %}"></script>
+<script src="{% static 'js/large-carousel/zoomer.js' %}"></script>
+<script src="{% static 'js/large-carousel/mousewheel.js' %}"></script>
+<script src="{% static 'js/large-carousel/large-carousel-zoom.js' %}"></script>
+<script src="{% static 'js/large-carousel/zoomer.js' %}"></script>
+<script src="{% static 'js/resize-carousel.js' %}"></script>
+<script src="{% static 'js/quills.js' %}"></script>
+<script src="{% static 'js/quills-script-history.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    DocumentCategories('GET', '{% url "doccategories" %}');
+    //url = '/ajax/member/search';
+    $("#idSearchBoxMember").keyup(function() {
+        MemberSearch($("#idSearchBoxMember"), "GET", "{% url 'mem_search'%}", $(this).val());
+    });
+});
+</script>
+{% endblock %}

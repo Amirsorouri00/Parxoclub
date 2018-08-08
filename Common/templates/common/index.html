@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--
+           ╔╣╣╣╣╣╗╖┌   ╓╥╣╣╣╣╣╣╖
+         ╔╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╖
+         ╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╝
+          ╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╜
+           ╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╜     ╣╜╙╙╙╣═╣╜╙╙╙╣═  ╢╣╖  ╙╣╖ ╔╝└╓╣╜╙╙╣
+           ║╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣      ╣─╗╗╗╣ ╣═ ╣╗╣─ ╢╜ ╢╖  ╓╣╣╖  ╢    ║╬
+           ╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣     ╣─     ╣─  ╙╣═╢╜   ║═╢╜─ ╙╣═ ╨╣╗╣╜
+         ╓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣
+         ╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣
+         ╙╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╝
+           ╙╣╣╣╣╝╜└     ╙╙╣╣╣╣╜└
+ 
+ -->
+<html lang="en , fa">
+{% load static %}
+
+<head>
+    <title>P R Λ X O{% block title %}{% endblock %}</title>
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content=" width=device-width,   initial-scale=1.0,   maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="The Way We ... Flow">
+    <meta name="keywords" content="Praxo, praxo, PRAXO,P R &#923 X O, PR&#923XO, software, engineering, software engineering, programming, healthcare, health, hospital, Medical, HIS, LIS, Integrating HIS & LIS, Hospital information system, Laboratory Information System, web designing, UI, UX, Android, IOS, App development, Laboratory  ">
+    <meta name="description" content="The Way We ... Flow | PRAXO">
+    <meta name="author" content="PRAXO">
+    <meta property="og:site_name" content="PRAXO">
+    <meta property="og:title" content="praxo.ir">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="The Way We ... Flow | PRAXO">
+    <meta property="og:image" content="http://www.praxo.ir/img/praxo.jpg">
+    <meta name="twitter:site" content="@praxoco">
+    <meta name="twitter:description" content="The Way We ... Flow | PRAXO">
+    <meta property="og:site_name" content="PRAXO">
+    <meta property="og:title" content="PRAXO">
+    <meta property="og:url" content="https://www.praxo.ir/">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="The Way We ... Flow | PRAXO">
+    <meta property="og:image" content="http://www.praxo.ir/img/praxo.jpg">
+    <meta name="msapplication-config" content="{% static '/favico/browserconfig.xml' %}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- link -->
+    <link rel="canonical" href="http://www.praxo.ir/">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/favico/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static '/favico/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/favico/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static '/favico/manifest.json' %}">
+    <link rel="mask-icon" href="{% static '/favico/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <link rel="shortcut icon" href="{% static '/favico/favicon.ico' %}">
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.overlayScrollbars.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/praxofont.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/member-doc.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static '/css/praxofont.css' %}"> {% block IndexCss %} {% endblock %}
+    <!-- Scripts -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/button.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/js.cookie.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/html-objects-to-append.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/all-ajax-functions.js' %}"></script>
+    {% block HeadJavascript %} {% endblock %}
+</head>
+
+<body>
+    <div class="main">
+        {% include 'common/index-main-header.html' %}
+        <div class="mobile-main">
+            {% include 'common/index-main-mobile-side-nav.html' %} {% block after_side_nav_content %} {% endblock %}
+        </div>
+    </div> {% block content %} {% endblock %} {% include 'common/index-mobile-menu-back.html' %} {% block menu-back-after-content %} {% endblock %}
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="{% static 'js/jquery.overlayScrollbars.min.js' %}"></script>
+    {% block DashboardJavascript %} {% endblock %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/hammer.js' %}"></script>
+    <script src="{% static 'js/hammer-menu.js' %}"></script>
+    <script src="{% static 'js/mobile-script.js' %}"></script>
+    <script src="{% static 'js/button.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script src="{% static 'js/float-panels.js' %}"></script>
+    <script src="{% static 'js/notification.js' %}"></script>
+    <script src="{% static 'js/demo.js' %}"></script>
+    {% block DashboardJavascript2 %} {% endblock %}
+    <!--<script src="{% static 'js/quills.js' %}"></script>
+    <script src="{% static 'js/quills-script-history.js' %}"></script>-->
+</body>
+{% block EndJavascript %} {% endblock %}
+
+</html>

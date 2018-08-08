@@ -1,0 +1,25 @@
+{% extends "common/index.html" %} {% load static %}
+<!-- Title Block -->
+{% block title %} | Maintenace{% endblock %}
+<!-- After Side Nav Block Objects in index.html  -->
+{% block after_side_nav_content %}
+<!-- Maintenance panel -->
+{% include 'member/maintenance-panel-maintenance.html' %}
+<!-- Maintenance Users -->
+{% include 'member/maintenance-user-maintenance.html' %} {% endblock %} {% block menu-back-after-content %}
+<!-- Modal Add User -->
+{% include 'member/maintenance-add-user-modal.html' %}
+<!-- Modal Edit User -->
+{% include 'member/maintenance-edit-user-modal.html' %}
+<!-- Modal Remove User -->
+{% include 'member/maintenance-remove-user-modal.html' %} {% endblock %} {% block EndJavascript %}
+<script src="{% static 'js/carousel.js' %}"></script>
+<script src="{% static 'js/large-carousel/zoomer.js' %}"></script>
+<script src="{% static 'js/large-carousel/mousewheel.js' %}"></script>
+<script src="{% static 'js/large-carousel/large-carousel-zoom.js' %}"></script>
+<script src="{% static 'js/large-carousel/zoomer.js' %}"></script>
+<script src="{% static 'js/resize-carousel.js' %}"></script>
+<script src="{% static 'js/quills.js' %}"></script>
+<script src="{% static 'js/quills-script-history.js' %}"></script>
+<script src="js/froala.min.js"></script>
+{% endblock %}

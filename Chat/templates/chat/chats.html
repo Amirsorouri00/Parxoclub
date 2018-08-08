@@ -1,0 +1,24 @@
+{% extends "common/index.html" %}
+<!-- Title Block -->
+{% block title %} | ChatPanel{% endblock %}
+<!-- After Side Nav Block Objects in index.html  -->
+{% block after_side_nav_content %}
+<!-- Float Calender -->
+<!-- Chat Panel -->
+{% include 'chat/chat-user-chats-panel.html' %}
+<!-- Talk -->
+{% include 'chat/chat-talk-main-panel.html' %} {% endblock %}
+<!-- After mobile menu back Block Objects in index.html  -->
+{% block menu-back-after-content %}
+<!-- Show Event Modal -->
+{% include 'member/member-show-event-modal.html' %}
+<!-- Add Event Modal -->
+{% include 'member/member-add-event-modal.html' %}
+<!-- Edit Event Modal -->
+{% include 'member/member-edit-event-modal.html' %}
+<!-- Remove Event Modal -->
+{% include 'member/member-remove-event-modal.html' %}
+<!-- Chat Upload Modal -->
+{% include 'chat/chat-chat-upload-modal.html' %}
+<!-- Remove Chat Modal -->
+{% include 'chat/chat-remove-chat-modal.html' %} {% endblock %}

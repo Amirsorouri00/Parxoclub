@@ -1,0 +1,48 @@
+<!-- Maintenance Users -->
+<div class="maintenance-content">
+    <div class="maintenance-content-container">
+        <div class="maintenance-content-header">
+            <form class="maintenance-search">
+                <input type="text" name="search" required="">
+                <label>Search</label>
+                <div class="maintenance-input-box">
+                    <select class="maintenance-search-select">
+                        <option value="gold">All Users</option>
+                        <option value="silver">Supervisors</option>
+                        <option value="bronze">Experts</option>
+                        <option value="bronze">Doctors</option>
+                        <option value="bronze">Nurses</option>
+                        <option value="bronze">Suppliers</option>
+                        <option value="bronze">Patients</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="maintenance-users-list overlay-scroll">
+            <div id-modal="idEditUser" class="user-base-maintenance" modal-btn="show">
+                <div class="user-maintenance-photo-container">
+                    <div class="user-maintenance-photo"></div>
+                </div>
+                <div class="user-maintenance-content-container">
+                    <span class="user-maintenance-name">Masoud Nourbakhsh</span>
+                    <span class="user-maintenance-title">Digestive Laboratory Supervisor</span>
+                </div>
+                <div id-modal="idRemoveUser" class="user-maintenance-remove icon-trashfill" modal-btn="show"></div>
+            </div>
+            <div id-modal="idEditUser" class="user-base-maintenance" modal-btn="show">
+                <div class="user-maintenance-photo-container">
+                    <div class="user-maintenance-photo"></div>
+                </div>
+                <div class="user-maintenance-content-container">
+                    <span class="user-maintenance-name">Masoud Nourbakhsh</span>
+                    <span class="user-maintenance-title">Digestive Laboratory Supervisor</span>
+                </div>
+                <div id-modal="idRemoveUser" class="user-maintenance-remove icon-trashfill" modal-btn="show"></div>
+            </div>
+        </div>
+        <div id-modal="idAddUser" class="btn-new-doc-container " modal-btn="show">
+            <div class="btn-new-doc btn-taint">
+            </div>
+        </div>
+    </div>
+</div>

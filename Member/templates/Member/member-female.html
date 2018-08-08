@@ -1,0 +1,1488 @@
+{% extends "common/index.html" %} {% block title %} | Dashboard{% endblock %}{% block side_content %} {% load static %}
+<!-- Float Chat -->
+<div class="chat-drag">
+    <div class="float-chat-base">
+        <div class="float-chat-header">
+            <div class="photo-container-float-chat">
+                <div class="float-chat-photo"></div>
+            </div>
+            <div class="user-name-float-chat">Masoud Nourbakhsh</div>
+            <div id-modal="idRemoveChat" class="remove-chat-tool" modal-btn="show">
+                <span class="icon-trashfill"></span>
+            </div>
+        </div>
+        <div class="float-chat-talk overlay-scroll">
+            <div style="padding-left: 10px;padding-right: 10px;">
+                <!-- Member Bubble -->
+                <div class="received-bubble">
+                    <div class="bubble-container">
+                        <div class="bubble-text">
+                            <span>Thanks for headup ;)</span>
+                        </div>
+                        <div class="bubble-detail">
+                            <span class="time">6:23 pm</span>
+                            <span class="status"></span>
+                            <span class="attach"></span>
+                        </div>
+                    </div>
+                    <div class="bubble-check">
+                        <div class="bubble-checkbox">
+                            <div class="bubble-checkbox-select">
+                                <span class="bubble-checkbox-icon icon-check"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Admin Bubble -->
+                <div class="sent-bubble">
+                    <div class="bubble-container">
+                        <div class="bubble-text">
+                            <span>I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection.It seems you have some inflammation in your knees. However, there's nothing broken. Just take some ibuprofen or aspirin and the swelling should go down.OK, I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection.</span>
+                        </div>
+                        <div class="bubble-detail">
+                            <span class="time">6:23 pm</span>
+                            <span class="status icon-delivered"> </span>
+                            <span class="attach"></span>
+                        </div>
+                    </div>
+                    <div class="bubble-check">
+                        <div class="bubble-checkbox">
+                            <div class="bubble-checkbox-select">
+                                <span class="bubble-checkbox-icon icon-check"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Member Bubble - Attached -->
+                <div class="received-bubble">
+                    <div class="bubble-attach">
+                        <div class="bubble-file-attach">
+                            <img src="img/nik2.png">
+                        </div>
+                        <div class="bubble-text-attach">
+                            <span>Thanks for headup ;) </span>
+                        </div>
+                        <div class="bubble-detail-attach">
+                            <span class="time">6:23 pm</span>
+                            <span class="status"></span>
+                            <span class="attach icon-attach"></span>
+                        </div>
+                    </div>
+                    <div class="bubble-check">
+                        <div class="bubble-checkbox">
+                            <div class="bubble-checkbox-select">
+                                <span class="bubble-checkbox-icon icon-check"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Admin Bubble - Attached -->
+                <div class="sent-bubble">
+                    <div class="bubble-attach">
+                        <div class="bubble-file-attach">
+                            <img src="img/nik.png">
+                        </div>
+                        <div class="bubble-text-attach">
+                            <span>Thanks for headup ;) </span>
+                        </div>
+                        <div class="bubble-detail-attach">
+                            <span class="time">6:23 pm</span>
+                            <span class="status icon-sent"></span>
+                            <span class="attach icon-attach"></span>
+                        </div>
+                    </div>
+                    <div class="bubble-check">
+                        <div class="bubble-checkbox">
+                            <div class="bubble-checkbox-select">
+                                <span class="bubble-checkbox-icon icon-check"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="float-chat-type-base">
+            <div id-modal="idChatUpload" class="float-attach-container" modal-btn="show">
+                <div class="float-attach-btn btn-taint icon-attach"></div>
+            </div>
+            <div class="float-emoji-container">
+                <div class="float-emoji-btn btn-taint icon-emoji"></div>
+                <div class="float-emoji-base">
+                    <div class="float-emoji-wrapper">
+                        <div class="emoji" style="background-image: url('img/emoji/Eyes-only.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Grin-1.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Grin-2.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Grin-3.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Smile.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Sad-1.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Sad-3.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Frown-1.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Frown-2.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Surprised-sad.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Surprised-sad raised brows.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Sad-with frown.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Surprised-raised brows.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Surprised.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Angry-1.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Angry-2.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Delightful.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Not-impressed.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Smirk.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Wink.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Heart-Eyes.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Kiss-Heart.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Kiss.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Kiss-Happy Eyes.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Disappointed.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Doh.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Blushing-1.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Jazz-Hands.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Dead.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Yelling.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Sigh.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Tongue-Out 1.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Tongue-Out 2.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Tongue-Out 3.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Tongue-Out 4.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Eyes-Up.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Eyes-Open.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Sigh-2.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Angel.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Nervous-Smile.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Grin-Drop.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Tired-Drop.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Tear-1.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Headache-1.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Headache-2.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Spooky.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Laughing-Tears.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Wiping-Tear.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Sunglasses.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Zzz.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Nurse.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Crying.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Wounded.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Dollar-Eyes.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Pondering.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Ill.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Zipped.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Geek.png');"></div>
+                        <div class="emoji" style="background-image: url('img/emoji/Hrumph.png');"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="type-sep"></div>
+            <div class="float-type-input-base">
+                <form>
+                    <input id="idChatInputFloat" class="float-type-input" required="">
+                    <label class="float-label-type-input"> Write a message...</label>
+                    </input>
+                </form>
+            </div>
+            <div class="float-type-send-container">
+                <div class="float-send-btn btn-taint icon-send"></div>
+            </div>
+        </div>
+    </div>
+    <div class="float-chat-btn icon-chatfill"></div>
+</div>
+<!-- Float Calendar -->
+<div class="calendar-drag">
+    <div class="float-calendar-base">
+        <div class="float-calendar-header">
+            <div class="icon-container-float-calendar icon-calendarfill"></div>
+            <div class="month-name-float-calendar">November 2017</div>
+        </div>
+        <div class="float-calendar-table-wrapper">
+            <div class="float-calendar-table-container">
+                <div class="float-calendar-table-base">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Son</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wen</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">29</span>
+                                            <span class="date-2">29</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">30</span>
+                                            <span class="date-2">30</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">31</span>
+                                            <span class="date-2">31</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">1</span>
+                                            <span class="date-2">1</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">2</span>
+                                            <span class="date-2">2</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="active">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">3</span>
+                                            <span class="date-2">3</span>
+                                        </div>
+                                        <div class="event-cell-container">
+                                            <div class="float-event-badge bg-yellow">
+                                                <span class="event-count">6</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">4</span>
+                                            <span class="date-2">4</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">5</span>
+                                            <span class="date-2">5</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">6</span>
+                                            <span class="date-2">6</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">7</span>
+                                            <span class="date-2">7</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="today">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">8</span>
+                                            <span class="date-2">8</span>
+                                        </div>
+                                        <div class="event-cell-container">
+                                            <div class="float-event-badge bg-blue">
+                                                <span class="event-count">15</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">9</span>
+                                            <span class="date-2">9</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">10</span>
+                                            <span class="date-2">10</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">11</span>
+                                            <span class="date-2">11</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">12</span>
+                                            <span class="date-2">12</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">13</span>
+                                            <span class="date-2">13</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">14</span>
+                                            <span class="date-2">14</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">15</span>
+                                            <span class="date-2">15</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">16</span>
+                                            <span class="date-2">16</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">17</span>
+                                            <span class="date-2">17</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">18</span>
+                                            <span class="date-2">18</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">19</span>
+                                            <span class="date-2">19</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">20</span>
+                                            <span class="date-2">20</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">21</span>
+                                            <span class="date-2">21</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">22</span>
+                                            <span class="date-2">22</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">23</span>
+                                            <span class="date-2">23</span>
+                                        </div>
+                                        <div class="event-cell-container">
+                                            <div class="float-event-badge bg-red">
+                                                <span class="event-count">24</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">24</span>
+                                            <span class="date-2">24</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">25</span>
+                                            <span class="date-2">25</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">26</span>
+                                            <span class="date-2">26</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">27</span>
+                                            <span class="date-2">27</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">28</span>
+                                            <span class="date-2">28</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">29</span>
+                                            <span class="date-2">29</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">30</span>
+                                            <span class="date-2">30</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">1</span>
+                                            <span class="date-2">1</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">2</span>
+                                            <span class="date-2">2</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">3</span>
+                                            <span class="date-2">3</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">4</span>
+                                            <span class="date-2">4</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">5</span>
+                                            <span class="date-2">5</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">6</span>
+                                            <span class="date-2">6</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">7</span>
+                                            <span class="date-2">7</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">8</span>
+                                            <span class="date-2">8</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="disable">
+                                    <div class="date-cell">
+                                        <div class="date-container">
+                                            <span class="date-1">9</span>
+                                            <span class="date-2">9</span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="float-event-base">
+                    <div class="float-event-container overlay-scroll">
+                        <div class="event-detial" id-modal="idShowEvent" modal-btn="show">
+                            <div class="event-type-detail icon-labfill"></div>
+                            <div class="event-time-detail w-30"><span>10 am - 11:30 am</span></div>
+                            <div class="event-title-detail w-50"><span>Design A Priscription schdl for Dr. Farmani</span></div>
+                            <div class="edit-event-detail-btn icon-edit" id-modal="idEditEvent" modal-btn="show"></div>
+                            <div class="remove-event-detail-btn icon-close" id-modal="idRemoveEvent" modal-btn="show"></div>
+                        </div>
+                        <div class="event-detial" id-modal="idShowEvent" modal-btn="show">
+                            <div class="event-type-detail icon-prescfill"></div>
+                            <div class="event-time-detail w-30"><span>10 am - 11:30 am</span></div>
+                            <div class="event-title-detail w-50"><span>Design A Priscription schdl for Dr. Farmani</span></div>
+                            <div class="edit-event-detail-btn icon-edit" id-modal="idEditEvent" modal-btn="show"></div>
+                            <div class="remove-event-detail-btn icon-close" id-modal="idRemoveEvent" modal-btn="show"></div>
+                        </div>
+                        <div class="event-detial" id-modal="idShowEvent" modal-btn="show">
+                            <div class="event-type-detail icon-labfill"></div>
+                            <div class="event-time-detail w-30"><span>10 am - 11:30 am</span></div>
+                            <div class="event-title-detail w-50"><span>Design A Priscription schdl for Dr. Farmani</span></div>
+                            <div class="edit-event-detail-btn icon-edit" id-modal="idEditEvent" modal-btn="show"></div>
+                            <div class="remove-event-detail-btn icon-close" id-modal="idRemoveEvent" modal-btn="show"></div>
+                        </div>
+                        <div class="event-detial" id-modal="idShowEvent" modal-btn="show">
+                            <div class="event-type-detail icon-labfill"></div>
+                            <div class="event-time-detail w-30"><span>10 am - 11:30 am</span></div>
+                            <div class="event-title-detail w-50"><span>Design A Priscription schdl for Dr. Farmani</span></div>
+                            <div class="edit-event-detail-btn icon-edit" id-modal="idEditEvent" modal-btn="show"></div>
+                            <div class="remove-event-detail-btn icon-close" id-modal="idRemoveEvent" modal-btn="show"></div>
+                        </div>
+                    </div>
+                    <div id-modal="idAddEvent" class="btn-new-doc-container " modal-btn="show">
+                        <div class="btn-new-doc btn-taint"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="float-calendar-selector-base">
+            <div id="idFloatPrev" class="text-submit-btn-container ">
+                <div class="text-submit-btn float btn-taint"><span class="fs-22 clr-lightGray icon-left"></span></div>
+            </div>
+            <div id="idFloatSep1" class="text-submit-btn-sep"></div>
+            <div id="idFloatToday" class="text-submit-btn-container ">
+                <div class="text-submit-btn float btn-taint"><span class="submit-sf clr-lightGray">Today</span></div>
+            </div>
+            <div id="idFloatSep2" class="text-submit-btn-sep"></div>
+            <div id="idFloatNext" class="text-submit-btn-container ">
+                <div class="text-submit-btn float btn-taint"><span class="fs-22 clr-lightGray icon-right"></span></div>
+            </div>
+            <div id="idFloatBack" class="text-submit-btn-container">
+                <div class="text-submit-btn float btn-taint"><span class="fs-22 clr-lightGray icon-left"></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="float-calendar-btn icon-calendarfill"></div>
+</div>
+<!-- Members Content -->
+<div class="content-wrapper">
+    <div class="member-panel">
+        <div class="info">
+            <div class="container">
+                <div class="photo-container">
+                    <div class="photo" id-modal="idChangePhoto" modal-btn="show">
+                        <div class="change-overlay">change</div>
+                    </div>
+                </div>
+                <div class="detail-container">
+                    <span id-modal="idMemberInfo" class="detail-bold" modal-btn="show">Masoud Nourbakhsh</span>
+                    <span class="detail">Title / Position</span>
+                    <span class="detail">Male | 28</span>
+                    <span class="detail">Gold Membership</span>
+                </div>
+            </div>
+            <div class="member-options">
+                <div class="member-option-btn btn-modal icon-editfill" id-modal="idEditMember" modal-btn="show"></div>
+                <div id="idFloatCalendarLoader" class="member-option-btn icon-calendarfill"></div>
+                <div id="idFloatChatLoader" class="member-option-btn icon-chatfill"></div>
+            </div>
+        </div>
+        <div class="member-menu overlay-scroll">
+            <div class="column active">
+                <div class="main">
+                    <div class="icon icon-time"></div>
+                    <div class="title">
+                        Member History
+                    </div>
+                    <div class="expander">
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="main">
+                    <div class="icon icon-lab"></div>
+                    <div class="title">
+                        Laboratory & Pathology
+                    </div>
+                    <div class="expander">
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="main">
+                    <div class="icon icon-imaging"></div>
+                    <div class="title">
+                        Imaging
+                    </div>
+                    <div class="badge-container">
+                        <div class="badge  bg-yellow">
+                            <span> 141 </span>
+                        </div>
+                    </div>
+                    <div class="expander">
+                        <span class="icon-right"></span>
+                    </div>
+                </div>
+                <div class="submenu">
+                    <div class="item">
+                        <span>● Sonography</span>
+                    </div>
+                    <div class="item">
+                        <span>● MRI</span>
+                    </div>
+                    <div class="item">
+                        <span>● Radiology</span>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="main">
+                    <div class="icon icon-heart"></div>
+                    <div class="title">
+                        Heart
+                    </div>
+                    <div class="badge-container">
+                    </div>
+                    <div class="expander">
+                        <span class="icon-right"></span>
+                    </div>
+                </div>
+                <div class="submenu">
+                    <div class="item">
+                        <span>● Electrocardiography</span>
+                    </div>
+                    <div class="item">
+                        <span>● Echo</span>
+                    </div>
+                    <div class="item">
+                        <span>● Fitness Test</span>
+                    </div>
+                    <div class="item">
+                        <span>● CTA Result</span>
+                    </div>
+                    <div class="item">
+                        <span>● CTA Report</span>
+                    </div>
+                    <div class="item">
+                        <span>● Angioplasty</span>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="main">
+                    <div class="icon icon-digestive"></div>
+                    <div class="title">
+                        Digestive System
+                    </div>
+                    <div class="badge-container">
+                    </div>
+                    <div class="expander">
+                        <span class="icon-right"></span>
+                    </div>
+                </div>
+                <div class="submenu">
+                    <div class="item">
+                        <span>● Endoscopy</span>
+                    </div>
+                    <div class="item">
+                        <span>● Colonoscopy</span>
+                    </div>
+                </div>
+            </div>
+            <div class="seperator"></div>
+            <div class="column">
+                <div class="main">
+                    <div class="icon icon-presc"></div>
+                    <div class="title">
+                        Prescriptions
+                    </div>
+                    <div class="badge-container">
+                    </div>
+                    <div class="expander">
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="main">
+                    <div class="icon icon-hospital"></div>
+                    <div class="title">
+                        Hospitalization
+                    </div>
+                    <div class="badge-container">
+                    </div>
+                    <div class="expander">
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="main">
+                    <div class="icon icon-medic"></div>
+                    <div class="title">
+                        Medicinal schedule
+                    </div>
+                    <div class="badge-container">
+                    </div>
+                    <div class="expander">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search Results Panel -->
+<div class="search-result-wrapper">
+    <div class="search-result-panel">
+        <div class="search">
+            <form class="container">
+                <input id="idSearchBoxMember" type="text" name="search" required="" tabindex="-1" autocomplete="off">
+                <label class="label">Search</label>
+                <!-- <input class="button" type="reset"> -->
+            </form>
+        </div>
+        <div id="idResultContainer" class="result-container">
+            <div class="result-list">
+                <div class="result-item">
+                    <div class="photo-container">
+                        <div class="photo"></div>
+                    </div>
+                    <div class="detail">
+                        <span class="name">Masoud Nourbakhsh</span>
+                        <span class="position">Title/Position</span>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <div class="photo-container">
+                        <div class="photo"></div>
+                    </div>
+                    <div class="detail ">
+                        <span class="name">Masoud Nourbakhsh</span>
+                        <span class="position">Title/Position</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Plane Member Search -->
+<div class="plane-search-wrapper" style="display: none;">
+    <div class="plane-search-container">
+        <form class="header-plane-search">
+            <input type="text" name="search" required="">
+            <label>Search</label>
+        </form>
+        <div class="options-plane-search"></div>
+    </div>
+</div>
+<!-- Docs Content -->
+<!-- Member detail -->
+<div class="docs-main">
+    <div class="member-docs">
+        <div class="doc-container">
+            <div class="doc-header">
+                <div class="mobile-back-member icon-left btn-taint"></div>
+                <div class="doc-header-icon">
+                    <span class="icon-imagingfill"></span>
+                </div>
+                <span class="doc-header-title">Imaging > Sonography</span>
+            </div>
+            <div class="doc-content">
+                <div class="doc-photo">
+                    <div class="doc-photo-header">
+                        <div class="edit-doc icon-editfill" id-modal="idNewDoc" modal-btn="show"></div>
+                        <div class="remove-doc icon-trashfill" id-modal="idRemoveDoc" modal-btn="show"></div>
+                    </div>
+                    <div class="doc-carousel">
+                        <div class="carousel-cell">
+                            <div class="carousel-img" style="transform: scale(0.4);" id-modal="idMemberLargeCarousel" modal-btn="show"></div>
+                        </div>
+                        <div class="carousel-cell">
+                            <div class="carousel-img" style="transform: scale(0.4);" id-modal="idMemberLargeCarousel" modal-btn="show"></div>
+                        </div>
+                        <div class="carousel-cell">
+                            <div class="carousel-img" style="transform: scale(0.4);" id-modal="idMemberLargeCarousel" modal-btn="show"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-table">
+                    <table class="w-100">
+                        <thead>
+                            <tr>
+                                <th class="w-10"></th>
+                                <th class="w-20">Date</th>
+                                <th class="w-25">Title</th>
+                                <th class="w-25">Supervisor</th>
+                                <th class="w-20">Site</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="overlay-scroll">
+                        <table class="w-100" style="margin-top: -44px;">
+                            <thead>
+                                <tr>
+                                    <th class="w-10"></th>
+                                    <th class="w-20">Date</th>
+                                    <th class="w-25">Title</th>
+                                    <th class="w-25">Supervisor</th>
+                                    <th class="w-20">Site</th>
+                                </tr>
+                            </thead>
+                            <tbody id="idDocRecords">
+                                <tr class="rowLink">
+                                    <td class="notification clr-red icon-alertfill" style="font-size: 18px;"></td>
+                                    <td>1396/08/25</td>
+                                    <td>Cardio Approval</td>
+                                    <td>Dr. Nashraqi</td>
+                                    <td>Nikan-East</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <script type="text/javascript">
+                        // tbody content generator
+                        var elem = document.getElementById('idDocRecords');
+                        for (var i = 1; i < 51; i++) {
+                            var content = '<td></td>';
+                            content += '<td>1396/08/25</td>';
+                            content += '<td>Cardio Approval</td>';
+                            content += '<td>Dr. Nashraqi</td>';
+                            content += '<td>Nikan-East</td>';
+                            var tr = document.createElement('tr');
+                            tr.setAttribute('class', 'rowLink');
+                            tr.innerHTML = content;
+                            elem.append(tr);
+                        }
+                        </script>
+                    </div>
+                    <div id-modal="idNewDoc" class="btn-new-doc-container " modal-btn="show">
+                        <div class="btn-new-doc btn-taint"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block menu-back-after-content %}
+<!-- Modal -->
+<div id="idNewDoc" class="custom-modal">
+    <div class="modal-container">
+        <div class="doc-input-base">
+            <div class="doc-no-field-error">
+                <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
+                <ul class="no-field-error">
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Name must not be in other language than English.</li>
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Home Address must be in Tehran.</li>
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
+                </ul>
+            </div>
+            <div class="overlay-scroll">
+                <div class="doc-input-container">
+                    <div class="doc-no-field-error-fake"></div>
+                    <form>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>Date</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>Title</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>Supervisor</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>site</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="doc-input-base-padding"></div>
+                </div>
+            </div>
+            <div class="doc-buttons-base">
+                <div class="text-submit-btn-container" modal-close>
+                    <div class="text-submit-btn btn-taint" tabindex="1"><span class="fs-22 clr-red icon-close"></span></div>
+                </div>
+                <div class="text-submit-btn-sep"></div>
+                <div class="text-submit-btn-container ">
+                    <div class="text-submit-btn btn-taint" tabindex="1"><span class="fs-22 clr-cyan icon-check"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="doc-upload-base">
+            <div class="doc-upload-btn-base">
+                <div class="doc-upload-btn">
+                    <input id="files" class="doc-upload-input" type="file" accept=".jpg,.png,.bmp" multiple tabindex="1" />
+                    <div class="doc-upload-btn-frame"></div>
+                    <div class="doc-upload-btn-blinker"></div>
+                    <div class="doc-upload-btn-blinker2"></div>
+                </div>
+                <div class="upload-files-container">
+                    <div class="overlay-scroll">
+                        <div class="file-upload-row server-storage">
+                            <div class="file-upload-stored icon-server"></div>
+                            <div class="thumbnail-container"><img src="img/nik.png"></div>
+                            <div class="file-upload-name"><span>dfsfsfsdfsfsdfsdfsdfsfsdd.jpg</span></div>
+                            <div class="file-upload-size">2.35<span>kB</span></div>
+                            <div class="file-upload-revert bg-red icon-rotateright"></div>
+                        </div>
+                        <div class="file-upload-row server-storage">
+                            <div class="file-upload-stored icon-server"></div>
+                            <div class="thumbnail-container"><img src="img/nik2.png"></div>
+                            <div class="file-upload-name"><span>12334.jpg</span></div>
+                            <div class="file-upload-size">2.35<span>kB</span></div>
+                            <div class="file-upload-trash icon-trashfill"></div>
+                        </div>
+                        <div class="file-upload-row local-storage">
+                            <div class="file-upload-stored icon-pc"></div>
+                            <div class="thumbnail-container"><img src="img/nik2.png"></div>
+                            <div class="file-upload-name"><span>12334.jpg</span></div>
+                            <div class="file-upload-size">2.35<span>kB</span></div>
+                            <div class="file-upload-remove icon-close"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Member Options Modal -->
+<div id="idEditMember" class="custom-modal">
+    <div class="modal-member-edit">
+        <div class="header-member-edit">
+            <div class="photo-container">
+            </div>
+        </div>
+        <div class="member-edit-input-base">
+            <div class="no-field-error-base">
+                <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
+                <ul class="no-field-error">
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Name must not be in other language than English.</li>
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Home Address must be in Tehran.</li>
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
+                </ul>
+            </div>
+            <div class="overlay-scroll">
+                <div class="no-field-error-base-fake">
+                    <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
+                    <ul class="no-field-error">
+                        <li class="no-field-detail clr-red"><span>•&#32;</span>Name must not be in other language than English.</li>
+                        <li class="no-field-detail clr-red"><span>•&#32;</span>Home Address must be in Tehran.</li>
+                        <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
+                    </ul>
+                </div>
+                <form>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>First Name</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="date" required="" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>Last Name</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="date" required="" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>Birth Date</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="date" required="" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="custom-toggle">
+                        <div class="toggle-container">
+                            <div class="toggle-title">Gender</div>
+                            <input id="idGender" type="checkbox">
+                            <div class="toggle-option-first">Female</div>
+                            <label class="toggle-btn-base" tabindex="1" for="idGender">
+                                <div class="toggle-btn"></div>
+                            </label>
+                            <div class="toggle-option-second">Male</div>
+                        </div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>Email</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="date" required="" tabindex="1">
+                        </div>
+                        <div class="input-validation">example@mail.com</div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>Phone</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="date" required="" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>Address</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="date" required="" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="field-error clr-red">
+                        <ul>
+                            <li>Address most be in Tehran</li>
+                            <li>Street name is too short</li>
+                        </ul>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>Membership Type</label>
+                        </div>
+                        <div class="input-box">
+                            <select>
+                                <option value="gold">Gold</option>
+                                <option value="silver">Silver</option>
+                                <option value="bronze">Bronze</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>Membership ID</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="date" required="" tabindex="1">
+                        </div>
+                    </div>
+                </form>
+                <div class="member-edit-input-base-padding"></div>
+            </div>
+        </div>
+        <div class="submit-member-edit-base">
+            <div class="text-submit-btn-container" modal-close>
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container">
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Remove Doc Modal -->
+<div id="idRemoveDoc" class="custom-modal">
+    <div class="modal-remove-doc">
+        <div class="modal-message">Are you sure about removing this field?</div>
+        <div class="submit-remove-doc">
+            <div class="cancel-btn-container">
+                <div class="cancel-btn" tabindex="1" modal-close></div>
+            </div>
+            <div class="ok-btn-container">
+                <div class="ok-btn" tabindex="1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Change Photo -->
+<div id="idChangePhoto" class="custom-modal">
+    <div class="modal-change-photo">
+        <div class="header-change-photo">
+            <div class="icon-header-change-photo"></div>
+            <div class="text-header-change-photo">change photo of <span>Tahmine Molaei</span></div>
+        </div>
+        <div class="photo-editor-container">
+            <div class="photo-editor"></div>
+            <div class="edit-btn-wrapper">
+                <div class="edit-btn-container">
+                    <div class="edit-btn  btn-taint icon-browse" title="Browse" tabindex="1"></div>
+                </div>
+                <div class="edit-btn-container">
+                    <div class="edit-btn  btn-taint icon-rotateleft" title="Rotate left" tabindex="1"></div>
+                </div>
+                <div class="edit-btn-container">
+                    <div class="edit-btn  btn-taint icon-rotateright" title="Rotate Right" tabindex="1"></div>
+                </div>
+                <div class="edit-btn-container">
+                    <div class="edit-btn  btn-taint icon-trash" title="Clear Photo" tabindex="1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="submit-change-photo">
+            <div class="text-submit-btn-container " modal-close>
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container ">
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Show Event Modal -->
+<div id="idShowEvent" class="custom-modal">
+    <div class="modal-show-event">
+        <div class="modal-show-event-container">
+            <div class="header-show-event">
+                <div class="show-event-icon-shake-container">
+                    <div class="show-event-icon-shake icon-labfill"></div>
+                </div>
+                <div class="show-event-header-text">
+                    <div class="show-event-date">3 November 2017</div>
+                    <div class="show-event-date-sep"></div>
+                    <div class="show-event-time">10:00 am - 11:30 am</div>
+                </div>
+                <div class="modal-close icon-close" modal-close></div>
+            </div>
+            <div class="show-event-base">
+                <div class="show-event-base-container">
+                    <div class="show-event-title">Laboratory</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+        <div class="submit-show-event-base">
+            <div class="text-submit-btn-container ">
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-left"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container ">
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-right"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add Event Modal -->
+<div id="idAddEvent" class="custom-modal">
+    <div class="modal-edit-event">
+        <div class="header-edit-event">
+            <div class="event-icon-shake-container">
+                <div class="event-icon-shake icon-alarm"></div>
+            </div>
+        </div>
+        <div class="edit-event-input-base overlay-scroll">
+            <form>
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>Event Type</label>
+                    </div>
+                    <div class="input-box">
+                        <select>
+                            <option value="pharmacy">Pharmacy</option>
+                            <option value="laboratory">Laboratory</option>
+                            <option value="hospitolization">Hospitolization</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>Title</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="date" required="" tabindex="1">
+                    </div>
+                </div>
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>Time</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="Time" name="time" required="" tabindex="1">
+                    </div>
+                    <div class="input-validation">Begin at</div>
+                </div>
+                <div class="custom-input" style="margin-top: 5px;">
+                    <div class="input-box">
+                        <input type="Time" name="time" required="" tabindex="1">
+                    </div>
+                    <div class="input-validation">Finish at</div>
+                </div>
+                <div class="custom-textarea">
+                    <div class="textarea-label">
+                        <label>Description</label>
+                    </div>
+                    <div class="textarea-box">
+                        <textarea type="text" name="date" required="" tabindex="1" autocomplete="off"></textarea>
+                    </div>
+                </div>
+            </form>
+            <div class="event-edit-input-padding"></div>
+        </div>
+        <div class="submit-edit-event-base">
+            <div class="text-submit-btn-container " modal-close>
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container ">
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit Event Modal -->
+<div id="idEditEvent" class="custom-modal">
+    <div class="modal-edit-event">
+        <div class="header-edit-event">
+            <div class="event-icon-shake-container">
+                <div class="event-icon-shake icon-alarm"></div>
+            </div>
+        </div>
+        <div class="edit-event-input-base overlay-scroll">
+            <form>
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>Event Type</label>
+                    </div>
+                    <div class="input-box">
+                        <select>
+                            <option value="pharmacy">Pharmacy</option>
+                            <option value="laboratory">Laboratory</option>
+                            <option value="hospitolization">Hospitolization</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>Title</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="date" required="" tabindex="1">
+                    </div>
+                </div>
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>Time</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="Time" name="time" required="" tabindex="1">
+                    </div>
+                    <div class="input-validation">Begin at</div>
+                </div>
+                <div class="custom-input" style="margin-top: 5px;">
+                    <div class="input-box">
+                        <input type="Time" name="time" required="" tabindex="1">
+                    </div>
+                    <div class="input-validation">Finish at</div>
+                </div>
+                <div class="custom-textarea">
+                    <div class="textarea-label">
+                        <label>Description</label>
+                    </div>
+                    <div class="textarea-box">
+                        <textarea type="text" name="date" required="" tabindex="1" autocomplete="off"></textarea>
+                    </div>
+                </div>
+            </form>
+            <div class="event-edit-input-padding"></div>
+        </div>
+        <div class="submit-edit-event-base">
+            <div class="text-submit-btn-container " modal-close>
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container ">
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Remove Event Modal -->
+<div id="idRemoveEvent" class="custom-modal">
+    <div class="modal-remove-doc">
+        <div class="modal-message">Are you sure about removing this Event?</div>
+        <div class="submit-remove-doc">
+            <div class="cancel-btn-container">
+                <div class="cancel-btn" tabindex="1" modal-close></div>
+            </div>
+            <div class="ok-btn-container">
+                <div class="ok-btn" tabindex="1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Chat Upload Modal -->
+<div id="idChatUpload" class="custom-modal">
+    <div class="modal-chat-upload">
+        <div class="chat-upload-header"><span>Send File</span></div>
+        <div class="chat-upload-img-container">
+            <div class="chat-upload-img"></div>
+        </div>
+        <div class="chat-upload-caption">
+            <form>
+                <div class="Caption-input">
+                    <input class="Caption-inputbox" type="text" required="" tabindex="1">
+                    <label class="Caption-label">Caption</label>
+                    <label class="Caption-border"></label>
+                </div>
+            </form>
+        </div>
+        <div class="submit-chat-upload">
+            <div class="text-submit-btn-container " modal-close>
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container ">
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Remove Chat Modal -->
+<div id="idRemoveChat" class="custom-modal">
+    <div class="modal-remove-doc">
+        <div class="modal-message">Are you sure about removing this Conversation(s)?</div>
+        <div class="submit-remove-doc">
+            <div class="cancel-btn-container">
+                <div class="cancel-btn" tabindex="1" modal-close></div>
+            </div>
+            <div class="ok-btn-container">
+                <div class="ok-btn" tabindex="1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Member Info -->
+<div id="idMemberInfo" class="custom-modal">
+    <div class="modal-member-info">
+        <div class="header-member-info">
+            <div class="photo-container"></div>
+        </div>
+        <div class="member-info-container">
+            <div class="member-info-content">
+                <div class="member-info-content-wrapper overlay-scroll">
+                    <div class="member-info-padding"></div>
+                    <div class="member-info-detail">
+                        <span class="member-info-title">First Name</span>
+                        <span class="member-info-subtitle">Masoud</span>
+                    </div>
+                    <div class="member-info-detail">
+                        <span class="member-info-title">Last Name</span>
+                        <span class="member-info-subtitle">Nourbakhsh</span>
+                    </div>
+                    <div class="member-info-detail">
+                        <span class="member-info-title">Birth Date</span>
+                        <span class="member-info-subtitle">10/06/1986</span>
+                    </div>
+                    <div class="member-info-detail">
+                        <span class="member-info-title">Gender</span>
+                        <span class="member-info-subtitle">Male</span>
+                    </div>
+                    <div class="member-info-detail">
+                        <span class="member-info-title">Email</span>
+                        <span class="member-info-subtitle">masoud.nourbakhsh@gmail.com</span>
+                    </div>
+                    <div class="member-info-detail">
+                        <span class="member-info-title">Phone</span>
+                        <span class="member-info-subtitle">+989126335847</span>
+                    </div>
+                    <div class="member-info-detail">
+                        <span class="member-info-title">Address</span>
+                        <span class="member-info-subtitle">No6-3th west allay-Motahari blvd-Payambar west-Sattari Highway-Tehran-Iran</span>
+                    </div>
+                    <div class="member-info-detail">
+                        <span class="member-info-title">Membership</span>
+                        <span class="member-info-subtitle">Gold</span>
+                    </div>
+                    <div class="member-info-detail">
+                        <span class="member-info-title">ID</span>
+                        <span class="member-info-subtitle">253498-58</span>
+                    </div>
+                    <div class="member-info-detail">
+                        <span class="member-info-title">User Type</span>
+                        <span class="member-info-subtitle"> Patient<br>Supervisor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="submit-member-info">
+            <div class="text-submit-btn-container " modal-close>
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'member/member-modal-large-carousel.html' %} {% endblock %}{% block javascript %} {% endblock %}

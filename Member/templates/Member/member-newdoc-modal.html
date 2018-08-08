@@ -1,0 +1,100 @@
+<!-- Modal -->
+{% load static %}
+<div id="idNewDoc" class="custom-modal">
+    <div class="modal-container">
+        <div class="doc-input-base">
+            <div class="doc-no-field-error">
+                <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
+                <ul class="no-field-error">
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Name must not be in other language than English.</li>
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Home Address must be in Tehran.</li>
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
+                </ul>
+            </div>
+            <div class="overlay-scroll">
+                <div class="doc-input-container">
+                    <div class="doc-no-field-error-fake"></div>
+                    <form>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>Date</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>Title</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>Supervisor</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>site</label>
+                            </div>
+                            <div class="input-box">
+                                <input type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="doc-input-base-padding"></div>
+                </div>
+            </div>
+            <div class="doc-buttons-base">
+                <div class="text-submit-btn-container" modal-close>
+                    <div class="text-submit-btn btn-taint" tabindex="1"><span class="fs-22 clr-red icon-close"></span></div>
+                </div>
+                <div class="text-submit-btn-sep"></div>
+                <div class="text-submit-btn-container ">
+                    <div class="text-submit-btn btn-taint" tabindex="1"><span class="fs-22 clr-cyan icon-check"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="doc-upload-base">
+            <div class="doc-upload-btn-base">
+                <div class="doc-upload-btn">
+                    <input id="files" class="doc-upload-input" type="file" accept=".jpg,.png,.bmp" multiple tabindex="1" />
+                    <div class="doc-upload-btn-frame"></div>
+                    <div class="doc-upload-btn-blinker"></div>
+                    <div class="doc-upload-btn-blinker2"></div>
+                </div>
+                <div class="upload-files-container">
+                    <div class="overlay-scroll">
+                        <div class="file-upload-row server-storage">
+                            <div class="file-upload-stored icon-server"></div>
+                            <div class="thumbnail-container"><img src="{% static 'img/nik.png' %}"></div>
+                            <div class="file-upload-name"><span>dfsfsfsdfsfsdfsdfsdfsfsdd.jpg</span></div>
+                            <div class="file-upload-size">2.35<span>kB</span></div>
+                            <div class="file-upload-revert bg-red icon-rotateright"></div>
+                        </div>
+                        <div class="file-upload-row server-storage">
+                            <div class="file-upload-stored icon-server"></div>
+                            <div class="thumbnail-container"><img src="{% static 'img/nik2.png' %}"></div>
+                            <div class="file-upload-name"><span>12334.jpg</span></div>
+                            <div class="file-upload-size">2.35<span>kB</span></div>
+                            <div class="file-upload-trash icon-trashfill"></div>
+                        </div>
+                        <div class="file-upload-row local-storage">
+                            <div class="file-upload-stored icon-pc"></div>
+                            <div class="thumbnail-container"><img src="{% static 'img/nik2.png' %}"></div>
+                            <div class="file-upload-name"><span>12334.jpg</span></div>
+                            <div class="file-upload-size">2.35<span>kB</span></div>
+                            <div class="file-upload-remove icon-close"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
