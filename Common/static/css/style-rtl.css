@@ -45,6 +45,26 @@ td {}
 
 
 
+#newsEditor {}
+
+#historyEditor {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -282,6 +302,24 @@ Y8.   .88 88 88.  .88 88.  .88 88.  .88 88
         transform: scale(2.5);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -645,6 +683,24 @@ div.main.active {}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
                   oo                                     
                                                          
@@ -673,7 +729,7 @@ Y8ooooo. 88'  `88 88 88'  `88 88'  `88 88ooood8 88'  `88
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;      
+    user-select: none;
 }
 
 .spinner-base.active {
@@ -856,15 +912,31 @@ Y8ooooo. 88'  `88 88 88'  `88 88'  `88 88ooood8 88'  `88
 
 
 
-.spinner-text-container {
+.spinner-text-container {}
 
-}
-
-.spinner-text{
+.spinner-text {
     font-family: IRANSans;
     font-weight: 300;
     font-size: 14px;
- }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -971,6 +1043,24 @@ dP `88888P' `8888P88 dP dP    dP
     font-weight: 300;
     font-size: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1199,6 +1289,24 @@ dP `88888P' `8888P88 dP dP    dP
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 8888ba.88ba                      dP                                                                  dP   oo                   
 88  `8b  `8b                     88                                                                  88                        
@@ -1256,6 +1364,24 @@ dP   dP   dP `88888P' dP  dP  dP 88Y8888' `88888P' dP       `88888P'    `88888P'
 .member-panel .member-options .member-option-btn {}
 
 .member-panel .member-options .member-option-btn:hover {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1380,6 +1506,24 @@ d8'   .8P 88.  ... 88.  .88 88       88.  ... 88    88     88     88 88.  ...   
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  a88888b. dP                  dP       888888ba                             dP 
 d8'   `88 88                  88       88    `8b                            88 
@@ -1465,6 +1609,8 @@ Y8.   .88 88    88 88.  .88   88       88        88.  .88 88    88 88.  ... 88
     letter-spacing: 1px;
 }
 
+.user-name-chat span {}
+
 .user-status-chat {
     margin-right: 8px;
     margin-left: 0px;
@@ -1494,6 +1640,8 @@ Y8.   .88 88    88 88.  .88   88       88        88.  .88 88    88 88.  ... 88
     font-size: 12px;
 }
 
+.text-chat span {}
+
 .attach-chat {
     margin-left: 3px;
     margin-right: auto;
@@ -1514,6 +1662,7 @@ Y8.   .88 88    88 88.  .88   88       88        88.  .88 88    88 88.  ... 88
     font-weight: 500;
     font-size: 11px;
     letter-spacing: 1px;
+    margin-left: 2px;
 }
 
 .user-chat:hover {}
@@ -1543,22 +1692,37 @@ Y8.   .88 88    88 88.  .88   88       88        88.  .88 88    88 88.  ... 88
 
 
 
-.chat-grouping { 
+.chat-grouping {
     font-family: IRANSans;
     font-weight: 500;
     font-size: 11px;
     line-height: 25px;
-
 }
 
-.chat-grouping:before {
- 
-}
+.chat-grouping:before {}
 
-.chat-grouping span{
+.chat-grouping span {
     padding-left: 0px;
     padding-right: 20px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1620,12 +1784,49 @@ d888888P          dP dP           888888ba                             dP
 /*Talk Panel*/
 
 .talk-panel {
-    right: 523px;
+    right: 526px;
     left: auto;
     direction: rtl;
 }
 
 .talk-container {}
+
+
+.talk-inside-container {}
+
+.back-last-talk-container {
+    right: auto;
+    left: 22px;
+    opacity: 0;
+    transform: translate(0px, 76px) scale(0);
+    transition: 400ms ease;
+}
+
+.back-last-talk-container.active {
+    opacity: 1;
+    transform: translate(18px, 0px) scale(1);
+}
+
+.back-last-talk {}
+
+.back-last-talk:hover {}
+
+.back-last-talk:hover .last-talk-badge-container {}
+
+.last-talk-badge-container {
+    margin-top: -70px;
+    margin-left: 0;
+    margin-right: 30px;
+}
+
+.last-talk-badge-span {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+
 
 .talk-header {}
 
@@ -1659,15 +1860,15 @@ d888888P          dP dP           888888ba                             dP
 .remove-chat-tool.active span {}
 
 
-.talk-base {
-    direction: ltr;
-}
+.talk-base {}
 
 .received-bubble {
     display: flex;
     margin-top: 5px;
     margin-bottom: 5px;
     box-sizing: border-box;
+    direction: ltr;
+    margin-right: auto;
 }
 
 .received-bubble .bubble-text {
@@ -1680,6 +1881,20 @@ d888888P          dP dP           888888ba                             dP
     font-size: 14px;
     line-height: 23px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1806,7 +2021,7 @@ d888888P          dP dP           888888ba                             dP
     order: 3;
 }
 
-.sent-bubble .bubble-container{
+.sent-bubble .bubble-container {
     width: auto;
     height: auto;
     background-color: rgba(78, 214, 226, .6);
@@ -1881,6 +2096,7 @@ d888888P          dP dP           888888ba                             dP
     margin-top: 5px;
     margin-bottom: 5px;
     box-sizing: border-box;
+    direction: ltr;
 }
 
 .sent-bubble .bubble-attach {
@@ -1988,6 +2204,21 @@ d888888P          dP dP           888888ba                             dP
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*----------------------------------------------------*/
 
 .type-base {}
@@ -2064,6 +2295,24 @@ d888888P          dP dP           888888ba                             dP
     font-weight: 300;
     font-size: 14px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2243,8 +2492,26 @@ a88aaaa    88 .d8888b. .d8888b. d8888P    88        88d888b. .d8888b. d8888P
 .float-send-btn.active:focus {}
 
 .float-chat-base .float-chat-talk {
-    direction: ltr;
+    direction: rtl;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2470,6 +2737,24 @@ td .date-cell .event-cell-container .float-event-badge {}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
          dP                                                       dP                  dP            
          88                                                       88                  88            
@@ -2526,6 +2811,24 @@ td .date-cell .event-cell-container .float-event-badge {}
 .photo-editor-container .edit-btn-wrapper .edit-btn-container .edit-btn {}
 
 .submit-change-photo {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2763,6 +3066,263 @@ dP   dP   dP `88888P' dP  dP  dP 88Y8888' `88888P' dP           88888888P `88888
 
 
 
+/*
+
+8888ba.88ba                      dP                            888888ba                    dP       dP                                        dP 
+88  `8b  `8b                     88                            88    `8b                   88       88                                        88 
+88   88   88 .d8888b. 88d8b.d8b. 88d888b. .d8888b. 88d888b.    88     88 .d8888b. .d8888b. 88d888b. 88d888b. .d8888b. .d8888b. 88d888b. .d888b88 
+88   88   88 88ooood8 88'`88'`88 88'  `88 88ooood8 88'  `88    88     88 88'  `88 Y8ooooo. 88'  `88 88'  `88 88'  `88 88'  `88 88'  `88 88'  `88 
+88   88   88 88.  ... 88  88  88 88.  .88 88.  ... 88          88    .8P 88.  .88       88 88    88 88.  .88 88.  .88 88.  .88 88       88.  .88 
+dP   dP   dP `88888P' dP  dP  dP 88Y8888' `88888P' dP          8888888P  `88888P8 `88888P' dP    dP 88Y8888' `88888P' `88888P8 dP       `88888P8 
+                                                                                                                                                 
+                                                                                                                                                 
+
+*/
+
+
+/*Member Dashboard*/
+
+.doc-history {}
+
+.doc-history-header {}
+
+.doc-history-header-icon {}
+
+.doc-history-header-title {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 12px;
+    text-align: left;
+}
+
+.doc-medic-history {}
+
+.history-section {}
+
+.history-section:before {}
+
+.history-section-title-container {}
+
+.history-section-title {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 12px;
+    text-align: left;
+}
+
+.history-section-editor {
+    margin-left: 0px;
+    margin-right: 30px;
+}
+
+.section-sep-container {}
+
+.section-sep1 {}
+
+.section-sep2 {
+    transform: rotate(-45deg);
+}
+
+.section-sep3 {
+    transform: rotate(45deg) translate(-5px, -5px);
+    transform-origin: 0% 100%;
+}
+
+.section-sep4 {}
+
+.section-content-container {
+    padding: 15px 15px 15px 30px;
+    font-family: IRANSans;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.dr-list {}
+
+
+.dr-list-header {}
+
+.dr-list-header-icon {}
+
+.dr-list-header-title {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.dr-list-container {}
+
+.dr-container {}
+
+.dr-container:hover {}
+
+.dr-photo-container {}
+
+.dr-content {}
+
+.dr-name {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.dr-expertise {
+    font-family: IRANSans;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.dr-expertise span {
+    margin-right: 0px;
+    margin-left: 10px;
+}
+
+.dr-location {
+    font-family: IRANSans;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.dr-location span {
+    margin-right: 2px;
+    margin-left: 12px;
+}
+
+.dr-record-count {
+
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 12px;
+    margin-right: auto;
+    margin-left: 0px;
+    padding-left: 10px;
+    padding-right: 0px;
+}
+
+.dr-record-count span {
+    margin-right: 0px;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+ 88888888b       dP oo   dP      dP     dP  oo            dP                                 8888ba.88ba                 dP          dP 
+ 88              88      88      88     88                88                                 88  `8b  `8b                88          88 
+a88aaaa    .d888b88 dP d8888P    88aaaaa88a dP .d8888b. d8888P .d8888b. 88d888b. dP    dP    88   88   88 .d8888b. .d888b88 .d8888b. 88 
+ 88        88'  `88 88   88      88     88  88 Y8ooooo.   88   88'  `88 88'  `88 88    88    88   88   88 88'  `88 88'  `88 88'  `88 88 
+ 88        88.  .88 88   88      88     88  88       88   88   88.  .88 88       88.  .88    88   88   88 88.  .88 88.  .88 88.  .88 88 
+ 88888888P `88888P8 dP   dP      dP     dP  dP `88888P'   dP   `88888P' dP       `8888P88    dP   dP   dP `88888P' `88888P8 `88888P8 dP 
+                                                                                      .88                                               
+                                                                                  d8888P                                                
+
+*/
+
+
+/*Edit History Modal*/
+
+.modal-edit-history {
+    direction: rtl;
+}
+
+.custom-modal.active .modal-edit-history {}
+
+
+
+
+.edit-history-header {}
+
+.title-header-edit-history {
+    font-family: IRANSans;
+    font-weight: 500;
+    direction: ltr;
+    font-size: 14px;
+    writing-mode: tb-rl;
+}
+
+.editor-container-history {}
+
+.editor-base-history {
+    direction: ltr;
+}
+
+
+.history-submit {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2876,6 +3436,24 @@ a88aaaa8P' 88 .d8888b. 88d888b. .d8888b.    88   88   88 .d8888b. 88d8b.d8b. 88d
     order: 2;
     background-color: rgba(250, 252, 254, 1);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3184,6 +3762,24 @@ td .date-cell .event-cell-container .event-badge {}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 888888ba                                  
@@ -3311,6 +3907,24 @@ dP     dP `88888P' 8888P Y8P  `88888P'
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*.news-view-container {
     width: 60%;
     height: 100%;
@@ -3355,6 +3969,24 @@ dP     dP `88888P' 8888P Y8P  `88888P'
     font-size: 14px;
     line-height: 25px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3472,9 +4104,29 @@ d8'    88        88       88    88    `8b                                 88  `8
 
 
 
-.editor-base-news {}
+.editor-base-news {
+    direction: ltr !important;
+}
 
 .news-submit-smal-screen {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3673,6 +4325,24 @@ d8'   .8P 88    88 88.  .88 88.88b.88'     88        88 .88'  88.  ... 88    88 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  88888888b       dP oo   dP       88888888b                              dP      8888ba.88ba                 dP          dP 
  88              88      88       88                                     88      88  `8b  `8b                88          88 
@@ -3708,6 +4378,24 @@ a88aaaa    .d888b88 dP d8888P    a88aaaa    dP   .dP .d8888b. 88d888b. d8888P   
 .event-edit-input-padding {}
 
 .submit-edit-event-base {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3816,6 +4504,24 @@ a88aaaa    88d888b. 88d888b. .d8888b. 88d888b.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 8888ba.88ba           oo            dP                                                         
@@ -3845,6 +4551,24 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
 }
 
 .header-correct-maintenance {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3915,6 +4639,24 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*Maintenance Content*/
 
 .maintenance-content {
@@ -3928,6 +4670,24 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
 
 
 .maintenance-content-header {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3956,6 +4716,24 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
     font-size: 10px margin-left: 0px;
     margin-right: 5px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4042,6 +4820,24 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*Users List*/
 
 .maintenance-users-list {}
@@ -4096,6 +4892,680 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ .d888888        dP            oo             888888ba                    dP       dP                                        dP 
+d8'    88        88                           88    `8b                   88       88                                        88 
+88aaaaa88a .d888b88 88d8b.d8b. dP 88d888b.    88     88 .d8888b. .d8888b. 88d888b. 88d888b. .d8888b. .d8888b. 88d888b. .d888b88 
+88     88  88'  `88 88'`88'`88 88 88'  `88    88     88 88'  `88 Y8ooooo. 88'  `88 88'  `88 88'  `88 88'  `88 88'  `88 88'  `88 
+88     88  88.  .88 88  88  88 88 88    88    88    .8P 88.  .88       88 88    88 88.  .88 88.  .88 88.  .88 88       88.  .88 
+88     88  `88888P8 dP  dP  dP dP dP    dP    8888888P  `88888P8 `88888P' dP    dP 88Y8888' `88888P' `88888P8 dP       `88888P8 
+                                                                                                                                
+                                                                                                                                
+*/
+
+
+/*Admin Dashboard*/
+
+.dashboard-content {
+    left: 0px;
+    right: 200px;
+    direction: rtl;
+}
+
+.dashboard-content-container {}
+
+
+.dashboard-1st {}
+
+.dashboard-user-box {}
+
+.dashboard-user-box.onload {}
+
+.dashboard-user-box .user-box-back1 {
+    transform: translate(150px, -60px) rotate(-90deg);
+}
+
+.dashboard-user-box.onload .user-box-back1 {
+    transform: translate( 150px, -60px) rotate(-30deg);
+}
+
+.dashboard-user-box .user-box-back2 {
+    transform: scale(.3) translate( -200px, 120px) rotate(120deg);
+    transition: 4000ms ease 200ms;
+    position: absolute;
+}
+
+.dashboard-user-box.onload .user-box-back2 {
+    transform: scale(.3) translate( -200px, 120px) rotate(0deg);
+}
+
+.dashboard-user-box .user-box-photo-container {}
+
+.dashboard-user-box.onload .user-box-photo-container {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.dashboard-user-box .user-box-welcome {
+    font-family: IRANSans;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+
+.dashboard-user-box.onload .user-box-welcome {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.dashboard-user-box .user-box-icon-container {}
+
+.dashboard-user-box .user-box-icon-container span {}
+
+.user-box-badge-container {
+    right: auto;
+    left: -5px
+}
+
+.user-box-badge-container .user-box-badge {}
+
+.user-box-badge-container .user-box-badge span {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 12px;
+    top: -8px;
+}
+
+
+.dashboard-user-box.onload .user-box-badge-container {}
+
+.dashboard-diagram-box {
+    margin-left: 0px;
+    margin-right: 20px;
+}
+
+.dashboard-diagram-box.onload {}
+
+
+
+
+
+
+
+
+.line-chart-legend-box {}
+
+.line-chart-legend-box:before {
+    right: 100%;
+    left: 0;
+    width: 1px;
+    border-left: 1px solid #dfe8f1;
+    border-right: none;
+}
+
+.legend-box-title-container {}
+
+.legend-box-title-container .legend-box-title {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 14px;
+    margin-left: 0px;
+    margin-right: 30px;
+}
+
+.legend-box-title-container .legend-box-descript {
+    font-family: IRANSans;
+    font-weight: 300;
+    font-size: 12px;
+    margin-left: 0px;
+    margin-right: 30px;
+}
+
+.legend-column-wrapper {}
+
+
+.legend-column {}
+
+.legend-container {}
+
+.legend-color {
+    margin-right: 0px;
+    margin-left: 10px;
+}
+
+.legend-title {
+    font-family: IRANSans;
+    font-weight: 300;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.legend-title span {}
+
+.legend-toggle {}
+
+#lineChart {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dashboard-2nd {}
+
+.dashboard-chat-box {}
+
+.dashboard-chat-box.onload {}
+
+.dashboard-chat-box:before {
+    right: 100%;
+    left: 0;
+    border-left: 1px solid #dfe8f1;
+    border-right: none;
+}
+
+.dashboard-chat-header {}
+
+
+.dashboard-chat-header-base {}
+
+.dashboard-chat-header-rect {}
+
+.dashboard-chat-box.onload .dashboard-chat-header-rect {
+    width: 140px;
+}
+
+.dashboard-chat-header-circle {
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
+.dashboard-chat-box.onload .dashboard-chat-header-circle {}
+
+.dashboard-chat-header-title {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 12px;
+    margin-left: 0px;
+    margin-right: 10px;
+}
+
+.dashboard-chat-box.onload .dashboard-chat-header-title {}
+
+.dashboard-chat-wrapper {}
+
+.dashboard-chat-padding {}
+
+.dashboard-chat-container {}
+
+.dashboard-chat-box.onload .dashboard-chat-container {}
+
+.dashboard-chat-container:hover .dashboard-chat-photo {}
+
+.dashboard-chat-container:hover .dashboard-chat-badge {}
+
+.dashboard-chat-container:before {}
+
+.dashboard-chat-photo-container {}
+
+.dashboard-chat-photo {}
+
+
+.dashboard-chat-content-container {}
+
+.dashboard-chat-content {}
+
+.dashboard-chat-content .name-dashboard-chat-content {}
+
+.user-name-dashboard-chat {
+    font-family: IRANSans;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 12px;
+}
+
+.user-status-dashboard-chat {
+    margin-left: 0px;
+    margin-right: 8px;
+}
+
+.user-deliver-dashboard-chat {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.user-time-dashboard-chat {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 10px;
+    margin-right: 3px;
+    margin-left: 10px;
+}
+
+.text-dashboard-chat-content {}
+
+.text-dashboard-chat {
+    font-family: IRANSans;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.attach-dashboard-chat {
+    margin-left: 3px;
+    margin-right: auto;
+}
+
+.dashboard-chat-badge-container {
+    margin-right: 0px;
+    margin-left: 10px;
+}
+
+.dashboard-chat-badge {}
+
+
+.dashboard-chat-badge span {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-left: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dashboard-event-box {
+    margin-left: 0px;
+    margin-right: 20px;
+}
+
+.dashboard-event-box.onload {}
+
+.dashboard-event-box:before {
+    right: 100%;
+    left: 0;
+    border-left: 1px solid #dfe8f1;
+    border-right: none;
+    box-sizing: border-box;
+}
+
+.dashboard-event-header {}
+
+
+.dashboard-event-header-base {}
+
+.dashboard-event-header-rect {}
+
+.dashboard-event-box.onload .dashboard-event-header-rect {
+    width: 140px;
+}
+
+.dashboard-event-header-circle {
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
+.dashboard-event-box.onload .dashboard-event-header-circle {}
+
+.dashboard-event-header-title {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 12px;
+    margin-left: 0px;
+    margin-right: 10px;
+}
+
+.dashboard-event-box.onload .dashboard-event-header-title {}
+
+.dashboard-even-wrapper {}
+
+.dashboard-event-padding {}
+
+.dashboard-event-padding.end {}
+
+.dashboard-event-container {}
+
+.dashboard-event-box.onload .dashboard-event-container {}
+
+.dashboard-event-container:hover .dashboard-event-icon {}
+
+.dashboard-event-icon-container {}
+
+.dashboard-event-icon {
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
+.dashboard-event-content-container {}
+
+.dashboard-event-content-box {
+    margin-left: 0px;
+    margin-right: 5px;
+}
+
+.dashboard-event-content-sep {}
+
+.dashboard-event-content-sep2 {}
+
+.dashboard-event-content-sep:before {}
+
+.dashboard-event-content-rec {
+    transform: translateX(8px);
+}
+
+.dashboard-event-content-rec:before {}
+
+
+.dashboard-event-container:hover .dashboard-event-content-rec:before {}
+
+.dashboard-event-container:hover .dashboard-event-content-sep:before {}
+
+.dashboard-event-container:hover .dashboard-event-content-box {}
+
+
+.dashboard-event-title {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.dashboard-event-title span {}
+
+.dashboard-event-hour {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.dashboard-event-hour span {
+    margin-left: 0px;
+    margin-right: 5px;
+}
+
+
+.dashboard-event-content {
+    font-family: IRANSans;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.dashboard-event-time-container {
+    margin-right: 0px;
+    margin-left: 5px;
+}
+
+.dashboard-event-time-icon {}
+
+.dashboard-event-container:hover .dashboard-event-time-icon {}
+
+
+.dashboard-event-time-date {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.dashboard-event-time-date span {}
+
+
+.dashboard-event-time-remain {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.dashboard-event-time-hour span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dashboard-widget-box {
+    margin-left: 0px;
+    margin-right: 20px;
+    opacity: 0;
+}
+
+.dashboard-widget-box.onload {}
+
+.dashboard-widget-container {
+    transform: translateX(-400px);
+}
+
+.dashboard-widget-container.two {}
+
+.dashboard-widget-container.three {}
+
+.dashboard-widget-container.four {}
+
+.dashboard-widget-box.onload .dashboard-widget-container {}
+
+.dashboard-widget-base {}
+
+
+.dashboard-widget-base:hover {}
+
+
+.widget-icon {
+    transform-origin: 100% 0%;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.widget-icon.two {}
+
+.widget-icon.three {}
+
+.widget-icon.four {}
+
+.dashboard-widget-box.onload .widget-icon {}
+
+.widget-icon span {}
+
+.dashboard-widget-box.onload .widget-icon span {}
+
+.widget-title {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-left: 0px;
+    margin-right: 10px;
+}
+
+.dashboard-widget-box.onload .widget-title {}
+
+.widget-count {
+    font-family: IRANSans;
+    font-weight: 300;
+    font-size: 30px;
+    margin-left: 0px;
+    margin-right: auto;
+}
+
+
+.dashboard-widget-box.onload .widget-count {}
+
+
+.widget-chart {}
+
+
+.dashboard-widget-box.onload .widget-chart {}
+
+
+
+
+
+
+
+
+
+
+
+
+.dashboard-footer {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 8888ba.88ba                 dP          dP     .d888888        dP       dP    dP     dP                            
 88  `8b  `8b                88          88    d8'    88        88       88    88     88                            
@@ -4117,6 +5587,24 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP    88     88  `88888P8 `88888P8    `Y
 .custom-modal.active .modal-add-user {}
 
 .header-add-user {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4170,6 +5658,24 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP    88     88  `88888P8 `88888P8    `Y
 .add-user-photo-editor .news-photo-editor-container {}
 
 .submit-add-user {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4263,6 +5769,24 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP     dP     dP `88888P' dP  dP  dP `88
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 8888ba.88ba                 dP          dP    8888ba.88ba                      dP                            dP          .8888b             
@@ -4279,7 +5803,6 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP    dP   dP   dP `88888P' dP  dP  dP 8
 
 .modal-member-info {
     direction: rtl;
-
 }
 
 .custom-modal.active .modal-member-info {
@@ -4288,31 +5811,19 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP    dP   dP   dP `88888P' dP  dP  dP 8
 
 
 
-.modal-member-info .header-member-info {
- 
-}
+.modal-member-info .header-member-info {}
 
-.modal-member-info .header-member-info .photo-container {
- 
-}
+.modal-member-info .header-member-info .photo-container {}
 
-.member-info-container {
- 
-}
+.member-info-container {}
 
 
 
-.member-info-content {
- 
-}
+.member-info-content {}
 
-.member-info-content .member-info-padding {
- 
-}
+.member-info-content .member-info-padding {}
 
-.member-info-content .member-info-detail {
- 
-}
+.member-info-content .member-info-detail {}
 
 .member-info-content .member-info-detail .member-info-title {
     font-family: IRANSans;
@@ -4332,9 +5843,25 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP    dP   dP   dP `88888P' dP  dP  dP 8
 
 
 
-.submit-member-info {
- 
-}
+.submit-member-info {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4439,6 +5966,24 @@ d888888P          dP       dP                   dP oo
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  .d888888        dP       dP     888888ba                         8888ba.88ba                 dP          dP 
 d8'    88        88       88     88    `8b                        88  `8b  `8b                88          88 
@@ -4464,6 +6009,24 @@ d8'    88        88       88     88    `8b                        88  `8b  `8b  
 }
 
 .custom-modal.active .modal-container {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4653,6 +6216,24 @@ dP   dP   dP `88888P' dP  dP  dP 88Y8888' `88888P' dP           88888888P `88888
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  888888ba                                                    888888ba                       8888ba.88ba                 dP          dP 
  88    `8b                                                   88    `8b                      88  `8b  `8b                88          88 
@@ -4684,6 +6265,24 @@ a88aaaa8P' .d8888b. 88d8b.d8b. .d8888b. dP   .dP .d8888b.    88     88 .d8888b. 
 }
 
 .submit-remove-doc {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4780,6 +6379,24 @@ d8'    88  88                                 88  `8b  `8b                88    
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  a88888b. dP                  dP      dP     dP          dP                         dP    8888ba.88ba                 dP          dP 
 d8'   `88 88                  88      88     88          88                         88    88  `8b  `8b                88          88 
@@ -4795,13 +6412,12 @@ Y8.   .88 88    88 88.  .88   88      Y8.   .8P 88.  .88 88 88.  .88 88.  .88 88
 /*Chat Upload Modal */
 
 .modal-chat-upload {
-direction: rtl;
+    direction: rtl;
 }
 
 .custom-modal.active .modal-chat-upload {}
 
-.chat-upload-header {
-}
+.chat-upload-header {}
 
 .chat-upload-header span {
     font-family: IRANSans;
@@ -4811,14 +6427,29 @@ direction: rtl;
     margin-right: 10px;
 }
 
-.chat-upload-img-container {
-}
+.chat-upload-img-container {}
 
-.chat-upload-img {
-}
+.chat-upload-img {}
 
-.chat-upload-caption {
-}
+.chat-upload-caption {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4835,8 +6466,7 @@ direction: rtl;
  *** Caption Input
  */
 
-.Caption-input {
-}
+.Caption-input {}
 
 .Caption-inputbox {
     font-family: IRANSans;
@@ -4846,11 +6476,9 @@ direction: rtl;
     padding-right: 5px;
 }
 
-.Caption-inputbox:focus {
-}
+.Caption-inputbox:focus {}
 
-.Caption-inputbox::selection {
-}
+.Caption-inputbox::selection {}
 
 .Caption-label {
     font-family: IRANSans;
@@ -4876,14 +6504,29 @@ direction: rtl;
     transform-origin: 100% 0;
 }
 
-.Caption-inputbox:focus~.Caption-border {
-}
+.Caption-inputbox:focus~.Caption-border {}
 
-.Caption-inputbox:valid~.Caption-border {
-}
+.Caption-inputbox:valid~.Caption-border {}
 
-.submit-chat-upload {
-}
+.submit-chat-upload {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4954,6 +6597,24 @@ d888888P                     dP       888888ba             dP     dP
     color: rgba(255, 255, 255, 1);
     border: 1px solid rgba(78, 214, 226, .6);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5135,6 +6796,24 @@ d8'   .8P 88.  .88 88.  .88 88  88  88 88   88       88    .88 88.  .88   88    
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 d888888P                     dP      .d88888b           dP                  oo   dP       888888ba             dP     dP                              
    88                        88      88.    "'          88                       88       88    `8b            88     88                              
@@ -5255,6 +6934,24 @@ d888888P                     dP      .d88888b           dP                  oo  
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  a88888b. dP                                888888ba             dP     dP                     
 d8'   `88 88                                88    `8b            88     88                     
@@ -5278,6 +6975,24 @@ Y8.   .88 88 88.  .88       88 88.  ...     88    .88 88.  .88   88     88   88.
 .modal-close:hover {
     transform: rotate(-180deg);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5406,6 +7121,24 @@ dP dP    dP 88Y888P' `88888P'   dP
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
  a88888b. dP                         dP           888888ba                    
@@ -5459,6 +7192,92 @@ Y8.   .88 88    88 88.  ... 88.  ... 88  `8b.     88    .88 88.  .88  .d88b.
     margin-right: 10px;
     margin-left: 0px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+ 888888ba                                                     a88888b. dP                  dP   
+ 88    `8b                                                   d8'   `88 88                  88   
+a88aaaa8P' .d8888b. 88d8b.d8b. .d8888b. dP   .dP .d8888b.    88        88d888b. .d8888b. d8888P 
+ 88   `8b. 88ooood8 88'`88'`88 88'  `88 88   d8' 88ooood8    88        88'  `88 88'  `88   88   
+ 88     88 88.  ... 88  88  88 88.  .88 88 .88'  88.  ...    Y8.   .88 88    88 88.  .88   88   
+ dP     dP `88888P' dP  dP  dP `88888P' 8888P'   `88888P'     Y88888P' dP    dP `88888P8   dP   
+                                                                                                
+                                                                                                
+ a88888b. dP                         dP           888888ba                    
+d8'   `88 88                         88           88    `8b                   
+88        88d888b. .d8888b. .d8888b. 88  .dP     a88aaaa8P' .d8888b. dP.  .dP 
+88        88'  `88 88ooood8 88'  `"" 88888"       88   `8b. 88'  `88  `8bd8'  
+Y8.   .88 88    88 88.  ... 88.  ... 88  `8b.     88    .88 88.  .88  .d88b.  
+ Y88888P' dP    dP `88888P' `88888P' dP   `YP     88888888P `88888P' dP'  `dP 
+                                                                              
+                                                                              
+*/
+
+
+/*
+ *** Check Box
+ */
+
+.chat-custom-check {}
+
+.chat-check-option-base {}
+
+.chat-check-box {}
+
+.chat-check-box.active {}
+
+.chat-check-box.active .chat-check-box-select {}
+
+.chat-check-box.active .chat-check-box-select .chat-check-box-icon {}
+
+.chat-check-box-select {}
+
+.chat-check-box-select .chat-check-box-icon {}
+
+.chat-check-box-title {
+    font-family: IRANSans;
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-left: 0px;
+}
+
+
+
 
 
 
@@ -5602,6 +7421,24 @@ d888888P                     dP
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 d888888P                            dP          
    88                               88          
@@ -5658,6 +7495,70 @@ d888888P                            dP
 .custom-toggle input:checked+.toggle-option-first+.toggle-btn-base .toggle-btn {
     transform: translateX(-18px);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+.d88888b  oo                   dP             d888888P                            dP          
+88.    "'                      88                88                               88          
+`Y88888b. dP 88d888b. .d8888b. 88 .d8888b.       88    .d8888b. .d8888b. .d8888b. 88 .d8888b. 
+      `8b 88 88'  `88 88'  `88 88 88ooood8       88    88'  `88 88'  `88 88'  `88 88 88ooood8 
+d8'   .8P 88 88    88 88.  .88 88 88.  ...       88    88.  .88 88.  .88 88.  .88 88 88.  ... 
+ Y88888P  dP dP    dP `8888P88 dP `88888P'       dP    `88888P' `8888P88 `8888P88 dP `88888P' 
+                           .88                                       .88      .88             
+                       d8888P                                    d8888P   d8888P              
+
+*/
+
+
+/*Single Toggle*/
+
+.single-toggle-container {}
+
+.single-toggle-container input {}
+
+.single-toggle-btn-base {}
+
+.single-toggle-btn {}
+
+.single-toggle-container input:checked+.single-toggle-btn-base {}
+
+
+
+.single-toggle-container input:checked+.single-toggle-btn-base .single-toggle-btn {
+    transform: translateX(-16px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5763,6 +7664,24 @@ d8'   .8P 88.  ... 88 88.  ... 88.  ...   88
     font-weight: 300;
     font-size: 12px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5987,6 +7906,24 @@ input:focus~.addRowInputboxButtonContainer {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 dP     dP                          dP                   
 88     88                          88                   
@@ -6073,6 +8010,24 @@ dP     dP  `88888P' `88888P8 `88888P8 `88888P' dP
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 
 888888ba               88888888b oo          dP       dP     88888888b                                     
@@ -6116,6 +8071,24 @@ dP     dP `88888P'     dP        dP `88888P' dP `88888P8     88888888P dP       
     margin-right: 10px;
     line-height: 18px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6232,6 +8205,284 @@ dP     dP `88888P'   dP   dP dP     dP `88888P' `88888P8   dP   dP `88888P' dP  
 
 
 
+/*
+8888ba.88ba                 dP          dP    dP                                                a88888b.                                                       dP 
+88  `8b  `8b                88          88    88                                               d8'   `88                                                       88 
+88   88   88 .d8888b. .d888b88 .d8888b. 88    88        .d8888b. 88d888b. .d8888b. .d8888b.    88        .d8888b. 88d888b. .d8888b. dP    dP .d8888b. .d8888b. 88 
+88   88   88 88'  `88 88'  `88 88'  `88 88    88        88'  `88 88'  `88 88'  `88 88ooood8    88        88'  `88 88'  `88 88'  `88 88    88 Y8ooooo. 88ooood8 88 
+88   88   88 88.  .88 88.  .88 88.  .88 88    88        88.  .88 88       88.  .88 88.  ...    Y8.   .88 88.  .88 88       88.  .88 88.  .88       88 88.  ... 88 
+dP   dP   dP `88888P' `88888P8 `88888P8 dP    88888888P `88888P8 dP       `8888P88 `88888P'     Y88888P' `88888P8 dP       `88888P' `88888P' `88888P' `88888P' dP 
+                                                                               .88                                                                                
+                                                                           d8888P                                                                                 
+*/
+
+
+/*Modal Large Carousel*/
+
+.modal-large-carousel {}
+
+.custom-modal.active .modal-large-carousel {}
+
+
+
+.modal-large-carousel .doc-carousel {}
+
+
+.modal-large-carousel .doc-carousel .large-carousel-cell {}
+
+.modal-large-carousel .doc-carousel .large-carousel-cell .large-carousel-img {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+8888ba.88ba           dP       oo dP             8888ba.88ba                             
+88  `8b  `8b          88          88             88  `8b  `8b                            
+88   88   88 .d8888b. 88d888b. dP 88 .d8888b.    88   88   88 .d8888b. 88d888b. dP    dP 
+88   88   88 88'  `88 88'  `88 88 88 88ooood8    88   88   88 88ooood8 88'  `88 88    88 
+88   88   88 88.  .88 88.  .88 88 88 88.  ...    88   88   88 88.  ... 88    88 88.  .88 
+dP   dP   dP `88888P' 88Y8888' dP dP `88888P'    dP   dP   dP `88888P' dP    dP `88888P' 
+                                                                                         
+                                                                                         
+
+*/
+
+
+/*Mobile Menu*/
+
+.mobile-main {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+}
+
+.mobile-main.active {
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+}
+
+.header .nav .logo.active {
+    transform: rotate(180deg);
+}
+
+.burger {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.burger-line-top {
+    width: 15px;
+    height: 2px;
+    background-color: rgba(53, 209, 223, 1);
+    border-radius: 100px;
+    display: none;
+    opacity: 0;
+    order: 1;
+    margin: 1px;
+    transition: 800ms ease;
+}
+
+.burger-line-mid {
+    width: 15px;
+    height: 2px;
+    background-color: rgba(53, 209, 223, 1);
+    border-radius: 100px;
+    display: none;
+    opacity: 0;
+    order: 1;
+    margin: 1px;
+    transition: 400ms ease;
+}
+
+.burger-line-btm {
+    width: 15px;
+    height: 2px;
+    background-color: rgba(53, 209, 223, 1);
+    border-radius: 100px;
+    display: none;
+    opacity: 0;
+    order: 1;
+    margin: 1px;
+    transition: 800ms ease;
+}*/
+
+.header .nav .logo.active .burger-line-top {
+    transform: rotate(-135deg) scaleX(.6) translate(-1px, -1px);
+}
+
+.header .nav .logo.active .burger-line-mid {
+    transform: rotate(-135deg) scale(0);
+}
+
+
+.header .nav .logo.active .burger-line-btm {
+    transform: rotate(135deg) scaleX(.6) translate(-1px, 1px);
+}
+
+.mobile-menu-back {}
+
+.mobile-menu-back.active {}
+
+.mobile-menu-base {
+    width: 70%;
+    height: calc(100vh - 50px);
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: none;
+    z-index: 400;
+    position: absolute;
+    top: 0px;
+    left: auto;
+    right: 0px;
+    transform: translateX(100%);
+    transition: transform 800ms ease, box-shadow 400ms ease 600ms;
+    display: none;
+    opacity: 0;
+    display: flex;
+    flex-flow: column;
+}
+
+
+.mobile-menu-base.active {
+    transform: translateX(0px);
+    box-shadow: -2px 0px 3px 0px rgba(9, 32, 36, 0.04), -6px 0px 14px 0px rgba(9, 32, 36, 0.07);
+}
+
+.mobile-menu-base .column {
+    flex-flow: row-reverse;
+}
+
+.mobile-menu-base .column.active {}
+
+.mobile-menu-base .column:hover .title {}
+
+.mobile-menu-base .icon {
+    margin-right: 15px;
+}
+
+.mobile-menu-base .title {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 13px;
+    margin-right: 15px;
+}
+
+.mobile-menu-base .column.active .title {}
+
+.mobile-menu-base .badge-container {
+    left: 0px;
+}
+
+.mobile-menu-base .badge {}
+
+.mobile-menu-base .column.active .badge {}
+
+.mobile-menu-base .badge span {
+    font-family: IRANSans;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-left: 1px;
+}
+
+
+.mobile-back-chat {}
+
+.mobile-back-chat:after {
+    right: 50px;
+    left: 0;
+    border-left: 1px solid #dfe8f1;
+    border-right: none;
+}
+
+.mobile-back-member {}
+
+.mobile-back-member:after {
+    right: 50px;
+    left: 0;
+    border-left: 1px solid #dfe8f1;
+    border-right: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6298,15 +8549,15 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88     88  88.     8b. .88 Y8'' 
         top: 50px;
     }
     .talk-panel {
-        width: calc(100% - 373px);
-        right: 373px;
+        width: calc(100% - 376px);
+        right: 376px;
         left: auto;
         top: 50px;
     }
     .received-bubble {
         max-width: 90%;
     }
-    .sent-bubble .bubble-container{
+    .sent-bubble {
         max-width: 90%;
     }
     .doc-content {
@@ -6318,6 +8569,7 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88     88  88.     8b. .88 Y8'' 
         height: 70%;
         margin-top: 3px;
         margin-left: 0px;
+        margin-right: 0px;
     }
     .member-panel .info .container .photo-container {
         width: 40%;
@@ -6359,6 +8611,71 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88     88  88.     8b. .88 Y8'' 
     .lang-panel {
         margin-right: 0px;
         margin-left: 120px;
+    }
+    .dashboard-content {
+        width: calc(100% - 50px);
+        left: 0px;
+        right: 50px;
+    }
+    .dashboard-2nd {
+        height: auto;
+        flex-flow: column;
+    }
+
+    .dashboard-chat-box {
+        width: 100%;
+    }
+    .dashboard-chat-box:before {
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        width: 100%;
+        border-left: none;
+        border-bottom: 2px solid #dfe8f1;
+    }
+    .dashboard-event-box {
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+    .dashboard-event-box:before {
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        width: 100%;
+        border-bottom: 2px solid #dfe8f1;
+        border-left: none;
+    }
+
+    .dashboard-widget-box {
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 20px;
+    }
+    .dashboard-footer {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1376px) and (min-width: 851px) {
+    .dashboard-event-content-box {
+        width: 100%;
+    }
+    .dashboard-event-time-container {
+        display: none;
     }
 }
 
@@ -6477,15 +8794,15 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88    8b. .88      88 Y8'' .8P
         top: 50px;
     }
     .talk-panel {
-        width: calc(100% - 373px);
-        right: 373px;
+        width: calc(100% - 376px);
+        right: 376px;
         left: auto;
         top: 50px;
     }
     .received-bubble {
         max-width: 90%;
     }
-    .sent-bubble .bubble-container{
+    .sent-bubble {
         max-width: 90%;
     }
     .doc-content {
@@ -6497,6 +8814,7 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88    8b. .88      88 Y8'' .8P
         height: 70%;
         margin-top: 3px;
         margin-left: 0px;
+        margin-right: 0px;
     }
     .member-panel .info .container .photo-container {
         width: 80%;
@@ -6594,7 +8912,7 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88    8b. .88      88 Y8'' .8P
         height: 100%;
         max-width: 100%;
         max-height: 100%;
-        /*background-image: url('../img/ErrorBack.svg');*/
+        background-image: url('../img/ErrorBack.svg');
         background-size: cover;
         background-repeat: no-repeat;
     }
@@ -6615,7 +8933,7 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88    8b. .88      88 Y8'' .8P
 
     .news-view-container {
         width: 100%;
-        height: 70%;
+        height: 60%;
         margin-right: 0px;
         margin-top: 3px;
         margin-left: 0px;
@@ -6625,12 +8943,8 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88    8b. .88      88 Y8'' .8P
     }
     .news-list-container {
         width: 100%;
-        height: 30%;
+        height: 40%;
     }
-
-
-
-
     .modal-add-news {
         width: 100%;
         height: 100vh;
@@ -6706,12 +9020,136 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88    8b. .88      88 Y8'' .8P
         margin-left: 120px;
         margin-right: 0px;
     }
+    .modal-edit-history {}
+    .edit-history-header {}
+    .title-header-edit-history {
+        writing-mode: horizontal-tb;
+        line-height: 45px;
+        margin-top: 0px;
+        margin-left: 0px;
+        margin-right: 20px;
+    }
+
+    .dashboard-content {
+        width: calc(100% - 50px);
+        left: 0px;
+        right: 50px;
+    }
+
+    .dashboard-1st {
+        width: 100%;
+        flex-flow: column;
+    }
+
+    .dashboard-user-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        flex-flow: column;
+    }
+
+    .dashboard-diagram-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 20px;
+        position: relative;
+    }
+
+
+    .dashboard-2nd {
+        height: auto;
+        flex-flow: column;
+    }
+
+    .dashboard-chat-box {
+        width: 100%;
+    }
+    .dashboard-chat-box:before {
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        width: 100%;
+        border-left: none;
+        border-bottom: 2px solid #dfe8f1;
+    }
+    .dashboard-event-box {
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+    .dashboard-event-box:before {
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        width: 100%;
+        border-bottom: 2px solid #dfe8f1;
+        border-left: none;
+    }
+
+    .dashboard-widget-box {
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 20px;
+    }
+    .dashboard-footer {
+        display: none;
+    }
+    .legend-toggle {
+        display: none;
+    }
+    .legend-title {
+        width: 100%;
+        max-width: 80px;
+    }
+    #idFloatCalendarLoader {
+        display: none;
+    }
+    #idFloatChatLoader {
+        display: none;
+    }
+    .calendar-drag {
+        display: none;
+    }
+    .chat-drag {
+        display: none;
+    }
+    #newsEditor {
+        min-height: calc(100vh - 650px);
+        max-height: calc(100vh - 650px);
+    }
+    #historyEditor {
+        min-height: calc(100vh - 191px);
+        max-height: calc(100vh - 191px);
+    }
 }
 
 
-}
 
 @media only screen and (min-device-width:1025px) {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6775,9 +9213,12 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    d88888P    `88888P8 dP    d
                                                                                                                 
 */
 
+
 /* ----------- iPhone 5 and 5S ----------- */
 
+
 /* Portrait */
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
     .sidemenu {
         width: 0px;
@@ -6871,7 +9312,155 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    d88888P    `88888P8 dP    d
         margin-right: 0px;
         margin-left: 0px;
     }
+    .dashboard-content {
+        width: 100%;
+        left: 0px;
+        right: 0px;
+        top: 50px;
+    }
+
+
+    .dashboard-1st {
+        width: 100%;
+        flex-flow: column;
+    }
+
+    .dashboard-user-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        flex-flow: column;
+    }
+
+    .dashboard-diagram-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 20px;
+    }
+    .dashboard-chat-box {
+        min-width: 280px;
+    }
+    .dashboard-event-content-box {
+        width: 100%;
+    }
+    .dashboard-event-time-container {
+
+        display: none;
+    }
+    .dashboard-widget-box {
+        min-width: 280px;
+    }
+    /*------------------------------------*/
+    .header .title .span2 {
+        display: none;
+    }
+    .burger {
+        display: flex;
+        opacity: 1;
+    }
+
+    .burger-line-top {
+        display: flex;
+        opacity: 1;
+    }
+
+    .burger-line-mid {
+        display: flex;
+        opacity: 1;
+    }
+
+    .burger-line-btm {
+        display: flex;
+        opacity: 1;
+    }
+
+
+    .mobile-menu-base {
+        display: block;
+        opacity: 1;
+    }
+    .member-docs {
+        width: 100%;
+        left: auto;
+        right: 100%;
+        top: 50px;
+    }
+    .maintenance-content {
+        left: auto;
+        right: 100%;
+        top: 50px;
+        width: calc(100% - 517px);
+    }
+    .talk-panel {
+        left: auto;
+        right: 100%;
+        top: 50px;
+        width: calc(100% - 526px);
+    }
+    #idFloatCalendarLoader {
+        display: none;
+    }
+    #idFloatChatLoader {
+        display: none;
+    }
+    .talk-container {
+        width: 100%;
+        min-width: 314px;
+        box-shadow: none;
+    }
+    .talk-inside-container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .user-talk-header {
+        margin-left: 0px;
+        margin-right: 61px;
+    }
+    .talk-header .user-talk-header .user-name-talk {
+        max-width: 140px;
+    }
+    .mobile-back-chat {
+        display: flex;
+    }
+    .mobile-back-member {
+        display: flex;
+    }
+    .calendar-drag {
+        display: none;
+    }
+    .chat-drag {
+        display: none;
+    }
+    #newsEditor {
+        min-height: 112px;
+        max-height: 112px;
+    }
+    #historyEditor {
+        min-height: calc(100vh - 214px);
+        max-height: calc(100vh - 214px);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6917,6 +9506,7 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    d88888P    `88888P8 dP    d
 
 
 /* Landscape */
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
     .login-logo {
         margin: 0px;
@@ -6961,7 +9551,61 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    d88888P    `88888P8 dP    d
         margin-right: 0px;
         margin-left: 0px;
     }
+    .chat-upload-caption {
+        display: none;
+    }
+    .dashboard-1st {
+        width: 100%;
+        flex-flow: column;
+    }
+
+    .dashboard-user-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        flex-flow: column;
+    }
+
+    .dashboard-diagram-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 20px;
+    }
+    .dashboard-event-content-box {
+        width: 100%;
+    }
+    .dashboard-event-time-container {
+
+        display: none;
+    }
+    #idFloatCalendarLoader {
+        display: none;
+    }
+    #idFloatChatLoader {
+        display: none;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7018,9 +9662,12 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    `Y888P'
                                                              
 */
 
+
 /* ----------- iPhone 6 ----------- */
 
+
 /* Portrait */
+
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
     .sidemenu {
         width: 0px;
@@ -7114,7 +9761,147 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    `Y888P'
         margin-right: 0px;
         margin-left: 0px;
     }
+    .dashboard-content {
+        width: 100%;
+        left: 0px;
+        right: 0px;
+        top: 50px;
+    }
+    .dashboard-1st {
+        width: 100%;
+        flex-flow: column;
+    }
+
+    .dashboard-user-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        flex-flow: column;
+    }
+
+    .dashboard-diagram-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 20px;
+    }
+    .dashboard-event-content-box {
+        width: 100%;
+    }
+    .dashboard-event-time-container {
+
+        display: none;
+    }
+    /*------------------------------------*/
+    .header .title .span2 {
+        display: none;
+    }
+    .burger {
+        display: flex;
+        opacity: 1;
+    }
+
+    .burger-line-top {
+        display: flex;
+        opacity: 1;
+    }
+
+    .burger-line-mid {
+        display: flex;
+        opacity: 1;
+    }
+
+    .burger-line-btm {
+        display: flex;
+        opacity: 1;
+    }
+
+
+    .mobile-menu-base {
+        display: block;
+        opacity: 1;
+    }
+    .member-docs {
+        width: 100%;
+        left: auto;
+        right: 100%;
+        top: 50px;
+    }
+    .maintenance-content {
+        left: auto;
+        right: 100%;
+        top: 50px;
+        width: calc(100% - 517px);
+    }
+    .talk-panel {
+        left: auto;
+        right: 100%;
+        top: 50px;
+        width: calc(100% - 526px);
+    }
+    #idFloatCalendarLoader {
+        display: none;
+    }
+    #idFloatChatLoader {
+        display: none;
+    }
+    .talk-container {
+        width: 100%;
+        min-width: 320px;
+        box-shadow: none;
+    }
+    .talk-inside-container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .user-talk-header {
+        margin-left: 0px;
+        margin-right: 61px;
+    }
+    .talk-header .user-talk-header .user-name-talk {
+        max-width: 190px;
+    }
+    .mobile-back-chat {
+        display: flex;
+    }
+    .mobile-back-member {
+        display: flex;
+    }
+    .calendar-drag {
+        display: none;
+    }
+    .chat-drag {
+        display: none;
+    }
+    #newsEditor {
+        min-height: 187px;
+        max-height: 187px;
+    }
+    #historyEditor {
+        min-height: calc(100vh - 191px);
+        max-height: calc(100vh - 191px);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7160,6 +9947,7 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    `Y888P'
 
 
 /* Landscape */
+
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
     .login-logo {
         margin: 0px;
@@ -7198,7 +9986,61 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    `Y888P'
         margin-right: 0px;
         margin-left: 0px;
     }
+    .chat-upload-caption {
+        display: none;
+    }
+    .dashboard-1st {
+        width: 100%;
+        flex-flow: column;
+    }
+
+    .dashboard-user-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        flex-flow: column;
+    }
+
+    .dashboard-diagram-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 20px;
+    }
+    .dashboard-event-content-box {
+        width: 100%;
+    }
+    .dashboard-event-time-container {
+
+        display: none;
+    }
+    #idFloatCalendarLoader {
+        display: none;
+    }
+    #idFloatChatLoader {
+        display: none;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7260,9 +10102,12 @@ dP 88Y888P' dP    dP `88888P' dP    dP `88888P'    `Y888P'    dP
                                                             
 */
 
+
 /* ----------- iPhone 6 ----------- */
 
+
 /* Portrait */
+
 @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
     .sidemenu {
         width: 0px;
@@ -7356,6 +10201,128 @@ dP 88Y888P' dP    dP `88888P' dP    dP `88888P'    `Y888P'    dP
         margin-right: 0px;
         margin-left: 0px;
     }
+    .dashboard-content {
+        width: 100%;
+        left: 0px;
+        right: 0px;
+        top: 50px;
+    }
+    .dashboard-1st {
+        width: 100%;
+        flex-flow: column;
+    }
+
+    .dashboard-user-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        flex-flow: column;
+    }
+
+    .dashboard-diagram-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 20px;
+    }
+    .dashboard-event-content-box {
+        width: 100%;
+    }
+    .dashboard-event-time-container {
+
+        display: none;
+    }
+    /*------------------------------------*/
+    .header .title .span2 {
+        display: none;
+    }
+    .burger {
+        display: flex;
+        opacity: 1;
+    }
+
+    .burger-line-top {
+        display: flex;
+        opacity: 1;
+    }
+
+    .burger-line-mid {
+        display: flex;
+        opacity: 1;
+    }
+
+    .burger-line-btm {
+        display: flex;
+        opacity: 1;
+    }
+
+
+    .mobile-menu-base {
+        display: block;
+        opacity: 1;
+    }
+    .member-docs {
+        width: 100%;
+        left: auto;
+        right: 100%;
+        top: 50px;
+    }
+    .maintenance-content {
+        left: auto;
+        right: 100%;
+        top: 50px;
+        width: calc(100% - 517px);
+    }
+    .talk-panel {
+        left: auto;
+        right: 100%;
+        top: 50px;
+        width: calc(100% - 526px);
+    }
+    #idFloatCalendarLoader {
+        display: none;
+    }
+    #idFloatChatLoader {
+        display: none;
+    }
+    .talk-container {
+        width: 100%;
+        min-width: 320px;
+        box-shadow: none;
+    }
+    .talk-inside-container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .user-talk-header {
+        margin-left: 0px;
+        margin-right: 61px;
+    }
+    .talk-header .user-talk-header .user-name-talk {
+        max-width: 230px;
+    }
+    .mobile-back-chat {
+        display: flex;
+    }
+    .mobile-back-member {
+        display: flex;
+    }
+    .calendar-drag {
+        display: none;
+    }
+    .chat-drag {
+        display: none;
+    }
+    #newsEditor {
+        min-height: 221px;
+        max-height: 221px;
+    }
+    #historyEditor {
+        min-height: calc(100vh - 191px);
+        max-height: calc(100vh - 191px);
+    }
 }
 
 
@@ -7401,7 +10368,26 @@ dP 88Y888P' dP    dP `88888P' dP    dP `88888P'    `Y888P'    dP
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Landscape */
+
 @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: landscape) {
     .login-logo {
         margin: 0px;
@@ -7433,5 +10419,41 @@ dP 88Y888P' dP    dP `88888P' dP    dP `88888P'    `Y888P'    dP
         margin-top: 50px;
         margin-right: 0px;
         margin-left: 0px;
+    }
+    .chat-upload-caption {
+        display: none;
+    }
+    .dashboard-1st {
+        width: 100%;
+        flex-flow: column;
+    }
+
+    .dashboard-user-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        flex-flow: column;
+    }
+
+    .dashboard-diagram-box {
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 20px;
+    }
+    .dashboard-event-content-box {
+        width: 100%;
+    }
+    .dashboard-event-time-container {
+
+        display: none;
+    }
+    #idFloatCalendarLoader {
+        display: none;
+    }
+    #idFloatChatLoader {
+        display: none;
     }
 }

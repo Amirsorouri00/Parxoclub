@@ -1,0 +1,41 @@
+.member-panel .info .container .photo-container .photo {
+
+    background-image: url('../img/userDefaultFemale.svg');
+}
+
+
+
+.search-result-panel .result-container .result-list .result-item .photo-container .photo {
+    background-image: url('../img/userDefaultFemale.svg');
+}
+
+
+.user-chat .photo-container-user-chat .photo-user-chat {
+    background-image: url('../img/userDefaultFemale.svg');
+}
+
+
+.talk-header .user-talk-header .photo-container-talk .talk-photo {
+    background-image: url('../img/userDefaultFemale.svg');
+}
+
+
+.photo-container-float-chat .float-chat-photo {
+    background-image: url('../img/userDefaultFemale.svg');
+}
+
+
+.user-maintenance-photo {
+    background-image: url('../img/userDefaultFemale.svg');
+}
+
+
+.modal-remove-user .header-remove-user .photo-container {
+    background-image: url('../img/userDefaultFemale.svg');
+}
+
+
+.modal-member-edit .header-member-edit .photo-container {
+    background-image: url('../img/userDefaultFemale.svg');
+}
+

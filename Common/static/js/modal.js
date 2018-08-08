@@ -30,6 +30,6 @@ var modal = {
         $("div.main").removeClass("active");
         var elemModal = $(".custom-modal");
         elemModal.removeClass("active");
-        elemModal.empty();
+        //elemModal.empty();
     }
 }

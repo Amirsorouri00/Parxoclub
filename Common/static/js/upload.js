@@ -22,12 +22,12 @@ $.fn.docFileUploader = function (filesToUpload, uploadList) {
                 reader.onload = function(e) {
                     var target = e.target;
                     var elementRow = `
-                    <div file-id="${target.fileId}" class="file-upload-row local-storage">
+                    <div file-id="${target.fileId}" class="file-upload-row">
                         <div class="file-upload-stored"></div>
                         <div class="thumbnail-container"><img src="${target.result}"></div>
                         <div class="file-upload-name"><span>${target.name}</span></div>
                         <div class="file-upload-size">${filesize(target.size)}</div>
-                        <div class="file-upload-remove icon-close"></div>
+                        <div class="file-upload-trash icon-trashfill"></div>
                     </div>`;
                     
                     $(uploadList).append(elementRow);
@@ -63,3 +63,4 @@ $.fn.docFileUploader = function (filesToUpload, uploadList) {
 
     return this;
 };
+

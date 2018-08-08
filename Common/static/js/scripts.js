@@ -1,16 +1,38 @@
 $(document).ready(function() {
     /* Slim scroll */
-    $('.overlay-scroll').overlayScrollbars({ 
+    $('.overlay-scroll').overlayScrollbars({
         className: "os-theme-dark",
         sizeAutoCapable: true,
         paddingAbsolute: true,
-        scrollbars : {
+        normalizeRTL: true,
+        scrollbars: {
+            visibility: "auto",
             autoHide: "leave",
-            autoHideDelay: 500,
+            autoHideDelay: 300,
+            dragScrolling: true,
+            clickScrolling: false,
+            touchSupport: true,
+
+        },
+        overflowBehavior: {
+            x: "hidden",
+            y: "scroll"
         },
     });
+    // slimScroll({
+    //     height: '100%',
+    //     distance: '5px',
+    //     size: '5px',
+    //     color: 'rgba(205, 214, 223, 1)',
+    //     wheelStep: '7',
+    // });
 
-    initCarousel();
+    /* Slick */
+    $('.doc-carousel').slick({
+        lazyLoad: 'ondemand', // ondemand progressive anticipated
+        dots: true,
+
+    });
 
     /* CSRF code */
     function getCookie(name) {
@@ -45,19 +67,21 @@ $(document).ready(function() {
     });
 });
 
+
 window.onload = function() {
     /* No Field Error */
     var noFieldHeight = $('.no-field-error-base').height();
     $('.no-field-error-base-fake').css('min-height', noFieldHeight + 'px');
 
-    /* Carousel Height */
-    resizeCarousel();
+    /* Doc No Field Error */
+    var docNoFieldHeight = $('.doc-no-field-error').height();
+    $('.doc-no-field-error-fake').css('min-height', docNoFieldHeight + 'px');
+
+
+    // $('.news-photo-editor-container').appendTo('.add-user-input .onmobile-photo-editor')    
+
 }
 
-$(window).resize(function() {
-    /* Carousel Height */
-    resizeCarousel();    
-});
 
 window.addEventListener('click', function(e) {
     var userPanelVisibility = $("#idUserPanel").attr("visible")
@@ -76,6 +100,19 @@ window.addEventListener('click', function(e) {
             'transition': '200ms ease 80ms',
             'opacity': '0',
         });
+    }
+    var userPanelVisibility = $("#idLangPanel").attr("visible")
+    if (document.getElementById('idLangPanel').contains(e.target) || document.getElementById('idHeaderLangContainer').contains(e.target)) {
+        return;
+    } else if (userPanelVisibility == "true") {
+        var visible = ($("#idLangPanel").attr("visible") == "true");
+        visible = !visible;
+        document.getElementById("idLangPanel").setAttribute("visible", visible.toString());
+        $('#idLangPanel').css({
+            'transform': 'scaleY(0)'
+        });
+        $('#idLangExpander').removeClass("active");
+        $('#idLangPanelContainer').removeClass("active");
     }
 });
 
@@ -107,6 +144,31 @@ $('#idHeaderUserContainer').click(function() {
     }
 });
 
+$('#idHeaderLangContainer').click(function() {
+    var visible = ($("#idLangPanel").attr("visible") == "true");
+    visible = !visible;
+    document.getElementById("idLangPanel").setAttribute("visible", visible.toString());
+    if (visible) {
+        $('#idLangPanel').css({
+            'transform': 'scaleY(1)'
+        });
+        $('#idLangExpander').toggleClass("active");
+        $('#idLangPanelContainer').addClass("active");
+    } else {
+        $('#idLangPanel').css({
+            'transform': 'scaleY(0)'
+        });
+        $('#idLangExpander').toggleClass("active");
+        $('#idLangPanelContainer').removeClass("active");
+    }
+});
+
+
+
+
+
+
+
 /* Member search box */
 $('#idSearchBoxMember').focus(function() {
     document.getElementById("idResultContainer").classList.toggle('active');
@@ -117,14 +179,11 @@ $('#idSearchBoxMember').blur(function() {
 
 /* Chat send button */
 $(document).on('input', '#idChatInput', function() {
-    if ($(this).val().length == 0)
-    {
+    if ($(this).val().length == 0) {
         var elmInput = $(".send-btn");
-        elmInput.attr('disabled','disabled');
+        elmInput.attr('disabled', 'disabled');
         elmInput.removeClass("active");
-    }
-    else
-    {
+    } else {
         var elmInput = $(".send-btn");
         elmInput.removeAttr('disabled');
         elmInput.addClass("active");
@@ -150,13 +209,21 @@ $(document).on('click', '.user-base-maintenance', function() {
     $(this).addClass('active').siblings().removeClass("active");
 });
 
+
 /* Check Box */
-$(document).on('click', '.check-box', function() {
+$('.check-box').click(function() {
     $(this).toggleClass('active');
 });
 
+
+$('.chat-check-box').click(function() {
+    $(this).toggleClass('active');
+});
+
+
+
 /* Bubble Check Box */
-$(document).on('click', '.bubble-checkbox', function() {
+$('.bubble-checkbox').click(function() {
     $(this).toggleClass('active');
     $('.remove-chat-tool').toggleClass('active');
 });

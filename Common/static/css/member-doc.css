@@ -36,10 +36,29 @@
     order: 1;
     box-sizing: border-box;
     flex-flow: column;
+    position: relative;
 }
 
+.doc-no-field-error {
+    width: 80%;
+    border-bottom: 1px solid #e74c3c;
+    margin: 0px 10% 0px 10%;
+    background-color: rgba(255, 255, 255, .8);
+    z-index: 100;
+    position: absolute;
+}
 
+.doc-no-field-error-fake {
+    width: 100%;
+    display: flex;
+    opacity: 1;
+    opacity: 0;
+}
 
+.doc-input-wrapper{
+    width: 100%;
+    height: 100%;
+}
 .doc-input-container {
     width: 100%;
     background-color: rgba(255, 255, 255, 1);
@@ -105,6 +124,8 @@
     background-position: 80% 50%;
     justify-content: flex-start;
 }
+
+
 
 
 
@@ -346,12 +367,12 @@
 }
 
 .server-storage {
-    background-color: rgba(210,215,220,.5) !important;
+    background-color: rgba(210, 215, 220, .5) !important;
     border-bottom: 1px solid #d0d6db;
 }
 
 .local-storage {
-    background-color: rgba(210,215,220,.2) !important;
+    background-color: rgba(210, 215, 220, .2) !important;
     border-bottom: 1px solid #dfe8f1;
 }
 
@@ -480,6 +501,8 @@
 
 
 
+
+
 /*
 
 .img-thumbnail {
@@ -542,10 +565,12 @@
         width: 100%;
         height: 40%;
     }
-    .file-upload-size{
+    .file-upload-size {
         display: none;
     }
 }
+
+
 
 
 
@@ -586,6 +611,8 @@
 
 
 
+
+
 /* --- @media --- iPhone 6 --- */
 
 
@@ -597,6 +624,8 @@
         transform-origin: 50% 0%;
     }
 }
+
+
 
 
 

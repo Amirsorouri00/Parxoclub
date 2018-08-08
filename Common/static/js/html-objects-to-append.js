@@ -1,0 +1,4 @@
+search_object_to_append = "<div class='result-item'><div class='photo-container'><div class='photo'></div></div><div class='detail'><span class='name'> first_name last_name </span><span class='position'>Title/Position</span></div></div>";
+document_categories_object_to_append = "<div class='column'><div class='main main_ajax_id'><div class='icon icon_name'></div><div class='title'>classTitle</div><div class='expander'></div></div></div>";
+document_categories_object_to_appendto_submenu = "<div class='item'><span>● Sonography</span></div>";
+general = '<div style={width:50;height:50; background-color:red}></div>'

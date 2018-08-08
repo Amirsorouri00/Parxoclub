@@ -14,4 +14,3 @@ $(document).on('click', '.btn-taint', function(e){
     y = e.pageY - $(this).offset().top - taint.height() / 2;
     taint.css({ top: y + 'px', left: x + 'px' }).addClass("drop");
 });
-
