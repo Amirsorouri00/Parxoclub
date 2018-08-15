@@ -6,6 +6,7 @@
         </div>
         <div class="add-user-top">
             <div class="add-user-input">
+                {% if form_user.first_name.errors %}
                 <div class="doc-no-field-error">
                     <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
                     <ul class="no-field-error">
@@ -14,95 +15,119 @@
                         <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
                     </ul>
                 </div>
+                {% endif %}
                 <div class="add-user-input-wrapper overlay-scroll">
                     <div class="doc-no-field-error-fake"></div>
                     <form>
+                        {% comment %} First Name {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>First Name</label>
+                                <label>{{form_user.first_name.label}}</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="date" required="" tabindex="1">
+                                {{form_user.first_name}}
                             </div>
                         </div>
+                        {% if form_user.first_name.errors %}
+                        <div class="field-error clr-red">{{form_user.first_name.errors}}</div>
+                        {% endif %} {% comment %} Last Name {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>Last Name</label>
+                                <label>{{form_user.last_name.label}}</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="date" required="" tabindex="1">
+                                {{form_user.last_name}}
                             </div>
                         </div>
+                        {% if form_user.last_name.errors %}
+                        <div class="field-error clr-red">{{form_user.last_name.errors}}</div>
+                        {% endif %} {% comment %} Birthdate {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>Birth Date</label>
+                                <label>{{form_profile.birthdate.label}}</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="date" required="" tabindex="1">
+                                {{form_profile.birthdate}}
                             </div>
                         </div>
+                        {% if form_profile.birthdate.errors %}
+                        <div class="field-error clr-red">{{form_profile.birthdate.errors}}</div>
+                        {% endif %} {% comment %} Gender {% endcomment %}
                         <div class="custom-toggle">
                             <div class="toggle-container">
-                                <div class="toggle-title">Gender</div>
-                                <input id="idGender1" type="checkbox">
+                                <div class="toggle-title">{{form_profile.gender.label}}</div>
+                                {{form_profile.gender}}
                                 <div class="toggle-option-first">Female</div>
-                                <label class="toggle-btn-base" tabindex="1" for="idGender1">
+                                <label class="toggle-btn-base" tabindex="1" for="{{form_profile.gender.id_for_label}}">
                                     <div class="toggle-btn"></div>
                                 </label>
                                 <div class="toggle-option-second">Male</div>
                             </div>
                         </div>
+                        {% if form_profile.gender.errors %}
+                        <div class="field-error clr-red">{{form_profile.gender.errors}}</div>
+                        {% endif %} {% comment %} Email {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>Email</label>
+                                <label>{{form_user.email.label}}</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="date" required="" tabindex="1">
+                                {{form_user.email}}
                             </div>
                             <div class="input-validation">example@mail.com</div>
                         </div>
+                        {% if form_user.email.errors %}
+                        <div class="field-error clr-red">{{form_user.email.errors}}</div>
+                        {% endif %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>Phone</label>
+                                <label>{{form_profile.mobile.label}}</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="date" required="" tabindex="1">
+                                {{form_profile.mobile}}
                             </div>
                         </div>
+                        {% if form_profile.mobile.errors %}
+                        <div class="field-error clr-red">{{form_profile.mobile.errors}}</div>
+                        {% endif %} {% comment %} Address {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>Address</label>
+                                <label>{{form_profile.address.label}}</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="date" required="" tabindex="1">
+                                {{form_profile.address}}
                             </div>
                         </div>
+                        {% if form_profile.address.errors %}
                         <div class="field-error clr-red">
                             <ul>
                                 <li>Address most be in Tehran</li>
                                 <li>Street name is too short</li>
                             </ul>
                         </div>
+                        {% endif %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>Membership Type</label>
+                                <label>{{form_member.membership.lable}}</label>
                             </div>
                             <div class="input-box">
-                                <select>
-                                    <option value="gold">Gold</option>
-                                    <option value="silver">Silver</option>
-                                    <option value="bronze">Bronze</option>
-                                </select>
+                                {{form_member.membership}}
                             </div>
                         </div>
+                        {% if form_member.membership.errors %}
+                        <div class="field-error clr-red">{{form_member.membership.errors}}</div>
+                        {% endif %} {% comment %} Membership Code {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>Membership ID</label>
+                                <label>{{form_member.code.lable}}</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="date" required="" tabindex="1">
+                                {{form_member.code}}
                             </div>
                         </div>
+                        {% if form_member.membership.errors %}
+                        <div class="field-error clr-red">{{form_member.code.errors}}</div>
+                        {% endif %}
                         <div class="custom-check">
                             <div class="check-label">
                                 <label>User Type</label>
@@ -142,7 +167,9 @@
                     <div class="news-photo-editor"></div>
                     <div class="news-edit-btn-wrapper">
                         <div class="news-edit-btn-container">
-                            <div class="news-edit-btn  btn-taint icon-browse" title="Browse" tabindex="1"></div>
+                            <div title="Browse">
+                                <input style="padding-left: 0.5em;" class="news-edit-btn  btn-taint icon-browse" type="file" name="date" required="" tabindex="1">
+                            </div>
                         </div>
                         <div class="news-edit-btn-container">
                             <div class="news-edit-btn  btn-taint icon-rotateleft" title="Rotate left" tabindex="1"></div>

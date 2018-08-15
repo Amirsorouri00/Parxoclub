@@ -11,6 +11,8 @@ from django.http import JsonResponse
 # Rest_Framework
 from rest_framework.renderers import JSONRenderer
 from .serializer import UserSerializer
+# Form
+from .forms import UserForm, ProfileForm, MemberForm
 # Controller functions handle members actions and activities
 
 def AddProfilePkey(request, userId):
@@ -95,7 +97,17 @@ def MemberSearch(request):
         raise Http404
 
 def Maintenance(request):
-    return render(request, 'member/maintenance.html')
+    #user = get_object_or_404(User, id=user_id)
+    form_user = UserForm()
+    form_profile = ProfileForm()
+    form_member = MemberForm()
+    #form_member = MembersForm(instance=user.members)
+    return render(request, 'member/maintenance.html', { 
+        'form_user': form_user,
+        'form_profile': form_profile,
+        'form_member': form_member,
+    })
+    #return render(request, 'member/maintenance.html')
 
 '''
 @transaction.atomic
