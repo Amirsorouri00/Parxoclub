@@ -22,3 +22,19 @@ class DocumentsSerializer(serializers.ModelSerializer):
         model = Documents
         fields = ('id', 'title', 'date', 'attachment', 'comment'
             , 'category_id', 'physician_id', 'user_id', 'doccatsubmenu_id')
+
+class SpecialistsHistoryObject(object):
+    def __init__(self, prefixName, physicianFirstName, physicianLastName, title, num, *args):
+        self.prefix_name = prefixName
+        self.physician_first_name = physicianFirstName
+        self.physician_last_name = physicianLastName
+        self.title = title
+        self.num = num
+        # I have to add other Probable variable Here
+
+class SpecialistsHistorySerializer(serializers.Serializer):
+    prefix_name = serializers.CharField(max_length=50)
+    physician_first_name = serializers.CharField(max_length=100)
+    physician_last_name = serializers.CharField(max_length=100)
+    title = serializers.CharField(max_length=50)
+    num = serializers.IntegerField()

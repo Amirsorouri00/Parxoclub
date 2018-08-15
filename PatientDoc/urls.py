@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import DocCatMem, mohsenTest, Categories, MemberDocuments, Dashboard, Member, MemberFemale
+from .views import DocCatMem, mohsenTest, Categories, MemberDocuments, Dashboard, Member, MemberFemale, SpecialistsHistory
 
 urlpatterns = [
     path('doccatmem/<int:_id>/doc/<int:_cat>/', DocCatMem, name= 'doccatmem'), 
@@ -11,5 +11,6 @@ urlpatterns = [
     path('memberfemale/<int:user_id>/', MemberFemale, name='memberfemale'),
     # React WebService for patientDocs
     path('doccategories', Categories, name='doccategories'),
+    path('specialists/history/', SpecialistsHistory, name='specialists_history'),
     path('userdocs/<int:user_id>/', MemberDocuments, name='userdocs'),
 ]

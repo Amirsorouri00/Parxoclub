@@ -1,19 +1,22 @@
-clu import os, datetime
+import os, datetime
+from array import array
 # Django
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, Http404
+from django.db.models import Count
 # Models
 from .models import DocCategories, Documents
 from Member.models import Members, Memberships
 # Rest_Framework
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from .models import DocCatSubmenu
+from .models import DocCatSubmenu, Documents
 # Serializers
 from .serializer import DocCategoriesSerializer, DocCategoriesSubMenuSerializer, DocumentsSerializer
 from Member.serializer import MemberSerializer, UserSerializer
+from PatientDoc.serializer import SpecialistsHistoryObject, SpecialistsHistorySerializer
 # Forms
 from .forms import DocumentForm
 # Create your views here.
@@ -49,13 +52,20 @@ def Categories(request):
         return Http404
 
 def SpecialistsHistory(request):
+    # 127.0.0.1:8000/patientdoc/specialists/history/
     if request.is_ajax():
-        cats = DocCategories.objects.all().order_by('index')
-        catSerializer = DocCategoriesSerializer(cats, many=True)
-        #return HttpResponse(catSerializer)
-        json = {'DocCats': catSerializer.data}
-        content = JSONRenderer().render(json)
-        return HttpResponse(content)
+        query = Documents.objects.filter(user_id = 6)
+        query2 = Documents.objects.filter(user_id = 6).values('physician_id').annotate(num=Count('physician_id'))
+        arr = []
+        for item in query:
+            tmp = [x for x in query2 if x['physician_id']==item.physician.user_id]
+            obj = SpecialistsHistoryObject(item.physician.prefix.name, item.physician.user.first_name, item.physician.user.last_name , item.physician.expertise.name, tmp[0]['num'])
+            json = SpecialistsHistorySerializer(obj)
+            content = JSONRenderer().render(json.data)
+            if content not in arr:
+                arr.append(content)
+        content2 = JSONRenderer().render({'context': arr})
+        return HttpResponse(content2)    
     else:
         return Http404
 
