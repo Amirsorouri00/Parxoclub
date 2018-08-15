@@ -7,3 +7,9 @@ ROOM_STRING = 'ROOM-PRIVATE-KEY'
 USER_CONTACT_HAVE_ROOM = 'UserHaveRoomWithContact'
 USER_EXIST_IN_ROOM = 'UserExistInTheRoom'
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+CHOICES = (
+    (1, "Gold"),
+    (2, "Bronz"),
+    (3, "Silver"),
+    (4, "Normal")
+)
