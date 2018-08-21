@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='memberships',
             name='name',
-            field=models.CharField(choices=[(1, 'Gold'), (2, 'Bronz'), (3, 'Silver'), (4, 'Normal')], max_length=50),
+            field=models.CharField(max_length=50),
         ),
     ]
