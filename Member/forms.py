@@ -11,9 +11,15 @@ from Common.constants import CHOICES
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email']
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
+        # self.fields['user_name'].label = "Username"
+        # self.fields['user_name'].widget = forms.TextInput(attrs={
+        #     'id': 'maintenance_user_name_id',
+        #     'class': 'maintenance_user_name_class',
+        #     'name': 'user_name',
+        #     'placeholder': 'amirso'})
         self.fields['first_name'].label = "First Name"
         self.fields['first_name'].widget = forms.TextInput(attrs={
             'id': 'maintenance_first_name_id',

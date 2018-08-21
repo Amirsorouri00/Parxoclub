@@ -1,4 +1,4 @@
-from .models import Profile
+from .models import Profile, Members
 from django.http import Http404
 from Common import security, constants
 from django.http.response import HttpResponse
@@ -8,12 +8,23 @@ from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
 from django.views.decorators.clickjacking import xframe_options_sameorigin
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from django.template.loader import render_to_string
+from django.db import connection
 # Rest_Framework
 from rest_framework.renderers import JSONRenderer
-from .serializer import UserSerializer
+from .serializer import UserSerializer, MaintenanceUsersSerializer, MemberSerializer
+from django.core import serializers
 # Form
 from .forms import UserForm, ProfileForm, MemberForm
 # Controller functions handle members actions and activities
+
+from collections import namedtuple
+
+def namedtuplefetchall(cursor):
+    "Return all rows from a cursor as a namedtuple"
+    desc = cursor.description
+    nt_result = namedtuple('Result', [col[0] for col in desc])
+    return [nt_result(*row) for row in cursor.fetchall()]
 
 def AddProfilePkey(request, userId):
     userProfile = Profile.objects.get(user_id = userId)
@@ -96,18 +107,173 @@ def MemberSearch(request):
     else:
         raise Http404
 
+def MemberSearchByPrefixx(request):
+    if request.is_ajax():
+        search_filter = ''
+        search_filter = request.POST.get('member_search', None)
+        condition = Q()
+        condition = Q(name__iexact=search_filter)
+        cursor = connection.cursor()
+        cursor.execute("SELECT auth_user.first_name as first_name, auth_user.last_name as last_name, member_prefixes.name as prefix_name, member_expertises.name as expertise_name \
+                    FROM member_members join auth_user on auth_user.id = member_members.user_id \
+                    join member_physicians on member_members.physician_id = member_physicians.user_id \
+                    join member_prefixes on member_physicians.prefix_id = member_prefixes.id \
+                    join member_expertises on member_physicians.expertise_id = member_expertises.id \
+                    where member_prefixes.name = %s", ['Doctor'])
+        results = namedtuplefetchall(cursor)
+        #data = serializers.serialize('json', members, fields=('__all__'))
+        return JsonResponse(results, safe=False)
+        data = UserSerializer(members.objects.physician.prefix.filter(condition), many = True)
+        json = {'users': data.data}
+        content = JSONRenderer().render(json)
+        search_result = {
+            'users': User.objects.filter(condition)
+        }
+        #return JsonResponse(search_result)
+        return HttpResponse(content)
+    else:raise Http404
+
 def Maintenance(request):
     #user = get_object_or_404(User, id=user_id)
-    form_user = UserForm()
-    form_profile = ProfileForm()
-    form_member = MemberForm()
-    #form_member = MembersForm(instance=user.members)
-    return render(request, 'member/maintenance.html', { 
-        'form_user': form_user,
-        'form_profile': form_profile,
-        'form_member': form_member,
-    })
+    if request.method == 'POST':
+        form_user = UserForm(request.POST)
+        form_profile = ProfileForm(request.POST)
+        form_member = MemberForm(request.POST)
+        if form_user.is_valid() & form_profile.is_valid() & form_member.is_valid():
+            form_user.save()
+            form_profile.save()
+            form_member.save()
+            return JsonResponse({
+                'modal': True, 
+                'notification': { 
+                    'type': 'success',
+                    'message': 'Updated successfully.'
+                }
+            })
+        else:
+            html = render_to_string('member/maintenance.html', {'form_user': form_user,
+                'form_profile': form_profile,
+                'form_member': form_member,})
+            #content = JSONRenderer().render(html)
+            data = {'form': html, 'field':request.POST.get('field', None)}
+            return JsonResponse(data, safe=False)
+            # return render(request, 'member/maintenance.html', { 
+            #     #see (what about the error)
+            #     'form_user': form_user,
+            #     'form_profile': form_profile,
+            #     'form_member': form_member, 
+            # })
+        
+    else:
+        form_user = UserForm()
+        form_profile = ProfileForm()
+        form_member = MemberForm()
+        Users = User.objects.all()
+        #form_member = MembersForm(instance=user.members)
+        return render(request, 'member/maintenance.html', { 
+            'form_user': form_user,
+            'form_profile': form_profile,
+            'form_member': form_member,
+        })
     #return render(request, 'member/maintenance.html')
+
+def Validation(request):
+    value = request.POST.get('value', None)
+    field = request.POST.get('field', None)
+    if field == 'email':
+        data = {
+            'is_taken': User.objects.filter(email__iexact=value).exists(),
+            'field': 'email',
+        }
+        if data['is_taken']:
+            data['error'] = 'A user with this email already exists.'
+    elif field == 'birthdate':
+        data = {
+            'is_taken': 'NONE',
+            'field': 'birthdate',
+        }
+        form_profile = ProfileForm({'birthdate':value})
+        data['error'] = form_profile.errors['birthdate'][0]
+    else: data = {
+            'is_taken': 'NONE'
+        }
+    return JsonResponse(data)
+
+def UpdateDjangoTemplateVariables(request):
+    #product_list = request.POST.get('email', None)
+    data = {
+        'error': request.POST.get('error', None),
+    }
+    html = render_to_string('common/common-field-error-message.html', {'variable':data})
+    #content = JSONRenderer().render(html)
+    data = {'form': html, 'field':request.POST.get('field', None)}
+    return JsonResponse(data, safe=False)
+    #return JsonResponse(content, safe=False)
+
+def OneUserInfo(request):
+    if request.is_ajax():
+        #return HttpResponse('content')
+        userId = request.POST.get('user_id', None)
+        user = User.objects.get(id = userId)
+        userSerializer = MaintenanceUsersSerializer(user)
+        json = {'user': userSerializer.data, 'id': user.id}
+        content = JSONRenderer().render(json)
+        return HttpResponse(content)
+    else:
+        return Http404
+
+def serializer_test(request):
+    if request.is_ajax():
+        #return HttpResponse('content')
+        userId = request.POST.get('id', None)
+        user = Members.objects.get(user_id = userId)
+        userSerializer = MemberSerializer(user)
+        json = {'user': userSerializer.data, 'url': '{% url "maintenance_edit_user" %}'}
+        content = JSONRenderer().render(json)
+        return HttpResponse(content)
+    else:
+        return Http404
+
+def EditUser(request):
+    if request.is_ajax():
+        #return HttpResponse('content')
+        #return HttpResponse(request.POST.get('user_id', None))
+        userId = request.POST.get('id', None)
+        user = User.objects.get(id = userId)
+        profile = Profile.objects.get(user_id = userId)
+        member = Members.objects.get(user_id = userId)
+        form_user = UserForm(instance = user)
+        form_profile = ProfileForm(instance = profile)
+        form_member = MemberForm(instance = member)
+        html = render_to_string('member/maintenance-edit-user-modal.html', {'form_user': form_user,
+                'form_profile': form_profile,
+                'form_member': form_member,})
+        #content = JSONRenderer().render(html)
+        data = {'form': html, 'field':request.POST.get('field', None)}
+        return JsonResponse(data, safe=False)
+    else:
+        return Http404
+
+def RemoveUser(request):
+    if request.is_ajax():
+        #return HttpResponse('content')
+        #return HttpResponse(request.POST.get('user_id', None))
+        userId = request.POST.get('id', None)
+        user = User.objects.get(id = userId)
+        profile = Profile.objects.get(user_id = userId)
+        member = Members.objects.get(user_id = userId)
+        form_user = UserForm(instance = user)
+        form_profile = ProfileForm(instance = profile)
+        form_member = MemberForm(instance = member)
+        html = render_to_string('member/maintenance-remove-user-modal.html', {'form_user': form_user,
+                'form_profile': form_profile,
+                'form_member': form_member,})
+        #content = JSONRenderer().render(html)
+        data = {'form': html, 'field':request.POST.get('field', None)}
+        return JsonResponse(data, safe=False)
+    else:
+        return Http404
+
 
 '''
 @transaction.atomic

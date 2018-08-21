@@ -15,7 +15,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 class Profile(models.Model):
     # Foreign Keys
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.PROTECT)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='profile_user', primary_key=True, on_delete=models.PROTECT)
     # Columns
     pkey = models.CharField(max_length=100, blank=False, null=False)
     birthdate = models.DateField(blank=True, null=True)
@@ -29,23 +29,25 @@ class Memberships(models.Model):
     index = models.IntegerField(default=0)
     #done
 
-class Members(models.Model):
-    code = models.CharField(max_length=20, db_index=True, unique=True)
-    # Foreign Keys
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.PROTECT)
-    membership = models.ForeignKey(Memberships, on_delete=models.PROTECT)
-
 class Prefixes(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=True, null=True)
 
 class Expertises(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=True, null=True)
 
 class Physicians(models.Model):
     # Foreign Keys
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.PROTECT)
-    prefix = models.ForeignKey(Prefixes, on_delete=models.PROTECT)
-    expertise = models.ForeignKey(Expertises, on_delete=models.PROTECT, blank=True, null=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='physician_user', primary_key=True, on_delete=models.PROTECT)
+    prefix = models.ForeignKey(Prefixes, related_name='physician_prefix', on_delete=models.PROTECT)
+    expertise = models.ForeignKey(Expertises, related_name='physician_expertise',on_delete=models.PROTECT, blank=True, null=True)
+
+class Members(models.Model):
+    code = models.CharField(max_length=20, db_index=True, unique=True)
+    # Foreign Keys
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='member_user', primary_key=True, on_delete=models.PROTECT)
+    membership = models.ForeignKey(Memberships, related_name='member_membership', on_delete=models.PROTECT)
+    physician = models.ForeignKey(Physicians, related_name='member_physician', on_delete=models.PROTECT)
+    Profile = models.ForeignKey(Profile, related_name='member_profile', on_delete=models.PROTECT)
 
 class Group_Have_Perm(models.Model):
     name = models.CharField(max_length=50)

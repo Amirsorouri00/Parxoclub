@@ -13,7 +13,7 @@ function CsrfSafeMethod(method) {
 };
 
 function SendData(type, url, data, callbackSuccess, callbackError, from) {
-    console.log('senddata from: ' + from);
+    //console.log('senddata from: ' + from + ' .url: ' + url);
     // callbackSuccess = RedirectInto;
     // callbackError = RedirectInto;
     $.ajax({
@@ -21,6 +21,8 @@ function SendData(type, url, data, callbackSuccess, callbackError, from) {
         url: url,
         data: data,
         success: function(data) {
+            console.log('sendData: from = ' + from + 'data = ' + data + 'url: ' + url)
+            console.dir(data)
             callbackSuccess(window, data, from);
         },
         error: function(data) {
@@ -79,11 +81,12 @@ function CheckUserNamePasswordExistance(object, type, url) {
 };
 
 function Bind(winref, data, from) {
-    data2 = JSON.parse(data);
-    console.log('in Bind : ' + data);
+    console.log('in Bind, from = ' + from);
+    //data2 = JSON.parse(data);
+    console.log('in Bind, Data: ');
     //console.log('in Bind : '+ data2.DocCats[0].sub_menu);
-    console.log('from: ' + from);
     if (from == 'MemberSearch') {
+        data2 = JSON.parse(data);
         $.each(data2.users, function(i, item) {
             //console.log('in Bind2 : '+ data2.users[0].username);
             //str = "<div class='result-item'><div class='photo-container'><div class='photo'></div></div><div class='detail'><span class='name'> first_name last_name </span><span class='position'>Title/Position</span></div></div>"
@@ -92,11 +95,42 @@ function Bind(winref, data, from) {
             $('#idResultContainer .result-list').append(res);
         });
     } else if (from == 'DocumentCategories') {
-        console.log('in from');
-        var object = $('.member-menu .overlay-scroll');
+        data2 = JSON.parse(data);
+        //var object = $('.member-menu .overlay-scroll');
         CreateDocumentCategoryMenu(data2.DocCats);
         // $('#ajax_category').append(res);
-    } else { console.log("from doesn't match") };
+    } else if (from == 'AddNewUserModalLiveChecks') {
+        console.log('in Bind, from = ' + from);
+        console.dir(data.field);
+        //data2 = JSON.parse(data);
+        $('#amir_error_add_user_modal_' + data.field).append(data.form)
+    } else if (from == 'MaintenanceAddUserModalForm') {
+        //data2 = JSON.parse(data);
+        $('#amir_error_add_user_modal_email').append(data.form)
+    } else if (from == 'EditUserModalLiveChecks') {
+        //data2 = JSON.parse(data);
+        console.log('Hello from: bind /n EditUserModalLiveChecks')
+        tmp = data.form.replace("custom-modal", "custom-modal active");
+        $("#idEditUser").replaceWith(tmp);
+        // $('#amir_error_add_user_modal_email').append(data.form)
+    } else if (from == 'RemoveUserModalLiveChecks') {
+        //data2 = JSON.parse(data);
+        console.log('Hello from: bind /n RemoveUserModalLiveChecks')
+        tmp = data.form.replace("custom-modal", "custom-modal active");
+        $("#idRemoveUser").replaceWith(tmp);
+        // $('#amir_error_add_user_modal_email').append(data.form)
+    } else if (from == 'member') {
+        data2 = JSON.parse(data);
+        $.each(data2.users, function(i, item) {
+            //console.log('in Bind2 : '+ data2.users[0].username);
+            //str = "<div class='result-item'><div class='photo-container'><div class='photo'></div></div><div class='detail'><span class='name'> first_name last_name </span><span class='position'>Title/Position</span></div></div>"
+            res = search_object_to_append.replace("first_name", item.first_name).replace("last_name", item.last_name);
+            //$('#idResultContainer .result-list').append("<div class='result-item'><div class='photo-container'><div class='photo'></div></div><div class='detail'><span class='name'>" + item.first_name + ' ' + item.last_name +"</span><span class='position'>Title/Position</span></div></div>");
+        });
+    } else {
+        console.log("from doesn't match");
+        //console.log(data)
+    };
     //console.log($(bind_object).find('.result-list .result-item .detail span'));
     //$(bind_object).find('.result-list .result-item .detail .detail').append("<span class='name'>" + data + '</span>');
     //$('#idResultContainer .result-list').append("<div class='result-item'><div class='photo-container'><div class='photo'></div></div><div class='detail'><span class='name'>Masoud Nourbakhsh</span><span class='position'>Title/Position</span></div></div>");
@@ -131,9 +165,9 @@ function CreateDocumentCategoryMenu(data) {
 
 function ErrorManagement() {};
 
-function MemberSearch(object, type, url, search_text) {
+function MemberSearch(object, type, url, search_text, from) {
     console.log('insearch');
-    var from = 'MemberSearch';
+    //var from = 'MemberSearch';
     //var searchText = $(this).val();
     var data = {
         'member_search': search_text
@@ -151,6 +185,118 @@ function SearchSuccess(data) {
     $('#search-results').html(data);
 };
 
+function AddNewUserModalLiveChecks(winRef, data, from, type, url) {
+    //url = '/ajax/member/validate_username/';
+    //CheckUserNamePasswordExistance("#idUsername ", "POST ", url);
+    if (from == 'AddNewUserModalLiveChecks') {
+        type = 'POST';
+        //console.log('return returned: ' + data);
+        SendData(type, '/member/update/', data, Bind, ErrorManagement, 'AddNewUserModalLiveChecks');
+    }
+    //type = 'POST';
+    //url = '{% url "validate_email" %}';
+    var object = '#maintenance_email_id, #maintenance_birthdate_id';
+    $(object).change(function() {
+        console.log($(this).val());
+        console.log($(this).attr('name'));
+        type = 'POST';
+        name = $(this).attr('name');
+        value = $(this).val();
+        var jsonvar = {};
+        jsonvar['' + name] = value;
+        console.log('jsonvar: ');
+        console.dir(jsonvar);
+        //value_field = { name : $(value) };
+        data = {
+            'field': $(this).attr('name'),
+            'value': value,
+        }
+        console.dir(data);
+        //SendData(type, url, '', Bind, ErrorManagement, 'AddNewUserModalLiveChecks');
+        SendData(type, url, data, AddNewUserModalLiveChecks, ErrorManagement, 'AddNewUserModalLiveChecks');
+        //console.log('return returned: '+data);
+        //SendData(type, url, data, Bind, ErrorManagement, 'AddNewUserModalLiveChecks');
+        /*$.ajax({
+            type: 'Post',
+            url: url,
+            data: {
+                'field': 'ali',
+                'email': email
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data)
+                if (data.is_taken) {
+                    $.ajax({
+                        type: 'Post',
+                        url: "/member/update/",
+                        data: data,
+                        dataType: 'json',
+                        success: function(tmp) {
+                            $('#amir_error_add_user_modal_email').append(tmp)
+                        }
+                    });
+                    alert(data.error);
+                }
+                else {console.log('no error detected in email')}
+            }
+        });*/
+    });
+};
+
+function EditUserModalLiveChecks(winRef, data, from, type, url) {
+    if (from == 'EditUserModalLiveChecks') {
+        data2 = JSON.parse(data);
+        console.dir('in EditUserModalLiveChecks, data  = ' + data2.user);
+        tmp = { 'user': data2.user, 'id': data2.id }
+        console.log(tmp)
+        // console.dir('in EditUserModalLiveChecks, data  = ' + data);
+        SendData("POST", '/member/edituser/', tmp, Bind, ErrorManagement, 'EditUserModalLiveChecks');
+    } else if (from == 'page') {
+        console.dir(data)
+        SendData("POST", '/member/oneuserinfo/', data, EditUserModalLiveChecks, ErrorManagement, 'EditUserModalLiveChecks');
+    }
+};
+
+function RemoveUserModalLiveChecks(winRef, data, from, type, url) {
+    if (from == 'RemoveUserModalLiveChecks') {
+        data2 = JSON.parse(data);
+        console.dir('in RemoveUserModalLiveChecks, data  = ' + data2.user);
+        tmp = { 'user': data2.user, 'id': data2.id }
+        console.log(tmp)
+        SendData("POST", '/member/removeuser/', tmp, Bind, ErrorManagement, 'RemoveUserModalLiveChecks');
+    } else if (from == 'page') {
+        console.dir(data)
+        SendData("POST", '/member/oneuserinfo/', data, RemoveUserModalLiveChecks, ErrorManagement, 'RemoveUserModalLiveChecks');
+    }
+};
+
+function AddNewUserModalLiveChecksSendToServer() {
+    $.ajax({
+        type: 'Post',
+        url: url,
+        data: {
+            'field': 'ali',
+            'email': email
+        },
+        dataType: 'json',
+        success: function(data) {
+            console.log(data)
+            if (data.is_taken) {
+                $.ajax({
+                    type: 'Post',
+                    url: "/member/update/",
+                    data: data,
+                    dataType: 'json',
+                    success: function(tmp) {
+                        $('#amir_error_add_user_modal_email').append(tmp)
+                    }
+                });
+                alert(data.error);
+            } else { console.log('no error detected in email') }
+        }
+    });
+};
 
 // success: function(data){
 //     console.log(data);
