@@ -12,9 +12,9 @@ $('.mobile-menu-back').click(function() {
     $('.mobile-menu-base').toggleClass('active');
 });
 
-$(".mobile-menu-base").click(function(event){
+$(".mobile-menu-base").click(function(event) {
     event.stopPropagation();
- });
+});
 
 
 $('#idHeaderUserContainer').click(function() {
