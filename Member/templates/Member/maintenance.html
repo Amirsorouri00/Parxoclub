@@ -21,5 +21,179 @@
 <script src="{% static 'js/resize-carousel.js' %}"></script>
 <script src="{% static 'js/quills.js' %}"></script>
 <script src="{% static 'js/quills-script-history.js' %}"></script>
-<script src="js/froala.min.js"></script>
+<script src="{% static 'js/froala.min.js' %}"></script>
+<script src="{% static 'js/cropper.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    AddNewUserModalLiveChecks('', '', '', 'POST', '{% url "validate_email" %}');
+    //url = '/ajax/member/search';
+    $('.user-base-maintenance1').click(function() {
+        var userId = $(this).attr('user_id');
+        if ($(this).attr('id-modal') == 'idRemoveUser') { return } else {
+            data = { 'user_id': userId };
+            EditUserModalLiveChecks('', data, 'page', 'POST', '{% url "one_user_info" %}');
+        }
+    })
+    $('.user-maintenance-remove').click(function() {
+        var userId = $(this).attr('user_id');
+        data = { 'user_id': userId };
+        console.log('in page maintenance remove user: ' + data);
+        RemoveUserModalLiveChecks('', data, 'page', 'POST', '{% url "one_user_info" %}');
+    })
+    $("#idSearchBoxMember").keyup(function() {
+        MemberSearch($("#idSearchBoxMember"), "GET", "{% url 'mem_search'%}", $(this).val(), 'maintenance');
+    });
+    $(".maintenance-input-box").change(function() {
+        alert($(".maintenance-input-box option:selected").text());
+    });
+});
+
+function handleFileSelect(evt) {
+    var files = evt.target.files;
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+        // Only process image files.
+        if (!f.type.match('image.*')) {
+            continue;
+        }
+        var reader = new FileReader();
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {
+                // Render thumbnail.
+                var img = document.getElementById('add_user_modal_image');
+                img.src = e.target.result;
+                img.title = '' + escape(theFile.name);
+                /*img.innerHTML = [
+                    '<img style="height: 75px; border: 1px solid #000; margin: 5px" src="',
+                    e.target.result,
+                    '" title="', escape(theFile.name),
+                    '"/>'
+                ].join('');*/
+                document.getElementById('news-photo-editor').insertBefore(img, null);
+            };
+        })(f);
+        // Read in the image file as a data URL.
+        reader.readAsDataURL(f);
+    }
+}
+document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+<script type="text/javascript">
+var photo_blob = null;
+$(function() {
+    var $imageProfile = $('#add_user_modal_image');
+
+    initCropper($imageProfile, null)
+
+    $("#idRotateLeft").click(function() {
+        $imageProfile.cropper('rotate', -90);
+    });
+
+    $("#idRotateRight").click(function() {
+        $imageProfile.cropper('rotate', 90);
+    });
+
+    $("#idNoPhoto").click(function() {
+        $imageProfile.cropper('destroy');
+        $imageProfile.attr('default-photo', true);
+    });
+});
+
+function initCropper(image, src) {
+    image.cropper('destroy');
+
+    if (src != null)
+        image.attr('src', src);
+
+
+    if (image.attr('default-photo') == "true")
+        return;
+
+    image.cropper({
+        viewMode: 3,
+        dragMode: 'move',
+        aspectRatio: 1,
+        autoCropArea: 1,
+        wheelZoomRatio: 0.2,
+        restore: false,
+        guides: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+
+        ready: function(e) {
+            if (src == null) {
+                var canvas_data = JSON.parse(document.getElementById('add_user_modal_image').value);
+                $(this).cropper('rotate', canvas_data['rotate']);
+                $(this).cropper('setCanvasData', canvas_data);
+            }
+            getCropOutput($(this));
+        },
+        crop: function(e) {
+            getCropOutput($(this));
+        }
+    });
+
+    function getCropOutput(image) {
+        var rotate = image.cropper('getImageData').rotate;
+        var canvas_data = image.cropper('getCanvasData');
+        canvas_data['rotate'] = rotate;
+        document.getElementById('add_user_modal_image').value = JSON.stringify(canvas_data);
+
+        image.cropper('getCroppedCanvas').toBlob(function(blob) {
+            photo_blob = blob;
+        });
+    }
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            var $image = $('#add_user_modal_image');
+            $image.attr('default-photo', false);
+            initCropper($image, e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#form1').submit(function(event) {
+        // do stuff
+        event.preventDefault();
+        var context = '{{context}}';
+        var firstname = $("#maintenance_first_name_id").val();
+        var lastname = $("#maintenance_last_name_id").val();
+        var email = $("#maintenance_email_id").val();
+        var birthdate = $("#maintenance_birthdate_id").val();
+        var mobile = $("#maintenance_mobile_id").val();
+        var address = $("#maintenance_address_id").val();
+        var gender = $("#maintenance_gender_id").val();
+        var code = $("#maintenance_member_code_id").val();
+        var membership = $("#maintenance_membership_type_id").val();
+        data = {
+            'first_name': firstname,
+            'last_name': lastname,
+            'email': email,
+            'username': email,
+            'birthdate': birthdate,
+            'mobile': mobile,
+            'address': address,
+            'gender': gender,
+            'code': code,
+            'membership': membership,
+        }
+        SendData("POST", $(this).attr('action'), data, Bind, ErrorManagement, 'MaintenanceAddUserModalForm');
+        return false;
+    });
+});
+</script>
+<script type="text/javascript">
+/* Remove User Modal */
+</script>
 {% endblock %}

@@ -18,7 +18,7 @@
                 {% endif %}
                 <div class="add-user-input-wrapper overlay-scroll">
                     <div class="doc-no-field-error-fake"></div>
-                    <form>
+                    <form id="form1" action="{% url 'maintenance'%}" method="POST" enctype="multipart/form-data">
                         {% comment %} First Name {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
@@ -49,6 +49,7 @@
                             <div class="input-box">
                                 {{form_profile.birthdate}}
                             </div>
+                            <div id="amir_error_add_user_modal_birthdate" class="input-validation clr-red"> {% include 'common/common-field-error-message.html' with variable="{{form_profile.birthdate}}" %}</div>
                         </div>
                         {% if form_profile.birthdate.errors %}
                         <div class="field-error clr-red">{{form_profile.birthdate.errors}}</div>
@@ -74,7 +75,7 @@
                             <div class="input-box">
                                 {{form_user.email}}
                             </div>
-                            <div class="input-validation">example@mail.com</div>
+                            <div id="amir_error_add_user_modal_email" class="input-validation clr-red"> {% include 'common/common-field-error-message.html' with variable="{{form_user.email}}" %}</div>
                         </div>
                         {% if form_user.email.errors %}
                         <div class="field-error clr-red">{{form_user.email.errors}}</div>
@@ -162,23 +163,24 @@
                 </div>
             </div>
             <div class="add-user-sep"></div>
+            <output id="list"><img style="height: 100%; width: 100%;" id="add_user_modal_image" src="" title="" /></output>
             <div class="add-user-photo-editor ">
                 <div class="news-photo-editor-container ">
-                    <div class="news-photo-editor"></div>
+                    <div id="news-photo-editor" class="news-photo-editor" style="background-image: url();"></div>
                     <div class="news-edit-btn-wrapper">
                         <div class="news-edit-btn-container">
                             <div title="Browse">
-                                <input style="padding-left: 0.5em;" class="news-edit-btn  btn-taint icon-browse" type="file" name="date" required="" tabindex="1">
+                                <input style="padding-left: 0.5em;" id="files" accept=".jpg,.png,.bmp" class="news-edit-btn  btn-taint icon-browse" type="file" name="date" required="" tabindex="1" multiple />
                             </div>
                         </div>
                         <div class="news-edit-btn-container">
-                            <div class="news-edit-btn  btn-taint icon-rotateleft" title="Rotate left" tabindex="1"></div>
+                            <div id="idRotateLeft" class="news-edit-btn  btn-taint icon-rotateleft" title="Rotate left" tabindex="1"></div>
                         </div>
                         <div class="news-edit-btn-container">
-                            <div class="news-edit-btn  btn-taint icon-rotateright" title="Rotate Right" tabindex="1"></div>
+                            <div id="idRotateRight" class="news-edit-btn  btn-taint icon-rotateright" title="Rotate Right" tabindex="1"></div>
                         </div>
                         <div class="news-edit-btn-container">
-                            <div class="news-edit-btn  btn-taint icon-trash" title="Clear Photo" tabindex="1"></div>
+                            <div id="idNoPhoto" class="news-edit-btn  btn-taint icon-trash" title="Clear Photo" tabindex="1"></div>
                         </div>
                     </div>
                 </div>
@@ -190,7 +192,7 @@
             </div>
             <div class="text-submit-btn-sep"></div>
             <div class="text-submit-btn-container ">
-                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+                <button form="form1" type="submit" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
             </div>
         </div>
     </div>
