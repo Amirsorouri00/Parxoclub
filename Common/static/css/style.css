@@ -422,6 +422,9 @@ td {
 
 
 
+
+
+
 /*
 
  .88888.  dP          dP                dP 
@@ -632,6 +635,9 @@ Y8.   .88 88 88.  .88 88.  .88 88.  .88 88
         transform: scale(2.5);
     }
 }
+
+
+
 
 
 
@@ -1838,6 +1844,9 @@ div.main.active {
 
 
 
+
+
+
 /*
                   oo                                     
                                                          
@@ -2348,6 +2357,9 @@ Y8ooooo. 88'  `88 88 88'  `88 88'  `88 88ooood8 88'  `88
 
 
 
+
+
+
 /*
 dP                   oo          
 88                               
@@ -2494,6 +2506,9 @@ dP `88888P' `8888P88 dP dP    dP
     line-height: 50px;
     justify-content: center;
 }
+
+
+
 
 
 
@@ -3387,6 +3402,9 @@ dP `88888P' `8888P88 dP dP    dP
 
 
 
+
+
+
 /*
 8888ba.88ba                      dP                                                                  dP   oo                   
 88  `8b  `8b                     88                                                                  88                        
@@ -3534,6 +3552,9 @@ dP   dP   dP `88888P' dP  dP  dP 88Y8888' `88888P' dP       `88888P'    `88888P'
 .member-panel .member-options .member-option-btn:hover {
     color: rgba(255, 255, 255, 1);
 }
+
+
+
 
 
 
@@ -4276,6 +4297,9 @@ d8'   .8P 88.  ... 88.  .88 88       88.  ... 88    88     88     88 88.  ...   
 
 
 
+
+
+
 /*
  a88888b. dP                  dP       888888ba                             dP 
 d8'   `88 88                  88       88    `8b                            88 
@@ -4715,6 +4739,9 @@ Y8.   .88 88    88 88.  .88   88       88        88.  .88 88    88 88.  ... 88
 .chat-grouping span {
     padding-left: 20px;
 }
+
+
+
 
 
 
@@ -6013,6 +6040,9 @@ d888888P          dP dP           888888ba                             dP
 
 
 
+
+
+
 /*Bubble Check*/
 
 .bubble-check {
@@ -6085,6 +6115,9 @@ d888888P          dP dP           888888ba                             dP
     opacity: 0;
     transition: 200ms ease 200ms;
 }
+
+
+
 
 
 
@@ -7007,6 +7040,9 @@ a88aaaa    88 .d8888b. .d8888b. d8888P    88        88d888b. .d8888b. d8888P
 
 
 
+
+
+
 /*
 
 .8888b dP                     dP                        dP                         dP                   
@@ -7642,6 +7678,9 @@ td .date-cell .event-cell-container .float-event-badge {
 
 
 
+
+
+
 /*
          dP                                                       dP                  dP            
          88                                                       88                  88            
@@ -7803,6 +7842,9 @@ td .date-cell .event-cell-container .float-event-badge {
     justify-content: space-between;
     align-items: center;
 }
+
+
+
 
 
 
@@ -8626,6 +8668,9 @@ dP   dP   dP `88888P' dP  dP  dP 88Y8888' `88888P' dP           88888888P `88888
 
 
 
+
+
+
 /*
 
 8888ba.88ba                      dP                            888888ba                    dP       dP                                        dP 
@@ -9121,6 +9166,9 @@ dP   dP   dP `88888P' dP  dP  dP 88Y8888' `88888P' dP          8888888P  `88888P
 
 
 
+
+
+
 /*
 
  88888888b       dP oo   dP      dP     dP  oo            dP                                 8888ba.88ba                 dP          dP 
@@ -9217,6 +9265,9 @@ a88aaaa    .d888b88 dP d8888P    88aaaaa88a dP .d8888b. d8888P .d8888b. 88d888b.
     align-items: center;
     margin-top: auto;
 }
+
+
+
 
 
 
@@ -9839,6 +9890,9 @@ a88aaaa8P' 88 .d8888b. 88d888b. .d8888b.    88   88   88 .d8888b. 88d8b.d8b. 88d
 
 
 
+
+
+
 /*
  a88888b.          dP                         dP                   
 d8'   `88          88                         88                   
@@ -10051,7 +10105,7 @@ Y8.   .88 88.  .88 88 88.  ... 88    88 88.  .88 88.  .88 88
 
 .calendar-table-base table {
     width: 100%;
-    height: 100%;
+    height: 99.9%;
     border-collapse: collapse;
     table-layout: fixed;
 }
@@ -10402,6 +10456,9 @@ td .date-cell .event-cell-container .event-badge {
 .remove-event-detail-btn:hover {
     color: rgba(231, 76, 60, 1);
 }
+
+
+
 
 
 
@@ -11021,7 +11078,7 @@ dP     dP `88888P' 8888P Y8P  `88888P'
 .photo-news-view-container {
     width: 100%;
     height: 50vh;
-     display: flex;
+    display: flex;
     order: 1;
     justify-content: center;
     padding: 50px;
@@ -11047,6 +11104,9 @@ dP     dP `88888P' 8888P Y8P  `88888P'
     padding: 0px 40px 40px 40px;
     box-sizing: border-box;
 }
+
+
+
 
 
 
@@ -11806,6 +11866,9 @@ d8'    88        88       88    88    `8b                                 88  `8
 
 
 
+
+
+
 /*
 .d88888b  dP                               88888888b                              dP      8888ba.88ba                 dP          dP 
 88.    "' 88                               88                                     88      88  `8b  `8b                88          88 
@@ -11983,6 +12046,9 @@ d8'   .8P 88    88 88.  .88 88.88b.88'     88        88 .88'  88.  ... 88    88 
     flex-flow: row;
     align-items: center;
 }
+
+
+
 
 
 
@@ -12706,6 +12772,9 @@ a88aaaa    .d888b88 dP d8888P    a88aaaa    dP   .dP .d8888b. 88d888b. d8888P   
 
 
 
+
+
+
 /*
  88888888b                                     
  88                                            
@@ -13111,6 +13180,9 @@ a88aaaa    88d888b. 88d888b. .d8888b. 88d888b.
 
 
 
+
+
+
 /*
 
 8888ba.88ba           oo            dP                                                         
@@ -13182,6 +13254,9 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
     display: flex;
     order: 3
 }
+
+
+
 
 
 
@@ -13741,6 +13816,9 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
 
 
 
+
+
+
 /*Maintenance Content*/
 
 .maintenance-content {
@@ -13789,6 +13867,9 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
     overflow: hidden;
     box-sizing: border-box;
 }
+
+
+
 
 
 
@@ -14256,6 +14337,9 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
 
 
 
+
+
+
 /*Maintenance Search Option*/
 
 .maintenance-search .maintenance-input-box {
@@ -14317,6 +14401,9 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
     padding-top: 10px;
     font-size: 12px;
 }
+
+
+
 
 
 
@@ -14648,6 +14735,9 @@ dP   dP   dP `88888P8 dP dP    dP   dP   `88888P' dP    dP `88888P8 dP    dP `88
     transition: 400ms ease;
     color: rgba( 231, 76, 60, 1);
 }
+
+
+
 
 
 
@@ -16344,6 +16434,9 @@ d8'    88        88                           88    `8b                   88    
 
 
 
+
+
+
 /*
 8888ba.88ba                 dP          dP     .d888888        dP       dP    dP     dP                            
 88  `8b  `8b                88          88    d8'    88        88       88    88     88                            
@@ -16398,6 +16491,9 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP    88     88  `88888P8 `88888P8    `Y
     align-items: center;
     transition: 400ms ease;
 }
+
+
+
 
 
 
@@ -16757,6 +16853,9 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP    88     88  `88888P8 `88888P8    `Y
 
 
 
+
+
+
 /*
 8888ba.88ba                 dP          dP     888888ba                                                    dP     dP                            
 88  `8b  `8b                88          88     88    `8b                                                   88     88                            
@@ -16914,6 +17013,9 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP     dP     dP `88888P' dP  dP  dP `88
     justify-content: space-between;
     align-items: center;
 }
+
+
+
 
 
 
@@ -17473,6 +17575,9 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP    dP   dP   dP `88888P' dP  dP  dP 8
 
 
 
+
+
+
 /*
 d888888P          dP       dP                   dP oo          
    88             88       88                   88             
@@ -17502,6 +17607,9 @@ d888888P          dP       dP                   dP oo
     flex-flow: column;
     overflow: hidden;
 }
+
+
+
 
 
 
@@ -17856,6 +17964,9 @@ d8'    88        88       88     88    `8b                        88  `8b  `8b  
 .custom-modal.active .modal-container {
     transform: translateY( 0px);
 }
+
+
+
 
 
 
@@ -18550,6 +18661,9 @@ dP   dP   dP `88888P' dP  dP  dP 88Y8888' `88888P' dP           88888888P `88888
 
 
 
+
+
+
 /*
  888888ba                                                    888888ba                       8888ba.88ba                 dP          dP 
  88    `8b                                                   88    `8b                      88  `8b  `8b                88          88 
@@ -18612,6 +18726,9 @@ a88aaaa8P' .d8888b. 88d8b.d8b. .d8888b. dP   .dP .d8888b.    88     88 .d8888b. 
     display: flex;
     border: 2;
 }
+
+
+
 
 
 
@@ -19202,6 +19319,9 @@ d8'    88  88                                 88  `8b  `8b                88    
 
 
 
+
+
+
 /*
  a88888b. dP                  dP      dP     dP          dP                         dP    8888ba.88ba                 dP          dP 
 d8'   `88 88                  88      88     88          88                         88    88  `8b  `8b                88          88 
@@ -19296,6 +19416,9 @@ Y8.   .88 88    88 88.  .88   88      Y8.   .8P 88.  .88 88 88.  .88 88.  .88 88
     justify-content: center;
     align-items: center;
 }
+
+
+
 
 
 
@@ -19851,6 +19974,9 @@ Y8.   .88 88    88 88.  .88   88      Y8.   .8P 88.  .88 88 88.  .88 88.  .88 88
 
 
 
+
+
+
 /*
 d888888P                     dP       888888ba             dP     dP                              
    88                        88       88    `8b            88     88                              
@@ -19888,6 +20014,9 @@ d888888P                     dP       888888ba             dP     dP
     color: rgba(255, 255, 255, 1);
     border: 1px solid rgba(78, 214, 226, .6);
 }
+
+
+
 
 
 
@@ -20571,6 +20700,9 @@ d8'   .8P 88.  .88 88.  .88 88  88  88 88   88       88    .88 88.  .88   88    
 
 
 
+
+
+
 /*
 d888888P                     dP      .d88888b           dP                  oo   dP       888888ba             dP     dP                              
    88                        88      88.    "'          88                       88       88    `8b            88     88                              
@@ -20927,6 +21059,9 @@ d888888P                     dP      .d88888b           dP                  oo  
 
 
 
+
+
+
 /*
  a88888b. dP                                888888ba             dP     dP                     
 d8'   `88 88                                88    `8b            88     88                     
@@ -20960,6 +21095,9 @@ Y8.   .88 88 88.  .88       88 88.  ...     88    .88 88.  .88   88     88   88.
 .modal-close:hover {
     transform: rotate(180deg);
 }
+
+
+
 
 
 
@@ -21616,6 +21754,9 @@ input[type=Time]::-webkit-outer-spin-button {
 
 
 
+
+
+
 /*
 
  a88888b. dP                         dP           888888ba                    
@@ -21822,6 +21963,9 @@ Y8.   .88 88    88 88.  ... 88.  ... 88  `8b.     88    .88 88.  .88  .d88b.
 
 
 
+
+
+
 /*
 
 
@@ -21940,6 +22084,9 @@ Y8.   .88 88    88 88.  ... 88.  ... 88  `8b.     88    .88 88.  .88  .d88b.
     color: rgba(168, 176, 185, .6);
     margin-left: 10px;
 }
+
+
+
 
 
 
@@ -22583,6 +22730,9 @@ d888888P                     dP
 
 
 
+
+
+
 /*
 d888888P                            dP          
    88                               88          
@@ -22692,6 +22842,9 @@ d888888P                            dP
 .custom-toggle input:checked+.toggle-option-first+.toggle-btn-base .toggle-btn {
     transform: translateX(18px);
 }
+
+
+
 
 
 
@@ -23092,6 +23245,9 @@ d8'   .8P 88 88    88 88.  .88 88 88.  ...       88    88.  .88 88.  .88 88.  .8
 
 
 
+
+
+
 /*
 .d88888b           dP                     dP   
 88.    "'          88                     88   
@@ -23203,6 +23359,9 @@ d8'   .8P 88.  ... 88 88.  ... 88.  ...   88
     padding-top: 10px;
     font-size: 12px;
 }
+
+
+
 
 
 
@@ -23922,6 +24081,9 @@ input:focus~.addRowInputboxButtonContainer {
 
 
 
+
+
+
 /*
 dP     dP                          dP                   
 88     88                          88                   
@@ -23992,6 +24154,9 @@ dP     dP  `88888P' `88888P8 `88888P8 `88888P' dP
     line-height: 18px;
     bottom: .6pt;
 }
+
+
+
 
 
 
@@ -24582,6 +24747,9 @@ dP     dP `88888P'     dP        dP `88888P' dP `88888P8     88888888P dP       
 
 
 
+
+
+
 /*
 
 888888ba             dP   oo .8888b oo                     dP   oo                   
@@ -24779,6 +24947,9 @@ dP     dP `88888P'   dP   dP dP     dP `88888P' `88888P8   dP   dP `88888P' dP  
 
 
 
+
+
+
 /*
 8888ba.88ba                 dP          dP    dP                                                a88888b.                                                       dP 
 88  `8b  `8b                88          88    88                                               d8'   `88                                                       88 
@@ -24907,6 +25078,9 @@ dP   dP   dP `88888P' `88888P8 `88888P8 dP    88888888P `88888P8 dP       `8888P
 
 
 
+
+
+
 /*
 
 8888ba.88ba           dP       oo dP             8888ba.88ba                             
@@ -24927,6 +25101,8 @@ dP   dP   dP `88888P' 88Y8888' dP dP `88888P'    dP   dP   dP `88888P' dP    dP 
     -webkit-filter: blur(0px);
     filter: blur(0px);
     box-sizing: border-box;
+    width: 100%;
+    height: 100vh
 }
 
 .mobile-main.active {
@@ -24948,6 +25124,9 @@ dP   dP   dP `88888P' 88Y8888' dP dP `88888P'    dP   dP   dP `88888P' dP    dP 
     align-items: center;
     justify-content: center;
 }
+
+
+
 
 
 
@@ -25430,6 +25609,9 @@ dP   dP   dP `88888P' 88Y8888' dP dP `88888P'    dP   dP   dP `88888P' dP    dP 
 
 
 
+
+
+
 /*
  a88888b.                           dP oo             d88  d8888b. .d888b.  a8888a           .d888b. 888888P d88  
 d8'   `88                           88                 88      `88 Y8' `8P d8' ..8b          Y8' `8P 88'      88  
@@ -25609,6 +25791,9 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88     88  88.     8b. .88 Y8'' 
         display: none;
     }
 }
+
+
+
 
 
 
@@ -26555,6 +26740,9 @@ Y8.       88  88  88 88.  ... 88.  .88 88 88.  .88    8b. .88      88 Y8'' .8P
 
 
 
+
+
+
 /*
 oo  888888ba  dP                                     888888P                            dP    888888P .d88888b  
     88    `8b 88                                     88'                                88    88'     88.    "' 
@@ -27060,6 +27248,9 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    d88888P    `88888P8 dP    d
 
 
 
+
+
+
 /* Landscape */
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
@@ -27142,6 +27333,9 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    d88888P    `88888P8 dP    d
         display: none;
     }
 }
+
+
+
 
 
 
@@ -27937,6 +28131,9 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    `Y888P'
 
 
 
+
+
+
 /* Landscape */
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
@@ -28014,6 +28211,9 @@ dP  dP        dP    dP `88888P' dP    dP `88888P'    `Y888P'
         display: none;
     }
 }
+
+
+
 
 
 
@@ -28525,6 +28725,9 @@ dP 88Y888P' dP    dP `88888P' dP    dP `88888P'    `Y888P'    dP
         max-height: calc(100vh - 191px);
     }
 }
+
+
+
 
 
 
