@@ -1,0 +1,18 @@
+{% extends "common/index.html" %} {% load static %} {% block IndexCss %}
+<!-- No Additional Css files in Comparison to index needed. -->{% endblock %}
+<!-- Title Block -->
+{% block title %} | Calender{% endblock %}
+<!-- After Side Nav Block Objects in index.html -->
+{% block after_side_nav_content %}
+<!-- Calendar -->
+{% include 'calender/calender-after-sidenave-calender-wrapper.html' %}{% endblock %}
+<!-- After mobile menu back Block Objects in index.html  -->
+{% block menu-back-after-content %}
+<!-- Show Event Modal -->
+{% include 'calender/calender-show-event-modal.html' %}
+<!-- Add Event Modal -->
+{% include 'calender/calender-add-event-modal.html' %}
+<!-- Edit Event Modal -->
+{% include 'calender/calender-edit-event-modal.html' %}
+<!-- Remove Event Modal -->
+{% include 'calender/calender-remove-event-modal.html' %} {% endblock %}

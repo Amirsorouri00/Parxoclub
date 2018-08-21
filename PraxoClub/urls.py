@@ -21,10 +21,10 @@ urlpatterns = [
     path('chat/', include('Chat.urls')),
     path('authenticate/', include('Member.urls')),
     path('member/', include('Member.urls')),
+    path('calender/', include('Calender.urls')),
     path('patientdoc/', include('PatientDoc.urls')),
-     #path('admin/', admin.site.urls),
-
-     #Ajax
+     # path('admin/', admin.site.urls),
+     # Ajax
     path('ajax/member/', include('Member.urls')),
     path('ajax/patientdoc/', include('PatientDoc.urls')),
 ]
