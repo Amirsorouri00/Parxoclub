@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'Member',
     'Chat',
     'Common',
-    'Calender',
+    'Calendar',
     'Log',
     'rest_framework', # Django Rest framework app
     'rest_framework.authtoken',

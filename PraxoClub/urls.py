@@ -21,7 +21,7 @@ urlpatterns = [
     path('chat/', include('Chat.urls')),
     path('authenticate/', include('Member.urls')),
     path('member/', include('Member.urls')),
-    path('calender/', include('Calender.urls')),
+    path('calender/', include('Calendar.urls')),
     path('patientdoc/', include('PatientDoc.urls')),
      # path('admin/', admin.site.urls),
      # Ajax
