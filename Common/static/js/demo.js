@@ -154,6 +154,3 @@ $('#idFloatBack').click(function() {
     });
     $(this).addClass("active");
 });
-
-
- 

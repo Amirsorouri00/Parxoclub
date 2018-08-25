@@ -10,7 +10,7 @@ from Common.constants import EVENT_TYPE_COLOR_CHOICES
 
 class EventType(models.Model):
     name = models.CharField(max_length=50)
-    color = models.CharField(max_length = 5 ,choices = EVENT_TYPE_COLOR_CHOICES, null = False)
+    color = models.CharField(max_length = 10 ,choices = EVENT_TYPE_COLOR_CHOICES, null = False)
 
 class Event(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, blank=True, null=True) #change to not nullable

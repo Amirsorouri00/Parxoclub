@@ -7,16 +7,13 @@
             </div>
         </div>
         <div class="edit-event-input-base overlay-scroll">
-            <form>
+            <form id="form1">
                 <div class="custom-input">
                     <div class="input-label">
                         <label>Event Type</label>
                     </div>
                     <div class="input-box">
-                        <select>
-                            <option value="pharmacy">Pharmacy</option>
-                            <option value="laboratory">Laboratory</option>
-                            <option value="hospitolization">Hospitolization</option>
+                        <select id="calendar_my_select">
                         </select>
                     </div>
                 </div>
@@ -25,7 +22,7 @@
                         <label>Title</label>
                     </div>
                     <div class="input-box">
-                        <input type="text" name="date" required="" tabindex="1">
+                        <input id="calendar_input_title" type="text" name="title" required="" tabindex="1">
                     </div>
                 </div>
                 <div class="custom-input">
@@ -33,13 +30,13 @@
                         <label>Time</label>
                     </div>
                     <div class="input-box">
-                        <input type="Time" name="time" required="" tabindex="1">
+                        <input id="calendar_input_start_time" type="Time" name="time" required="" tabindex="1">
                     </div>
                     <div class="input-validation">Begin at</div>
                 </div>
                 <div class="custom-input" style="margin-top: 5px;">
                     <div class="input-box">
-                        <input type="Time" name="time" required="" tabindex="1">
+                        <input id="calendar_input_end_time" type="Time" name="time" required="" tabindex="1">
                     </div>
                     <div class="input-validation">Finish at</div>
                 </div>
@@ -48,7 +45,7 @@
                         <label>Description</label>
                     </div>
                     <div class="textarea-box">
-                        <textarea type="text" name="date" required="" tabindex="1" autocomplete="off"></textarea>
+                        <textarea id="calendar_text_event_note" type="text" name="date" required="" tabindex="1" autocomplete="off"></textarea>
                     </div>
                 </div>
             </form>
@@ -56,11 +53,11 @@
         </div>
         <div class="submit-edit-event-base">
             <div class="text-submit-btn-container" modal-close>
-                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
+                <button form="form1" type="submit" class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></button>
             </div>
             <div class="text-submit-btn-sep"></div>
             <div class="text-submit-btn-container ">
-                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+                <button form="form1" type="submit" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
             </div>
         </div>
     </div>

@@ -7,7 +7,32 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.http import HttpResponse, JsonResponse, Http404
 from django.template.loader import render_to_string
+from .models import Event, EventType
+from .serializer import EventTypeSerializer
+# Rest_Framework
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from rest_framework import serializers
 
+
+def AddEvents(request):
+    date = request.POST.get('date', None)
+    #title = request.POST.get('date', None)
+    start_time = request.POST.get('start_time', None)
+    end_time = request.POST.get('end_time', None)
+    note = request.POST.get('note', None)
+    new_event = Event.objects.create(user_id = 1, event_type_id = 2, 
+        day_of_the_event = date, start_time = start_time, end_time = end_time,
+        event_note = note)
+    new_event.save()
+    return HttpResponse(request.POST.get('date', None))
+
+def EventTypes(request):
+    event_types = EventType.objects.all()
+    data = EventTypeSerializer(event_types, many = True)
+    json = {'types': data.data}
+    content = JSONRenderer().render(json)
+    return HttpResponse(content)
 
 def Calendar(request):
     if not request.GET.get('day__gte', None):
@@ -30,24 +55,6 @@ def Calendar(request):
         data = {'form': html}
         return JsonResponse(data, safe=False)
 # Create your views here.
-
-def CalendarStringer(request):
-    extra_context = CalendarMaker(request)
-    html = render_to_string('calendar/calendar-after-sidenave-calendar-wrapper.html', { 
-            'previous_month': extra_context['previous_month'],
-            'next_month': extra_context['next_month'],
-            'calendar' : extra_context['calendar'],
-        })
-    #content = JSONRenderer().render(html)
-    data = {'form': html}
-    return JsonResponse(data, safe=False)
-    # extra_context = CalendarMaker(request)
-    # #return HttpResponse(extra_context['previous_month'])
-    # return render(request, 'calendar/calendar.html', { 
-    #         'previous_month': extra_context['previous_month'],
-    #         'next_month': extra_context['next_month'],
-    #         'calendar' : extra_context['calendar'],
-    #     })
 
 def CalendarMaker(request):
     after_day = request.GET.get('day__gte', None)

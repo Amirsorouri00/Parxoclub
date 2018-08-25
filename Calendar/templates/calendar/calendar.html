@@ -19,6 +19,26 @@
 <script type="text/javascript">
 $(document).ready(function() {
     Calendar('', '', '', '', '');
+    SendData("GET", '/calendar/eventtypes/', '', Bind, ErrorManagement, 'CalendarGetData');
+    $('form').submit(function(event) {
+        // do stuff
+        event.preventDefault();
+        //var context = '{{context}}';
+        var title = $("#calendar_input_title").val();
+        var start_time = $("#calendar_input_start_time").val();
+        var end_time = $("#calendar_input_end_time").val();
+        var date = $(".date-header-event-list").attr('value');
+        var note = $("#calendar_text_event_note").val();
+        data = {
+            'title': title,
+            'start_time': start_time,
+            'end_time': end_time,
+            'date': date,
+            'note': note,
+        }
+        SendData("POST", 'addevents/', data, Bind, ErrorManagement, 'CalendarForm');
+        return false;
+    });
 });
 </script>
 {% endblock %}

@@ -136,6 +136,20 @@ function Bind(winref, data, from) {
         });
         //$(".calendar-wrapper").replaceWith(data.form);
         //data2 = JSON.parse(data);
+    } else if (from == 'CalendarGetData') {
+        console.dir('from CalendarGetData: ' + data);
+        data2 = JSON.parse(data);
+        $.each(data2.types, function(i, item) {
+            $('#calendar_my_select').append($('<option>', {
+                value: item.name,
+                text: item.name,
+            }));
+        });
+        //$(".calendar-wrapper").replaceWith(data.form);
+        //data2 = JSON.parse(data);
+    } else if (from == 'CalendarForm') {
+        console.dir('from CalendarForm: ' + data);
+
     } else {
         console.log("from doesn't match");
         //console.log(data)
@@ -291,7 +305,16 @@ function Calendar(winRef, data, from, type, url) {
         var link_to_month = $('#calendar_next_month').attr('month_link');
         SendData("GET", link_to_month, '', Bind, ErrorManagement, 'Calendar');
     });
+
+    $('body').on('click', ".calendar-table-base table tbody tr td", function() {
+        $(".calendar-table-base table tbody tr td").removeClass("active");
+        $(this).addClass("active");
+    });
 };
+
+// function CalendarGetData(winRef, url, method, data, bind_object) {
+//     SendData("GET", url, '', Bind, ErrorManagement, 'CalendarGetData');
+// }
 
 // function AddNewUserModalLiveChecksSendToServer() {
 //     $.ajax({
