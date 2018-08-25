@@ -15,4 +15,10 @@
 <!-- Edit Event Modal -->
 {% include 'calendar/calendar-edit-event-modal.html' %}
 <!-- Remove Event Modal -->
-{% include 'calendar/calendar-remove-event-modal.html' %} {% endblock %}
+{% include 'calendar/calendar-remove-event-modal.html' %} {% endblock %}{% block EndJavascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+    Calendar('', '', '', '', '');
+});
+</script>
+{% endblock %}

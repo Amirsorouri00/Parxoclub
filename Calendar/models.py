@@ -33,7 +33,6 @@ class Event(models.Model):
             overlap = True
         elif new_start <= fixed_start and new_end >= fixed_end: #outter limits
             overlap = True
-
         return overlap
 
     def get_absolute_url(self):

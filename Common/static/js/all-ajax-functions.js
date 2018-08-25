@@ -98,7 +98,7 @@ function Bind(winref, data, from) {
         data2 = JSON.parse(data);
         //var object = $('.member-menu .overlay-scroll');
         CreateDocumentCategoryMenu(data2.DocCats);
-        // $('#ajax_category').append(res);
+        // $('#ajax_category').append(res);Calendar
     } else if (from == 'AddNewUserModalLiveChecks') {
         console.log('in Bind, from = ' + from);
         console.dir(data.field);
@@ -127,6 +127,15 @@ function Bind(winref, data, from) {
             res = search_object_to_append.replace("first_name", item.first_name).replace("last_name", item.last_name);
             //$('#idResultContainer .result-list').append("<div class='result-item'><div class='photo-container'><div class='photo'></div></div><div class='detail'><span class='name'>" + item.first_name + ' ' + item.last_name +"</span><span class='position'>Title/Position</span></div></div>");
         });
+    } else if (from == 'Calendar') {
+        //console.log('from calendar: ' + data);
+        $('.calendar-wrapper').fadeOut("slow", function() {
+            var div = $(data.form).hide();
+            $(this).replaceWith(div);
+            $('.calendar-wrapper').fadeIn("slow");
+        });
+        //$(".calendar-wrapper").replaceWith(data.form);
+        //data2 = JSON.parse(data);
     } else {
         console.log("from doesn't match");
         //console.log(data)
@@ -271,32 +280,47 @@ function RemoveUserModalLiveChecks(winRef, data, from, type, url) {
     }
 };
 
-function AddNewUserModalLiveChecksSendToServer() {
-    $.ajax({
-        type: 'Post',
-        url: url,
-        data: {
-            'field': 'ali',
-            'email': email
-        },
-        dataType: 'json',
-        success: function(data) {
-            console.log(data)
-            if (data.is_taken) {
-                $.ajax({
-                    type: 'Post',
-                    url: "/member/update/",
-                    data: data,
-                    dataType: 'json',
-                    success: function(tmp) {
-                        $('#amir_error_add_user_modal_email').append(tmp)
-                    }
-                });
-                alert(data.error);
-            } else { console.log('no error detected in email') }
-        }
+function Calendar(winRef, data, from, type, url) {
+    $('body').on('click', '#calendar_prev_month', function() {
+        //$(object).click(function() {
+        var link_to_month = $('#calendar_prev_month').attr('month_link');
+        SendData("GET", link_to_month, '', Bind, ErrorManagement, 'Calendar');
+    });
+    $('body').on('click', '#calendar_next_month', function() {
+        //$(object).click(function() {
+        var link_to_month = $('#calendar_next_month').attr('month_link');
+        SendData("GET", link_to_month, '', Bind, ErrorManagement, 'Calendar');
     });
 };
+
+// function AddNewUserModalLiveChecksSendToServer() {
+//     $.ajax({
+//         type: 'Post',
+//         url: url,
+//         data: {
+//             'field': 'ali',
+//             'email': email
+//         },
+//         dataType: 'json',
+//         success: function(data) {
+//             console.log(data)
+//             if (data.is_taken) {
+//                 $.ajax({
+//                     type: 'Post',
+//                     url: "/member/update/",
+//                     data: data,
+//                     dataType: 'json',
+//                     success: function(tmp) {
+//                         $('#amir_error_add_user_modal_email').append(tmp)
+//                     }
+//                 });
+//                 alert(data.error);
+//             } else { console.log('no error detected in email') }
+//         }
+//     });
+// };
+
+
 
 // success: function(data){
 //     console.log(data);
