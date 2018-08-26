@@ -39,7 +39,6 @@ def Maintenance(request):
         profile.save()
         member = Members.objects.create(code = '1767663414', user_id = user.id, membership_id = 1, physician_id = 1, Profile_id = 1)
         member.save()
-        return HttpResponse('request.POST')
         return JsonResponse({
             'modal': True, 
             'notification': { 
