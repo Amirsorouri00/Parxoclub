@@ -23,6 +23,43 @@
 <script src="{% static 'js/quills-script-history.js' %}"></script>
 <script src="{% static 'js/froala.min.js' %}"></script>
 <script src="{% static 'js/cropper.min.js' %}"></script>
+<!-- New Functions for New Maintenance -->
+<script type="text/javascript">
+$(document).ready(function() {
+    Maintenance('', '', '', '', '');
+    SendData("POST", '{% url "all_user_info" %}', '', Bind, ErrorManagement, 'maintenance_page_all_user_info');
+    $('#form1').submit(function(event) {
+        // do stuff
+        event.preventDefault();
+        var context = '{{context}}';
+        var firstname = $("#maintenance_first_name_id").val();
+        var lastname = $("#maintenance_last_name_id").val();
+        var email = $("#maintenance_email_id").val();
+        var birthdate = $("#maintenance_birthdate_id").val();
+        var mobile = $("#maintenance_mobile_id").val();
+        var address = $("#maintenance_address_id").val();
+        var gender = $("#maintenance_gender_id").val();
+        var code = $("#maintenance_member_code_id").val();
+        var membership = $("#maintenance_membership_type_id").val();
+        data = {
+            'first_name': firstname,
+            'last_name': lastname,
+            'email': email,
+            'username': email,
+            'birthdate': birthdate,
+            'mobile': mobile,
+            'address': address,
+            'gender': gender,
+            'code': code,
+            'membership': membership,
+        }
+
+        SendData("POST", $(this).attr('action'), data, Bind, ErrorManagement, 'MaintenanceAddUserModalForm');
+        return false;
+    });
+});
+</script>
+<!-- /New Functions for New Maintenance -->
 <script type="text/javascript">
 $(document).ready(function() {
     AddNewUserModalLiveChecks('', '', '', 'POST', '{% url "validate_email" %}');
@@ -160,38 +197,6 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-</script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#form1').submit(function(event) {
-        // do stuff
-        event.preventDefault();
-        var context = '{{context}}';
-        var firstname = $("#maintenance_first_name_id").val();
-        var lastname = $("#maintenance_last_name_id").val();
-        var email = $("#maintenance_email_id").val();
-        var birthdate = $("#maintenance_birthdate_id").val();
-        var mobile = $("#maintenance_mobile_id").val();
-        var address = $("#maintenance_address_id").val();
-        var gender = $("#maintenance_gender_id").val();
-        var code = $("#maintenance_member_code_id").val();
-        var membership = $("#maintenance_membership_type_id").val();
-        data = {
-            'first_name': firstname,
-            'last_name': lastname,
-            'email': email,
-            'username': email,
-            'birthdate': birthdate,
-            'mobile': mobile,
-            'address': address,
-            'gender': gender,
-            'code': code,
-            'membership': membership,
-        }
-        SendData("POST", $(this).attr('action'), data, Bind, ErrorManagement, 'MaintenanceAddUserModalForm');
-        return false;
-    });
-});
 </script>
 <script type="text/javascript">
 /* Remove User Modal */

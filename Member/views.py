@@ -1,3 +1,4 @@
+import datetime
 from .models import Profile, Members
 from django.http import Http404
 from Common import security, constants
@@ -10,6 +11,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.db import connection
+from django.contrib.auth.hashers import make_password
 # Rest_Framework
 from rest_framework.renderers import JSONRenderer
 from .serializer import UserSerializer, MaintenanceUsersSerializer, MemberSerializer
@@ -17,8 +19,36 @@ from django.core import serializers
 # Form
 from .forms import UserForm, ProfileForm, MemberForm
 # Controller functions handle members actions and activities
-
 from collections import namedtuple
+
+def Maintenance(request):
+    #user = get_object_or_404(User, id=user_id)
+    if request.method == 'POST':
+        #return HttpResponse(request.POST)
+        #return HttpResponse('Maintenance')
+        user = User.objects.create(password = make_password(123456, salt=None, hasher='default'),
+                is_superuser = 1, username = request.POST.get('first_name', None),
+                first_name = request.POST.get('first_name', None),
+                last_name = request.POST.get('last_name', None),
+                email = request.POST.get('email', None), is_staff = 1, is_active = 1,
+                date_joined = datetime.datetime.now())
+        user.save()
+        profile = Profile.objects.create(user_id = user.id, birthdate = request.POST.get('birthdate', None),
+                gender = 1, mobile = request.POST.get('mobile', None),
+                address = request.POST.get('address', None))
+        profile.save()
+        member = Members.objects.create(code = '1767663414', user_id = user.id, membership_id = 1, physician_id = 1, Profile_id = 1)
+        member.save()
+        return HttpResponse('request.POST')
+        return JsonResponse({
+            'modal': True, 
+            'notification': { 
+                'type': 'success',
+                'message': 'Updated successfully.'
+            }
+        })
+    else:
+        return render(request, 'member/maintenance.html')
 
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
@@ -133,49 +163,49 @@ def MemberSearchByPrefixx(request):
         return HttpResponse(content)
     else:raise Http404
 
-def Maintenance(request):
-    #user = get_object_or_404(User, id=user_id)
-    if request.method == 'POST':
-        form_user = UserForm(request.POST)
-        form_profile = ProfileForm(request.POST)
-        form_member = MemberForm(request.POST)
-        if form_user.is_valid() & form_profile.is_valid() & form_member.is_valid():
-            form_user.save()
-            form_profile.save()
-            form_member.save()
-            return JsonResponse({
-                'modal': True, 
-                'notification': { 
-                    'type': 'success',
-                    'message': 'Updated successfully.'
-                }
-            })
-        else:
-            html = render_to_string('member/maintenance.html', {'form_user': form_user,
-                'form_profile': form_profile,
-                'form_member': form_member,})
-            #content = JSONRenderer().render(html)
-            data = {'form': html, 'field':request.POST.get('field', None)}
-            return JsonResponse(data, safe=False)
-            # return render(request, 'member/maintenance.html', { 
-            #     #see (what about the error)
-            #     'form_user': form_user,
-            #     'form_profile': form_profile,
-            #     'form_member': form_member, 
-            # })
+# def Maintenance(request):
+#     #user = get_object_or_404(User, id=user_id)
+#     if request.method == 'POST':
+#         form_user = UserForm(request.POST)
+#         form_profile = ProfileForm(request.POST)
+#         form_member = MemberForm(request.POST)
+#         if form_user.is_valid() & form_profile.is_valid() & form_member.is_valid():
+#             form_user.save()
+#             form_profile.save()
+#             form_member.save()
+#             return JsonResponse({
+#                 'modal': True, 
+#                 'notification': { 
+#                     'type': 'success',
+#                     'message': 'Updated successfully.'
+#                 }
+#             })
+#         else:
+#             html = render_to_string('member/maintenance.html', {'form_user': form_user,
+#                 'form_profile': form_profile,
+#                 'form_member': form_member,})
+#             #content = JSONRenderer().render(html)
+#             data = {'form': html, 'field':request.POST.get('field', None)}
+#             return JsonResponse(data, safe=False)
+#             # return render(request, 'member/maintenance.html', { 
+#             #     #see (what about the error)
+#             #     'form_user': form_user,
+#             #     'form_profile': form_profile,
+#             #     'form_member': form_member, 
+#             # })
         
-    else:
-        form_user = UserForm()
-        form_profile = ProfileForm()
-        form_member = MemberForm()
-        Users = User.objects.all()
-        #form_member = MembersForm(instance=user.members)
-        return render(request, 'member/maintenance.html', { 
-            'form_user': form_user,
-            'form_profile': form_profile,
-            'form_member': form_member,
-        })
-    #return render(request, 'member/maintenance.html')
+#     else:
+#         form_user = UserForm()
+#         form_profile = ProfileForm()
+#         form_member = MemberForm()
+#         Users = User.objects.all()
+#         #form_member = MembersForm(instance=user.members)
+#         return render(request, 'member/maintenance.html', { 
+#             'form_user': form_user,
+#             'form_profile': form_profile,
+#             'form_member': form_member,
+#         })
+#     #return render(request, 'member/maintenance.html')
 
 def Validation(request):
     value = request.POST.get('value', None)
@@ -209,6 +239,16 @@ def UpdateDjangoTemplateVariables(request):
     data = {'form': html, 'field':request.POST.get('field', None)}
     return JsonResponse(data, safe=False)
     #return JsonResponse(content, safe=False)
+
+def AllUserInfo(request):
+    if request.is_ajax():
+        user = User.objects.all()
+        userSerializer = MaintenanceUsersSerializer(user, many = True)
+        json = {'users': userSerializer.data}
+        content = JSONRenderer().render(json)
+        return HttpResponse(content)
+    else:
+        return Http404
 
 def OneUserInfo(request):
     if request.is_ajax():
