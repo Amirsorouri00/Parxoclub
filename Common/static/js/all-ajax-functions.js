@@ -106,6 +106,16 @@ function Bind(winref, data, from) {
             //$('#idResultContainer .result-list').append("<div class='result-item'><div class='photo-container'><div class='photo'></div></div><div class='detail'><span class='name'>" + item.first_name + ' ' + item.last_name +"</span><span class='position'>Title/Position</span></div></div>");
             $('#idResultContainer .result-list').append(res);
         });
+    } else if (from == 'maintenance_page_all_user_info') {
+        data2 = JSON.parse(data);
+        console.log(data2)
+        maintenance_all_users_info_array = data2;
+        $.each(data2.users, function(i, item) {
+            console.log(item)
+            tmp = maintenance_user_info_fields_base.replace('FirstName', item.first_name).replace('LastName', item.last_name).replace('user_id="2"', 'user_id="' + item.id + '"')
+            $('.maintenance-users-list .os-padding .os-viewport .os-content').append(tmp);
+
+        });
     } else if (from == 'DocumentCategories') {
         data2 = JSON.parse(data);
         //var object = $('.member-menu .overlay-scroll');
@@ -245,7 +255,7 @@ function SearchSuccess(data) {
     $('#search-results').html(data);
 };
 
-function AddNewUserModalLiveChecks(winRef, data, from, type, url) {
+/*function AddNewUserModalLiveChecks(winRef, data, from, type, url) {
     //url = '/ajax/member/validate_username/';
     //CheckUserNamePasswordExistance("#idUsername ", "POST ", url);
     if (from == 'AddNewUserModalLiveChecks') {
@@ -274,36 +284,9 @@ function AddNewUserModalLiveChecks(winRef, data, from, type, url) {
         console.dir(data);
         //SendData(type, url, '', Bind, ErrorManagement, 'AddNewUserModalLiveChecks');
         SendData(type, url, data, AddNewUserModalLiveChecks, ErrorManagement, 'AddNewUserModalLiveChecks');
-        //console.log('return returned: '+data);
-        //SendData(type, url, data, Bind, ErrorManagement, 'AddNewUserModalLiveChecks');
-        /*$.ajax({
-            type: 'Post',
-            url: url,
-            data: {
-                'field': 'ali',
-                'email': email
-            },
-            dataType: 'json',
-            success: function(data) {
-                console.log(data)
-                if (data.is_taken) {
-                    $.ajax({
-                        type: 'Post',
-                        url: "/member/update/",
-                        data: data,
-                        dataType: 'json',
-                        success: function(tmp) {
-                            $('#amir_error_add_user_modal_email').append(tmp)
-                        }
-                    });
-                    alert(data.error);
-                }
-                else {console.log('no error detected in email')}
-            }
-        });*/
     });
 };
-
+*/
 function EditUserModalLiveChecks(winRef, data, from, type, url) {
     if (from == 'EditUserModalLiveChecks') {
         data2 = JSON.parse(data);
@@ -356,7 +339,8 @@ function Calendar(winRef, data, from, type, url) {
         $('#calendar_input_start_time_edit').val(result.start_time);
         $('#calendar_input_end_time_edit').val(result.end_time);
         $('#calendar_text_event_note_edit').val(result.event_note);
-        $('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
+        $("#calendar_my_select_edit").children('[value=' + result.event_type + ']').attr('selected', true);
+        //$('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
     });
 };
 
@@ -367,13 +351,18 @@ function GetOneDayEvents(day) {
     data = { 'month_val': month_val };
     url = $('.calendar-table-header .month-title').attr('url');
     SendData("GET", url, data, Bind, ErrorManagement, 'GetOneDayEvents');
+};
+
+function Maintenance(winRef, data, from, type, url) {
+
 }
 
-function calendar_find(specific_array, property_to_check, value_to_check) {
-    return specific_array.id === value_to_check;
-}
 
 
+
+// function calendar_find(specific_array, property_to_check, value_to_check) {
+//     return specific_array.id === value_to_check;
+// }
 
 // function CalendarGetData(winRef, url, method, data, bind_object) {
 //     SendData("GET", url, '', Bind, ErrorManagement, 'CalendarGetData');

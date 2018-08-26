@@ -2,7 +2,7 @@
 <!-- Side Nav -->
 <div class="sidemenu">
     <div class="base">
-        <a href="dashboard.html">
+        <a href="{% url 'dashboard' %}">
             <div class="column active">
                 <span class="icon icon-dashboard"></span>
                 <span class="title"> Admin Dashboard</span>
@@ -14,7 +14,7 @@
                 <span class="title"> Members</span>
             </div>
         </a>
-        <a href="chats.html">
+        <a href="{% url 'chat' %}">
             <div class="column">
                 <span class="icon icon-chat"></span>
                 <span class="title"> Chat </span>
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <a href="calendar.html">
+        <a href="{% url 'calendar:calendar_get' %}">
             <div class="column">
                 <span class="icon icon-calendar"></span>
                 <span class="title"> Calendar</span>
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </a>
-        <a href="maintenance.html">
+        <a href="{% url 'maintenance' %}">
             <div class="column">
                 <span class="icon icon-setting"></span>
                 <span class="title"> Maintenance</span>
