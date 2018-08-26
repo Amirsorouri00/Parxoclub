@@ -36,7 +36,8 @@ class Event(models.Model):
         return overlap
 
     def get_absolute_url(self):
-        url = reverse('admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=[self.id])
+        url = reverse('calendar:get_one_events')
+        # '''args=[self.id]'''
         return u'<a href="%s">%s</a>' % (url, str(self.start_time))
 
     def clean(self):

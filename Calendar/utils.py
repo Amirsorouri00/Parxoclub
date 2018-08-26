@@ -54,3 +54,6 @@ class EventCalendar(HTMLCalendar):
         a('</table>')
         a('\n')
         return ''.join(v)
+    def month_title(self, theyear, themonth, withyear=True):
+        return self.formatmonthname(theyear, themonth, withyear=withyear)
+    

@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import Calendar, EventTypes, AddEvents
+from .views import Calendar, EventTypes, AddEvents, GetOneEvent, GetDayEvents
 from django.conf.urls import url
 app_name = 'calendar'
 urlpatterns = [
@@ -7,5 +7,8 @@ urlpatterns = [
     path('eventtypes/', EventTypes),
     path('addevents/', AddEvents),
     path('', Calendar, name = 'calendar_get'),
+    path('getoneevent/', GetOneEvent, name = 'get_one_events'),
+    path('getdayevents/', GetDayEvents, name='get_day_events'),
+
     #path('admin/', admin.site.urls),
 ]

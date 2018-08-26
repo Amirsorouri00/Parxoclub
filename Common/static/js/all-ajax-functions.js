@@ -32,6 +32,18 @@ function SendData(type, url, data, callbackSuccess, callbackError, from) {
     });
 };
 
+function tConvert(time) {
+    // Check correct time format and split into components
+    time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+    if (time.length > 1) { // If time format correct
+        time = time.slice(1); // Remove full string match value
+        time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+    }
+    return time.join(''); // return adjusted time or original string
+}
+
 function Login(type, url, username, password) {
     console.log('inlogin');
     if ((username != "") && (password != "")) {
@@ -134,6 +146,7 @@ function Bind(winref, data, from) {
             $(this).replaceWith(div);
             $('.calendar-wrapper').fadeIn("slow");
         });
+        //$('.calendar-table-header .month-title').text()
         //$(".calendar-wrapper").replaceWith(data.form);
         //data2 = JSON.parse(data);
     } else if (from == 'CalendarGetData') {
@@ -144,12 +157,36 @@ function Bind(winref, data, from) {
                 value: item.name,
                 text: item.name,
             }));
+            $('#calendar_my_select_edit').append($('<option>', {
+                value: item.name,
+                text: item.name,
+            }));
         });
         //$(".calendar-wrapper").replaceWith(data.form);
         //data2 = JSON.parse(data);
     } else if (from == 'CalendarForm') {
         console.dir('from CalendarForm: ' + data);
 
+    } else if (from == 'GetOneDayEvents') {
+        console.dir('from GetOneDayEvents: ' + data);
+        data2 = JSON.parse(data);
+        events_of_current_day_array = data2;
+        console.log(events_of_current_day_array.events[0].id);
+        html = '';
+        $.each(data2.events, function(i, item) {
+            start_time = tConvert(item.start_time);
+            end_time = tConvert(item.end_time);
+            event_time_range = start_time.toString() + '-' + end_time.toString();
+            event_detail_html = calendar_after_sidenav_calendar_wrapper.replace('event_time_range', event_time_range).replace('event_note', item.event_note).replace('AmirEventObject', item.id);
+            // $('.base-event-list .overlay-scroll').fadeOut("slow", function() {
+            //     var div = $(data.form).hide();
+            //     $(this).replaceWith(div);
+            //     $('.calendar-wrapper').fadeIn("slow");
+            // });
+            html += event_detail_html;
+        });
+        $('.base-event-list .overlay-scroll .event-detial').remove();
+        var object = $('.base-event-list .overlay-scroll').append(event_detail_html);
     } else {
         console.log("from doesn't match");
         //console.log(data)
@@ -307,10 +344,36 @@ function Calendar(winRef, data, from, type, url) {
     });
 
     $('body').on('click', ".calendar-table-base table tbody tr td", function() {
+        GetOneDayEvents($(this));
         $(".calendar-table-base table tbody tr td").removeClass("active");
         $(this).addClass("active");
     });
+    $('body').on('click', ".base-event-list .overlay-scroll .event-detial .edit-event-detail-btn", function() {
+        event_id = $(".base-event-list .overlay-scroll .event-detial .edit-event-detail-btn").attr("event_object");
+        result = '';
+        result = events_of_current_day_array.events.find(event => (event.id == event_id));
+        $('#calendar_input_title_edit').val('amir');
+        $('#calendar_input_start_time_edit').val(result.start_time);
+        $('#calendar_input_end_time_edit').val(result.end_time);
+        $('#calendar_text_event_note_edit').val(result.event_note);
+        $('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
+    });
 };
+
+function GetOneDayEvents(day) {
+    month_val = $('.calendar-table-header .month-title').attr('value');
+    thisday = $(day).find('.date-cell .date-container .date-1');
+    month_val += thisday.text().toString();
+    data = { 'month_val': month_val };
+    url = $('.calendar-table-header .month-title').attr('url');
+    SendData("GET", url, data, Bind, ErrorManagement, 'GetOneDayEvents');
+}
+
+function calendar_find(specific_array, property_to_check, value_to_check) {
+    return specific_array.id === value_to_check;
+}
+
+
 
 // function CalendarGetData(winRef, url, method, data, bind_object) {
 //     SendData("GET", url, '', Bind, ErrorManagement, 'CalendarGetData');

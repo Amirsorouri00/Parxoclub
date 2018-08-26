@@ -14,7 +14,7 @@
                     <div class="month-selector">
                         <div id="calendar_next_month" class="next-month btn-taint icon-right" month_link={{ next_month }}></div>
                     </div>
-                    <div class="month-title">November 2017</div>
+                    <div class="month-title" url="{% url 'calendar:get_day_events' %}" value="{{ month_value }}">{{ month_title }}</div>
                     <div class="today-selector">
                         <div class="today-btn btn-taint">Today</div>
                     </div>

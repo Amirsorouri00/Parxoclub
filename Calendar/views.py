@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 from django.http import HttpResponse, JsonResponse, Http404
 from django.template.loader import render_to_string
 from .models import Event, EventType
-from .serializer import EventTypeSerializer
+from .serializer import EventTypeSerializer, EventSerializer
 # Rest_Framework
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -27,6 +27,27 @@ def AddEvents(request):
     new_event.save()
     return HttpResponse(request.POST.get('date', None))
 
+def GetOneEvent(request):
+    return HttpResponse('GetOneEvent')
+
+def GetDayEvents(request):
+    #return HttpResponse('GetDayEvents: '+ str(request.GET.get('month_val', None)))
+    day_of_event = request.GET.get('month_val', None)
+    try:
+        split_after_day = day_of_event.split('-')
+        d = datetime.date(year=int(split_after_day[0]), month=int(split_after_day[1]), day=int(split_after_day[2]))
+    except:
+        d = datetime.date.today()
+    events = Event.objects.filter(day_of_the_event__year=d.year)\
+            .filter(day_of_the_event__month=d.month)\
+            .filter(day_of_the_event__day=d.day)
+    data = EventSerializer(events, many = True)
+    json = {'events': data.data}
+    content = JSONRenderer().render(json)
+    return HttpResponse(content)
+    return HttpResponse('GetDayEvents: '+ str(d))
+    
+
 def EventTypes(request):
     event_types = EventType.objects.all()
     data = EventTypeSerializer(event_types, many = True)
@@ -42,6 +63,8 @@ def Calendar(request):
         return render(request, 'calendar/calendar.html', { 
                 'previous_month': extra_context['previous_month'],
                 'next_month': extra_context['next_month'],
+                'month_title': extra_context['month_title'],
+                'month_value': extra_context['month_value'],
                 'calendar' : extra_context['calendar'],
             })
     else:
@@ -49,6 +72,8 @@ def Calendar(request):
         html = render_to_string('calendar/calendar-after-sidenave-calendar-wrapper.html', { 
                 'previous_month': extra_context['previous_month'],
                 'next_month': extra_context['next_month'],
+                'month_title': extra_context['month_title'],
+                'month_value': extra_context['month_value'],
                 'calendar' : extra_context['calendar'],
             })
         #content = JSONRenderer().render(html)
@@ -86,6 +111,9 @@ def CalendarMaker(request):
     cal = EventCalendar()
     html_calendar = cal.formatmonth(d.year, d.month, withyear=True)
     #html_calendar = html_calendar.replace('<td ', '<td  width="150" height="150"')
+    #extra_context['month_title'] = cal.month_title(d.year, d.month, withyear=True)
+    extra_context['month_title'] = ''+str(d.month)+' '+str(d.year) 
+    extra_context['month_value'] = ''+str(d.year) +'-'+str(d.month)+'-'
     extra_context['calendar'] = mark_safe(html_calendar)
     #extra_context['calendar'] = mark_safe(CALENDAR_TABLE)
     return extra_context
