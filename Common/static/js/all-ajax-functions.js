@@ -29,6 +29,30 @@ function SendData(type, url, data, callbackSuccess, callbackError, from) {
             console.log('error: ' + JSON.stringify(data));
             callbackError(window, data, from);
         }
+
+    });
+};
+
+function fileSendData(type, url, data, callbackSuccess, callbackError, from) {
+    //console.log('senddata from: ' + from + ' .url: ' + url);
+    // callbackSuccess = RedirectInto;
+    // callbackError = RedirectInto;
+    $.ajax({
+        type: type,
+        url: url,
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            console.log('filesendData: from = ' + from + ' .data = ' + data + ' .url: ' + url);
+            //console.dir(data)
+            callbackSuccess(window, data, from);
+        },
+        error: function(data) {
+            console.log('error: ' + JSON.stringify(data));
+            callbackError(window, data, from);
+        }
+
     });
 };
 
@@ -356,8 +380,6 @@ function GetOneDayEvents(day) {
 function Maintenance(winRef, data, from, type, url) {
 
 }
-
-
 
 
 // function calendar_find(specific_array, property_to_check, value_to_check) {

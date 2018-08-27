@@ -8,3 +8,4 @@ events_of_current_day_array = []
 
 maintenance_user_info_fields_base = '<div id-modal="idEditUser" class="user-base-maintenance" user_id="2" modal-btn="show"> <div user_id="2" class="user-base-maintenance1 user-maintenance-photo-container"> <div class="user-maintenance-photo"></div> </div> <div user_id="2" class="user-base-maintenance1 user-maintenance-content-container"> <span class="user-maintenance-name">FirstName LastName</span> <span class="user-maintenance-title">Digestive Laboratory Supervisor</span> </div> <div user_id="2" id-modal="idRemoveUser" class="user-maintenance-remove icon-trashfill" modal-btn="show"></div> </div>'
 maintenance_all_users_info_array = []
+maintenance_add_user_photo = ''

@@ -41,20 +41,38 @@ $(document).ready(function() {
         var gender = $("#maintenance_gender_id").val();
         var code = $("#maintenance_member_code_id").val();
         var membership = $("#maintenance_membership_type_id").val();
-        data = {
-            'first_name': firstname,
-            'last_name': lastname,
-            'email': email,
-            'username': email,
-            'birthdate': birthdate,
-            'mobile': mobile,
-            'address': address,
-            'gender': gender,
-            'code': code,
-            'membership': membership,
-        }
-
-        SendData("POST", $(this).attr('action'), data, Bind, ErrorManagement, 'MaintenanceAddUserModalForm');
+        var photo = document.getElementById('files'); //$("#files").files;
+        //console.dir('photo: ' + photo.files[0]);
+        var fd = new FormData();
+        console.log(photo.files[0].name);
+        fd.append('file', photo.files);
+        fd.append("first_name", firstname);
+        fd.append("last_name", lastname);
+        fd.append("email", email);
+        fd.append("username", email);
+        fd.append("birthdate", birthdate);
+        fd.append("mobile", mobile);
+        fd.append("code", code);
+        fd.append('photo_name', photo.files[0].name);
+        fd.append('photo', photo.files[0]);
+        // data = {
+        //     'first_name': firstname,
+        //     'last_name': lastname,
+        //     'email': email,
+        //     'username': email,
+        //     'birthdate': birthdate,
+        //     'mobile': mobile,
+        //     'address': address,
+        //     'gender': gender,
+        //     'code': code,
+        //     'membership': membership,
+        //     'photo': maintenance_add_user_photo,
+        //     'photo_name': photo.files[0].name,
+        // }
+        //console.log(fd);
+        //console.dir(data);
+        //var data = JSON.stringify(data, null, 2);
+        fileSendData("POST", $(this).attr('action'), fd, Bind, ErrorManagement, 'MaintenanceAddUserModalForm');
         return false;
     });
 });
@@ -85,37 +103,31 @@ $(document).ready(function() {
     });
 });
 
-function handleFileSelect(evt) {
-    var files = evt.target.files;
+$(function() {
+    $("#files").change(showPreviewImage_click);
+})
 
-    // Loop through the FileList and render image files as thumbnails.
-    for (var i = 0, f; f = files[i]; i++) {
-        // Only process image files.
-        if (!f.type.match('image.*')) {
-            continue;
-        }
+function showPreviewImage_click(e) {
+    var inputFiles = this.files;
+    if (inputFiles == undefined || inputFiles.length == 0) return;
+    else {
+        var inputFile = inputFiles[0];
         var reader = new FileReader();
-        // Closure to capture the file information.
-        reader.onload = (function(theFile) {
-            return function(e) {
-                // Render thumbnail.
-                var img = document.getElementById('add_user_modal_image');
-                img.src = e.target.result;
-                img.title = '' + escape(theFile.name);
-                /*img.innerHTML = [
-                    '<img style="height: 75px; border: 1px solid #000; margin: 5px" src="',
-                    e.target.result,
-                    '" title="', escape(theFile.name),
-                    '"/>'
-                ].join('');*/
-                document.getElementById('news-photo-editor').insertBefore(img, null);
-            };
-        })(f);
-        // Read in the image file as a data URL.
-        reader.readAsDataURL(f);
+        reader.onload = function(event) {
+            //alert("I AM result: " + event.target.result);
+            content = event.target.result;
+            maintenance_add_user_photo = content;
+            $('#news-photo-editor').css({ 'background-image': 'url(' + content + ')' });
+            // $(this).closest('#news-photo-editor').css({ 'background-image': 'url(' + event.target.result + ')' });
+            //img.title = '' + escape(theFile.name);
+            //$(this).closest('.news-photo-editor').append(img);
+        };
+        reader.onerror = function(event) {
+            alert("I AM ERROR: " + event.target.error.code);
+        };
+        reader.readAsDataURL(inputFile);
     }
 }
-document.getElementById('files').addEventListener('change', handleFileSelect, false);
 </script>
 <script type="text/javascript">
 var photo_blob = null;
@@ -188,7 +200,6 @@ function initCropper(image, src) {
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-
         reader.onload = function(e) {
             var $image = $('#add_user_modal_image');
             $image.attr('default-photo', false);

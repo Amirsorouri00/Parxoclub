@@ -4,6 +4,7 @@ from django.http import Http404
 from Common import security, constants
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
+from django.conf import settings
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
 from django.views.decorators.clickjacking import xframe_options_sameorigin
@@ -20,12 +21,12 @@ from django.core import serializers
 from .forms import UserForm, ProfileForm, MemberForm
 # Controller functions handle members actions and activities
 from collections import namedtuple
+from PatientDoc.views import handle_uploaded_doc_files
 
 def Maintenance(request):
     #user = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
-        #return HttpResponse(request.POST)
-        #return HttpResponse('Maintenance')
+        files = request.FILES.getlist('photo')
         user = User.objects.create(password = make_password(123456, salt=None, hasher='default'),
                 is_superuser = 1, username = request.POST.get('first_name', None),
                 first_name = request.POST.get('first_name', None),
@@ -37,8 +38,10 @@ def Maintenance(request):
                 gender = 1, mobile = request.POST.get('mobile', None),
                 address = request.POST.get('address', None))
         profile.save()
-        member = Members.objects.create(code = '1767663414', user_id = user.id, membership_id = 1, physician_id = 1, Profile_id = 1)
+        member = Members.objects.create(code = request.POST.get('code', None), user_id = user.id, membership_id = 1, physician_id = 1, Profile_id = 1)
         member.save()
+        photo_name = request.POST.get('photo_name', False)
+        handle_uploaded_doc_files(user.pk, files, photo_name)
         return JsonResponse({
             'modal': True, 
             'notification': { 

@@ -14,7 +14,6 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework import serializers
 
-
 def AddEvents(request):
     date = request.POST.get('date', None)
     #title = request.POST.get('date', None)
@@ -47,7 +46,6 @@ def GetDayEvents(request):
     return HttpResponse(content)
     return HttpResponse('GetDayEvents: '+ str(d))
     
-
 def EventTypes(request):
     event_types = EventType.objects.all()
     data = EventTypeSerializer(event_types, many = True)

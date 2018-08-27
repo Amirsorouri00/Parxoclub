@@ -1,4 +1,4 @@
-<!-- Modal Add User -->
+<!-- Modal Edit User -->
 <div id="idEditUser" class="custom-modal">
     <div class="modal-add-user">
         <div class="header-add-user">
@@ -18,117 +18,93 @@
                 {% endif %}
                 <div class="add-user-input-wrapper overlay-scroll">
                     <div class="doc-no-field-error-fake"></div>
-                    <form id="form2" action="" method="POST" enctype="multipart/form-data">
-                        {% comment %} First Name {% endcomment %}
+                    <form>
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>{{form_user.first_name.label}}</label>
+                                <label>First Name</label>
                             </div>
                             <div class="input-box">
-                                {{form_user.first_name}}
+                                <input id="maintenance_first_name_id_edit" type="text" name="date" required="" tabindex="1">
                             </div>
                         </div>
-                        {% if form_user.first_name.errors %}
-                        <div class="field-error clr-red">{{form_user.first_name.errors}}</div>
-                        {% endif %} {% comment %} Last Name {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>{{form_user.last_name.label}}</label>
+                                <label>Last Name</label>
                             </div>
                             <div class="input-box">
-                                {{form_user.last_name}}
+                                <input id="maintenance_last_name_id_edit" type="text" name="date" required="" tabindex="1">
                             </div>
                         </div>
-                        {% if form_user.last_name.errors %}
-                        <div class="field-error clr-red">{{form_user.last_name.errors}}</div>
-                        {% endif %} {% comment %} Birthdate {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>{{form_profile.birthdate.label}}</label>
+                                <label>Birth Date</label>
                             </div>
                             <div class="input-box">
-                                {{form_profile.birthdate}}
+                                <input id="maintenance_birthdate_id_edit" type="text" name="date" required="" tabindex="1">
                             </div>
-                            <div id="amir_error_add_user_modal_birthdate" class="input-validation clr-red"> {% include 'common/common-field-error-message.html' with variable="{{form_profile.birthdate}}" %}</div>
                         </div>
-                        {% if form_profile.birthdate.errors %}
-                        <div class="field-error clr-red">{{form_profile.birthdate.errors}}</div>
-                        {% endif %} {% comment %} Gender {% endcomment %}
                         <div class="custom-toggle">
                             <div class="toggle-container">
-                                <div class="toggle-title">{{form_profile.gender.label}}</div>
-                                {{form_profile.gender}}
+                                <div class="toggle-title">Gender</div>
+                                <input id="idGender2" type="checkbox">
                                 <div class="toggle-option-first">Female</div>
-                                <label class="toggle-btn-base" tabindex="1" for="{{form_profile.gender.id_for_label}}">
+                                <label class="toggle-btn-base" tabindex="1" for="idGender2">
                                     <div class="toggle-btn"></div>
                                 </label>
                                 <div class="toggle-option-second">Male</div>
                             </div>
                         </div>
-                        {% if form_profile.gender.errors %}
-                        <div class="field-error clr-red">{{form_profile.gender.errors}}</div>
-                        {% endif %} {% comment %} Email {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>{{form_user.email.label}}</label>
+                                <label>Email</label>
                             </div>
                             <div class="input-box">
-                                {{form_user.email}}
+                                <input id="maintenance_email_id_edit" type="text" name="date" required="" tabindex="1">
                             </div>
-                            <div id="amir_error_add_user_modal_email" class="input-validation clr-red"> {% include 'common/common-field-error-message.html' with variable="{{form_user.email}}" %}</div>
+                            <div class="input-validation">example@mail.com</div>
                         </div>
-                        {% if form_user.email.errors %}
-                        <div class="field-error clr-red">{{form_user.email.errors}}</div>
-                        {% endif %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>{{form_profile.mobile.label}}</label>
+                                <label>Phone</label>
                             </div>
                             <div class="input-box">
-                                {{form_profile.mobile}}
+                                <input id="maintenance_mobile_id_edit" type="text" name="date" required="" tabindex="1">
                             </div>
                         </div>
-                        {% if form_profile.mobile.errors %}
-                        <div class="field-error clr-red">{{form_profile.mobile.errors}}</div>
-                        {% endif %} {% comment %} Address {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>{{form_profile.address.label}}</label>
+                                <label>Address</label>
                             </div>
                             <div class="input-box">
-                                {{form_profile.address}}
+                                <input id="maintenance_address_id_edit" type="text" name="date" required="" tabindex="1">
                             </div>
                         </div>
-                        {% if form_profile.address.errors %}
                         <div class="field-error clr-red">
                             <ul>
                                 <li>Address most be in Tehran</li>
                                 <li>Street name is too short</li>
                             </ul>
                         </div>
-                        {% endif %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>{{form_member.membership.lable}}</label>
+                                <label>Membership Type</label>
                             </div>
                             <div class="input-box">
-                                {{form_member.membership}}
+                                <select id="maintenance_membership_type_id_edit">
+                                    <option value="gold">Gold</option>
+                                    <option value="silver">Silver</option>
+                                    <option value="bronze">Bronze</option>
+                                </select>
                             </div>
                         </div>
-                        {% if form_member.membership.errors %}
-                        <div class="field-error clr-red">{{form_member.membership.errors}}</div>
-                        {% endif %} {% comment %} Membership Code {% endcomment %}
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>{{form_member.code.lable}}</label>
+                                <label>Membership ID</label>
                             </div>
                             <div class="input-box">
-                                {{form_member.code}}
+                                <input id="maintenance_member_code_id_edit" type="text" name="date" required="" tabindex="1">
                             </div>
                         </div>
-                        {% if form_member.membership.errors %}
-                        <div class="field-error clr-red">{{form_member.code.errors}}</div>
-                        {% endif %}
                         <div class="custom-check">
                             <div class="check-label">
                                 <label>User Type</label>
@@ -163,10 +139,9 @@
                 </div>
             </div>
             <div class="add-user-sep"></div>
-            <output id="list"><img style="height: 100%; width: 100%;" id="add_user_modal_image" src="" title="" /></output>
             <div class="add-user-photo-editor ">
                 <div class="news-photo-editor-container ">
-                    <div id="news-photo-editor" class="news-photo-editor" style="background-image: url();"></div>
+                    <div id="news-photo-editor_edit" class="news-photo-editor" style="background-image: url();"></div>
                     <div class="news-edit-btn-wrapper">
                         <div class="news-edit-btn-container">
                             <div title="Browse">
@@ -192,7 +167,7 @@
             </div>
             <div class="text-submit-btn-sep"></div>
             <div class="text-submit-btn-container ">
-                <button form="" type="" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
+                <button form="form2" type="submit" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
             </div>
         </div>
     </div>

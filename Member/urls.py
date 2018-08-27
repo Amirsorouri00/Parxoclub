@@ -14,7 +14,7 @@ urlpatterns = [
     path('alluserinfo/', AllUserInfo, name='all_user_info'),
     path('edituser/', EditUser, name='maintenance_edit_user'),
     path('removeuser/', RemoveUser, name='maintenance_remove_user'),
-    url(r'^api-token-auth/', views.obtain_auth_token),
+    url(r'^api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
     path('search/', MemberSearch, name = 'mem_search'),
     path('prefixsearch/', MemberSearchByPrefixx, name = 'mem_prefix_search'),
     path('update/', UpdateDjangoTemplateVariables, name = 'update_variable'),

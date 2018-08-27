@@ -29,12 +29,12 @@ def list_atch_files(record_id):
         atch_files = os.listdir(folder_path)
     return atch_files
 
-def handle_uploaded_doc_files(record_id, files):
+def handle_uploaded_doc_files(record_id, files, extension):
     upload_path = settings.DOC_UPLOAD_URL + '{}/'.format(record_id)
     if not os.path.isdir(upload_path):
         os.makedirs(upload_path)
     for imgfile in files:
-        (tempname, extension) = os.path.splitext(imgfile.name)
+        #(tempname, extension) = os.path.splitext(imgfile.name)
         filename = datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f")
         with open(upload_path + filename + extension, 'wb+') as destination:
             for chunk in imgfile.chunks():
