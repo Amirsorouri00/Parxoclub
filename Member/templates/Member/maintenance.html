@@ -44,7 +44,6 @@ $(document).ready(function() {
         var photo = document.getElementById('files'); //$("#files").files;
         //console.dir('photo: ' + photo.files[0]);
         var fd = new FormData();
-        console.log(photo.files[0].name);
         fd.append('file', photo.files);
         fd.append("first_name", firstname);
         fd.append("last_name", lastname);

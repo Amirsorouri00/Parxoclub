@@ -9,55 +9,57 @@
             <div class="remove-user-info-content overlay-scroll">
                 <div class="remove-user-info-padding"></div>
                 <div class="remove-user-detail">
-                    <span class="remove-user-title">{{form_user.first_name.label}}First Name</span>
-                    <span id="remove-user-info-firstname" class="remove-user-subtitle">{{form_user.first_name.value|default_if_none:""}}</span>
+                    <span class="remove-user-title">First Name</span>
+                    <span id="remove-user-info-firstname" name="first_name" class="remove-user-subtitle"></span>
                 </div>
                 <div class="remove-user-detail">
-                    <span class="remove-user-title">{{form_user.last_name.label}}</span>
-                    <span id="remove-user-info-lastname" class="remove-user-subtitle">{{form_user.last_name.value|default_if_none:""}}</span>
+                    <span class="remove-user-title">Last Name</span>
+                    <span id="remove-user-info-lastname" name="last_name" class="remove-user-subtitle"></span>
                 </div>
                 <div class="remove-user-detail">
-                    <span class="remove-user-title">{{form_profile.birthdate.label}}</span>
-                    <span id="remove-user-info-birthdate" class="remove-user-subtitle">{{form_profile.birthdate.value|default_if_none:""}}</span>
+                    <span class="remove-user-title">Birth Date</span>
+                    <span id="remove-user-info-birthdate" name="birtdate" class="remove-user-subtitle"></span>
                 </div>
                 <div class="remove-user-detail">
-                    <span class="remove-user-title">{{form_profile.gender.label}}</span>
-                    <span id="remove-user-info-gender" class="remove-user-subtitle">{{form_profile.gender.value|default_if_none:""}}</span>
+                    <span class="remove-user-title">Gender</span>
+                    <span id="remove-user-info-gender" name="gender" class="remove-user-subtitle"></span>
                 </div>
                 <div class="remove-user-detail">
-                    <span class="remove-user-title">{{form_user.email.label}}</span>
-                    <span id="remove-user-info-email" class="remove-user-subtitle">{{form_user.email.value|default_if_none:""}}</span>
+                    <span class="remove-user-title">Email</span>
+                    <span id="remove-user-info-email" name="email" class="remove-user-subtitle"></span>
                 </div>
                 <div class="remove-user-detail">
-                    <span class="remove-user-title">{{form_profile.mobile.label}}</span>
-                    <span id="remove-user-info-mobile" class="remove-user-subtitle">{{form_profile.mobile.value|default_if_none:""}}</span>
+                    <span class="remove-user-title">Phone</span>
+                    <span id="remove-user-info-mobile" name="mobile" class="remove-user-subtitle"></span>
                 </div>
                 <div class="remove-user-detail">
-                    <span class="remove-user-title">{{form_profile.address.label}}</span>
-                    <span id="remove-user-info-address" class="remove-user-subtitle">No6-3th west allay-Motahari blvd-Payambar west-Sattari Highway-{{form_profile.address.value|default_if_none:""}}-Iran</span>
+                    <span class="remove-user-title">Address</span>
+                    <span id="remove-user-info-address" name="address" class="remove-user-subtitle">No6-3th west allay-Motahari blvd-Payambar west-Sattari Highway-%s-Iran</span>
                 </div>
                 <div class="remove-user-detail">
-                    <span class="remove-user-title">{{form_member.membership.lable}}</span>
-                    <span id="remove-user-info-membership" class="remove-user-subtitle">{{form_member.membership.value|default_if_none:""}}</span>
+                    <span class="remove-user-title">Membership</span>
+                    <span id="remove-user-info-membership" name="membership" class="remove-user-subtitle">Gold</span>
                 </div>
                 <div class="remove-user-detail">
-                    <span class="remove-user-title">{{form_member.code.lable}}</span>
-                    <span id="remove-user-info-code" class="remove-user-subtitle">{{form_member.code.value|default_if_none:""}}</span>
+                    <span class="remove-user-title">ID</span>
+                    <span id="remove-user-info-code" name="code" class="remove-user-subtitle">253498-58</span>
                 </div>
                 <div class="remove-user-detail">
                     <span class="remove-user-title">User Type</span>
-                    <span id="remove-user-info-prefix" class="remove-user-subtitle"> Patient<br>Supervisor</span>
+                    <span id="remove-user-info-prefix" name="physician" class="remove-user-subtitle"> Patient<br>Supervisor</span>
                 </div>
             </div>
         </div>
-        <div class="submit-remove-user">
-            <div class="text-submit-btn-container " modal-close>
-                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-close"></span></div>
+        <form>
+            <div class="submit-remove-user">
+                <div class="text-submit-btn-container " modal-close>
+                    <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-close"></span></div>
+                </div>
+                <div class="text-submit-btn-sep"></div>
+                <div class="text-submit-btn-container ">
+                    <button type="submit" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
+                </div>
             </div>
-            <div class="text-submit-btn-sep"></div>
-            <div class="text-submit-btn-container ">
-                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-check"></span></div>
-            </div>
-        </div>
+        </form>
     </div>
 </div>

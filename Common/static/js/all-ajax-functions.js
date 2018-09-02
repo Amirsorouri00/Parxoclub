@@ -378,7 +378,15 @@ function GetOneDayEvents(day) {
 };
 
 function Maintenance(winRef, data, from, type, url) {
-
+    $('body').on('click', ".user-base-maintenance", function() {
+        console.log('in ideditmodal: ');
+        user_id = $(this).attr("user_id");
+        console.log('ideditmodal: ' + user_id);
+        result = '';
+        result = maintenance_all_users_info_array.users.find(user => (user.id == user_id));
+        console.dir('ideditmodal: ' + result.first_name);
+        //$('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
+    });
 }
 
 
