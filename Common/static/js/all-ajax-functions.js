@@ -68,6 +68,14 @@ function tConvert(time) {
     return time.join(''); // return adjusted time or original string
 }
 
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
 function Login(type, url, username, password) {
     console.log('inlogin');
     if ((username != "") && (password != "")) {
@@ -82,12 +90,19 @@ function Login(type, url, username, password) {
     } // pop ups 
 };
 
+
+
 function RedirectInto(winref, data, bind, from) {
     console.log(data);
     alert(data);
     if (data.context) {
         // data.redirect contains the string URL to redirect to
-        winref.location.href = data.context;
+        var next = getUrlVars()["next"];
+        if (next) {
+            winref.location.href = next;
+        } else {
+            winref.location.href = data.context;
+        }
         //window.location.href = data.context;
     } else { console.log('context in the data has not any value'); }
     /*if (data.is_taken) {
@@ -136,7 +151,7 @@ function Bind(winref, data, from) {
         maintenance_all_users_info_array = data2;
         $.each(data2.users, function(i, item) {
             console.log(item)
-            tmp = maintenance_user_info_fields_base.replace('FirstName', item.first_name).replace('LastName', item.last_name).replace('user_id="2"', 'user_id="' + item.id + '"')
+            tmp = maintenance_user_info_fields_base.replace('FirstName', item.first_name).replace('LastName', item.last_name).replace('user_id="2"', 'user_id="' + item.id + '"').replace('user_id="3"', 'user_id="' + item.id + '"').replace('user_id="4"', 'user_id="' + item.id + '"').replace('user_id="5"', 'user_id="' + item.id + '"')
             $('.maintenance-users-list .os-padding .os-viewport .os-content').append(tmp);
 
         });
@@ -384,7 +399,87 @@ function Maintenance(winRef, data, from, type, url) {
         console.log('ideditmodal: ' + user_id);
         result = '';
         result = maintenance_all_users_info_array.users.find(user => (user.id == user_id));
+        var edit_user_object = $("#edit-user-input-wrapper");
+        $('#edit_form').attr('user_id', user_id);
+        $('#news-photo-editor-edit').css({ 'background-image': 'url()' });
+        edit_user_object.find("input[name='first_name']").val(result.first_name);
+        edit_user_object.find("input[name='last_name']").val(result.last_name);
+        edit_user_object.find("input[name='email']").val(result.email);
+        edit_user_object.find("input[name='birthdate']").val(result.profile_user.birthdate);
+        edit_user_object.find("input[name='mobile']").val(result.profile_user.mobile);
+        edit_user_object.find("input[name='address']").val(result.address);
+        edit_user_object.find("select[name='membership']").val(result.member_user.membership_set);
         console.dir('ideditmodal: ' + result.first_name);
+        //$('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
+    });
+
+    $('body').on('click', ".btn-new-doc-container", function() {
+        console.log('in idaddusermodal: ');
+        var edit_user_object = $("#add-user-input-wrapper");
+        $('#news-photo-editor').css({ 'background-image': 'url()' });
+        edit_user_object.find("input[name='first_name']").val();
+        edit_user_object.find("input[name='last_name']").val();
+        edit_user_object.find("input[name='email']").val();
+        edit_user_object.find("input[name='birthdate']").val();
+        edit_user_object.find("input[name='mobile']").val();
+        edit_user_object.find("input[name='address']").val();
+        edit_user_object.find("select[name='membership']").val();
+        //$('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
+    });
+
+    $('body').on('click', ".user-base-maintenance .user-maintenance-remove", function() {
+        console.log('in idremovemodal: ');
+        user_id = $(this).attr("user_id");
+        result = '';
+        result = maintenance_all_users_info_array.users.find(user => (user.id == user_id));
+        var remove_user_object = $("#remove-user-input-wrapper");
+        $('#remove_form').attr('user_id', user_id);
+        //console.log(edit_user_object);
+        remove_user_object.find("span[name='first_name']").text(result.first_name);
+        remove_user_object.find("span[name='last_name']").text(result.last_name);
+        remove_user_object.find("span[name='email']").text(result.email);
+        remove_user_object.find("span[name='birthdate']").text(result.profile_user.birthdate);
+        remove_user_object.find("span[name='mobile']").text(result.profile_user.mobile);
+        remove_user_object.find("span[name='address']").text(result.address);
+        remove_user_object.find("span[name='membership']").text(result.member_user.membership_set);
+        console.dir('ideditmodal: ' + result.first_name);
+        //$('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
+    });
+
+    $('#edit_form').submit(function(event) {
+        // do stuff
+        event.preventDefault();
+        var fd = new FormData();
+        var edit_form = $('#edit_form .custom-input :input');
+        console.log($(edit_form));
+        $(edit_form).each(function(index) {
+            //console.log('here');
+            console.log($(this).attr('name'));
+            console.log($(this).val());
+            fd.append($(this).attr('name'), $(this).val());
+        });
+        fd.append('user_id', $(this).attr('user_id'));
+        var photo = document.getElementById('files2');
+        fd.append('photo_name', photo.files[0].name);
+        fd.append('photo', photo.files[0]);
+        console.log('editUserSubmmit: ');
+        console.log(fd.entries());
+        console.log(fd.get('first_name'));
+        for (var p of fd) {
+            console.log(p);
+        }
+        fileSendData("POST", $(this).attr('action'), fd, Bind, ErrorManagement, 'MaintenanceEditUserModalForm');
+        $('#news-photo-editor').css({ 'background-image': 'url()' });
+        return false;
+    });
+
+    $('body').on('click', "#remove_form", function() {
+        console.log('in ideditmodal: ');
+        user_id = $(this).attr("user_id");
+        var fd = new FormData();
+        fd.append("user_id", user_id);
+        console.log('remove submit: ' + user_id);
+        fileSendData("POST", $(this).attr('action'), fd, Bind, ErrorManagement, 'MaintenanceRemoveUserModalForm');
         //$('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
     });
 }
