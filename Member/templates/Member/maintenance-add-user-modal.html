@@ -16,7 +16,7 @@
                     </ul>
                 </div>
                 {% endif %}
-                <div class="add-user-input-wrapper overlay-scroll">
+                <div id="add-user-input-wrapper" class="add-user-input-wrapper overlay-scroll">
                     <div class="doc-no-field-error-fake"></div>
                     <form id="form1" action="{% url 'maintenance'%}" method="POST" enctype="multipart/form-data">
                         <div class="custom-input">
@@ -145,7 +145,7 @@
                     <div class="news-edit-btn-wrapper">
                         <div class="news-edit-btn-container">
                             <div title="Browse">
-                                <input style="padding-left: 0.5em;" id="files" accept=".jpg,.png,.bmp" class="news-edit-btn  btn-taint icon-browse" type="file" name="files" required="" tabindex="1" multiple />
+                                <input preview="news-photo-editor" style="padding-left: 0.5em;" id="files" accept=".jpg,.png,.bmp" class="news-edit-btn  btn-taint icon-browse" type="file" name="files" required="" tabindex="1" multiple />
                             </div>
                         </div>
                         <div class="news-edit-btn-container">

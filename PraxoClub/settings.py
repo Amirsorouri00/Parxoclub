@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'rest_framework', # Django Rest framework app
+    'rest_framework.authtoken',
     #'stream.apps.StreamConfig',
     'django.contrib.staticfiles',
     'channels', # Required for ChatApp
@@ -45,8 +47,6 @@ INSTALLED_APPS = [
     'Common',
     'Calendar',
     'Log',
-    'rest_framework', # Django Rest framework app
-    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -156,7 +156,10 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
 }
 
 # Password validation

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, Http404
 from django.db.models import Count
+from django.contrib.auth.decorators import login_required
 # Models
 from .models import DocCategories, Documents
 from Member.models import Members, Memberships
@@ -13,8 +14,12 @@ from Member.models import Members, Memberships
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from .models import DocCatSubmenu, Documents
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 # Serializers
-from .serializer import DocCategoriesSerializer, DocCategoriesSubMenuSerializer, DocumentsSerializer
+from .serializer import DocCategoriesSerializer, DocCategoriesSubMenuSerializer, DocumentsSerializer, MemberPanelDocumentsListSerializer
 from Member.serializer import MemberSerializer, UserSerializer
 from PatientDoc.serializer import SpecialistsHistoryObject, SpecialistsHistorySerializer
 # Forms
@@ -92,11 +97,13 @@ def MemberDocuments(request, user_id):
 def Dashboard(request):
     return render(request, 'patientdoc/dashboard.html')
 
+@login_required(login_url="/authenticate/login/")
 def Member(request):
     return render(request, 'member/member.html')
 
-def MemberFemale(request, user_id):
-    return render(request, 'member/member-female.html')
+@login_required(login_url="/authenticate/login/")
+def MemberFemale(request):
+    return render(request, 'member/member.html', {'panel': 'panel'})
 
 def DocCatMem(request, _id, _cat):
     member_info = get_object_or_404(Members, user_id=_id)
@@ -300,6 +307,19 @@ def mohsenTest(request):
     content = JSONRenderer().render(menuList)
     #return JsonResponse(json, safe=False)
     return HttpResponse(content)
+
+@api_view(['GET'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+def test(request):
+    if request.is_ajax():
+        docs = Documents.objects.all()
+        docSerializer = MemberPanelDocumentsListSerializer(docs, many=True)
+        json = {'DocCats': docSerializer.data}
+        content = JSONRenderer().render(json)
+        return HttpResponse(content) 
+    else:
+        raise Http404
 
 '''
 def document_update(request, record_id):

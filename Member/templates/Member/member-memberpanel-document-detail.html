@@ -1,0 +1,87 @@
+<!-- Docs Content -->
+<!-- Member detail -->
+<div class="docs-main">
+    <div class="member-docs">
+        <div class="doc-container">
+            <div class="doc-header">
+                <div class="mobile-back-member icon-left btn-taint"></div>
+                <div class="doc-header-icon">
+                    <span class="icon-imagingfill"></span>
+                </div>
+                <span class="doc-header-title">Imaging > Sonography</span>
+            </div>
+            <div class="doc-content">
+                <div class="doc-photo">
+                    <div class="doc-photo-header">
+                        <div class="edit-doc icon-editfill" id-modal="idNewDoc" modal-btn="show"></div>
+                        <div class="remove-doc icon-trashfill" id-modal="idRemoveDoc" modal-btn="show"></div>
+                    </div>
+                    <div class="doc-carousel">
+                        <div class="carousel-cell">
+                            <div class="carousel-img" style="transform: scale(0.4);" id-modal="idMemberLargeCarousel" modal-btn="show"></div>
+                        </div>
+                        <div class="carousel-cell">
+                            <div class="carousel-img" style="transform: scale(0.4);" id-modal="idMemberLargeCarousel" modal-btn="show"></div>
+                        </div>
+                        <div class="carousel-cell">
+                            <div class="carousel-img" style="transform: scale(0.4);" id-modal="idMemberLargeCarousel" modal-btn="show"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="custom-table">
+                    <table class="w-100">
+                        <thead>
+                            <tr>
+                                <th class="w-10"></th>
+                                <th class="w-20">Date</th>
+                                <th class="w-25">Title</th>
+                                <th class="w-25">Supervisor</th>
+                                <th class="w-20">Site</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="overlay-scroll">
+                        <table class="w-100" style="margin-top: -44px;">
+                            <thead>
+                                <tr>
+                                    <th class="w-10"></th>
+                                    <th class="w-20">Date</th>
+                                    <th class="w-25">Title</th>
+                                    <th class="w-25">Supervisor</th>
+                                    <th class="w-20">Site</th>
+                                </tr>
+                            </thead>
+                            <tbody id="idDocRecords">
+                                <tr class="rowLink">
+                                    <td class="notification clr-red icon-alertfill" style="font-size: 18px;"></td>
+                                    <td>1396/08/25</td>
+                                    <td>Cardio Approval</td>
+                                    <td>Dr. Nashraqi</td>
+                                    <td>Nikan-East</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <script type="text/javascript">
+                        // tbody content generator
+                        var elem = document.getElementById('idDocRecords');
+                        for (var i = 1; i < 3; i++) {
+                            var content = '<td></td>';
+                            content += '<td>1396/08/25</td>';
+                            content += '<td>Cardio Approval</td>';
+                            content += '<td>Dr. Nashraqi</td>';
+                            content += '<td>Nikan-East</td>';
+                            var tr = document.createElement('tr');
+                            tr.setAttribute('class', 'rowLink');
+                            tr.innerHTML = content;
+                            elem.append(tr);
+                        }
+                        </script>
+                    </div>
+                    <div id-modal="idNewDoc" class="btn-new-doc-container " modal-btn="show">
+                        <div class="btn-new-doc btn-taint"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

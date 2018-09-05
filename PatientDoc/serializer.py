@@ -38,3 +38,11 @@ class SpecialistsHistorySerializer(serializers.Serializer):
     physician_last_name = serializers.CharField(max_length=100)
     title = serializers.CharField(max_length=50)
     num = serializers.IntegerField()
+
+class MemberPanelDocumentsListSerializer(serializers.ModelSerializer):
+    supervisor = serializers.CharField(source='physician.user.last_name', read_only=True)
+    prefix = serializers.CharField(source='physician.prefix.name', read_only=True)
+    class Meta:
+        model = Documents
+        fields = ('id', 'title', 'date', 'attachment', 'comment'
+            , 'category_id', 'physician_id', 'user_id', 'doccatsubmenu_id', 'supervisor', 'prefix')

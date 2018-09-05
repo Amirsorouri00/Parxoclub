@@ -17,8 +17,14 @@
 {% include 'member/member-search-result-panel.html' %}
 <!-- Member Search Plane -->
 {% include 'member/member-plane-search.html' %}
+<!-- Panel -->
+{% if panel %}
+<!-- In Panel -->
+{% include 'member/member-memberpanel-document-detail.html' %}
+<!-- Dashboard -->
+{% else %}
 <!-- Member Detail History -->
-{% include 'member/member-detail-history.html' %} {% endblock %}
+{% include 'member/member-detail-history.html' %} {% endif %} {% endblock %}
 <!-- After mobile menu back Block Objects in index.html  -->
 {% block menu-back-after-content %}
 <!-- Modal -->

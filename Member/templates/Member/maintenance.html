@@ -72,6 +72,7 @@ $(document).ready(function() {
         //console.dir(data);
         //var data = JSON.stringify(data, null, 2);
         fileSendData("POST", $(this).attr('action'), fd, Bind, ErrorManagement, 'MaintenanceAddUserModalForm');
+        $('#news-photo-editor-edit').css({ 'background-image': 'url()' });
         return false;
     });
 });
@@ -103,20 +104,24 @@ $(document).ready(function() {
 });
 
 $(function() {
-    $("#files").change(showPreviewImage_click);
+    $("#files, #files2").change(showPreviewImage_click);
 })
 
 function showPreviewImage_click(e) {
     var inputFiles = this.files;
     if (inputFiles == undefined || inputFiles.length == 0) return;
     else {
+        preview = $(this).attr('preview').toString();
+        console.log('preview: ' + preview);
+        console.log($('#' + preview));
         var inputFile = inputFiles[0];
         var reader = new FileReader();
         reader.onload = function(event) {
             //alert("I AM result: " + event.target.result);
             content = event.target.result;
             maintenance_add_user_photo = content;
-            $('#news-photo-editor').css({ 'background-image': 'url(' + content + ')' });
+            // $('#news-photo-editor, #news-photo-editor_edit').css({ 'background-image': 'url(' + content + ')' });
+            $('#' + preview).css({ 'background-image': 'url(' + content + ')' });
             // $(this).closest('#news-photo-editor').css({ 'background-image': 'url(' + event.target.result + ')' });
             //img.title = '' + escape(theFile.name);
             //$(this).closest('.news-photo-editor').append(img);

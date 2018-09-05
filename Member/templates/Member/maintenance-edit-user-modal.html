@@ -16,15 +16,15 @@
                     </ul>
                 </div>
                 {% endif %}
-                <div class="add-user-input-wrapper overlay-scroll">
+                <div id="edit-user-input-wrapper" class="add-user-input-wrapper overlay-scroll">
                     <div class="doc-no-field-error-fake"></div>
-                    <form>
+                    <form id="edit_form" user_id="" action="{% url 'maintenance_edit_user'%}" method="POST" enctype="multipart/form-data">
                         <div class="custom-input">
                             <div class="input-label">
                                 <label>First Name</label>
                             </div>
                             <div class="input-box">
-                                <input id="maintenance_first_name_id_edit" type="text" name="date" required="" tabindex="1">
+                                <input id="maintenance_first_name_id_edit" type="text" name="first_name" required="" tabindex="1">
                             </div>
                         </div>
                         <div class="custom-input">
@@ -32,7 +32,7 @@
                                 <label>Last Name</label>
                             </div>
                             <div class="input-box">
-                                <input id="maintenance_last_name_id_edit" type="text" name="date" required="" tabindex="1">
+                                <input id="maintenance_last_name_id_edit" type="text" name="last_name" required="" tabindex="1">
                             </div>
                         </div>
                         <div class="custom-input">
@@ -40,13 +40,13 @@
                                 <label>Birth Date</label>
                             </div>
                             <div class="input-box">
-                                <input id="maintenance_birthdate_id_edit" type="text" name="date" required="" tabindex="1">
+                                <input id="maintenance_birthdate_id_edit" type="text" name="birthdate" required="" tabindex="1">
                             </div>
                         </div>
                         <div class="custom-toggle">
                             <div class="toggle-container">
                                 <div class="toggle-title">Gender</div>
-                                <input id="idGender2" type="checkbox">
+                                <input id="idGender2" name="gender" type="checkbox">
                                 <div class="toggle-option-first">Female</div>
                                 <label class="toggle-btn-base" tabindex="1" for="idGender2">
                                     <div class="toggle-btn"></div>
@@ -59,7 +59,7 @@
                                 <label>Email</label>
                             </div>
                             <div class="input-box">
-                                <input id="maintenance_email_id_edit" type="text" name="date" required="" tabindex="1">
+                                <input id="maintenance_email_id_edit" name="email" type="text" name="date" required="" tabindex="1">
                             </div>
                             <div class="input-validation">example@mail.com</div>
                         </div>
@@ -68,7 +68,7 @@
                                 <label>Phone</label>
                             </div>
                             <div class="input-box">
-                                <input id="maintenance_mobile_id_edit" type="text" name="date" required="" tabindex="1">
+                                <input id="maintenance_mobile_id_edit" name="mobile" type="text" name="date" required="" tabindex="1">
                             </div>
                         </div>
                         <div class="custom-input">
@@ -76,7 +76,7 @@
                                 <label>Address</label>
                             </div>
                             <div class="input-box">
-                                <input id="maintenance_address_id_edit" type="text" name="date" required="" tabindex="1">
+                                <input id="maintenance_address_id_edit" name="address" type="text" name="date" required="" tabindex="1">
                             </div>
                         </div>
                         <div class="field-error clr-red">
@@ -90,7 +90,7 @@
                                 <label>Membership Type</label>
                             </div>
                             <div class="input-box">
-                                <select id="maintenance_membership_type_id_edit">
+                                <select id="maintenance_membership_type_id_edit" name="membership">
                                     <option value="gold">Gold</option>
                                     <option value="silver">Silver</option>
                                     <option value="bronze">Bronze</option>
@@ -102,7 +102,7 @@
                                 <label>Membership ID</label>
                             </div>
                             <div class="input-box">
-                                <input id="maintenance_member_code_id_edit" type="text" name="date" required="" tabindex="1">
+                                <input id="maintenance_member_code_id_edit" name="code" type="text" name="date" required="" tabindex="1">
                             </div>
                         </div>
                         <div class="custom-check">
@@ -141,11 +141,11 @@
             <div class="add-user-sep"></div>
             <div class="add-user-photo-editor ">
                 <div class="news-photo-editor-container ">
-                    <div id="news-photo-editor_edit" class="news-photo-editor" style="background-image: url();"></div>
+                    <div id="news-photo-editor-edit" class="news-photo-editor" style="background-image: url();"></div>
                     <div class="news-edit-btn-wrapper">
                         <div class="news-edit-btn-container">
                             <div title="Browse">
-                                <input style="padding-left: 0.5em;" id="files" accept=".jpg,.png,.bmp" class="news-edit-btn  btn-taint icon-browse" type="file" name="date" required="" tabindex="1" multiple />
+                                <input preview="news-photo-editor-edit" style="padding-left: 0.5em;" id="files2" accept=".jpg,.png,.bmp" class="news-edit-btn  btn-taint icon-browse" type="file" name="date" required="" tabindex="1" multiple />
                             </div>
                         </div>
                         <div class="news-edit-btn-container">
@@ -167,7 +167,7 @@
             </div>
             <div class="text-submit-btn-sep"></div>
             <div class="text-submit-btn-container ">
-                <button form="form2" type="submit" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
+                <button form="edit_form" type="submit" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
             </div>
         </div>
     </div>

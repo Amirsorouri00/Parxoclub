@@ -17,6 +17,8 @@ from django.contrib.auth.hashers import make_password
 from rest_framework.renderers import JSONRenderer
 from .serializer import UserSerializer, MaintenanceUsersSerializer, MemberSerializer
 from django.core import serializers
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 # Form
 from .forms import UserForm, ProfileForm, MemberForm
 # Controller functions handle members actions and activities
@@ -81,7 +83,7 @@ def Login(request):
         password = request.POST.get('password', None)
         user2 = authenticate(username=username, password=password)
         if user2 is not None:
-            request.session.set_expiry(3)
+            request.session.set_expiry(100000)
             login(request, user2)
             data = {
                 'logged_in': True,
@@ -278,41 +280,55 @@ def serializer_test(request):
 
 def EditUser(request):
     if request.is_ajax():
-        #return HttpResponse('content')
-        #return HttpResponse(request.POST.get('user_id', None))
-        userId = request.POST.get('id', None)
-        user = User.objects.get(id = userId)
-        profile = Profile.objects.get(user_id = userId)
-        member = Members.objects.get(user_id = userId)
-        form_user = UserForm(instance = user)
-        form_profile = ProfileForm(instance = profile)
-        form_member = MemberForm(instance = member)
-        html = render_to_string('member/maintenance-edit-user-modal.html', {'form_user': form_user,
-                'form_profile': form_profile,
-                'form_member': form_member,})
-        #content = JSONRenderer().render(html)
-        data = {'form': html, 'field':request.POST.get('field', None)}
-        return JsonResponse(data, safe=False)
+        if request.method == 'POST':  
+            user = User.objects.get(pk = request.POST.get('user_id', None))
+            user.first_name = request.POST.get('first_name', None)
+            user.last_name = request.POST.get('last_name', None)
+            user.email = request.POST.get('email', None)
+            user.save()
+            profile = Profile.objects.get(pk = request.POST.get('user_id', None))
+            profile.mobile = request.POST.get('mobile', None)
+            profile.address = request.POST.get('address', None)
+            profile.birthdate = request.POST.get('birthdate', None)
+            profile.save()
+            member = Members.objects.get(pk = request.POST.get('user_id', None))
+            member.code = request.POST.get('code', None)
+            member.save()
+            files = request.FILES.getlist('photo')
+            photo_name = request.POST.get('photo_name', False)
+            handle_uploaded_doc_files(user.pk, files, photo_name)
+            return JsonResponse({
+                'modal': True, 
+                'notification': { 
+                    'type': 'success',
+                    'message': 'Updated successfully.'
+                }
+            })
+        else:
+            return render(request, 'member/maintenance.html')
     else:
         return Http404
 
 def RemoveUser(request):
     if request.is_ajax():
-        #return HttpResponse('content')
-        #return HttpResponse(request.POST.get('user_id', None))
-        userId = request.POST.get('id', None)
-        user = User.objects.get(id = userId)
-        profile = Profile.objects.get(user_id = userId)
-        member = Members.objects.get(user_id = userId)
-        form_user = UserForm(instance = user)
-        form_profile = ProfileForm(instance = profile)
-        form_member = MemberForm(instance = member)
-        html = render_to_string('member/maintenance-remove-user-modal.html', {'form_user': form_user,
-                'form_profile': form_profile,
-                'form_member': form_member,})
-        #content = JSONRenderer().render(html)
-        data = {'form': html, 'field':request.POST.get('field', None)}
-        return JsonResponse(data, safe=False)
+        if request.method == 'POST':  
+            user = User.objects.get(pk = request.POST.get('user_id', None))
+            profile = Profile.objects.get(pk = request.POST.get('user_id', None))
+            member = Members.objects.get(pk = request.POST.get('user_id', None))
+            #physician = physician.objects.get(pk = request.POST.get('user_id', None))
+            #physician.delete()
+            member.delete()
+            profile.delete()
+            user.delete()
+            return JsonResponse({
+                'modal': True, 
+                'notification': { 
+                    'type': 'success',
+                    'message': 'Updated successfully.'
+                }
+            })
+        else:
+            return HttpResponse('request methode is get, it should be post')
     else:
         return Http404
 
