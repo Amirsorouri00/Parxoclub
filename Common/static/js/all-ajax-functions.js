@@ -190,8 +190,9 @@ function Bind(winref, data, from) {
         data2 = JSON.parse(data);
         console.log('in bind member category menu filter: ');
         //table = $('#idDocRecords');
-        tmp = member_panel_documents_table_row;
+
         member_panel_documents_array = data2.DocCats;
+        tmp = member_panel_documents_table_row;
         $.each(member_panel_documents_array, function(i, item) {
             console.log(item)
             tmp = tmp.replace('Document_Date', item.date).replace('Document_Title', item.title).replace('Document_Supervisor', item.prefix + ' ' + item.supervisor).replace('praxo_doc_id', item.id);
@@ -199,8 +200,14 @@ function Bind(winref, data, from) {
         $('#idDocRecords').append(tmp);
         console.dir(data2);
     } else if (from == 'MemberCategorySubmenuFilter') {
-        //data2 = JSON.parse(data);
-        console.log('in bind member category submenu filter: ' + data);
+        data2 = JSON.parse(data);
+        member_panel_documents_array = data2.DocCats;
+        tmp = member_panel_documents_table_row;
+        $.each(member_panel_documents_array, function(i, item) {
+            console.log(item)
+            tmp = tmp.replace('Document_Date', item.date).replace('Document_Title', item.title).replace('Document_Supervisor', item.prefix + ' ' + item.supervisor).replace('praxo_doc_id', item.id);
+        });
+        $('#idDocRecords').append(tmp);
         //console.dir(data2);
     } else if (from == 'MemberAddNewDocumentsModalForm') {
         //data2 = JSON.parse(data);
@@ -533,17 +540,19 @@ function Member(winRef, data, from, type, url) {
     SendData("GET", url_to_get_token, '', Bind, ErrorManagement, 'MemberGetToken');
 
     $('body').on('click', "#ajax_category .column .main", function() {
+        $('.doc-header .doc-header-title').text($(this).find('.title').text().toString())
         cat_type = $(this).attr('submit_or_submenu');
         console.log('in member ajax category click: ' + cat_type);
         if (cat_type == 'submit2') {
             title = $(this).find('.title').text().toString();
             data = { 'sub_or_not': 'menu', 'title': title }
             SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategoryMenuFilter');
-        } else {}
+        } else { $('.doc-header .doc-header-title').text($(this).find('.title').text().toString()); }
     });
     $('body').on('click', "#ajax_category .column .submenu .item", function() {
         console.log('in member ajax submenu category click: ' + $(this).attr('parent'));
         cat_type = $(this).attr('item_type');
+        $('.doc-header .doc-header-title').text($(this).attr('parent') + '>' + $(this).find('span').attr('value'));
         if (cat_type == 'submenu') {
             title = $(this).find('span').attr('value');
             data = { 'sub_or_not': 'submenu', 'title': title }
