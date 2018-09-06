@@ -130,6 +130,19 @@ def AddNewDocumentMemberPanel(request):
     else:
         raise Http404
 
+@api_view(['POST'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+@csrf_exempt  
+def EditDocumentMemberPanel(request):
+    return HttpResponse('EditDocumentMemberPanel')
+
+@api_view(['POST'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+@csrf_exempt  
+def RemoveDocumentMemberPanel(request):
+    return HttpResponse('RemoveDocumentMemberPanel')
 
 def Categories(request):
     if request.is_ajax():

@@ -309,6 +309,9 @@ def EditUser(request):
     else:
         return Http404
 
+def ChangeUserPhoto(request):
+    return HttpResponse('ChangeUserPhoto')
+
 def RemoveUser(request):
     if request.is_ajax():
         if request.method == 'POST':  

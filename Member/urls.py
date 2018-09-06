@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import AddProfilePkey, TestDecrypt, Login, LoginPageUsernameValidation, Logout, MemberSearch, Maintenance, Validation, UpdateDjangoTemplateVariables, OneUserInfo, serializer_test, EditUser, RemoveUser, MemberSearchByPrefixx, AllUserInfo
+from .views import AddProfilePkey, TestDecrypt, Login, LoginPageUsernameValidation, Logout, MemberSearch, Maintenance, Validation, UpdateDjangoTemplateVariables, OneUserInfo, serializer_test, EditUser, RemoveUser, MemberSearchByPrefixx, AllUserInfo, ChangeUserPhoto
 from rest_framework.authtoken import views
 from django.conf.urls import url
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('maintenance/', Maintenance, name='maintenance'),
     path('oneuserinfo/', OneUserInfo, name='one_user_info'),
     path('alluserinfo/', AllUserInfo, name='all_user_info'),
+    path('changeuserphoto/', ChangeUserPhoto, name='change_user_photo'),
     path('edituser/', EditUser, name='maintenance_edit_user'),
     path('removeuser/', RemoveUser, name='maintenance_remove_user'),
     url(r'^api-token-auth/', views.obtain_auth_token, name='api_token_auth'),
