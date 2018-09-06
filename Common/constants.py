@@ -1,6 +1,9 @@
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
+LORE_IPSUM = 'Lorem ipsum dolor sit amet, ad viris mediocrem vis. Essent referrentur quo id, blandit recusabo in eos, mundi albucius ad duo. Sale utroque singulis pro at, mea affert dicunt no. Equidem hendrerit mediocritatem id vel, iudico alienum deserunt mea id. At eum eirmod vivendum.'
+
+
 CHAT_CONSUMER_PREFIX_GROUP_NAME = 'chat_%s'
 USER_STRING = 'USER-PRIVATE-KEY'
 ROOM_STRING = 'ROOM-PRIVATE-KEY'

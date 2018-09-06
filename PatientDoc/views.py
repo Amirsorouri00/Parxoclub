@@ -26,6 +26,7 @@ from Member.serializer import MemberSerializer, UserSerializer, TokenSerializer
 from PatientDoc.serializer import SpecialistsHistoryObject, SpecialistsHistorySerializer
 # Forms
 from .forms import DocumentForm
+from Common.constants import LORE_IPSUM
 
 # Create your views here.
 
@@ -99,6 +100,37 @@ def DocumentFilter(request):
     else:
         raise Http404
 
+
+@api_view(['POST'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+@csrf_exempt  
+def AddNewDocumentMemberPanel(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            #handling whole images have been sent from client still remained(it is just a for...)
+            files = request.FILES.getlist('photo_0', False)
+            photo_name = request.POST.get('photo_0_name', False)
+            physician = User.objects.get(last_name = request.POST.get('supervisor', None))
+            document = Documents.objects.create(title = request.POST.get('title', None),
+                        date = request.POST.get('date', None), comment = LORE_IPSUM, user_id = 2, 
+                        doccatsubmenu_id = 2, category_id = 7, physician_id = physician.id, attachment = 1)
+            document.save()
+            handle_uploaded_doc_files(document.pk+1000, files, photo_name)
+            return JsonResponse({
+            'modal': True, 
+            'notification': { 
+                'type': 'success',
+                'message': 'Updated successfully.'
+            }
+        })
+            return HttpResponse(request.FILES)
+        else:
+            raise Http404
+    else:
+        raise Http404
+
+
 def Categories(request):
     if request.is_ajax():
         cats = DocCategories.objects.all().order_by('index')
@@ -166,7 +198,6 @@ def DocCatMem(request, _id, _cat):
     record_id = 0
     if docs:
         atch_files = list_atch_files(docs[0].id)
-
     if request.is_ajax():
         catSerializer = DocCategoriesSerializer(cats)
         docSerializer = DocumentsSerializer(docs, many = True)

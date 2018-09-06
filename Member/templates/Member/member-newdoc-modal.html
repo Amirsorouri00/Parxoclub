@@ -16,7 +16,7 @@
             <div class="overlay-scroll">
                 <div class="doc-input-container">
                     <div class="doc-no-field-error-fake"></div>
-                    <form>
+                    <form id="AddNewDoc" action='{% url "add_new_document_member_panel" %}'>
                         <div class="custom-input">
                             <div class="input-label">
                                 <label>Date</label>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="text-submit-btn-sep"></div>
                 <div class="text-submit-btn-container ">
-                    <div class="text-submit-btn btn-taint" tabindex="1"><span class="fs-22 clr-cyan icon-check"></span></div>
+                    <button form="AddNewDoc" type="submit" class="text-submit-btn btn-taint" tabindex="1"><span class="fs-22 clr-cyan icon-check"></span></button>
                 </div>
             </div>
         </div>

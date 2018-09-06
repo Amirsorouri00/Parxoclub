@@ -202,6 +202,13 @@ function Bind(winref, data, from) {
         //data2 = JSON.parse(data);
         console.log('in bind member category submenu filter: ' + data);
         //console.dir(data2);
+    } else if (from == 'MemberAddNewDocumentsModalForm') {
+        //data2 = JSON.parse(data);
+        console.log('in bind member MemberAddNewDocumentsModalForm: ' + data);
+        for (var p of data) {
+            console.log(p);
+        }
+        //console.dir(data2);
     } else if (from == 'MaintenanceAddUserModalForm') {
         //data2 = JSON.parse(data);
         $('#amir_error_add_user_modal_email').append(data.form)
@@ -557,7 +564,7 @@ function Member(winRef, data, from, type, url) {
         //console.log(edit_user_object);
         edit_document_object.find("input[name='date']").val(result.date);
         edit_document_object.find("input[name='title']").val(result.title);
-        edit_document_object.find("input[name='supervisor']").val(result.prefix + ' ' + result.supervisor);
+        edit_document_object.find("input[name='supervisor']").val(result.supervisor);
         edit_document_object.find("input[name='site']").val(result.site);
         // File Images of Documents should be placed
         // $.each(names, function(i, item) {
@@ -569,6 +576,58 @@ function Member(winRef, data, from, type, url) {
         // });
         console.dir('ideditmodal: ' + result.supervisor);
         //$('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
+    });
+
+    $('body').on('click', ".btn-new-doc ", function() {
+        console.log('in idAddDocModal: ');
+        $('#mydiv-upload-files-container .file-upload-row').remove();
+        var edit_document_object = $("#idNewDoc .doc-input-container .custom-input");
+        //$('#remove_form').attr('user_id', user_id);
+        //console.log(edit_user_object);
+        edit_document_object.find("input[name='date']").val('');
+        edit_document_object.find("input[name='title']").val('');
+        edit_document_object.find("input[name='supervisor']").val('');
+        edit_document_object.find("input[name='site']").val('');
+
+        // File Images of Documents should be placed
+        // $.each(names, function(i, item) {
+        //     console.log(item);
+        //     tmp = member_panel_editoradd_document_modal_photos_info.replace('FileName', item.name).replace('FileSize', item.size);
+        //     $('#mydiv-upload-files-container').append(tmp);
+        //     // $(obj).find('.file-upload-name span').text(item.name)
+        //     // $(obj).find('.file-upload-size').text(item.name)
+        // });
+        //console.dir('idaddmodal: ' + result.supervisor);
+        //$('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
+    });
+    $('#AddNewDoc').submit(function(event) {
+        // do stuff
+        console.log('AddDocumentSubmmit: ');
+        event.preventDefault();
+        var fd = new FormData();
+        var edit_form = $(this).find('.custom-input :input');
+        console.log($(edit_form));
+        $(edit_form).each(function(index) {
+            //console.log('here');
+            console.log($(this).attr('name'));
+            console.log($(this).val());
+            fd.append($(this).attr('name'), $(this).val());
+        });
+        var photo = document.getElementById('files');
+        fd.append('files', photo.files);
+        $.each(photo.files, function(i, item) {
+            console.log(item);
+            fd.append("fileToUpload[]", item);
+            fd.append('photo_' + i, photo.files[i]);
+            fd.append('photo_' + i + '_name', photo.files[i].name);
+        });
+        console.log(fd.entries());
+        console.log(fd.get('title'));
+        for (var p of fd) {
+            console.log(p);
+        }
+        fileSendData("POST", $(this).attr('action'), fd, Bind, ErrorManagement, 'MemberAddNewDocumentsModalForm');
+        return false;
     });
     $('body').on('click', ".doc-photo-header .remove-doc", function() {
         console.log('in idremoveDocModal: ');

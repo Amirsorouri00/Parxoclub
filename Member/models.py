@@ -6,7 +6,6 @@ from rest_framework.authtoken.models import Token
 #from django.contrib.postgres.fields import JSONField
 from django_mysql.models import JSONField, Model
 
-
 # rest_framework Post-Save token generator
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
