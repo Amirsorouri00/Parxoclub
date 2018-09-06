@@ -7,9 +7,11 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, Http404
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 # Models
-from .models import DocCategories, Documents
+from .models import DocCategories, Documents, DocCatSubmenu
 from Member.models import Members, Memberships
+from rest_framework.authtoken.models import Token
 # Rest_Framework
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
@@ -20,10 +22,11 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 # Serializers
 from .serializer import DocCategoriesSerializer, DocCategoriesSubMenuSerializer, DocumentsSerializer, MemberPanelDocumentsListSerializer
-from Member.serializer import MemberSerializer, UserSerializer
+from Member.serializer import MemberSerializer, UserSerializer, TokenSerializer
 from PatientDoc.serializer import SpecialistsHistoryObject, SpecialistsHistorySerializer
 # Forms
 from .forms import DocumentForm
+
 # Create your views here.
 
 #TODO list attache files should be concatenated with the json response
@@ -44,6 +47,57 @@ def handle_uploaded_doc_files(record_id, files, extension):
         with open(upload_path + filename + extension, 'wb+') as destination:
             for chunk in imgfile.chunks():
                 destination.write(chunk)
+
+@api_view(['GET'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+@csrf_exempt
+def TokenReturner(request):
+    if request.is_ajax():
+        username = request.user
+        user = User.objects.get(username = username)
+        user_token = Token.objects.get(user_id = user.id)
+        user_token_serializer = TokenSerializer(user_token)
+        json = {'Token': user_token_serializer.data}
+        content = JSONRenderer().render(json)
+        return HttpResponse(content)
+    else:
+        json = {'Token': 'Error'}
+        content = JSONRenderer().render(json)
+        return HttpResponse(content)
+
+@api_view(['POST'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+@csrf_exempt    
+def DocumentFilter(request):
+    if request.is_ajax():
+        # query must be based on request.user 
+        # request.user returns username
+        subfilter_or_filter = request.POST.get('sub_or_not', None)
+        if subfilter_or_filter == 'submenu':
+            title = request.POST.get('title', None)
+            submenu_id = DocCatSubmenu.objects.get(name = title)
+            docs = Documents.objects.filter(doccatsubmenu = submenu_id)
+            if docs:    
+                docSerializer = MemberPanelDocumentsListSerializer(docs, many=True)
+                json = {'DocCats': docSerializer.data}
+                content = JSONRenderer().render(json)
+                return HttpResponse(content)
+            else: return HttpResponse(None)
+        elif subfilter_or_filter == 'menu':
+            title = request.POST.get('title', None)
+            docs = Documents.objects.filter(title = title)
+            if docs:
+                docSerializer = MemberPanelDocumentsListSerializer(docs, many=True)
+                json = {'DocCats': docSerializer.data}
+                content = JSONRenderer().render(json)
+                return HttpResponse(content) 
+            else: return HttpResponse(None)
+        else:
+            raise Http404
+    else:
+        raise Http404
 
 def Categories(request):
     if request.is_ajax():

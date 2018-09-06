@@ -6,6 +6,7 @@ from rest_framework import serializers
 # Models
 from .models import Members, Profile, Memberships, Prefixes, Physicians, Expertises
 from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 
 Maintenance_users = namedtuple('Users', ('user', 'member', 'physician'))
 
@@ -74,3 +75,8 @@ class MaintenanceUsersSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'first_name', 'last_name', 'email', 'membership_set','member_user','profile_user')
 
+class TokenSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source='user.first_name', read_only=True)
+    class Meta:
+        model = Token
+        fields = ('key', 'created', 'first_name')

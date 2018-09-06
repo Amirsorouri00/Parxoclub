@@ -3,6 +3,7 @@
 <div id="idNewDoc" class="custom-modal">
     <div class="modal-container">
         <div class="doc-input-base">
+            {% if form_user.first_name.errors %}
             <div class="doc-no-field-error">
                 <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
                 <ul class="no-field-error">
@@ -11,6 +12,7 @@
                     <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
                 </ul>
             </div>
+            {% endif %}
             <div class="overlay-scroll">
                 <div class="doc-input-container">
                     <div class="doc-no-field-error-fake"></div>
@@ -28,7 +30,7 @@
                                 <label>Title</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="date" required="" tabindex="1">
+                                <input type="text" name="title" required="" tabindex="1">
                             </div>
                         </div>
                         <div class="custom-input">
@@ -36,7 +38,7 @@
                                 <label>Supervisor</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="date" required="" tabindex="1">
+                                <input type="text" name="supervisor" required="" tabindex="1">
                             </div>
                         </div>
                         <div class="custom-input">
@@ -44,7 +46,7 @@
                                 <label>site</label>
                             </div>
                             <div class="input-box">
-                                <input type="text" name="date" required="" tabindex="1">
+                                <input type="text" name="site" required="" tabindex="1">
                             </div>
                         </div>
                     </form>
@@ -71,27 +73,29 @@
                 </div>
                 <div class="upload-files-container">
                     <div class="overlay-scroll">
-                        <div class="file-upload-row server-storage">
-                            <div class="file-upload-stored icon-server"></div>
-                            <div class="thumbnail-container"><img src="{% static 'img/nik.png' %}"></div>
-                            <div class="file-upload-name"><span>dfsfsfsdfsfsdfsdfsdfsfsdd.jpg</span></div>
-                            <div class="file-upload-size">2.35<span>kB</span></div>
-                            <div class="file-upload-revert bg-red icon-rotateright"></div>
+                        <div id="mydiv-upload-files-container">
+                            <!-- <div class="file-upload-row server-storage">
+                                <div class="file-upload-stored icon-server"></div>
+                                <div class="thumbnail-container"><img src="{% static 'img/nik.png' %}"></div>
+                                <div class="file-upload-name"><span>dfsfsfsdfsfsdfsdfsdfsfsdd.jpg</span></div>
+                                <div class="file-upload-size">2.35<span>kB</span></div>
+                                <div class="file-upload-revert bg-red icon-rotateright"></div>
+                            </div>
+                            <div class="file-upload-row server-storage">
+                                <div class="file-upload-stored icon-server"></div>
+                                <div class="thumbnail-container"><img src="{% static 'img/nik2.png' %}"></div>
+                                <div class="file-upload-name"><span>12334.jpg</span></div>
+                                <div class="file-upload-size">2.35<span>kB</span></div>
+                                <div class="file-upload-trash icon-trashfill"></div>
+                            </div> -->
                         </div>
-                        <div class="file-upload-row server-storage">
-                            <div class="file-upload-stored icon-server"></div>
-                            <div class="thumbnail-container"><img src="{% static 'img/nik2.png' %}"></div>
-                            <div class="file-upload-name"><span>12334.jpg</span></div>
-                            <div class="file-upload-size">2.35<span>kB</span></div>
-                            <div class="file-upload-trash icon-trashfill"></div>
-                        </div>
-                        <div class="file-upload-row local-storage">
+                        <!-- <div class="file-upload-row local-storage">
                             <div class="file-upload-stored icon-pc"></div>
                             <div class="thumbnail-container"><img src="{% static 'img/nik2.png' %}"></div>
                             <div class="file-upload-name"><span>12334.jpg</span></div>
                             <div class="file-upload-size">2.35<span>kB</span></div>
                             <div class="file-upload-remove icon-close"></div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

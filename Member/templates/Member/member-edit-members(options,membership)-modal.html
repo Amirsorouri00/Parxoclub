@@ -6,6 +6,7 @@
             </div>
         </div>
         <div class="member-edit-input-base">
+            {% if form_user.first_name.errors %}
             <div class="no-field-error-base">
                 <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
                 <ul class="no-field-error">
@@ -14,7 +15,9 @@
                     <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
                 </ul>
             </div>
+            {% endif %}
             <div class="overlay-scroll">
+                <!-- 
                 <div class="no-field-error-base-fake">
                     <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
                     <ul class="no-field-error">
@@ -22,14 +25,14 @@
                         <li class="no-field-detail clr-red"><span>•&#32;</span>Home Address must be in Tehran.</li>
                         <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
                     </ul>
-                </div>
-                <form>
+                </div> -->
+                <form id="edit_form" user_id="" action="{% url 'maintenance_edit_user'%}" method="POST" enctype="multipart/form-data">
                     <div class="custom-input">
                         <div class="input-label">
                             <label>First Name</label>
                         </div>
                         <div class="input-box">
-                            <input type="text" name="date" required="" tabindex="1">
+                            <input type="text" name="first_name" required="" tabindex="1">
                         </div>
                     </div>
                     <div class="custom-input">
@@ -37,7 +40,7 @@
                             <label>Last Name</label>
                         </div>
                         <div class="input-box">
-                            <input type="text" name="date" required="" tabindex="1">
+                            <input type="text" name="last_name" required="" tabindex="1">
                         </div>
                     </div>
                     <div class="custom-input">
@@ -45,13 +48,13 @@
                             <label>Birth Date</label>
                         </div>
                         <div class="input-box">
-                            <input type="text" name="date" required="" tabindex="1">
+                            <input type="text" name="birthdate" required="" tabindex="1">
                         </div>
                     </div>
                     <div class="custom-toggle">
                         <div class="toggle-container">
                             <div class="toggle-title">Gender</div>
-                            <input id="idGender" type="checkbox">
+                            <input id="idGender" name="gender" type="checkbox">
                             <div class="toggle-option-first">Female</div>
                             <label class="toggle-btn-base" tabindex="1" for="idGender">
                                 <div class="toggle-btn"></div>
@@ -64,7 +67,7 @@
                             <label>Email</label>
                         </div>
                         <div class="input-box">
-                            <input type="text" name="date" required="" tabindex="1">
+                            <input type="text" name="email" type="email" required="" tabindex="1">
                         </div>
                         <div class="input-validation">example@mail.com</div>
                     </div>
@@ -73,7 +76,7 @@
                             <label>Phone</label>
                         </div>
                         <div class="input-box">
-                            <input type="text" name="date" required="" tabindex="1">
+                            <input type="text" name="mobile" required="" tabindex="1">
                         </div>
                     </div>
                     <div class="custom-input">
@@ -81,7 +84,7 @@
                             <label>Address</label>
                         </div>
                         <div class="input-box">
-                            <input type="text" name="date" required="" tabindex="1">
+                            <input type="text" name="address" required="" tabindex="1">
                         </div>
                     </div>
                     <div class="field-error clr-red">
@@ -95,7 +98,7 @@
                             <label>Membership Type</label>
                         </div>
                         <div class="input-box">
-                            <select>
+                            <select id="member_membership_type_id_edit" name="membership">
                                 <option value="gold">Gold</option>
                                 <option value="silver">Silver</option>
                                 <option value="bronze">Bronze</option>
@@ -107,7 +110,7 @@
                             <label>Membership ID</label>
                         </div>
                         <div class="input-box">
-                            <input type="text" name="date" required="" tabindex="1">
+                            <input type="text" name="code" required="" tabindex="1">
                         </div>
                     </div>
                 </form>
@@ -120,7 +123,7 @@
             </div>
             <div class="text-submit-btn-sep"></div>
             <div class="text-submit-btn-container">
-                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+                <button form="edit_form" type="submit" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
             </div>
         </div>
     </div>

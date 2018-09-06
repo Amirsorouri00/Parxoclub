@@ -6,10 +6,10 @@
             <div class="text-header-change-photo">change photo of <span>Tahmine Molaei</span></div>
         </div>
         <div class="photo-editor-container">
-            <div class="photo-editor"></div>
+            <div class="photo-editor" style="background-image: url();"></div>
             <div class="edit-btn-wrapper">
                 <div class="edit-btn-container">
-                    <div class="edit-btn  btn-taint icon-browse" title="Browse" tabindex="1"></div>
+                    <input id="personal_photo_change" preview="photo-editor" class="edit-btn btn-taint icon-browse" type="file" accept=".jpg,.png,.bmp" style="padding-left: 0.5em;" title="Browse" tabindex="1"></input>
                 </div>
                 <div class="edit-btn-container">
                     <div class="edit-btn  btn-taint icon-rotateleft" title="Rotate left" tabindex="1"></div>
@@ -27,7 +27,7 @@
                 <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
             </div>
             <div class="text-submit-btn-sep"></div>
-            <div class="text-submit-btn-container ">
+            <div name="submit" class="text-submit-btn-container ">
                 <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
             </div>
         </div>

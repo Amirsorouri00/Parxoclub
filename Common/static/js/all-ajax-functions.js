@@ -7,6 +7,17 @@ $.ajaxSetup({
     }
 });
 
+function CookieHandler(one, two) {
+    console.log('CookieHandler: ' + two);
+    var csrftoken = Cookies.get('csrftoken');
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            xhr.setRequestHeader(one, two);
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    });
+}
+
 function CsrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -94,7 +105,7 @@ function Login(type, url, username, password) {
 
 function RedirectInto(winref, data, bind, from) {
     console.log(data);
-    alert(data);
+    //alert(data);
     if (data.context) {
         // data.redirect contains the string URL to redirect to
         var next = getUrlVars()["next"];
@@ -164,7 +175,33 @@ function Bind(winref, data, from) {
         console.log('in Bind, from = ' + from);
         console.dir(data.field);
         //data2 = JSON.parse(data);
-        $('#amir_error_add_user_modal_' + data.field).append(data.form)
+        $('#amir_error_add_user_modal_' + data.field).append(data.form);
+
+    } else if (from == 'MemberGetToken') {
+        data2 = JSON.parse(data);
+        console.log('in bind member get token: ' + data2);
+        CookieHandler('Authorization', 'Token ' + data2.Token.key);
+        /*
+            error to be handled
+            error: {"readyState":4,"responseText":"{\"detail\":\"Authentication credentials were not provided.\"}","responseJSON":{"detail":"Authentication credentials were not provided."},"status":403,"statusText":"Forbidden"}
+
+        */
+    } else if (from == 'MemberCategoryMenuFilter') {
+        data2 = JSON.parse(data);
+        console.log('in bind member category menu filter: ');
+        //table = $('#idDocRecords');
+        tmp = member_panel_documents_table_row;
+        member_panel_documents_array = data2.DocCats;
+        $.each(member_panel_documents_array, function(i, item) {
+            console.log(item)
+            tmp = tmp.replace('Document_Date', item.date).replace('Document_Title', item.title).replace('Document_Supervisor', item.prefix + ' ' + item.supervisor).replace('praxo_doc_id', item.id);
+        });
+        $('#idDocRecords').append(tmp);
+        console.dir(data2);
+    } else if (from == 'MemberCategorySubmenuFilter') {
+        //data2 = JSON.parse(data);
+        console.log('in bind member category submenu filter: ' + data);
+        //console.dir(data2);
     } else if (from == 'MaintenanceAddUserModalForm') {
         //data2 = JSON.parse(data);
         $('#amir_error_add_user_modal_email').append(data.form)
@@ -255,20 +292,19 @@ function CreateDocumentCategoryMenu(data) {
         }
         //console.log('submenu length: '+ item.sub_menu.length);
         if (item.sub_menu.length != 0) {
-            tmp = tmp.replace("<div class='expander'></div>", "<div class='expander'><span class='icon-right'></span></div>");
+            tmp = tmp.replace("<div class='expander'></div>", "<div class='expander'><span class='icon-right'></span></div>").replace('submit2', 'submenu');
         }
         var res = tmp;
         $('#ajax_category').append(res);
         var str = "<div class='submenu'>";
         var tmp2 = '';
         $.each(item.sub_menu, function(j, item_2) {
-            //          console.log('submenu:')
-            tmp2 = document_categories_object_to_appendto_submenu.replace("Sonography", item_2.name);
+            //console.log('submenu:')
+            tmp2 = document_categories_object_to_appendto_submenu.replace("Sonography", item_2.name).replace("parent2", item.name).replace('submenu_value', item_2.name);
             str = str + tmp2;
         });
         res2 = str + "</div>"
         $("#ajax_category .column .main_ajax_" + item.id).after(res2);
-
     });
 };
 
@@ -484,7 +520,116 @@ function Maintenance(winRef, data, from, type, url) {
     });
 }
 
+function Member(winRef, data, from, type, url) {
+    var sessionid = Cookies.get('sessionid');
+    CookieHandler('sessionid', sessionid);
+    SendData("GET", url_to_get_token, '', Bind, ErrorManagement, 'MemberGetToken');
 
+    $('body').on('click', "#ajax_category .column .main", function() {
+        cat_type = $(this).attr('submit_or_submenu');
+        console.log('in member ajax category click: ' + cat_type);
+        if (cat_type == 'submit2') {
+            title = $(this).find('.title').text().toString();
+            data = { 'sub_or_not': 'menu', 'title': title }
+            SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategoryMenuFilter');
+        } else {}
+    });
+    $('body').on('click', "#ajax_category .column .submenu .item", function() {
+        console.log('in member ajax submenu category click: ' + $(this).attr('parent'));
+        cat_type = $(this).attr('item_type');
+        if (cat_type == 'submenu') {
+            title = $(this).find('span').attr('value');
+            data = { 'sub_or_not': 'submenu', 'title': title }
+            SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategorySubmenuFilter');
+        } else {}
+    });
+    $('body').on('click', ".doc-photo-header .edit-doc", function() {
+        console.log('in ideditDocModal: ');
+        console.log(member_panel_documents_array);
+        $('#mydiv-upload-files-container .file-upload-row').remove();
+        document_id = $('#idDocRecords .active').attr("document_id");
+        console.log(document_id);
+        result = '';
+        result = member_panel_documents_array.find(doc => (doc.id == document_id));
+        console.log(result);
+        var edit_document_object = $("#idNewDoc .doc-input-container .custom-input");
+        //$('#remove_form').attr('user_id', user_id);
+        //console.log(edit_user_object);
+        edit_document_object.find("input[name='date']").val(result.date);
+        edit_document_object.find("input[name='title']").val(result.title);
+        edit_document_object.find("input[name='supervisor']").val(result.prefix + ' ' + result.supervisor);
+        edit_document_object.find("input[name='site']").val(result.site);
+        // File Images of Documents should be placed
+        // $.each(names, function(i, item) {
+        //     console.log(item);
+        //     tmp = member_panel_editoradd_document_modal_photos_info.replace('FileName', item.name).replace('FileSize', item.size);
+        //     $('#mydiv-upload-files-container').append(tmp);
+        //     // $(obj).find('.file-upload-name span').text(item.name)
+        //     // $(obj).find('.file-upload-size').text(item.name)
+        // });
+        console.dir('ideditmodal: ' + result.supervisor);
+        //$('#calendar_my_select_edit option[value=result.event_type]').attr("selected", "selected");
+    });
+    $('body').on('click', ".doc-photo-header .remove-doc", function() {
+        console.log('in idremoveDocModal: ');
+        console.log(member_panel_documents_array);
+        document_id = $('#idDocRecords .active').attr("document_id");
+        console.log(document_id);
+        // result = '';
+        // result = member_panel_documents_array.find(doc => (doc.id == document_id));
+        // console.log(result);
+        $(".ok-btn-container ").click(function() {
+            //SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategorySubmenuFilter');
+        });
+    });
+
+    $('body').on('click', ".submit-change-photo .text-submit-btn-container", function() {
+        console.log('submited');
+        //var inputFiles = $('#personal_photo_change').files;
+        var inputFiles = [member_personal_image_file_temp];
+        console.log(inputFiles);
+        if (inputFiles == undefined || inputFiles.length == 0) return;
+        else {
+            preview = $('.info .container .photo-container .photo');
+            console.log(preview);
+            var inputFile = inputFiles[0];
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                //alert("I AM result: " + event.target.result);
+                content = event.target.result;
+                maintenance_add_user_photo = content;
+                // $('#news-photo-editor, #news-photo-editor_edit').css({ 'background-image': 'url(' + content + ')' });
+                $(preview).css({ 'background-image': 'url(' + content + ')' });
+                // $(this).closest('#news-photo-editor').css({ 'background-image': 'url(' + event.target.result + ')' });
+                //img.title = '' + escape(theFile.name);
+                //$(this).closest('.news-photo-editor').append(img);
+            };
+            reader.onerror = function(event) {
+                alert("I AM ERROR: " + event.target.error.code);
+            };
+            reader.readAsDataURL(inputFile);
+        }
+    });
+
+    $("#files").change(function() {
+        console.log('input');
+        var names = [];
+        for (var i = 0; i < $(this).get(0).files.length; ++i) {
+            data = { 'name': $(this).get(0).files[i].name, 'size': $(this).get(0).files[i].size };
+            names.push(data);
+        }
+        console.dir(names);
+        // var obj = $('.file-upload-row');
+        $.each(names, function(i, item) {
+            console.log(item);
+            tmp = member_panel_editoradd_document_modal_photos_info.replace('FileName', item.name).replace('FileSize', item.size);
+            $('#mydiv-upload-files-container').append(tmp);
+            // $(obj).find('.file-upload-name span').text(item.name)
+            // $(obj).find('.file-upload-size').text(item.name)
+        });
+    });
+
+}
 // function calendar_find(specific_array, property_to_check, value_to_check) {
 //     return specific_array.id === value_to_check;
 // }
