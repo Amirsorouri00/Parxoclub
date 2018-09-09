@@ -63,10 +63,6 @@
 $(document).ready(function() {
     DocumentCategories('GET', '{% url "doccategories" %}');
     Member('', '', '', '', '');
-    //url = '/ajax/member/search';
-    $("#idSearchBoxMember").keyup(function() {
-        MemberSearch($("#idSearchBoxMember"), "GET", "{% url 'mem_search'%}", $(this).val(), 'MemberSearch');
-    });
 });
 
 $(function() {

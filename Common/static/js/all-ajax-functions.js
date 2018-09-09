@@ -190,16 +190,17 @@ function Bind(winref, data, from) {
         data2 = JSON.parse(data);
         console.log('in bind member category menu filter: ');
         //table = $('#idDocRecords');
-
+        $('#idDocRecords .rowLink').remove();
         member_panel_documents_array = data2.DocCats;
         tmp = member_panel_documents_table_row;
         $.each(member_panel_documents_array, function(i, item) {
             console.log(item)
-            tmp = tmp.replace('Document_Date', item.date).replace('Document_Title', item.title).replace('Document_Supervisor', item.prefix + ' ' + item.supervisor).replace('praxo_doc_id', item.id);
+            tmp = tmp.replace('Document_Date', item.date).replace('Document_Title', item.title).replace('Document_Supervisor', item.prefix + ' ' + item.supervisor);
         });
         $('#idDocRecords').append(tmp);
         console.dir(data2);
     } else if (from == 'MemberCategorySubmenuFilter') {
+        $('#idDocRecords .rowLink').remove();
         data2 = JSON.parse(data);
         member_panel_documents_array = data2.DocCats;
         tmp = member_panel_documents_table_row;
@@ -325,13 +326,12 @@ function CreateDocumentCategoryMenu(data) {
 function ErrorManagement() {};
 
 function MemberSearch(object, type, url, search_text, from) {
-    console.log('insearch');
-    //var from = 'MemberSearch';
-    //var searchText = $(this).val();
+    console.log('inMembersearch');
+    $('#idResultContainer .result-list .result-item').remove();
     var data = {
         'member_search': search_text
     };
-    SendData(type, url, data, Bind, ErrorManagement, from);
+    SendData(type, url, data, Bind, ErrorManagement, 'MemberSearch');
 };
 
 function DocumentCategories(type, url) {
@@ -538,6 +538,11 @@ function Member(winRef, data, from, type, url) {
     var sessionid = Cookies.get('sessionid');
     CookieHandler('sessionid', sessionid);
     SendData("GET", url_to_get_token, '', Bind, ErrorManagement, 'MemberGetToken');
+
+    $('body').on('keyup', "#idSearchBoxMember", function() {
+        //search_text = $(this).val();
+        MemberSearch("#idResultContainer", "GET", '/member/search/', $(this).val(), 'Member');
+    });
 
     $('body').on('click', "#ajax_category .column .main", function() {
         $('.doc-header .doc-header-title').text($(this).find('.title').text().toString())

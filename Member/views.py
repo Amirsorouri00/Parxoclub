@@ -83,7 +83,7 @@ def Login(request):
         password = request.POST.get('password', None)
         user2 = authenticate(username=username, password=password)
         if user2 is not None:
-            request.session.set_expiry(100)
+            request.session.set_expiry(100000)
             login(request, user2)
             data = {
                 'logged_in': True,
