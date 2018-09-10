@@ -15,16 +15,61 @@ from rest_framework.parsers import JSONParser
 from rest_framework import serializers
 
 def AddEvents(request):
-    date = request.POST.get('date', None)
-    #title = request.POST.get('date', None)
-    start_time = request.POST.get('start_time', None)
-    end_time = request.POST.get('end_time', None)
-    note = request.POST.get('note', None)
-    new_event = Event.objects.create(user_id = 1, event_type_id = 2, 
-        day_of_the_event = date, start_time = start_time, end_time = end_time,
-        event_note = note)
-    new_event.save()
-    return HttpResponse(request.POST.get('date', None))
+    if request.is_ajax():
+        if request.method == 'POST':
+            date = request.POST.get('date', None)
+            #title = request.POST.get('date', None)
+            start_time = request.POST.get('start_time', None)
+            end_time = request.POST.get('end_time', None)
+            note = request.POST.get('note', None)
+            new_event = Event.objects.create(user_id = 1, event_type_id = 2, 
+                day_of_the_event = date, start_time = start_time, end_time = end_time,
+                event_note = note)
+            new_event.save()
+            return HttpResponse(request.POST.get('date', None))
+        else:
+            raise Http404
+    else:
+        raise Http404
+    
+
+def EditEvents(request):
+    if request.is_ajax():
+        if request.method == 'POST':  
+            date = request.POST.get('date', None)
+            #title = request.POST.get('date', None)
+            start_time = request.POST.get('start_time', None)
+            end_time = request.POST.get('end_time', None)
+            note = request.POST.get('note', None)
+            event = Event.objects.filter(id = request.POST.get('event_id', None))
+            if event:
+                event.day_of_the_event = date
+                event.start_time = start_time
+                event.end_time = end_time
+                event.event_note = note
+                event.save()
+                return HttpResponse('Event Edited')
+            else: 
+                return HttpResponse('Event does not exist')
+        else:
+            raise Http404
+    else:
+        raise Http404
+
+def RemoveEvents(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            event = Event.objects.filter(id = request.POST.get('event_id', None))
+            if event:
+                event.delete()
+                return HttpResponse('Event Deleted')
+            else: 
+                return HttpResponse('Event does not exist')
+        else:
+            raise Http404
+    else:
+        raise Http404
+    
 
 def GetOneEvent(request):
     return HttpResponse('GetOneEvent')

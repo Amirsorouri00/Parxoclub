@@ -1,58 +1,35 @@
-import datetime
-from .models import Profile, Members
-from django.http import Http404
-from Common import security, constants
-from django.http.response import HttpResponse
-from django.shortcuts import render, redirect
-from django.conf import settings
-from django.db.models import Q
-from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
-from django.views.decorators.clickjacking import xframe_options_sameorigin
-from django.contrib.auth.models import User
-from django.http import JsonResponse
-from django.template.loader import render_to_string
-from django.db import connection
-from django.contrib.auth.hashers import make_password
-# Rest_Framework
-from rest_framework.renderers import JSONRenderer
-from .serializer import UserSerializer, MaintenanceUsersSerializer, MemberSerializer
-from django.core import serializers
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-# Form
-from .forms import UserForm, ProfileForm, MemberForm
-# Controller functions handle members actions and activities
-from collections import namedtuple
-from PatientDoc.views import handle_uploaded_doc_files
+import errno
 
-def Maintenance(request):
-    #user = get_object_or_404(User, id=user_id)
-    if request.method == 'POST':
-        files = request.FILES.getlist('photo')
-        user = User.objects.create(password = make_password(123456, salt=None, hasher='default'),
-                is_superuser = 1, username = request.POST.get('first_name', None),
-                first_name = request.POST.get('first_name', None),
-                last_name = request.POST.get('last_name', None),
-                email = request.POST.get('email', None), is_staff = 1, is_active = 1,
-                date_joined = datetime.datetime.now())
-        user.save()
-        profile = Profile.objects.create(user_id = user.id, birthdate = request.POST.get('birthdate', None),
-                gender = 1, mobile = request.POST.get('mobile', None),
-                address = request.POST.get('address', None))
-        profile.save()
-        member = Members.objects.create(code = request.POST.get('code', None), user_id = user.id, membership_id = 1, physician_id = 1, Profile_id = 1)
-        member.save()
-        photo_name = request.POST.get('photo_name', False)
-        handle_uploaded_doc_files(user.pk, files, photo_name)
-        return JsonResponse({
-            'modal': True, 
-            'notification': { 
-                'type': 'success',
-                'message': 'Updated successfully.'
-            }
-        })
-    else:
-        return render(request, 'member/maintenance.html')
+from django.conf import settings
+from django.contrib.auth import REDIRECT_FIELD_NAME, authenticate, login, \
+    logout
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
+from django.core import serializers
+from django.db import connection
+from django.db.models import Q
+from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.views.decorators.clickjacking import xframe_options_sameorigin
+from rest_framework.authentication import BasicAuthentication, \
+    SessionAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.renderers import JSONRenderer
+
+import datetime
+from .forms import MemberForm, ProfileForm, UserForm
+from .models import Expertises, Members, Physicians, Prefixes, Profile
+from PatientDoc.models import Documents
+from Calendar.models import Event
+from .serializer import MaintenanceUsersSerializer, MemberSerializer, \
+    UserSerializer
+from Common import constants, security
+from Member.models import Expertises, Physicians
+from PatientDoc.views import handle_uploaded_doc_files
+from collections import namedtuple
+from django.http import Http404, JsonResponse
+from django.http.response import HttpResponse
+from venv import create
 
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
@@ -167,50 +144,6 @@ def MemberSearchByPrefixx(request):
         return HttpResponse(content)
     else:raise Http404
 
-# def Maintenance(request):
-#     #user = get_object_or_404(User, id=user_id)
-#     if request.method == 'POST':
-#         form_user = UserForm(request.POST)
-#         form_profile = ProfileForm(request.POST)
-#         form_member = MemberForm(request.POST)
-#         if form_user.is_valid() & form_profile.is_valid() & form_member.is_valid():
-#             form_user.save()
-#             form_profile.save()
-#             form_member.save()
-#             return JsonResponse({
-#                 'modal': True, 
-#                 'notification': { 
-#                     'type': 'success',
-#                     'message': 'Updated successfully.'
-#                 }
-#             })
-#         else:
-#             html = render_to_string('member/maintenance.html', {'form_user': form_user,
-#                 'form_profile': form_profile,
-#                 'form_member': form_member,})
-#             #content = JSONRenderer().render(html)
-#             data = {'form': html, 'field':request.POST.get('field', None)}
-#             return JsonResponse(data, safe=False)
-#             # return render(request, 'member/maintenance.html', { 
-#             #     #see (what about the error)
-#             #     'form_user': form_user,
-#             #     'form_profile': form_profile,
-#             #     'form_member': form_member, 
-#             # })
-        
-#     else:
-#         form_user = UserForm()
-#         form_profile = ProfileForm()
-#         form_member = MemberForm()
-#         Users = User.objects.all()
-#         #form_member = MembersForm(instance=user.members)
-#         return render(request, 'member/maintenance.html', { 
-#             'form_user': form_user,
-#             'form_profile': form_profile,
-#             'form_member': form_member,
-#         })
-#     #return render(request, 'member/maintenance.html')
-
 def Validation(request):
     value = request.POST.get('value', None)
     field = request.POST.get('field', None)
@@ -278,39 +211,111 @@ def serializer_test(request):
     else:
         return Http404
 
+def Maintenance(request):
+    #user = get_object_or_404(User, id=user_id)
+    if request.method == 'POST':
+        files = request.FILES.getlist('photo')
+        user = User.objects.create(password = make_password(123456, salt=None, hasher='default'),
+                is_superuser = 1, username = request.POST.get('first_name', None),
+                first_name = request.POST.get('first_name', None),
+                last_name = request.POST.get('last_name', None),
+                email = request.POST.get('email', None), is_staff = 1, is_active = 1,
+                date_joined = datetime.datetime.now())
+        user.save()
+        profile = Profile.objects.create(user_id = user.id, birthdate = request.POST.get('birthdate', None),
+                gender = 1, mobile = request.POST.get('mobile', None),
+                address = request.POST.get('address', None))
+        profile.save()
+        prefix, expertise = [None, None]
+        if request.POST.get('expertise', None):
+            expertise = Expertises.objects.get(name=request.POST.get('expertise', None))
+        else:
+            expertise = Expertises.objects.get(pk = 1)
+        if request.POST.get('prefix', None):
+            prefix = Prefixes.objects.get(name=request.POST.get('prefix', None))
+        else:
+            prefix = Prefixes.objects.get(pk = 1)
+                        
+        # prefix = Prefixes.objects.get(name=request.POST.get('prefix', None))
+        physician = Physicians.objects.create(user_id = user.pk, prefix_id = prefix.pk, expertise_id = expertise.pk)
+        physician.save()
+        member = Members.objects.create(code = request.POST.get('code', None), user_id = user.id, membership_id = 1, physician_id = physician.pk, Profile_id = profile.pk)
+        member.save()
+        photo_name = request.POST.get('photo_name', False)
+        handle_uploaded_doc_files(user.pk, files, photo_name)
+        return JsonResponse({
+            'modal': True, 
+            'notification': { 
+                'type': 'success',
+                'message': 'Updated successfully.'
+            }
+        })
+    else:
+        return render(request, 'member/maintenance.html')
+
 def EditUser(request):
     if request.is_ajax():
         if request.method == 'POST':  
             user = User.objects.get(pk = request.POST.get('user_id', None))
-            user.first_name = request.POST.get('first_name', None)
-            user.last_name = request.POST.get('last_name', None)
-            user.email = request.POST.get('email', None)
-            user.save()
             profile = Profile.objects.get(pk = request.POST.get('user_id', None))
-            profile.mobile = request.POST.get('mobile', None)
-            profile.address = request.POST.get('address', None)
-            profile.birthdate = request.POST.get('birthdate', None)
-            profile.save()
+            expertise = Expertises.objects.get(name=request.POST.get('expertise', None))
+            prefix = Prefixes.objects.get(name=request.POST.get('prefix', None))
             member = Members.objects.get(pk = request.POST.get('user_id', None))
-            member.code = request.POST.get('code', None)
-            member.save()
-            files = request.FILES.getlist('photo')
-            photo_name = request.POST.get('photo_name', False)
-            handle_uploaded_doc_files(user.pk, files, photo_name)
-            return JsonResponse({
-                'modal': True, 
-                'notification': { 
-                    'type': 'success',
-                    'message': 'Updated successfully.'
-                }
-            })
+            if user & profile & physician & member:
+                user.first_name = request.POST.get('first_name', None)
+                user.last_name = request.POST.get('last_name', None)
+                user.email = request.POST.get('email', None)
+                user.save()
+                
+                profile.mobile = request.POST.get('mobile', None)
+                profile.address = request.POST.get('address', None)
+                profile.birthdate = request.POST.get('birthdate', None)
+                profile.save()
+                
+                physician = Physicians.objects.get(user_id = user.pk)
+                physician.prefix = prefix
+                physician.expertise = expertise
+                physician.save()
+                
+                member.code = request.POST.get('code', None)
+                member.physician = physician
+                member.save()
+                files = request.FILES.getlist('photo')
+                photo_name = request.POST.get('photo_name', False)
+                handle_uploaded_doc_files(user.pk, files, photo_name)
+                return JsonResponse({
+                    'modal': True, 
+                    'notification': { 
+                        'type': 'success',
+                        'message': 'Updated successfully.'
+                    }
+                })
+            else:
+                return JsonResponse({
+                    'modal': False, 
+                    'notification': { 
+                        'type': 'error',
+                        'message': "user and/or it's dependencies not exist"
+                    }
+                })
         else:
-            return render(request, 'member/maintenance.html')
+            return Http404
     else:
-        return Http404
+        raise Http404
 
 def ChangeUserPhoto(request):
     return HttpResponse('ChangeUserPhoto')
+    if request.is_ajax():
+        if request.method == 'POST':
+            files = request.FILES.getlist('photo')
+            photo_name = request.POST.get('photo_name', False)
+            user = User.objects.get(id = request.POST.get('user_id', None))
+            handle_uploaded_doc_files(user.pk, files, photo_name)
+            return HttpResponse('User Photo Changed')
+        else:
+            raise Http404
+    else:
+        raise Http404
 
 def RemoveUser(request):
     if request.is_ajax():
@@ -318,23 +323,97 @@ def RemoveUser(request):
             user = User.objects.get(pk = request.POST.get('user_id', None))
             profile = Profile.objects.get(pk = request.POST.get('user_id', None))
             member = Members.objects.get(pk = request.POST.get('user_id', None))
-            #physician = physician.objects.get(pk = request.POST.get('user_id', None))
-            #physician.delete()
-            member.delete()
-            profile.delete()
-            user.delete()
-            return JsonResponse({
+            physician = physician.objects.get(pk = request.POST.get('user_id', None))
+            success = {
                 'modal': True, 
                 'notification': { 
                     'type': 'success',
                     'message': 'Updated successfully.'
                 }
-            })
+            }
+            error = {
+                'modal': True, 
+                'notification': { 
+                    'type': 'success',
+                    'message': 'Updated successfully.'
+                }
+            }
+            events = Event.objects.filter(user_id = request.POST.get('user_id', None))
+            if events:
+                for event in events:
+                    event.delete()
+            documents = Documents.objects.filter(user_id = request.POST.get('user_id', None))
+            if documents:
+                for document in documents:
+                    document.delete()
+            if physician:
+                physician.delete()
+            else:
+                return JsonResponse(error)
+            if profile:                
+                profile.delete()
+            else:
+                return JsonResponse(error)
+            if member:
+                member.delete()
+            else:
+                return JsonResponse(error)
+            if user:
+                user.delete()
+            else:
+                return JsonResponse(error)
+            return JsonResponse(success)
         else:
-            return HttpResponse('request methode is get, it should be post')
+            #return HttpResponse('request methode is get, it should be post')
+            raise Http404
     else:
-        return Http404
+        raise Http404
 
+
+
+# def Maintenance(request):
+#     #user = get_object_or_404(User, id=user_id)
+#     if request.method == 'POST':
+#         form_user = UserForm(request.POST)
+#         form_profile = ProfileForm(request.POST)
+#         form_member = MemberForm(request.POST)
+#         if form_user.is_valid() & form_profile.is_valid() & form_member.is_valid():
+#             form_user.save()
+#             form_profile.save()
+#             form_member.save()
+#             return JsonResponse({
+#                 'modal': True, 
+#                 'notification': { 
+#                     'type': 'success',
+#                     'message': 'Updated successfully.'
+#                 }
+#             })
+#         else:
+#             html = render_to_string('member/maintenance.html', {'form_user': form_user,
+#                 'form_profile': form_profile,
+#                 'form_member': form_member,})
+#             #content = JSONRenderer().render(html)
+#             data = {'form': html, 'field':request.POST.get('field', None)}
+#             return JsonResponse(data, safe=False)
+#             # return render(request, 'member/maintenance.html', { 
+#             #     #see (what about the error)
+#             #     'form_user': form_user,
+#             #     'form_profile': form_profile,
+#             #     'form_member': form_member, 
+#             # })
+        
+#     else:
+#         form_user = UserForm()
+#         form_profile = ProfileForm()
+#         form_member = MemberForm()
+#         Users = User.objects.all()
+#         #form_member = MembersForm(instance=user.members)
+#         return render(request, 'member/maintenance.html', { 
+#             'form_user': form_user,
+#             'form_profile': form_profile,
+#             'form_member': form_member,
+#         })
+#     #return render(request, 'member/maintenance.html')
 
 '''
 @transaction.atomic

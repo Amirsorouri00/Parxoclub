@@ -75,6 +75,7 @@ def DocumentFilter(request):
     if request.is_ajax():
         # query must be based on request.user 
         # request.user returns username
+        # Permission
         subfilter_or_filter = request.POST.get('sub_or_not', None)
         if subfilter_or_filter == 'submenu':
             title = request.POST.get('title', None)
@@ -106,6 +107,8 @@ def DocumentFilter(request):
 @permission_classes((IsAuthenticated,))
 @csrf_exempt  
 def AddNewDocumentMemberPanel(request):
+    # Documents must be queried based on document title and user_id
+    # Permission
     if request.is_ajax():
         if request.method == 'POST':
             #handling whole images have been sent from client still remained(it is just a for...)
@@ -135,14 +138,76 @@ def AddNewDocumentMemberPanel(request):
 @permission_classes((IsAuthenticated,))
 @csrf_exempt  
 def EditDocumentMemberPanel(request):
+    # Documents must be queried based on document title and user_id
+    # Permission
     return HttpResponse('EditDocumentMemberPanel')
+    if request.is_ajax():
+        if request.method == 'POST':
+            #handling whole images have been sent from client still remained(it is just a for...)
+            files = request.FILES.getlist('photo_0', False)
+            photo_name = request.POST.get('photo_0_name', False)
+            physician = User.objects.get(last_name = request.POST.get('supervisor', None))
+            document = Documents.objects.get(title = request.POST.get('title', None))
+            if physician & document & files:
+                document.date = request.POST.get('date', None)
+                document.physician_id = physician.id
+                # document = Documents.objects.create(title = request.POST.get('title', None),
+                #             date = request.POST.get('date', None), comment = LORE_IPSUM, user_id = 2, 
+                #             doccatsubmenu_id = 2, category_id = 7, physician_id = physician.id, attachment = 1)
+                document.save()
+                handle_uploaded_doc_files(document.pk+1000, files, photo_name)
+                return JsonResponse({
+                'modal': True, 
+                'notification': { 
+                    'type': 'success',
+                    'message': 'Updated successfully.'
+                }
+                })
+            else: 
+                return JsonResponse({
+                'modal': False, 
+                'notification': { 
+                    'type': 'error',
+                    'message': 'document and its dependencies does not exist'
+                }
+                })
+        else:
+            raise Http404
+    else:
+        raise Http404
 
 @api_view(['POST'])
 @authentication_classes((SessionAuthentication, TokenAuthentication))
 @permission_classes((IsAuthenticated,))
 @csrf_exempt  
 def RemoveDocumentMemberPanel(request):
+    # Documents must be queried based on document title and user_id
+    # Permission
     return HttpResponse('RemoveDocumentMemberPanel')
+    if request.is_ajax():
+        if request.method == 'POST':
+            document = Documents.objects.get(title = request.POST.get('title', None))
+            if document:
+                document.delete()
+                return JsonResponse({
+                'modal': True, 
+                'notification': { 
+                    'type': 'success',
+                    'message': 'Updated successfully.'
+                }
+                })
+            else: 
+                return JsonResponse({
+                'modal': False, 
+                'notification': { 
+                    'type': 'error',
+                    'message': 'document and its dependencies does not exist'
+                }
+                })
+        else:
+            raise Http404
+    else:
+        raise Http404
 
 def Categories(request):
     if request.is_ajax():
