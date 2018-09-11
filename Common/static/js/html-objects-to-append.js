@@ -20,3 +20,5 @@ member_panel_documents_array = []
 
 member_panel_editoradd_document_modal_photos_info = '<div class="file-upload-row server-storage"> <div class="file-upload-stored icon-server"></div> <div class="thumbnail-container"><img src="{% static "img / nik2.png " %}"></div> <div class="file-upload-name"><span>FileName</span></div> <div class="file-upload-size">FileSize<span>kB</span></div> <div class="file-upload-trash icon-trashfill"></div> </div>'
 member_personal_image_file_temp = ''
+
+chat_talk_main_member_bubble = '<div class="received-bubble"> <div class="bubble-container"> <div class="bubble-text"> <span> BUBBLE-TEXT</span> </div> <div class="bubble-detail"> <span class="status"></span> <span class="time">BUBBLE-TIME</span> </div> </div> <div class="bubble-check"> <div class="bubble-checkbox"> <div class="bubble-checkbox-select"> <span class="bubble-checkbox-icon icon-check"></span> </div> </div> </div> </div>'

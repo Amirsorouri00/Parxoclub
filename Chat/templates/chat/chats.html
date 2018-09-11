@@ -1,4 +1,7 @@
-{% extends "common/index.html" %}
+{% extends "common/index.html" %} {% load static %} {% block SocketJavascript %}
+<script src="{% static '/socket.io-client/dist/socket.io.js' %}"></script>
+<script src="{% static '/luxon/src/luxon.js' %}"></script>
+{% endblock %}
 <!-- Title Block -->
 {% block title %} | ChatPanel{% endblock %}
 <!-- After Side Nav Block Objects in index.html  -->
@@ -21,4 +24,14 @@
 <!-- Chat Upload Modal -->
 {% include 'chat/chat-chat-upload-modal.html' %}
 <!-- Remove Chat Modal -->
-{% include 'chat/chat-remove-chat-modal.html' %} {% endblock %}
+{% include 'chat/chat-remove-chat-modal.html' %} {% endblock %}{% block EndJavascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+    Chat('', '', '', '', '');
+});
+</script>
+<!-- <script src="/node_modules/socket.io/socket.io.js"></script> -->
+<script>
+//const io = require('socket.io-client');
+</script>
+{% endblock %}

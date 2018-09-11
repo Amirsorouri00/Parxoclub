@@ -288,6 +288,16 @@ function Bind(winref, data, from) {
         });
         $('.base-event-list .overlay-scroll .event-detial').remove();
         var object = $('.base-event-list .overlay-scroll').append(event_detail_html);
+    } else if (from == 'Chat') {
+        console.dir('from Chat: ' + data);
+        //data2 = JSON.parse(data);
+        //console.log('from Chat: ' + data2);
+        time = luxon.DateTime.fromISO(data.sent);
+        //time = DateTime.fromISO(this.props.message.sent)
+        time = time.toFormat("HH ':' mm  ");
+        tmp = chat_talk_main_member_bubble.replace('BUBBLE-TEXT', data.text).replace('BUBBLE-TIME', time);
+        $('.talk-base .os-padding .os-viewport .os-content').append(tmp);
+
     } else {
         console.log("from doesn't match");
         //console.log(data)
@@ -538,7 +548,6 @@ function Member(winRef, data, from, type, url) {
     var sessionid = Cookies.get('sessionid');
     CookieHandler('sessionid', sessionid);
     SendData("GET", url_to_get_token, '', Bind, ErrorManagement, 'MemberGetToken');
-
     $('body').on('keyup', "#idSearchBoxMember", function() {
         //search_text = $(this).val();
         MemberSearch("#idResultContainer", "GET", '/member/search/', $(this).val(), 'Member');
@@ -554,6 +563,7 @@ function Member(winRef, data, from, type, url) {
             SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategoryMenuFilter');
         } else { $('.doc-header .doc-header-title').text($(this).find('.title').text().toString()); }
     });
+
     $('body').on('click', "#ajax_category .column .submenu .item", function() {
         console.log('in member ajax submenu category click: ' + $(this).attr('parent'));
         cat_type = $(this).attr('item_type');
@@ -702,6 +712,26 @@ function Member(winRef, data, from, type, url) {
         });
     });
 
+}
+
+function Chat(winRef, data, from, type, url) {
+    const socket = io('ws://192.168.30.98:3300/chatroom', {
+        transports: ["websocket"],
+        query: "userId=" + "5b90f6ba060cce44848daefb"
+    });
+    socket.on("connect", function() {
+        console.log("conected");
+    });
+    // socket.on('event', function (data) { console.log('connected:', data) });
+    socket.on('chat', function(data) {
+        console.log('message recieve on chat event: ' + data);
+        console.dir(data);
+        Bind(window, data, 'Chat');
+
+    });
+    socket.on('disconnect', function() {
+
+    });
 }
 // function calendar_find(specific_array, property_to_check, value_to_check) {
 //     return specific_array.id === value_to_check;

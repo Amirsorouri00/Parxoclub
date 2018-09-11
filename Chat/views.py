@@ -2,11 +2,17 @@ from django.shortcuts import render
 # Tested Basic tutorial chat project View
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 import json
 from .models import RoomUsers, Room
 # Rest_Framework
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
+from rest_framework.views import APIView
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 # Serializer
 from .serializer import RoomSerializer
 from django.http.response import HttpResponse
@@ -35,6 +41,11 @@ def UserChats(request, userId):
         #return JsonResponse(json, safe=False)
         return HttpResponse(content)
 # Create your views here.
+
+@api_view(['POST', 'GET'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+@csrf_exempt 
 def Chat(request):
     return render(request, 'chat/chats.html')
 
