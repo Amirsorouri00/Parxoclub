@@ -1,0 +1,152 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "luxon",
+        "scope": null,
+        "escapedName": "luxon",
+        "name": "luxon",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\wamp64\\www\\PraxoClub"
+    ]
+  ],
+  "_from": "luxon@latest",
+  "_id": "luxon@1.3.3",
+  "_inCache": true,
+  "_location": "/luxon",
+  "_nodeVersion": "8.9.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/luxon_1.3.3_1532912815144_0.3252489123321345"
+  },
+  "_npmUser": {
+    "name": "icambron",
+    "email": "icambron@gmail.com"
+  },
+  "_npmVersion": "5.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "luxon",
+    "scope": null,
+    "escapedName": "luxon",
+    "name": "luxon",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/luxon/-/luxon-1.3.3.tgz",
+  "_shasum": "e66e8537a62c9b351ba69b766d7fb70b07ab5e57",
+  "_shrinkwrap": null,
+  "_spec": "luxon",
+  "_where": "C:\\wamp64\\www\\PraxoClub",
+  "author": {
+    "name": "Isaac Cambron"
+  },
+  "browser": "build/cjs-browser/luxon.js",
+  "bugs": {
+    "url": "https://github.com/moment/luxon/issues"
+  },
+  "dependencies": {},
+  "description": "Immutable date wrapper",
+  "devDependencies": {
+    "babel-cli": "latest",
+    "babel-jest": "^23.0.1",
+    "babel-plugin-external-helpers": "latest",
+    "babel-preset-env": "^1.7.0",
+    "benchmark": "latest",
+    "codecov": "^3.0.2",
+    "core-js": "^2.5.7",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "latest",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "12.0.2",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-prettier": "latest",
+    "fs-extra": "^6.0.1",
+    "full-icu": "^1.2.1",
+    "husky": "^0.14.3",
+    "jest": "^22.4.2",
+    "jest-cli": "^23.1.0",
+    "lint-staged": "^4.3.0",
+    "prettier": "1.7.4",
+    "rollup": "^0.56.5",
+    "rollup-plugin-babel": "latest",
+    "rollup-plugin-babel-minify": "^5.0.0",
+    "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-node-resolve": "latest"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-3CM0jpS3mbHwWoPYprX1/Zsd5esni0LkhMfSiSY6xQ3/M3pnct3OPWbWkQdEEl9MO9593k6PvDn1DhxCkpuZEw==",
+    "shasum": "e66e8537a62c9b351ba69b766d7fb70b07ab5e57",
+    "tarball": "https://registry.npmjs.org/luxon/-/luxon-1.3.3.tgz",
+    "fileCount": 37,
+    "unpackedSize": 2253708,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbXmSvCRA9TVsSAnZWagAA5lUP/ikczwiVxpNOiphMHCnh\nzvLVrl++UVUF9gcetvxGkdjbFGZ/Up2DOJjhRPlsfepmeBf9mfrOS+iCnYiQ\n9xfS7OmzadfpuBhQjOyKsFFzx7mmB5UVXuJUDyAosV9IYJkYODs2VCcIHSPO\nHLpn5f8Sjc4QOByodgueor9wYCyAEghazfuWbLtwRg9J9/AaI7Mxgexw6XDe\nv/U/V7shD0ae0DAsfXkv4aYmIKENiFcmKuZiyWj/D6AV8REk+y9fu9A/XtF1\neZ2H4Up6Bu5BMc1lu/JNmd1bsZ1VteJrbEGg92TY7J2zlLkHchhlZUPK+NLj\nBgbyJ6DztezQDrEK/DopNGNmCyhDK7+zww2rfIQw4kngMkYf8EWy+lqJK+GV\nk9iOWVH4JOld50yokY6VhqupoAoJj9RhhwjFO7d7F6V78ZSELhH/uWC6xSYQ\nhR3rGKyBuJesUM5yD8xkhaKTwtYVuVaEcR9CtJVmkWfwhDIxr8dhDezvZGwy\nWv54vsaYmCJkSM9qEI5VtVix626KZITEG5beZLjKHS7myeXdwrzqIT/clpAU\npkynlaMRozZruT7fUToIBb3Rs+zqf34hbi6u/eUt4i3+y90JAik4eO5tzJ/V\nf/sLE3DHA/jKdZXZZ7RIcKhyfLsdw8NjOQIzKQBwhM4EMKXa9Dleh46zK0ts\nk9qJ\r\n=6EcC\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "files": [
+    "build/node/luxon.js",
+    "build/node/luxon.js.map",
+    "build/cjs-browser/luxon.js",
+    "build/cjs-browser/luxon.js.map",
+    "build/amd/luxon.js",
+    "build/amd/luxon.js.map",
+    "build/global/luxon.js",
+    "build/global/luxon.js.map",
+    "src"
+  ],
+  "gitHead": "b4bb96cb419fe76e44cfb99e4e173e767aaa8880",
+  "homepage": "https://github.com/moment/luxon#readme",
+  "keywords": [
+    "date",
+    "immutable"
+  ],
+  "license": "MIT",
+  "lint-staged": {
+    "*.{js,json}": [
+      "prettier --config .prettier.js --write",
+      "git add"
+    ]
+  },
+  "main": "build/node/luxon.js",
+  "maintainers": [
+    {
+      "name": "icambron",
+      "email": "icambron@gmail.com"
+    }
+  ],
+  "module": "src/luxon.js",
+  "name": "luxon",
+  "optionalDependencies": {},
+  "readme": "# Luxon\n\n[![MIT License][license-image]][license] [![Build Status][travis-image]][travis-url] [![NPM version][npm-version-image]][npm-url] [![Coverage Status][test-coverage-image]][test-coverage-url] [![Doc coverage][doc-coverage-image]][doc-url] [![PRs welcome][contributing-image]][contributing-url]\n\nLuxon is a library for working with dates and times in Javascript.\n\n```js\nDateTime.local().setZone('America/New_York').minus({ weeks: 1 }).endOf('day').toISO();\n```\n\n## Features\n * DateTime, Duration, and Interval types.\n * Immutable, chainable, unambiguous API.\n * Parsing and formatting for common and custom formats.\n * Native time zone and Intl support (no locale or tz files).\n\n## Download/install\n\n[Download/install instructions](https://moment.github.io/luxon/docs/manual/install.html)\n\n## Documentation\n\n* [General documentation][doc-url]\n* [API docs](https://moment.github.io/luxon/docs/identifiers.html)\n* [Quick tour](https://moment.github.io/luxon/docs/manual/tour.html)\n* [For Moment users](https://moment.github.io/luxon/docs/manual/moment.html)\n* [Why does Luxon exist?](https://moment.github.io/luxon/docs/manual/why.html)\n* [A quick demo](https://moment.github.io/luxon/demo/global.html)\n\n## Development\n\nSee [contributing](contributing.md).\n\n![Phasers to stun][phasers-image]\n\n[license-image]: http://img.shields.io/badge/license-MIT-blue.svg\n[license]: license.txt\n\n[travis-url]: http://travis-ci.org/moment/luxon\n[travis-image]: https://api.travis-ci.org/moment/luxon.svg?branch=master\n\n[npm-url]: https://npmjs.org/package/luxon\n[npm-version-image]: https://badge.fury.io/js/luxon.svg\n\n[doc-url]: https://moment.github.io/luxon/docs/\n[doc-coverage-image]: https://moment.github.io/luxon/docs/badge.svg\n\n[test-coverage-url]: https://codecov.io/gh/moment/luxon\n[test-coverage-image]: https://codecov.io/gh/moment/luxon/branch/master/graph/badge.svg\n\n[contributing-url]: https://moment.github.io/luxon/docs/manual/contributing.html\n[contributing-image]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg\n\n[phasers-image]: https://img.shields.io/badge/phasers-stun-brightgreen.svg\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moment/luxon.git"
+  },
+  "scripts": {
+    "benchmark": "babel-node benchmarks/datetime.js",
+    "build": "babel-node tasks/buildAll.js",
+    "build-node": "babel-node tasks/buildNode.js",
+    "check-doc-coverage": "babel-node tasks/docCoverage",
+    "codecov": "codecov",
+    "docs": "esdoc -c docs/index.js",
+    "format": "prettier --config .prettier.js --write 'src/**/*.js' 'test/**/*.js' 'benchmarks/*.js'",
+    "lint": "eslint src test benchmark",
+    "lint!": "npm run format && npm run lint",
+    "site": "cp -r site/** build/",
+    "test": "babel-node tasks/unit.js"
+  },
+  "version": "1.3.3"
+}
