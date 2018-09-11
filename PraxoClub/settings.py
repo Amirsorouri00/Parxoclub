@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 import os
 
+from django.conf.global_settings import STATIC_ROOT
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -202,7 +205,9 @@ STATIC_URL = '/static/'
 PIC_UPLOAD_URL = './common/static/uploads/profilePics/'
 DOC_UPLOAD_URL = './common/static/uploads/docs/'
 
+STATIC_ROOT = './Amir/Collected/'
+
 STATICFILES_DIRS = [
-   # os.path.join(BASE_DIR, "static"),
-   os.path.join("D:/Farzad/Projects/Nikan/Web/Source/Django/Nikan/common/", "static"),
+   os.path.join(BASE_DIR, "./node_modules/"),
+#    os.path.join("D:/Farzad/Projects/Nikan/Web/Source/Django/Nikan/common/", "static"),
 ]
