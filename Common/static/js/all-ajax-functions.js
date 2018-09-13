@@ -152,7 +152,7 @@ function Bind(winref, data, from) {
         $.each(data2.users, function(i, item) {
             //console.log('in Bind2 : '+ data2.users[0].username);
             //str = "<div class='result-item'><div class='photo-container'><div class='photo'></div></div><div class='detail'><span class='name'> first_name last_name </span><span class='position'>Title/Position</span></div></div>"
-            res = search_object_to_append.replace("first_name", item.first_name).replace("last_name", item.last_name);
+            res = search_object_to_append.replace("first_name", item.first_name).replace("last_name", item.last_name).replace('USER_ID', item.id);
             //$('#idResultContainer .result-list').append("<div class='result-item'><div class='photo-container'><div class='photo'></div></div><div class='detail'><span class='name'>" + item.first_name + ' ' + item.last_name +"</span><span class='position'>Title/Position</span></div></div>");
             $('#idResultContainer .result-list').append(res);
         });
@@ -195,10 +195,17 @@ function Bind(winref, data, from) {
         tmp = member_panel_documents_table_row;
         $.each(member_panel_documents_array, function(i, item) {
             console.log(item)
-            tmp = tmp.replace('Document_Date', item.date).replace('Document_Title', item.title).replace('Document_Supervisor', item.prefix + ' ' + item.supervisor);
+            tmp = tmp.replace('Document_Date', item.date).replace('Document_Title', item.title).replace('Document_Supervisor', item.prefix + ' ' + item.supervisor).replace('praxo_doc_id', item.id);
         });
         $('#idDocRecords').append(tmp);
         console.dir(data2);
+
+    } else if (from == 'MemberCategoryMenuHistoryPageFilter') {
+        //data2 = JSON.parse(data);
+        console.log('in MemberCategoryMenuHistoryPageFilter: ');
+        $(".docs-main").remove();
+        $('.plane-search-wrapper').after(data.form);
+
     } else if (from == 'MemberCategorySubmenuFilter') {
         $('#idDocRecords .rowLink').remove();
         data2 = JSON.parse(data);
@@ -294,9 +301,19 @@ function Bind(winref, data, from) {
         //console.log('from Chat: ' + data2);
         time = luxon.DateTime.fromISO(data.sent);
         //time = DateTime.fromISO(this.props.message.sent)
-        time = time.toFormat("HH ':' mm  ");
-        tmp = chat_talk_main_member_bubble.replace('BUBBLE-TEXT', data.text).replace('BUBBLE-TIME', time);
-        $('.talk-base .os-padding .os-viewport .os-content').append(tmp);
+        time = time.toFormat("h':'mm a");
+
+        if (data.name == user_id) {
+            tmp = chat_talk_main_user_bubble.replace('BUBBLE-TEXT', data.text).replace('BUBBLE-TIME', time);
+        } else {
+            tmp = chat_talk_main_member_bubble.replace('BUBBLE-TEXT', data.text).replace('BUBBLE-TIME', time);
+        }
+        $('.talk-base .os-padding .os-viewport .os-content .talk-inside-container').append(tmp);
+        console.log(chat_scrollbar);
+        var newChatHeight = $('.talk-inside-container > .received-bubble').last().height() - 1;
+        console.log(newChatHeight);
+        chat_scrollbar.scroll({ y: "+=" + newChatHeight + "px" }, 500);
+        chat_scrollbar.scroll({ y: "100%" }, 500);
 
     } else {
         console.log("from doesn't match");
@@ -559,8 +576,19 @@ function Member(winRef, data, from, type, url) {
         console.log('in member ajax category click: ' + cat_type);
         if (cat_type == 'submit2') {
             title = $(this).find('.title').text().toString();
-            data = { 'sub_or_not': 'menu', 'title': title }
-            SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategoryMenuFilter');
+            if (title == "Member History") {
+                user_id = $('.detail-container').attr('user_id');
+                data = { 'sub_or_not': 'menu', 'title': title, 'user_id': user_id };
+                SendData("POST", '/ajax/patientdoc/member/', data, Bind, ErrorManagement, 'MemberCategoryMenuHistoryPageFilter');
+            } else {
+                if (!$('#idDocRecords').length) {
+                    SendData("POST", '/ajax/patientdoc/memberfemale/', data, Bind, ErrorManagement, 'MemberCategoryMenuHistoryPageFilter');
+                }
+                user_id = $('.detail-container').attr('user_id');
+                data = { 'sub_or_not': 'menu', 'title': title, 'user_id': user_id };
+                SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategoryMenuFilter');
+            }
+
         } else { $('.doc-header .doc-header-title').text($(this).find('.title').text().toString()); }
     });
 
@@ -569,21 +597,26 @@ function Member(winRef, data, from, type, url) {
         cat_type = $(this).attr('item_type');
         $('.doc-header .doc-header-title').text($(this).attr('parent') + '>' + $(this).find('span').attr('value'));
         if (cat_type == 'submenu') {
+            if (!$('#idDocRecords').length) {
+                SendData("POST", '/ajax/patientdoc/memberfemale/', data, Bind, ErrorManagement, 'MemberCategoryMenuHistoryPageFilter');
+            }
+
             title = $(this).find('span').attr('value');
-            data = { 'sub_or_not': 'submenu', 'title': title }
+            user_id = $('.detail-container').attr('user_id');
+            data = { 'sub_or_not': 'submenu', 'title': title, 'user_id': user_id };
             SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategorySubmenuFilter');
         } else {}
     });
     $('body').on('click', ".doc-photo-header .edit-doc", function() {
         console.log('in ideditDocModal: ');
         console.log(member_panel_documents_array);
-        $('#mydiv-upload-files-container .file-upload-row').remove();
+        $('#mydiv-edit-upload-files-container .file-upload-row').remove();
         document_id = $('#idDocRecords .active').attr("document_id");
         console.log(document_id);
         result = '';
         result = member_panel_documents_array.find(doc => (doc.id == document_id));
         console.log(result);
-        var edit_document_object = $("#idNewDoc .doc-input-container .custom-input");
+        var edit_document_object = $("#EditDoc .custom-input");
         //$('#remove_form').attr('user_id', user_id);
         //console.log(edit_user_object);
         edit_document_object.find("input[name='date']").val(result.date);
@@ -637,6 +670,7 @@ function Member(winRef, data, from, type, url) {
             console.log($(this).val());
             fd.append($(this).attr('name'), $(this).val());
         });
+        fd.append('user_id', $('.detail-container').attr('user_id'));
         var photo = document.getElementById('files');
         fd.append('files', photo.files);
         $.each(photo.files, function(i, item) {
@@ -653,6 +687,152 @@ function Member(winRef, data, from, type, url) {
         fileSendData("POST", $(this).attr('action'), fd, Bind, ErrorManagement, 'MemberAddNewDocumentsModalForm');
         return false;
     });
+
+    $('#EditDoc').submit(function(event) {
+        // do stuff
+        event.preventDefault();
+        console.log('EditDocumentSubmmit: ');
+        var fd = new FormData();
+        var edit_form = $(this).find('.custom-input :input');
+        console.log($(edit_form));
+        $(edit_form).each(function(index) {
+            //console.log('here');
+            console.log($(this).attr('name'));
+            console.log($(this).val());
+            fd.append($(this).attr('name'), $(this).val());
+        });
+        fd.append('user_id', $('.detail-container').attr('user_id'));
+        var photo = document.getElementById('files');
+        fd.append('files', photo.files);
+        $.each(photo.files, function(i, item) {
+            console.log(item);
+            fd.append("fileToUpload[]", item);
+            fd.append('photo_' + i, photo.files[i]);
+            fd.append('photo_' + i + '_name', photo.files[i].name);
+        });
+        console.log(fd.entries());
+        console.log(fd.get('title'));
+        for (var p of fd) {
+            console.log(p);
+        }
+        fileSendData("POST", $(this).attr('action'), fd, Bind, ErrorManagement, 'MemberAddNewDocumentsModalForm');
+        return false;
+    });
+
+    $('body').on('click', "#editUserInfoModal", function() {
+        console.log('in editUserInfoModal onclick: ');
+        user = $('.detail-container .detail-bold').text();
+        res = user.split(' ');
+        i = 0;
+        first_name = '';
+        last_name = '';
+        $.each(res, function(i, item) {
+            console.log(item);
+            if (res != "" && i == 0) {
+                first_name = item;
+                i += 1;
+            } else if (res != "" && i == 1) {
+                last_name = item;
+            } else {}
+        });
+        edit_form = $('#edit_form');
+        $(edit_form).find("input[name='first_name']").val(first_name);
+        $(edit_form).find("input[name='last_name']").val(last_name);
+        $(edit_form).attr('user_id', $('.detail-container').attr('user_id'));
+        //console.log(res);
+        //$('.detail-container').attr('user_id', $(this).attr('user_id'));
+        // // result = '';
+        // // result = member_panel_documents_array.find(doc => (doc.id == document_id));
+        // // console.log(result);
+        // $(".ok-btn-container ").click(function() {
+        //     //SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategorySubmenuFilter');
+        // });
+    });
+
+    $('#edit_form').submit(function(event) {
+        // do stuff
+        event.preventDefault();
+        var fd = new FormData();
+        var edit_form = $('#edit_form .custom-input :input');
+        console.log($(edit_form));
+        $(edit_form).each(function(index) {
+            //console.log('here');
+            console.log($(this).attr('name'));
+            console.log($(this).val());
+            fd.append($(this).attr('name'), $(this).val());
+        });
+        fd.append('user_id', $(this).attr('user_id'));
+        console.log('editUserSubmmit: ');
+        console.log(fd.entries());
+        console.log(fd.get('first_name'));
+        for (var p of fd) {
+            console.log(p);
+        }
+        fileSendData("POST", $(this).attr('action'), fd, Bind, ErrorManagement, 'MemberEditUserInfoModalForm');
+        //$('#news-photo-editor').css({ 'background-image': 'url()' });
+        return false;
+    });
+
+    $('#changeUserPhotoModal').submit(function(event) {
+        // do stuff
+        event.preventDefault();
+        var fd = new FormData();
+        //var edit_form = $('#changeUserPhotoModal .custom-input :input');
+        //console.log($(edit_form));
+        fd.append('user_id', $('.detail-container').attr('user_id'));
+        var photo = document.getElementById('personal_photo_change');
+        fd.append('photo_name', photo.files[0].name);
+        fd.append('photo', photo.files[0]);
+        console.log('changeUserPhotoModal ');
+        for (var p of fd) {
+            console.log(p);
+        }
+        fileSendData("POST", $(this).attr('action'), fd, Bind, ErrorManagement, 'ChangeUserPhotoModalForm');
+        //$('#news-photo-editor').css({ 'background-image': 'url()' });
+        return false;
+    });
+
+    $('body').on('click', "#closeChangeUserPhotoModal", function() {
+        console.log('in close modal edit onclick: ');
+        var edit_form = $('#closeChangeUserPhotoModal .custom-input :input');
+        $(edit_form).each(function(index) {
+            //console.log('here');
+            $(this).val('');
+            console.log($(this));
+        });
+    });
+
+    $('body').on('click', "#editFormCloseModal", function() {
+        console.log('in close modal edit onclick: ');
+        var edit_form = $('#edit_form .custom-input :input');
+        $(edit_form).each(function(index) {
+            //console.log('here');
+            $(this).val('');
+            console.log($(this));
+        });
+        // // result = '';
+        // // result = member_panel_documents_array.find(doc => (doc.id == document_id));
+        // // console.log(result);
+        // $(".ok-btn-container ").click(function() {
+        //     //SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategorySubmenuFilter');
+        // });
+    });
+
+    $('body').on('click', ".result-item", function() {
+        console.log('in search result onclick: ');
+        console.log($(this).attr('user_id'));
+        user = $(this).find('.detail .name').text();
+        console.log(user)
+        $('.detail-container .detail-bold').text(user);
+        $('.detail-container').attr('user_id', $(this).attr('user_id'));
+        // // result = '';
+        // // result = member_panel_documents_array.find(doc => (doc.id == document_id));
+        // // console.log(result);
+        // $(".ok-btn-container ").click(function() {
+        //     //SendData("POST", url_document_filter, data, Bind, ErrorManagement, 'MemberCategorySubmenuFilter');
+        // });
+    });
+
     $('body').on('click', ".doc-photo-header .remove-doc", function() {
         console.log('in idremoveDocModal: ');
         console.log(member_panel_documents_array);
@@ -711,6 +891,23 @@ function Member(winRef, data, from, type, url) {
             // $(obj).find('.file-upload-size').text(item.name)
         });
     });
+    $("#editFiles").change(function() {
+        console.log('input');
+        var names = [];
+        for (var i = 0; i < $(this).get(0).files.length; ++i) {
+            data = { 'name': $(this).get(0).files[i].name, 'size': $(this).get(0).files[i].size };
+            names.push(data);
+        }
+        console.dir(names);
+        // var obj = $('.file-upload-row');
+        $.each(names, function(i, item) {
+            console.log(item);
+            tmp = member_panel_editoradd_document_modal_photos_info.replace('FileName', item.name).replace('FileSize', item.size);
+            $('#mydiv-edit-upload-files-container').append(tmp);
+            // $(obj).find('.file-upload-name span').text(item.name)
+            // $(obj).find('.file-upload-size').text(item.name)
+        });
+    });
 
 }
 
@@ -731,6 +928,29 @@ function Chat(winRef, data, from, type, url) {
     });
     socket.on('disconnect', function() {
 
+    });
+    console.log(user_id);
+    console.log(users);
+    $('body').on('keyup', "#idSearchBoxMember", function() {
+        //search_text = $(this).val();
+        MemberSearch("#idResultContainer", "GET", '/member/search/', $(this).val(), 'Member');
+    });
+
+    $('body').on('click', ".user-chat", function() {
+        username = $(this).find('.chat-content .name-chat-content .user-name-chat span').text();
+        $('.talk-header .user-talk-header .user-name-talk span').text(username);
+    });
+
+    $('#chat_input_send_form').submit(function(event) {
+        // do stuff
+        event.preventDefault();
+        chat_text = $(this).find('input').val();
+        $('#idChatInput').val('');
+        console.log(chat_text);
+        console.log('chat_input_send_form: ');
+        //socket.emit('chat', { hello: 'world' });
+        socket.send(JSON.stringify({ 'groupId': '5b90f6ba060cce44848daeff', 'message': chat_text }))
+        return false;
     });
 }
 // function calendar_find(specific_array, property_to_check, value_to_check) {
