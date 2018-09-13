@@ -190,13 +190,13 @@
                 {% include 'chat/chat-talk-main-panel-emoji-container.html' %}
                 <div class="type-sep"></div>
                 <div class="type-input-base">
-                    <form>
+                    <form id="chat_input_send_form">
                         <input id="idChatInput" class="type-input" required="">
                         <label class="label-type-input"> Write a message...</label>
                     </form>
                 </div>
                 <div class="type-send-container">
-                    <div class="send-btn btn-taint icon-send"></div>
+                    <button form="chat_input_send_form" type="submit" class="send-btn btn-taint icon-send"></button>
                 </div>
             </div>
         </div>

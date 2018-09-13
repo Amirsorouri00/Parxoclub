@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 import json
 from .models import RoomUsers, Room
 # Rest_Framework
@@ -47,7 +48,9 @@ def UserChats(request, userId):
 @permission_classes((IsAuthenticated,))
 @csrf_exempt 
 def Chat(request):
-    return render(request, 'chat/chats.html')
+    user = User.objects.get(username = request.user)
+    users = User.objects.all()
+    return render(request, 'chat/chats.html', {'user_id': user.id, 'users':users})
 
 
 '''
