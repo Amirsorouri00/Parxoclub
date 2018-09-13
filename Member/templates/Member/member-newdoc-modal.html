@@ -16,7 +16,7 @@
             <div class="overlay-scroll">
                 <div class="doc-input-container">
                     <div class="doc-no-field-error-fake"></div>
-                    <form id="AddNewDoc" action='{% url "add_new_document_member_panel" %}'>
+                    <form id="AddNewDoc" action='{% url "add_new_document_member_panel" %}' method="POST" enctype="multipart/form-data">
                         <div class="custom-input">
                             <div class="input-label">
                                 <label>Date</label>

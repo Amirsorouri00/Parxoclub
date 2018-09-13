@@ -1,32 +1,37 @@
-import os, datetime
+import os
 from array import array
-# Django
+
 from django.conf import settings
-from django.contrib.auth.models import User
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, JsonResponse, Http404
-from django.db.models import Count
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db.models import Count
+from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
-# Models
-from .models import DocCategories, Documents, DocCatSubmenu
-from Member.models import Members, Memberships
+from rest_framework.authentication import BasicAuthentication, \
+    SessionAuthentication, TokenAuthentication
 from rest_framework.authtoken.models import Token
-# Rest_Framework
-from rest_framework.renderers import JSONRenderer
+from rest_framework.decorators import api_view, authentication_classes, \
+    permission_classes
 from rest_framework.parsers import JSONParser
-from .models import DocCatSubmenu, Documents
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-# Serializers
-from .serializer import DocCategoriesSerializer, DocCategoriesSubMenuSerializer, DocumentsSerializer, MemberPanelDocumentsListSerializer
-from Member.serializer import MemberSerializer, UserSerializer, TokenSerializer
-from PatientDoc.serializer import SpecialistsHistoryObject, SpecialistsHistorySerializer
-# Forms
+
+import datetime
 from .forms import DocumentForm
+from .models import DocCatSubmenu, DocCategories, Documents
+from .serializer import DocCategoriesSerializer, \
+    DocCategoriesSubMenuSerializer, DocumentsSerializer, \
+    MemberPanelDocumentsListSerializer
+from Calendar.views import render_to_string
 from Common.constants import LORE_IPSUM
+from Member.models import Members, Memberships
+from Member.serializer import MemberSerializer, TokenSerializer, \
+    UserSerializer
+from PatientDoc.serializer import SpecialistsHistoryObject, \
+    SpecialistsHistorySerializer
+from django.http import Http404, HttpResponse, JsonResponse
+
 
 # Create your views here.
 
@@ -80,7 +85,7 @@ def DocumentFilter(request):
         if subfilter_or_filter == 'submenu':
             title = request.POST.get('title', None)
             submenu_id = DocCatSubmenu.objects.get(name = title)
-            docs = Documents.objects.filter(doccatsubmenu = submenu_id)
+            docs = Documents.objects.filter(doccatsubmenu = submenu_id, user_id = request.POST.get('user_id', None))
             if docs:    
                 docSerializer = MemberPanelDocumentsListSerializer(docs, many=True)
                 json = {'DocCats': docSerializer.data}
@@ -89,7 +94,7 @@ def DocumentFilter(request):
             else: return HttpResponse(None)
         elif subfilter_or_filter == 'menu':
             title = request.POST.get('title', None)
-            docs = Documents.objects.filter(title = title)
+            docs = Documents.objects.filter(title = title, user_id = request.POST.get('user_id', None))
             if docs:
                 docSerializer = MemberPanelDocumentsListSerializer(docs, many=True)
                 json = {'DocCats': docSerializer.data}
@@ -116,7 +121,7 @@ def AddNewDocumentMemberPanel(request):
             photo_name = request.POST.get('photo_0_name', False)
             physician = User.objects.get(last_name = request.POST.get('supervisor', None))
             document = Documents.objects.create(title = request.POST.get('title', None),
-                        date = request.POST.get('date', None), comment = LORE_IPSUM, user_id = 2, 
+                        date = request.POST.get('date', None), comment = LORE_IPSUM, user_id = request.POST.get('user_id', None),
                         doccatsubmenu_id = 2, category_id = 7, physician_id = physician.id, attachment = 1)
             document.save()
             handle_uploaded_doc_files(document.pk+1000, files, photo_name)
@@ -146,9 +151,9 @@ def EditDocumentMemberPanel(request):
             #handling whole images have been sent from client still remained(it is just a for...)
             files = request.FILES.getlist('photo_0', False)
             photo_name = request.POST.get('photo_0_name', False)
-            physician = User.objects.get(last_name = request.POST.get('supervisor', None))
-            document = Documents.objects.get(title = request.POST.get('title', None))
-            if physician & document & files:
+            physician = User.objects.filter(last_name = request.POST.get('supervisor', None))
+            document = Documents.objects.filter(title = request.POST.get('title', None), user_id = request.POST.get('user_id', None))
+            if physician and document and files:
                 document.date = request.POST.get('date', None)
                 document.physician_id = physician.id
                 # document = Documents.objects.create(title = request.POST.get('title', None),
@@ -186,7 +191,7 @@ def RemoveDocumentMemberPanel(request):
     return HttpResponse('RemoveDocumentMemberPanel')
     if request.is_ajax():
         if request.method == 'POST':
-            document = Documents.objects.get(title = request.POST.get('title', None))
+            document = Documents.objects.filter(title = request.POST.get('title', None), user_id = request.POST.get('title', None))
             if document:
                 document.delete()
                 return JsonResponse({
@@ -263,11 +268,30 @@ def Dashboard(request):
 
 @login_required(login_url="/authenticate/login/")
 def Member(request):
-    return render(request, 'member/member.html')
+    if request.method == 'POST':
+        if request.is_ajax():
+            html = render_to_string('member/member-detail-history.html')
+            #content = JSONRenderer().render(html)
+            data = {'form': html}
+            return JsonResponse(data, safe=False)
+        else:
+            raise Http404
+    else:
+        return render(request, 'member/member.html')
 
 @login_required(login_url="/authenticate/login/")
 def MemberFemale(request):
-    return render(request, 'member/member.html', {'panel': 'panel'})
+    if request.method == 'POST':
+        if request.is_ajax():
+            html = render_to_string('member/member-memberpanel-document-detail.html')
+            #content = JSONRenderer().render(html)
+            data = {'form': html}
+            return JsonResponse(data, safe=False)
+        else:
+            raise Http404    
+    else:
+        return render(request, 'member/member.html', {'panel': 'panel'})
+        
 
 def DocCatMem(request, _id, _cat):
     member_info = get_object_or_404(Members, user_id=_id)

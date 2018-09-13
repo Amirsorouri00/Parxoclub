@@ -1,5 +1,5 @@
 import errno
-
+import os, datetime
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME, authenticate, login, \
     logout
@@ -15,7 +15,6 @@ from rest_framework.authentication import BasicAuthentication, \
     SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.renderers import JSONRenderer
-
 import datetime
 from .forms import MemberForm, ProfileForm, UserForm
 from .models import Expertises, Members, Physicians, Prefixes, Profile
@@ -30,6 +29,24 @@ from collections import namedtuple
 from django.http import Http404, JsonResponse
 from django.http.response import HttpResponse
 from venv import create
+
+# def list_atch_files(record_id):
+#     atch_files = None
+#     folder_path = settings.PIC_UPLOAD_URL + '{}/'.format(record_id)
+#     if os.path.isdir(folder_path):
+#         atch_files = os.listdir(folder_path)
+#     return atch_files
+
+def handle_uploaded_user_files(record_id, files, extension):
+    upload_path = settings.PIC_UPLOAD_URL + '{}/'.format(record_id)
+    if not os.path.isdir(upload_path):
+        os.makedirs(upload_path)
+    for imgfile in files:
+        #(tempname, extension) = os.path.splitext(imgfile.name)
+        filename = datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+        with open(upload_path + filename + extension, 'wb+') as destination:
+            for chunk in imgfile.chunks():
+                destination.write(chunk)
 
 def namedtuplefetchall(cursor):
     "Return all rows from a cursor as a namedtuple"
@@ -228,13 +245,13 @@ def Maintenance(request):
         profile.save()
         prefix, expertise = [None, None]
         if request.POST.get('expertise', None):
-            expertise = Expertises.objects.get(name=request.POST.get('expertise', None))
+            expertise = Expertises.objects.filter(name=request.POST.get('expertise', None))
         else:
-            expertise = Expertises.objects.get(pk = 1)
+            expertise = Expertises.objects.filter(pk = 1)
         if request.POST.get('prefix', None):
-            prefix = Prefixes.objects.get(name=request.POST.get('prefix', None))
+            prefix = Prefixes.objects.filter(name=request.POST.get('prefix', None))
         else:
-            prefix = Prefixes.objects.get(pk = 1)
+            prefix = Prefixes.objects.filter(pk = 1)
                         
         # prefix = Prefixes.objects.get(name=request.POST.get('prefix', None))
         physician = Physicians.objects.create(user_id = user.pk, prefix_id = prefix.pk, expertise_id = expertise.pk)
@@ -242,7 +259,7 @@ def Maintenance(request):
         member = Members.objects.create(code = request.POST.get('code', None), user_id = user.id, membership_id = 1, physician_id = physician.pk, Profile_id = profile.pk)
         member.save()
         photo_name = request.POST.get('photo_name', False)
-        handle_uploaded_doc_files(user.pk, files, photo_name)
+        handle_uploaded_user_files(user.pk, files, photo_name)
         return JsonResponse({
             'modal': True, 
             'notification': { 
@@ -256,12 +273,12 @@ def Maintenance(request):
 def EditUser(request):
     if request.is_ajax():
         if request.method == 'POST':  
-            user = User.objects.get(pk = request.POST.get('user_id', None))
-            profile = Profile.objects.get(pk = request.POST.get('user_id', None))
-            expertise = Expertises.objects.get(name=request.POST.get('expertise', None))
-            prefix = Prefixes.objects.get(name=request.POST.get('prefix', None))
-            member = Members.objects.get(pk = request.POST.get('user_id', None))
-            if user & profile & physician & member:
+            user = User.objects.filter(pk = request.POST.get('user_id', None))
+            profile = Profile.objects.filter(pk = request.POST.get('user_id', None))
+            expertise = Expertises.objects.filter(name=request.POST.get('expertise', None))
+            prefix = Prefixes.objects.filter(name=request.POST.get('prefix', None))
+            member = Members.objects.filter(pk = request.POST.get('user_id', None))
+            if user and profile and physician and member:
                 user.first_name = request.POST.get('first_name', None)
                 user.last_name = request.POST.get('last_name', None)
                 user.email = request.POST.get('email', None)
@@ -272,17 +289,18 @@ def EditUser(request):
                 profile.birthdate = request.POST.get('birthdate', None)
                 profile.save()
                 
-                physician = Physicians.objects.get(user_id = user.pk)
+                physician = Physicians.objects.filter(user_id = user.pk)
                 physician.prefix = prefix
                 physician.expertise = expertise
                 physician.save()
                 
-                member.code = request.POST.get('code', None)
+                member.code = request.POST.filter('code', None)
                 member.physician = physician
                 member.save()
                 files = request.FILES.getlist('photo')
                 photo_name = request.POST.get('photo_name', False)
-                handle_uploaded_doc_files(user.pk, files, photo_name)
+                if files and photo_name:
+                    handle_uploaded_user_files(user.pk, files, photo_name)
                 return JsonResponse({
                     'modal': True, 
                     'notification': { 
@@ -304,13 +322,13 @@ def EditUser(request):
         raise Http404
 
 def ChangeUserPhoto(request):
-    return HttpResponse('ChangeUserPhoto')
+    #return HttpResponse('ChangeUserPhoto')
     if request.is_ajax():
         if request.method == 'POST':
             files = request.FILES.getlist('photo')
             photo_name = request.POST.get('photo_name', False)
             user = User.objects.get(id = request.POST.get('user_id', None))
-            handle_uploaded_doc_files(user.pk, files, photo_name)
+            handle_uploaded_user_files(user.pk, files, photo_name)
             return HttpResponse('User Photo Changed')
         else:
             raise Http404
@@ -320,10 +338,10 @@ def ChangeUserPhoto(request):
 def RemoveUser(request):
     if request.is_ajax():
         if request.method == 'POST':  
-            user = User.objects.get(pk = request.POST.get('user_id', None))
-            profile = Profile.objects.get(pk = request.POST.get('user_id', None))
-            member = Members.objects.get(pk = request.POST.get('user_id', None))
-            physician = physician.objects.get(pk = request.POST.get('user_id', None))
+            user = User.objects.filter(pk = request.POST.get('user_id', None))
+            profile = Profile.objects.filter(pk = request.POST.get('user_id', None))
+            member = Members.objects.filter(pk = request.POST.get('user_id', None))
+            physician = physician.objects.filter(pk = request.POST.get('user_id', None))
             success = {
                 'modal': True, 
                 'notification': { 

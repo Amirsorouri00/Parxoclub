@@ -16,7 +16,7 @@
             <div class="overlay-scroll">
                 <div class="doc-input-container">
                     <div class="doc-no-field-error-fake"></div>
-                    <form id="EditDoc" action='{% url "edit_document_member_panel" %}'>
+                    <form id="EditDoc" action='{% url "edit_document_member_panel" %}' method="POST" enctype="multipart/form-data">
                         <div class="custom-input">
                             <div class="input-label">
                                 <label>Date</label>
@@ -66,14 +66,14 @@
         <div class="doc-upload-base">
             <div class="doc-upload-btn-base">
                 <div class="doc-upload-btn">
-                    <input id="files" class="doc-upload-input" type="file" accept=".jpg,.png,.bmp" multiple tabindex="1" />
+                    <input id="editFiles" class="doc-upload-input" type="file" accept=".jpg,.png,.bmp" multiple tabindex="1" />
                     <div class="doc-upload-btn-frame"></div>
                     <div class="doc-upload-btn-blinker"></div>
                     <div class="doc-upload-btn-blinker2"></div>
                 </div>
                 <div class="upload-files-container">
                     <div class="overlay-scroll">
-                        <div id="mydiv-upload-files-container">
+                        <div id="mydiv-edit-upload-files-container">
                             <!-- <div class="file-upload-row server-storage">
                                 <div class="file-upload-stored icon-server"></div>
                                 <div class="thumbnail-container"><img src="{% static 'img/nik.png' %}"></div>
