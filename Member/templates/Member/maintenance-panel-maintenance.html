@@ -1,9 +1,10 @@
+{% load i18n %}
 <!-- Maintenance panel -->
 <div class="content-wrapper">
     <div class="maintenance-panel">
         <div class="header-maintenance">
             <div class="icon-header-maintenance icon-settingfill"></div>
-            <span class="title-header-maintenance">Maintenance</span>
+            <span class="title-header-maintenance">{% trans "Maintenance" %}</span>
             <div class="header-correct-maintenance"></div>
         </div>
         <div class="menu-base-maintenance overlay-scroll">
@@ -11,7 +12,7 @@
                 <div class="main">
                     <div class="icon"></div>
                     <div class="title">
-                        Users
+                        {% trans "Users" %}
                     </div>
                     <div class="expander">
                     </div>
@@ -22,7 +23,7 @@
                 <div class="main">
                     <div class="icon"></div>
                     <div class="title">
-                        Prefixes
+                        {% trans "Prefixes" %}
                     </div>
                     <div class="expander">
                         <span class="icon-right"></span>
@@ -30,13 +31,13 @@
                 </div>
                 <div class="submenu">
                     <div class="item">
-                        <span>● Titles</span>
+                        <span>● {% trans "Titles" %}</span>
                     </div>
                     <div class="item">
-                        <span>● Branches</span>
+                        <span>● {% trans "Branches" %}</span>
                     </div>
                     <div class="item">
-                        <span>● Laboratories</span>
+                        <span>● {% trans "Laboratories" %}</span>
                     </div>
                 </div>
             </div>
@@ -45,7 +46,7 @@
                 <div class="main">
                     <div class="icon"></div>
                     <div class="title">
-                        Categories
+                        {% trans "Categories" %}
                     </div>
                     <div class="expander">
                         <span class="icon-right"></span>
@@ -53,7 +54,7 @@
                 </div>
                 <div class="submenu">
                     <div class="item">
-                        <span>● Member Documents</span>
+                        <span>● {% trans "Member Documents" %}</span>
                     </div>
                 </div>
             </div>

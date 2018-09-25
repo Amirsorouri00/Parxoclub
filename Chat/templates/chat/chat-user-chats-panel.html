@@ -1,9 +1,10 @@
+{% load i18n %}
 <!-- Chat Panel -->
 <div class="content-wrapper">
     <div class="chat-panel">
         <div class="header-chat">
             <div class="icon-header-chat icon-chatfill"></div>
-            <span class="title-header-chat">Chats</span>
+            <span class="title-header-chat">{% trans "Chats" %}</span>
             <div class="badge-container-header">
                 <div class="badge  bg-yellow">
                     <span> 12 </span>
@@ -13,7 +14,7 @@
         <div class="search-chat">
             <form class="search-container">
                 <input id="search-box" class="search-box" type="text" name="search" required="">
-                <label class="search-label">search</label>
+                <label class="search-label">{% trans "search" %}</label>
             </form>
         </div>
         <div class="users-base-chat overlay-scroll">
@@ -62,7 +63,7 @@
                 </div>
             </div>
             <div class="chat-grouping">
-                <span>Contacts</span>
+                <span>{% trans "Contacts" %}</span>
             </div>
             <div class="user-chat ">
                 <div class="photo-container-user-chat">

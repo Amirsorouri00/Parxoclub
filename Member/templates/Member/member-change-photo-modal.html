@@ -1,9 +1,10 @@
+{% load i18n %}
 <!-- Change Photo -->
 <div id="idChangePhoto" class="custom-modal">
     <div class="modal-change-photo">
         <div class="header-change-photo">
             <div class="icon-header-change-photo"></div>
-            <div class="text-header-change-photo">change photo of <span>Tahmine Molaei</span></div>
+            <div class="text-header-change-photo">{% trans "change photo of" %} <span>Tahmine Molaei</span></div>
         </div>
         <form id="changeUserPhotoModal" action="{% url 'change_user_photo'%}" method="Post" enctype="multipart/form-data" class="photo-editor-container">
             <div class="photo-editor" style="background-image: url();"></div>

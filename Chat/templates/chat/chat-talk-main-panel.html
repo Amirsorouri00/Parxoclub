@@ -1,3 +1,4 @@
+{% load i18n %}
 <!-- Talk -->
 <div class="talk-main">
     <div class="talk-panel">
@@ -20,7 +21,7 @@
                     <div class="received-bubble">
                         <div class="bubble-container">
                             <div class="bubble-text">
-                                <span> Ok, i’ll send the prescriptions tomorrow.</span>
+                                <span>{% trans " Ok, i’ll send the prescriptions tomorrow." %}</span>
                             </div>
                             <div class="bubble-detail">
                                 <span class="status"></span>
@@ -39,7 +40,7 @@
                     <div class="received-bubble">
                         <div class="bubble-container">
                             <div class="bubble-text">
-                                <span>Thanks for headup ;)</span>
+                                <span>{% trans "Thanks for headup ;)" %}</span>
                             </div>
                             <div class="bubble-detail">
                                 <span class="status"></span>
@@ -58,7 +59,7 @@
                     <div class="sent-bubble">
                         <div class="bubble-container">
                             <div class="bubble-text">
-                                <span>You’re welcome. </span>
+                                <span>{% trans "You’re welcome." %} </span>
                             </div>
                             <div class="bubble-detail">
                                 <span class="status icon-delivered"></span>
@@ -77,7 +78,7 @@
                     <div class="sent-bubble">
                         <div class="bubble-container">
                             <div class="bubble-text">
-                                <span>I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection.It seems you have some inflammation in your knees. However, there's nothing broken. Just take some ibuprofen or aspirin and the swelling should go down.OK, I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection.</span>
+                                <span>{% trans "I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection.It seems you have some inflammation in your knees. However, there's nothing broken. Just take some ibuprofen or aspirin and the swelling should go down.OK, I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection." %}</span>
                             </div>
                             <div class="bubble-detail">
                                 <span class="status icon-delivered"></span>
@@ -96,7 +97,7 @@
                     <div class="received-bubble">
                         <div class="bubble-container">
                             <div class="bubble-text">
-                                <span>Thanks for headup ;)</span>
+                                <span>{% trans "Thanks for headup ;)" %}</span>
                             </div>
                             <div class="bubble-detail">
                                 <span class="status icon-delivered"></span>
@@ -115,7 +116,7 @@
                     <div class="received-bubble">
                         <div class="bubble-container">
                             <div class="bubble-text">
-                                <span>I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection.It seems you have some inflammation in your knees. However, there's nothing broken. Just take some ibuprofen or aspirin and the swelling should go down.OK, I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection.</span>
+                                <span>{% trans "I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection.It seems you have some inflammation in your knees. However, there's nothing broken. Just take some ibuprofen or aspirin and the swelling should go down.OK, I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection." %}</span>
                             </div>
                             <div class="bubble-detail">
                                 <span class="status"></span>
@@ -137,7 +138,7 @@
                                 <img src="img/nik2.png">
                             </div>
                             <div class="bubble-text-attach">
-                                <span>Thanks for headup ;) </span>
+                                <span>{% trans "Thanks for headup ;)" %} </span>
                             </div>
                             <div class="bubble-detail-attach">
                                 <span class="status icon-delivered"></span>
@@ -159,7 +160,7 @@
                                 <img src="img/nik.png">
                             </div>
                             <div class="bubble-text-attach">
-                                <span>Thanks for headup ;) </span>
+                                <span>{% trans "Thanks for headup ;)" %} </span>
                             </div>
                             <div class="bubble-detail-attach">
                                 <span class="status icon-delivered"></span>
@@ -192,7 +193,7 @@
                 <div class="type-input-base">
                     <form id="chat_input_send_form">
                         <input id="idChatInput" class="type-input" required="">
-                        <label class="label-type-input"> Write a message...</label>
+                        <label class="label-type-input">{% trans "Write a message..." %} </label>
                     </form>
                 </div>
                 <div class="type-send-container">

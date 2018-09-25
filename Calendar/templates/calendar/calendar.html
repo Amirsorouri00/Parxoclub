@@ -20,7 +20,7 @@
 $(document).ready(function() {
     Calendar('', '', '', '', '');
     SendData("GET", '/calendar/eventtypes/', '', Bind, ErrorManagement, 'CalendarGetData');
-    $('form').submit(function(event) {
+    $('#form1').submit(function(event) {
         // do stuff
         event.preventDefault();
         //var context = '{{context}}';
@@ -38,6 +38,12 @@ $(document).ready(function() {
         }
         SendData("POST", 'addevents/', data, Bind, ErrorManagement, 'CalendarForm');
         return false;
+        if ($(this).attr('id') == '#index-hidden-form') {
+
+        } else {
+
+        }
+
     });
 });
 </script>

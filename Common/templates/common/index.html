@@ -14,7 +14,7 @@
  
  -->
 <html lang="en , fa">
-{% load static %}
+{% load static %} {% load i18n %}
 
 <head>
     <title>P R Λ X O{% block title %}{% endblock %}</title>
@@ -52,10 +52,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery-ui.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.overlayScrollbars.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/style-rtl.css' %}"> -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/praxofont.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/member-doc.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static '/css/praxofont.css' %}"> {% block IndexCss %} {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/member-doc.css' %}"> {% if rtl %}
+    <!-- RTL Styles -->
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style-rtl.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/member-doc-rtl.css' %}">{% endif %}
     <!-- Scripts -->
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/button.js' %}"></script>
@@ -73,6 +75,11 @@
             {% include 'common/index-main-mobile-side-nav.html' %} {% block after_side_nav_content %} {% endblock %}
         </div>
     </div> {% block content %} {% endblock %} {% include 'common/index-mobile-menu-back.html' %} {% block menu-back-after-content %} {% endblock %}
+    <form id="index-hidden-form" action="{% url 'calendar:calendar_get' %}" method="POST" class="langform" style="display:none;">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.get_full_path }}" />
+        <input name="language" id="language" type="hidden" value="" />
+    </form>
     <!-- Scripts -->
     <script src="{% static 'js/jquery-ui.min.js' %}"></script>
     <script src="{% static 'js/slick.min.js' %}"></script>
@@ -88,6 +95,21 @@
     <script src="{% static 'js/notification.js' %}"></script>
     <script src="{% static 'js/demo.js' %}"></script>
     {% block DashboardJavascript2 %} {% endblock %}
+    <script type="text/javascript">
+    $('.lang-panel .lang-panel-container a').click(function(e) {
+        e.preventDefault();
+        var lang = $(this).attr('rel');
+        $('.langform #language').val(lang);
+        $('#index-hidden-form').attr('action');
+        $('#index-hidden-form').submit();
+    });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        console.log('location');
+        $('#index-hidden-form').attr('action', window.location.href);
+    });
+    </script>
     <!--<script src="{% static 'js/quills.js' %}"></script>
     <script src="{% static 'js/quills-script-history.js' %}"></script>-->
 </body>

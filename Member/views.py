@@ -28,6 +28,8 @@ from PatientDoc.views import handle_uploaded_doc_files
 from collections import namedtuple
 from django.http import Http404, JsonResponse
 from django.http.response import HttpResponse
+from django.utils import translation
+from django.utils.translation import get_language_bidi
 from venv import create
 
 # def list_atch_files(record_id):
@@ -94,7 +96,8 @@ def Login(request):
             }
             return JsonResponse(data)
     else:
-        context = { REDIRECT_FIELD_NAME: request.GET.get(REDIRECT_FIELD_NAME, '/')}
+        rtl = get_language_bidi()
+        context = { REDIRECT_FIELD_NAME: request.GET.get(REDIRECT_FIELD_NAME, '/'), 'rtl': rtl}
         return render(request, 'member/login.html', context)
 
 def LoginPageUsernameValidation(request):
@@ -109,8 +112,10 @@ def LoginPageUsernameValidation(request):
 def Logout(request):
     if request.user.is_authenticated == False:
         return HttpResponse('already loggedout')
-    logout(request)
-    #return HttpResponse('logged out')
+    else:
+        logout(request)
+        context = { REDIRECT_FIELD_NAME: request.GET.get(REDIRECT_FIELD_NAME, '/')}
+        return render(request, 'member/login.html', context)
 
 def MemberSearch(request):
     if request.is_ajax():
@@ -231,44 +236,52 @@ def serializer_test(request):
 def Maintenance(request):
     #user = get_object_or_404(User, id=user_id)
     if request.method == 'POST':
-        files = request.FILES.getlist('photo')
-        user = User.objects.create(password = make_password(123456, salt=None, hasher='default'),
-                is_superuser = 1, username = request.POST.get('first_name', None),
-                first_name = request.POST.get('first_name', None),
-                last_name = request.POST.get('last_name', None),
-                email = request.POST.get('email', None), is_staff = 1, is_active = 1,
-                date_joined = datetime.datetime.now())
-        user.save()
-        profile = Profile.objects.create(user_id = user.id, birthdate = request.POST.get('birthdate', None),
-                gender = 1, mobile = request.POST.get('mobile', None),
-                address = request.POST.get('address', None))
-        profile.save()
-        prefix, expertise = [None, None]
-        if request.POST.get('expertise', None):
-            expertise = Expertises.objects.filter(name=request.POST.get('expertise', None))
+        if request.is_ajax():
+            files = request.FILES.getlist('photo')
+            user = User.objects.create(password = make_password(123456, salt=None, hasher='default'),
+                    is_superuser = 1, username = request.POST.get('first_name', None),
+                    first_name = request.POST.get('first_name', None),
+                    last_name = request.POST.get('last_name', None),
+                    email = request.POST.get('email', None), is_staff = 1, is_active = 1,
+                    date_joined = datetime.datetime.now())
+            user.save()
+            profile = Profile.objects.create(user_id = user.id, birthdate = request.POST.get('birthdate', None),
+                    gender = 1, mobile = request.POST.get('mobile', None),
+                    address = request.POST.get('address', None))
+            profile.save()
+            prefix, expertise = [None, None]
+            if request.POST.get('expertise', None):
+                expertise = Expertises.objects.filter(name=request.POST.get('expertise', None))
+            else:
+                expertise = Expertises.objects.filter(pk = 1)
+            if request.POST.get('prefix', None):
+                prefix = Prefixes.objects.filter(name=request.POST.get('prefix', None))
+            else:
+                prefix = Prefixes.objects.filter(pk = 1)
+                            
+            # prefix = Prefixes.objects.get(name=request.POST.get('prefix', None))
+            physician = Physicians.objects.create(user_id = user.pk, prefix_id = prefix.pk, expertise_id = expertise.pk)
+            physician.save()
+            member = Members.objects.create(code = request.POST.get('code', None), user_id = user.id, membership_id = 1, physician_id = physician.pk, Profile_id = profile.pk)
+            member.save()
+            photo_name = request.POST.get('photo_name', False)
+            handle_uploaded_user_files(user.pk, files, photo_name)
+            return JsonResponse({
+                'modal': True, 
+                'notification': { 
+                    'type': 'success',
+                    'message': 'Updated successfully.'
+                }
+            })
         else:
-            expertise = Expertises.objects.filter(pk = 1)
-        if request.POST.get('prefix', None):
-            prefix = Prefixes.objects.filter(name=request.POST.get('prefix', None))
-        else:
-            prefix = Prefixes.objects.filter(pk = 1)
-                        
-        # prefix = Prefixes.objects.get(name=request.POST.get('prefix', None))
-        physician = Physicians.objects.create(user_id = user.pk, prefix_id = prefix.pk, expertise_id = expertise.pk)
-        physician.save()
-        member = Members.objects.create(code = request.POST.get('code', None), user_id = user.id, membership_id = 1, physician_id = physician.pk, Profile_id = profile.pk)
-        member.save()
-        photo_name = request.POST.get('photo_name', False)
-        handle_uploaded_user_files(user.pk, files, photo_name)
-        return JsonResponse({
-            'modal': True, 
-            'notification': { 
-                'type': 'success',
-                'message': 'Updated successfully.'
-            }
-        })
+            SPANISH_LANGUAGE_CODE = request.POST.get('language', None)
+            if SPANISH_LANGUAGE_CODE: 
+                translation.activate(SPANISH_LANGUAGE_CODE)
+                return render(request, 'member/maintenance.html', {'rtl':get_language_bidi()})
+            else:
+                raise Http404
     else:
-        return render(request, 'member/maintenance.html')
+        return render(request, 'member/maintenance.html', {'rtl': get_language_bidi()})
 
 def EditUser(request):
     if request.is_ajax():

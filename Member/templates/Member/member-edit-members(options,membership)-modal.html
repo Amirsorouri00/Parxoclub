@@ -1,3 +1,4 @@
+{% load i18n %}
 <!-- Member Options Modal -->
 <div id="idEditMember" class="custom-modal">
     <div class="modal-member-edit">
@@ -29,7 +30,7 @@
                 <form id="edit_form" user_id="" action="{% url 'maintenance_edit_user'%}" method="POST" enctype="multipart/form-data">
                     <div class="custom-input">
                         <div class="input-label">
-                            <label>First Name</label>
+                            <label>{% trans "First Name" %}</label>
                         </div>
                         <div class="input-box">
                             <input type="text" name="first_name" required="" tabindex="1">
@@ -37,7 +38,7 @@
                     </div>
                     <div class="custom-input">
                         <div class="input-label">
-                            <label>Last Name</label>
+                            <label>{% trans "Last Name" %}</label>
                         </div>
                         <div class="input-box">
                             <input type="text" name="last_name" required="" tabindex="1">
@@ -45,7 +46,7 @@
                     </div>
                     <div class="custom-input">
                         <div class="input-label">
-                            <label>Birth Date</label>
+                            <label>{% trans "Birth Date" %}</label>
                         </div>
                         <div class="input-box">
                             <input type="text" name="birthdate" required="" tabindex="1">
@@ -53,27 +54,27 @@
                     </div>
                     <div class="custom-toggle">
                         <div class="toggle-container">
-                            <div class="toggle-title">Gender</div>
+                            <div class="toggle-title">{% trans "Gender" %}</div>
                             <input id="idGender" name="gender" type="checkbox">
-                            <div class="toggle-option-first">Female</div>
+                            <div class="toggle-option-first">{% trans "Female" %}</div>
                             <label class="toggle-btn-base" tabindex="1" for="idGender">
                                 <div class="toggle-btn"></div>
                             </label>
-                            <div class="toggle-option-second">Male</div>
+                            <div class="toggle-option-second">{% trans "Male" %}</div>
                         </div>
                     </div>
                     <div class="custom-input">
                         <div class="input-label">
-                            <label>Email</label>
+                            <label>{% trans "Email" %}</label>
                         </div>
                         <div class="input-box">
                             <input type="text" name="email" type="email" required="" tabindex="1">
                         </div>
-                        <div class="input-validation">example@mail.com</div>
+                        <div class="input-validation">{% trans "example@mail.com" %}</div>
                     </div>
                     <div class="custom-input">
                         <div class="input-label">
-                            <label>Phone</label>
+                            <label>{% trans "Phone" %}</label>
                         </div>
                         <div class="input-box">
                             <input type="text" name="mobile" required="" tabindex="1">
@@ -81,7 +82,7 @@
                     </div>
                     <div class="custom-input">
                         <div class="input-label">
-                            <label>Address</label>
+                            <label>{% trans "Address" %}</label>
                         </div>
                         <div class="input-box">
                             <input type="text" name="address" required="" tabindex="1">
@@ -89,25 +90,25 @@
                     </div>
                     <div class="field-error clr-red">
                         <ul>
-                            <li>Address most be in Tehran</li>
-                            <li>Street name is too short</li>
+                            <li>{% trans "Address most be in Tehran" %}</li>
+                            <li>{% trans "Street name is too short" %}</li>
                         </ul>
                     </div>
                     <div class="custom-input">
                         <div class="input-label">
-                            <label>Membership Type</label>
+                            <label>{% trans "Membership Type" %}</label>
                         </div>
                         <div class="input-box">
                             <select id="member_membership_type_id_edit" name="membership">
-                                <option value="gold">Gold</option>
-                                <option value="silver">Silver</option>
-                                <option value="bronze">Bronze</option>
+                                <option value="gold">{% trans "Gold" %}</option>
+                                <option value="silver">{% trans "Silver" %}</option>
+                                <option value="bronze">{% trans "Bronze" %}</option>
                             </select>
                         </div>
                     </div>
                     <div class="custom-input">
                         <div class="input-label">
-                            <label>Membership ID</label>
+                            <label>{% trans "Membership ID" %}</label>
                         </div>
                         <div class="input-box">
                             <input type="text" name="code" required="" tabindex="1">

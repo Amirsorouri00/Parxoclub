@@ -1,4 +1,4 @@
- {% load static %}
+ {% load static %} {% load i18n %}
 <!-- Header -->
 <div class="header">
     <div class="nav">
@@ -10,21 +10,22 @@
             </div>
         </div>
         <div class="title">
-            <span class="span1">Admin</span>
-            <span class="span2">Dashboard</span>
+            <span class="span1">{% trans "Admin" %}</span>
+            <span class="span2">{% trans "Dashboard" %}</span>
         </div>
     </div>
     <div class="page">
         <div class="pattern"></div>
         <div id="idHeaderLangContainer" class="lang-container">
-            <span class="lang-name">En</span>
+            <span class="lang-name">{% get_current_language as LANGUAGE_CODE %} {{LANGUAGE_CODE|upper}}</span>
             <div id="idLangExpander" class="lang-expander"></div>
         </div>
         <div id="idLangPanel" class="lang-panel" visible="false">
             <div id="idLangPanelContainer" class="lang-panel-container">
-                <a href="rtl-dashboard.html" class="lang-option">
+                <a href="" rel="fa" class="lang-option">
                             <span>فا</span>
-                        </a>
+                        </a> {% get_language_info_list for LANGUAGES as languages %} {% for language in languages %} {% language lang_code %}
+                <a class="lang-option" href="" rel="{{ language.code }}"><span>{{ language.code|title }}</span></a> {% endlanguage %} {% endfor %}
             </div>
         </div>
         <div id="idHeaderUserContainer" class="user-container">
@@ -32,7 +33,7 @@
             <div class="photo"></div>
             <span class="username">
                         <div class="overflow-ellipsis" style="max-width: 80px;">
-                            Username
+                            {% trans "Username" %}
                         </div>
                     </span>
             <div id="idUserPanelExpander" class="expander"></div>
@@ -43,15 +44,15 @@
                 <div class="detail">
                     <span class="username">
                                 <div class="overflow-ellipsis" style="max-width: 400px;">
-                                    Username
+                                   {% trans "Username" %} 
                                 </div>
                             </span>
-                    <span class="position">Position/Title</span>
+                    <span class="position">{% trans "Position/Title" %}</span>
                 </div>
             </div>
             <div id="idLogoutContainer" class="logout-container">
-                <a href="index.html">
-                    <div id="idLogoutButton" class="logout-button btn-taint">Log Out</div>
+                <a href="{% url 'logout' %}">
+                    <div id="idLogoutButton" class="logout-button btn-taint">{% trans "Log Out" %}</div>
                 </a>
             </div>
         </div>

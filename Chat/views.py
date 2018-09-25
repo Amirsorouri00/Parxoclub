@@ -1,22 +1,28 @@
-from django.shortcuts import render
-# Tested Basic tutorial chat project View
-from django.shortcuts import render
-from django.utils.safestring import mark_safe
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-import json
-from .models import RoomUsers, Room
-# Rest_Framework
-from rest_framework.renderers import JSONRenderer
+from django.shortcuts import render
+from django.utils import translation
+from django.utils.decorators import method_decorator
+from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext_lazy as _
+from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authentication import BasicAuthentication, \
+    SessionAuthentication, TokenAuthentication
+from rest_framework.decorators import api_view, authentication_classes, \
+    permission_classes
 from rest_framework.parsers import JSONParser
-from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-# Serializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.views import APIView
+
+import json
+from .models import Room, RoomUsers
 from .serializer import RoomSerializer
+from django.http import Http404
 from django.http.response import HttpResponse
+
+
 # Create your views here.
 
 def index(request):
@@ -43,14 +49,44 @@ def UserChats(request, userId):
         return HttpResponse(content)
 # Create your views here.
 
+@csrf_exempt
 @api_view(['POST', 'GET'])
 @authentication_classes((SessionAuthentication, TokenAuthentication))
 @permission_classes((IsAuthenticated,))
-@csrf_exempt 
+# @method_decorator(csrf_exempt, name='get')
+# class Chat(View):
+#     def get(request):
+#         user = User.objects.get(username = request.user)
+#         users = User.objects.all()
+#         return render(request, 'chat/chats.html', {'user_id': user.id, 'users':users, 'rtl':translation.get_language_bidi()})
+#     def post(request):
+#         if request.is_ajax():
+#             raise Http404
+#         else:        
+#             SPANISH_LANGUAGE_CODE = request.POST.get('language', None)
+#             if SPANISH_LANGUAGE_CODE:
+#                 translation.activate(SPANISH_LANGUAGE_CODE)
+#                 extra_context = CalendarMaker(request)
+#                 user = User.objects.get(username = request.user)
+#                 users = User.objects.all()
+#                 return render(request, 'chat/chats.html', {'user_id': user.id, 'users':users, 'rtl':translation.get_language_bidi()})
+#             else: raise Http404
 def Chat(request):
-    user = User.objects.get(username = request.user)
-    users = User.objects.all()
-    return render(request, 'chat/chats.html', {'user_id': user.id, 'users':users})
+    if request.method == 'POST':
+        if request.is_ajax():
+            raise Http404
+        else:        
+            SPANISH_LANGUAGE_CODE = request.POST.get('language', None)
+            if SPANISH_LANGUAGE_CODE:
+                translation.activate(SPANISH_LANGUAGE_CODE)
+                user = User.objects.get(username = request.user)
+                users = User.objects.all()
+                return render(request, 'chat/chats.html', {'user_id': user.id, 'users':users, 'rtl':translation.get_language_bidi()})
+            else: raise Http404
+    else:
+        user = User.objects.get(username = request.user)
+        users = User.objects.all()
+        return render(request, 'chat/chats.html', {'user_id': user.id, 'users':users, 'rtl':translation.get_language_bidi()})
 
 
 '''

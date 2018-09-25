@@ -1,12 +1,11 @@
-{% load static %}
+{% load static %} {% load i18n %}
 <!-- Plane Member Search -->
 <div class="plane-search-wrapper" style="display: none;">
     <div class="plane-search-container">
         <form class="header-plane-search">
             <input type="text" name="search" required="">
-            <label>Search</label>
+            <label>{% trans "Search" %}</label>
         </form>
         <div class="options-plane-search"></div>
     </div>
 </div>
-

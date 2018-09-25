@@ -1,3 +1,4 @@
+{% load i18n %}
 <!-- Docs Content -->
 <!-- Member detail -->
 <div class="docs-main">
@@ -8,19 +9,19 @@
                 <div class="doc-header-icon">
                     <span class="icon-timefill"></span>
                 </div>
-                <span class="doc-header-title">Member History</span>
+                <span class="doc-header-title">{% trans "Member History" %}</span>
             </div>
             <div class="doc-content">
                 <div class="doc-history">
                     <div class="doc-history-header">
                         <div class="doc-history-header-icon icon-medicinesfill"></div>
-                        <div class="doc-history-header-title">Medical History</div>
+                        <div class="doc-history-header-title">{% trans "Medical History" %}</div>
                     </div>
                     <div class="doc-medic-history overlay-scroll">
                         <div class="history-section">
                             <div class="history-section-title-container">
                                 <div class="history-section-title">
-                                    Chief Complaint
+                                    {% trans "Chief Complaint" %}
                                 </div>
                                 <div id-modal="idEditHistory" class="history-section-editor icon-edit" modal-btn="show"></div>
                             </div>
@@ -31,13 +32,13 @@
                                 <div class="section-sep4"></div>
                             </div>
                             <div class="section-content-container">
-                                Check Up
+                                {% trans "Check Up" %}
                             </div>
                         </div>
                         <div class="history-section">
                             <div class="history-section-title-container">
                                 <div class="history-section-title">
-                                    Past Medical History
+                                    {% trans "Past Medical History" %}
                                 </div>
                                 <div id-modal="idEditHistory" class="history-section-editor icon-edit" modal-btn="show"></div>
                             </div>
@@ -58,7 +59,7 @@
                         <div class="history-section">
                             <div class="history-section-title-container">
                                 <div class="history-section-title">
-                                    Drug History
+                                    {% trans "Drug History" %}
                                 </div>
                                 <div id-modal="idEditHistory" class="history-section-editor icon-edit" modal-btn="show"></div>
                             </div>
@@ -75,7 +76,7 @@
                         <div class="history-section">
                             <div class="history-section-title-container">
                                 <div class="history-section-title">
-                                    Family History
+                                    {% trans "Family History" %}
                                 </div>
                                 <div id-modal="idEditHistory" class="history-section-editor icon-edit" modal-btn="show"></div>
                             </div>
@@ -95,7 +96,7 @@
                         <div class="history-section">
                             <div class="history-section-title-container">
                                 <div class="history-section-title">
-                                    Checkup Tests
+                                    {% trans "Checkup Tests" %}
                                 </div>
                                 <div id-modal="idEditHistory" class="history-section-editor icon-edit" modal-btn="show"></div>
                             </div>
@@ -112,7 +113,7 @@
                         <div class="history-section">
                             <div class="history-section-title-container">
                                 <div class="history-section-title">
-                                    Specialists Visits
+                                    {% trans "Specialists Visits" %}
                                 </div>
                                 <div id-modal="idEditHistory" class="history-section-editor icon-edit" modal-btn="show"></div>
                             </div>
@@ -129,7 +130,7 @@
                         <div class="history-section">
                             <div class="history-section-title-container">
                                 <div class="history-section-title">
-                                    Lab & Pathology Results
+                                    {% trans "Lab & Pathology Results" %}
                                 </div>
                                 <div id-modal="idEditHistory" class="history-section-editor icon-edit" modal-btn="show"></div>
                             </div>
@@ -151,7 +152,7 @@
                         <div class="history-section">
                             <div class="history-section-title-container">
                                 <div class="history-section-title">
-                                    Imaging
+                                    {% trans "Imaging" %}
                                 </div>
                                 <div id-modal="idEditHistory" class="history-section-editor icon-edit" modal-btn="show"></div>
                             </div>
@@ -176,7 +177,7 @@
                 <div class="custom-table dr-list">
                     <div class="dr-list-header">
                         <div class="dr-list-header-icon icon-stethoscopefill"></div>
-                        <div class="dr-list-header-title">Specialists History</div>
+                        <div class="dr-list-header-title">{% trans "Specialists History" %}</div>
                     </div>
                     <div class="dr-list-container overlay-scroll">
                         <div class="dr-container">

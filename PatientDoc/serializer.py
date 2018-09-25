@@ -8,14 +8,14 @@ from .models import DocCategories, DocCatSubmenu, Documents
 class DocCategoriesSubMenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = DocCatSubmenu
-        fields = ('id', 'name', 'index', 'icon')
+        fields = ('id', 'name', 'rtl_name', 'index', 'icon')
 
 class DocCategoriesSerializer(serializers.ModelSerializer):
     #sub_menu = serializers.StringRelatedField(many=True, allow_null=True)
     sub_menu = DocCategoriesSubMenuSerializer(many=True)
     class Meta:
         model = DocCategories
-        fields = ('id', 'name', 'index', 'icon', 'icon_name','sub_menu')
+        fields = ('id', 'name', 'rtl_name', 'index', 'icon', 'icon_name','sub_menu')
 
 class DocumentsSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,9 +1,10 @@
+{% load i18n %}
 <!-- Calendar -->
 <div class="calendar-wrapper">
     <div class="calendar-container">
         <div class="calendar-header">
             <div class="icon-calendar-header icon-calendarfill"></div>
-            <div class="title-calendar">Calendar</div>
+            <div class="title-calendar">{% trans "Calendar" %}</div>
         </div>
         <div class="calendar-base">
             <div class="calendar-table-container">
@@ -16,7 +17,7 @@
                     </div>
                     <div class="month-title" url="{% url 'calendar:get_day_events' %}" value="{{ month_value }}">{{ month_title }}</div>
                     <div class="today-selector">
-                        <div class="today-btn btn-taint">Today</div>
+                        <div class="today-btn btn-taint">{% trans "Today" %}</div>
                     </div>
                 </div>
                 <div class="calendar-table-base overlay-scroll">

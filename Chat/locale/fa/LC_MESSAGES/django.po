@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-17 22:56+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\templates\chat\chat-chat-upload-modal.html:5
+msgid "Send File"
+msgstr "ارسال فایل"
+
+#: .\templates\chat\chat-chat-upload-modal.html:13
+msgid "Caption"
+msgstr "عنوان"
+
+#: .\templates\chat\chat-remove-chat-modal.html:5
+msgid "Are you sure about removing this Conversation(s)?"
+msgstr "آیا از حذف این رویداد اطمینان دارید؟"
+
+#: .\templates\chat\chat-talk-main-panel.html:24
+msgid " Ok, i’ll send the prescriptions tomorrow."
+msgstr " باشه، من تا فردا نسخه‌ها رو می‌فرستم."
+
+#: .\templates\chat\chat-talk-main-panel.html:43
+#: .\templates\chat\chat-talk-main-panel.html:100
+#: .\templates\chat\chat-talk-main-panel.html:141
+#: .\templates\chat\chat-talk-main-panel.html:163
+msgid "Thanks for headup ;)"
+msgstr "ممنون بابت یادآوری :)"
+
+#: .\templates\chat\chat-talk-main-panel.html:62
+msgid "You’re welcome."
+msgstr "خواهش می‌کنم."
+
+#: .\templates\chat\chat-talk-main-panel.html:81
+#: .\templates\chat\chat-talk-main-panel.html:119
+msgid ""
+"I’m going to check your temperature and your pulse. You may need an "
+"antibiotic if you have an infection.It seems you have some inflammation in "
+"your knees. However, there's nothing broken. Just take some ibuprofen or "
+"aspirin and the swelling should go down.OK, I’m going to check your "
+"temperature and your pulse. You may need an antibiotic if you have an "
+"infection."
+msgstr "معمولا طراحان گرافیک برای صفحه‌آرایی، نخست از متن‌های آزمایشی و بی‌معنی استفاده می‌کنند تا صرفا به مشتری یا صاحب کار خود نشان دهند که صفحه طراحی یا صفحه بندی شده بعد از اینکه متن در آن قرار گیرد چگونه به نظر می‌رسد و قلم‌ها و اندازه‌بندی‌ها چگونه در نظر گرفته شده‌است. از آنجایی که طراحان عموما نویسنده متن نیستند و وظیفه رعایت حق تکثیر متون را ندارند و در همان حال کار آنها به نوعی وابسته به متن می‌باشد آنها با استفاده از محتویات ساختگی، صفحه گرافیکی خود را صفحه‌آرایی می‌کنند تا مرحله طراحی و صفحه‌بندی را به پایان برند."
+
+#: .\templates\chat\chat-talk-main-panel.html:196
+msgid "Write a message..."
+msgstr " پیام شما..."
+
+#: .\templates\chat\chat-user-chats-panel.html:7
+msgid "Chats"
+msgstr "گفت‌و‌گوها"
+
+#: .\templates\chat\chat-user-chats-panel.html:17
+msgid "search"
+msgstr "جستجو"
+
+#: .\templates\chat\chat-user-chats-panel.html:66
+msgid "Contacts"
+msgstr "تماس‌ها"

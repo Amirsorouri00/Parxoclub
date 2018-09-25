@@ -9,6 +9,7 @@ from rest_framework import serializers
 
 class DocCategories(models.Model):
     name = models.CharField(max_length=50)
+    rtl_name = models.CharField(max_length=50)
     index = models.IntegerField(default=0)
     # Integer field for icon uses icon names
     # which are integers to gets icon's paths
@@ -18,6 +19,7 @@ class DocCategories(models.Model):
 class DocCatSubmenu(models.Model):
     name = models.CharField(max_length=50)
     index = models.IntegerField(default=0)
+    rtl_name = models.CharField(max_length=50)
     # Integer field for icon uses icon names
     # which are integers to gets icon's paths
     icon = models.PositiveIntegerField(blank=True, null=True)

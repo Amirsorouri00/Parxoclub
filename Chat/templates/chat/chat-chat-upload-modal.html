@@ -1,7 +1,8 @@
+{% load i18n %}
 <!-- Chat Upload Modal -->
 <div id="idChatUpload" class="custom-modal">
     <div class="modal-chat-upload">
-        <div class="chat-upload-header"><span>Send File</span></div>
+        <div class="chat-upload-header"><span>{% trans "Send File" %}</span></div>
         <div class="chat-upload-img-container">
             <div class="chat-upload-img"></div>
         </div>
@@ -9,7 +10,7 @@
             <form>
                 <div class="Caption-input">
                     <input class="Caption-inputbox" type="text" required="" tabindex="1">
-                    <label class="Caption-label">Caption</label>
+                    <label class="Caption-label">{% trans "Caption" %}</label>
                     <label class="Caption-border"></label>
                 </div>
             </form>

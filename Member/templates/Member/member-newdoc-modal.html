@@ -1,5 +1,5 @@
 <!-- Modal -->
-{% load static %}
+{% load static %} {% load i18n %}
 <div id="idNewDoc" class="custom-modal">
     <div class="modal-container">
         <div class="doc-input-base">
@@ -19,7 +19,7 @@
                     <form id="AddNewDoc" action='{% url "add_new_document_member_panel" %}' method="POST" enctype="multipart/form-data">
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>Date</label>
+                                <label>{% trans "Date" %}</label>
                             </div>
                             <div class="input-box">
                                 <input type="text" name="date" required="" tabindex="1">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>Title</label>
+                                <label>{% trans "Title" %}</label>
                             </div>
                             <div class="input-box">
                                 <input type="text" name="title" required="" tabindex="1">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>Supervisor</label>
+                                <label>{% trans "Supervisor" %}</label>
                             </div>
                             <div class="input-box">
                                 <input type="text" name="supervisor" required="" tabindex="1">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="custom-input">
                             <div class="input-label">
-                                <label>site</label>
+                                <label>{% trans "site" %}</label>
                             </div>
                             <div class="input-box">
                                 <input type="text" name="site" required="" tabindex="1">

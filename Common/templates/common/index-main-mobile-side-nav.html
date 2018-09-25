@@ -1,23 +1,23 @@
-{% load static %}
+{% load static %} {% load i18n %}
 <!-- Side Nav -->
 <div class="sidemenu">
     <div class="base">
         <a href="{% url 'dashboard' %}">
             <div class="column active">
                 <span class="icon icon-dashboard"></span>
-                <span class="title"> Admin Dashboard</span>
+                <span class="title">{% trans "Admin Dashboard" %} </span>
             </div>
         </a>
         <a href="{% url 'member' %}">
             <div class="column">
                 <span class="icon icon-member"></span>
-                <span class="title"> Members</span>
+                <span class="title">{% trans "Members" %} </span>
             </div>
         </a>
         <a href="{% url 'chat' %}">
             <div class="column">
                 <span class="icon icon-chat"></span>
-                <span class="title"> Chat </span>
+                <span class="title">{% trans "Chat" %}  </span>
                 <div class="badge-container">
                     <div class="badge bg-yellow">
                         <span class="badgeSpan"> 11 </span>
@@ -27,7 +27,7 @@
         </a>
         <div class="column">
             <span class="icon icon-message"></span>
-            <span class="title"> Messages</span>
+            <span class="title">{% trans "Messages" %} </span>
             <div class="badge-container">
                 <div class="badge bg-red">
                     <span class="badgeSpan"> 3 </span>
@@ -37,7 +37,7 @@
         <a href="{% url 'calendar:calendar_get' %}">
             <div class="column">
                 <span class="icon icon-calendar"></span>
-                <span class="title"> Calendar</span>
+                <span class="title">{% trans "Calendar" %} </span>
                 <div class="badge-container">
                     <div class="badge bg-blue">
                         <span class="badgeSpan"> 125 </span>
@@ -48,7 +48,7 @@
         <a href="news.html">
             <div class="column">
                 <span class="icon icon-news"></span>
-                <span class="title"> News</span>
+                <span class="title">{% trans "News" %} </span>
                 <div class="badge-container">
                     <div class="badge bg-cyan">
                         <span class="badgeSpan"> 6 </span>
@@ -59,7 +59,7 @@
         <a href="{% url 'maintenance' %}">
             <div class="column">
                 <span class="icon icon-setting"></span>
-                <span class="title"> Maintenance</span>
+                <span class="title">{% trans "Maintenance" %} </span>
             </div>
         </a>
     </div>

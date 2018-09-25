@@ -13,6 +13,9 @@ from .serializer import EventTypeSerializer, EventSerializer
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from rest_framework import serializers
+from django.utils.translation import ugettext_lazy as _
+from django.utils import translation
+
 
 def AddEvents(request):
     if request.is_ajax():
@@ -56,7 +59,7 @@ def EditEvents(request):
     else:
         raise Http404
 
-def RemoveEvents(request):
+def RemoveEvents(request):  
     if request.is_ajax():
         if request.method == 'POST':
             event = Event.objects.filter(id = request.POST.get('event_id', None))
@@ -99,29 +102,50 @@ def EventTypes(request):
     return HttpResponse(content)
 
 def Calendar(request):
-    if not request.GET.get('day__gte', None):
-        extra_context = CalendarMaker(request)
-        #return HttpResponse(request.GET.get('day__gte', None)) 
-        #return HttpResponse(extra_context['previous_month'])
-        return render(request, 'calendar/calendar.html', { 
-                'previous_month': extra_context['previous_month'],
-                'next_month': extra_context['next_month'],
-                'month_title': extra_context['month_title'],
-                'month_value': extra_context['month_value'],
-                'calendar' : extra_context['calendar'],
-            })
+    if request.method == 'POST':
+        if request.is_ajax():
+            raise Http404 #Must shows the correct error or be handled
+        else:
+            SPANISH_LANGUAGE_CODE = request.POST.get('language', None)
+            if SPANISH_LANGUAGE_CODE:
+                translation.activate(SPANISH_LANGUAGE_CODE)
+                extra_context = CalendarMaker(request)  
+                #return HttpResponse(request.GET.get('day__gte', None)) 
+                #return HttpResponse(extra_context['previous_month'])
+                return render(request, 'calendar/calendar.html', { 
+                        'previous_month': extra_context['previous_month'],
+                        'next_month': extra_context['next_month'],
+                        'month_title': extra_context['month_title'],
+                        'month_value': extra_context['month_value'],
+                        'calendar' : extra_context['calendar'],
+                        'rtl': translation.get_language_bidi()
+                    })
+            else: raise Http404 #Must shows the correct error or be handled
     else:
-        extra_context = CalendarMaker(request)
-        html = render_to_string('calendar/calendar-after-sidenave-calendar-wrapper.html', { 
-                'previous_month': extra_context['previous_month'],
-                'next_month': extra_context['next_month'],
-                'month_title': extra_context['month_title'],
-                'month_value': extra_context['month_value'],
-                'calendar' : extra_context['calendar'],
-            })
-        #content = JSONRenderer().render(html)
-        data = {'form': html}
-        return JsonResponse(data, safe=False)
+        if not request.GET.get('day__gte', None):
+            extra_context = CalendarMaker(request)
+            #return HttpResponse(request.GET.get('day__gte', None)) 
+            #return HttpResponse(extra_context['previous_month'])
+            return render(request, 'calendar/calendar.html', { 
+                    'previous_month': extra_context['previous_month'],
+                    'next_month': extra_context['next_month'],
+                    'month_title': extra_context['month_title'],
+                    'month_value': extra_context['month_value'],
+                    'calendar' : extra_context['calendar'],
+                    'rtl': translation.get_language_bidi()
+                })
+        else:
+            extra_context = CalendarMaker(request)
+            html = render_to_string('calendar/calendar-after-sidenave-calendar-wrapper.html', { 
+                    'previous_month': extra_context['previous_month'],
+                    'next_month': extra_context['next_month'],
+                    'month_title': extra_context['month_title'],
+                    'month_value': extra_context['month_value'],
+                    'calendar' : extra_context['calendar'],
+                })
+            #content = JSONRenderer().render(html)
+            data = {'form': html}
+            return JsonResponse(data, safe=False)
 # Create your views here.
 
 def CalendarMaker(request):

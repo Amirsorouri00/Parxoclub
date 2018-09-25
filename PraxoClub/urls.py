@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('service/', include('WebService.urls')),
@@ -28,3 +29,17 @@ urlpatterns = [
     path('ajax/member/', include('Member.urls')),
     path('ajax/patientdoc/', include('PatientDoc.urls')),
 ]
+
+
+urlpatterns += i18n_patterns (
+    path('service/', include('WebService.urls')),
+    path('chat/', include('Chat.urls')),
+    path('authenticate/', include('Member.urls')),
+    path('member/', include('Member.urls')),
+    path('calendar/', include('Calendar.urls', namespace='calendar2')),
+    path('patientdoc/', include('PatientDoc.urls')),
+     # path('admin/', admin.site.urls),
+     # Ajax
+    path('ajax/member/', include('Member.urls')),
+    path('ajax/patientdoc/', include('PatientDoc.urls')),
+)

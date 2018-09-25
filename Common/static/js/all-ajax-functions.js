@@ -169,7 +169,11 @@ function Bind(winref, data, from) {
     } else if (from == 'DocumentCategories') {
         data2 = JSON.parse(data);
         //var object = $('.member-menu .overlay-scroll');
-        CreateDocumentCategoryMenu(data2.DocCats);
+        object = $('.search-result-wrapper .search-result-panel .search .container .label').text();
+
+        if (object == 'جستجو') {
+            CreateDocumentCategoryMenuRTL(data2.DocCats);
+        } else { CreateDocumentCategoryMenu(data2.DocCats); }
         // $('#ajax_category').append(res);Calendar
     } else if (from == 'AddNewUserModalLiveChecks') {
         console.log('in Bind, from = ' + from);
@@ -343,6 +347,31 @@ function CreateDocumentCategoryMenu(data) {
         $.each(item.sub_menu, function(j, item_2) {
             //console.log('submenu:')
             tmp2 = document_categories_object_to_appendto_submenu.replace("Sonography", item_2.name).replace("parent2", item.name).replace('submenu_value', item_2.name);
+            str = str + tmp2;
+        });
+        res2 = str + "</div>"
+        $("#ajax_category .column .main_ajax_" + item.id).after(res2);
+    });
+};
+
+function CreateDocumentCategoryMenuRTL(data) {
+    //console.log('CreateDocumentCategoryMenu:' + data);
+    $.each(data, function(i, item) {
+        var tmp = document_categories_object_to_append.replace("main_ajax_id", "main_ajax_" + item.id).replace("icon_name", item.icon_name).replace("classTitle", item.rtl_name);
+        if (i == 0) {
+            tmp = tmp.replace("column", "column active")
+        }
+        //console.log('submenu length: '+ item.sub_menu.length);
+        if (item.sub_menu.length != 0) {
+            tmp = tmp.replace("<div class='expander'></div>", "<div class='expander'><span class='icon-left'></span></div>").replace('submit2', 'submenu');
+        }
+        var res = tmp;
+        $('#ajax_category').append(res);
+        var str = "<div class='submenu'>";
+        var tmp2 = '';
+        $.each(item.sub_menu, function(j, item_2) {
+            //console.log('submenu:')
+            tmp2 = document_categories_object_to_appendto_submenu.replace("Sonography", item_2.rtl_name).replace("parent2", item.rtl_name).replace('submenu_value', item_2.rtl_name);
             str = str + tmp2;
         });
         res2 = str + "</div>"

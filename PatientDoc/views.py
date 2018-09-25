@@ -31,6 +31,9 @@ from Member.serializer import MemberSerializer, TokenSerializer, \
 from PatientDoc.serializer import SpecialistsHistoryObject, \
     SpecialistsHistorySerializer
 from django.http import Http404, HttpResponse, JsonResponse
+from django.utils.translation import get_language_bidi
+from django.utils.translation import ugettext_lazy as _
+from django.utils import translation
 
 
 # Create your views here.
@@ -264,7 +267,8 @@ def MemberDocuments(request, user_id):
         raise Http404
 
 def Dashboard(request):
-    return render(request, 'patientdoc/dashboard.html')
+    rtl = get_language_bidi()
+    return render(request, 'patientdoc/dashboard.html', {'rtl':rtl})
 
 @login_required(login_url="/authenticate/login/")
 def Member(request):
@@ -275,9 +279,14 @@ def Member(request):
             data = {'form': html}
             return JsonResponse(data, safe=False)
         else:
-            raise Http404
+            SPANISH_LANGUAGE_CODE = request.POST.get('language', None)
+            if SPANISH_LANGUAGE_CODE:    
+                translation.activate(SPANISH_LANGUAGE_CODE)
+                return render(request, 'member/member.html', {'rtl':get_language_bidi()})
+            else:
+                raise Http404
     else:
-        return render(request, 'member/member.html')
+        return render(request, 'member/member.html', {'rtl':get_language_bidi()})
 
 @login_required(login_url="/authenticate/login/")
 def MemberFemale(request):
@@ -290,7 +299,8 @@ def MemberFemale(request):
         else:
             raise Http404    
     else:
-        return render(request, 'member/member.html', {'panel': 'panel'})
+        rtl = get_language_bidi()
+        return render(request, 'member/member.html', {'panel': 'panel', 'rtl':rtl})
         
 
 def DocCatMem(request, _id, _cat):

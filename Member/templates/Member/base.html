@@ -39,24 +39,22 @@
     <meta property="og:image" content="http://www.praxo.ir/img/praxo.jpg">
     <meta name="msapplication-config" content="/favico/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-
     <!-- link -->
-    <link rel="canonical" href="http://www.praxo.ir/">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static '/css/praxofont.css' %}">    
+    <link rel="canonical" href="http://www.praxo.ir/"> {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}" /> {% if rtl %}
+    <!-- RTL Styles -->
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style-rtl.css' %}" />{% endif %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/praxofont.css' %}">
     <!-- Scripts -->
     <script type="text/javascript" src="{% static '/js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static '/js/button.js' %}"></script>
-
     <title>P R Λ X O{% block title %}{% endblock %}</title>
 </head>
 
 <body>
-    {% block content %}
-    {% endblock %}
+    {% block content %} {% endblock %}
 
-<body>
-    {% block javascript %}
-    {% endblock %}
+    <body>
+        {% block javascript %} {% endblock %}
+
 </html>
