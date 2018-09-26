@@ -1,0 +1,123 @@
+<!-- Float Chat -->
+{% load static %}
+<div class="chat-drag">
+    <div class="float-chat-base">
+        <div class="float-chat-header">
+            <div class="photo-container-float-chat">
+                <div class="float-chat-photo"></div>
+            </div>
+            <div class="user-name-float-chat">Masoud Nourbakhsh</div>
+            <div id-modal="idRemoveChat" class="remove-chat-tool" modal-btn="show">
+                <span class="icon-trashfill"></span>
+            </div>
+        </div>
+        <div class="float-chat-talk overlay-scroll">
+            <div style="padding-left: 10px;padding-right: 10px;">
+                <!-- Member Bubble -->
+                <div class="received-bubble">
+                    <div class="bubble-container">
+                        <div class="bubble-text">
+                            <span>Thanks for headup ;)</span>
+                        </div>
+                        <div class="bubble-detail">
+                            <span class="time">6:23 pm</span>
+                            <span class="status"></span>
+                            <span class="attach"></span>
+                        </div>
+                    </div>
+                    <div class="bubble-check">
+                        <div class="bubble-checkbox">
+                            <div class="bubble-checkbox-select">
+                                <span class="bubble-checkbox-icon icon-check"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Admin Bubble -->
+                <div class="sent-bubble">
+                    <div class="bubble-container">
+                        <div class="bubble-text">
+                            <span>I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection.It seems you have some inflammation in your knees. However, there's nothing broken. Just take some ibuprofen or aspirin and the swelling should go down.OK, I’m going to check your temperature and your pulse. You may need an antibiotic if you have an infection.</span>
+                        </div>
+                        <div class="bubble-detail">
+                            <span class="time">6:23 pm</span>
+                            <span class="status icon-delivered"> </span>
+                            <span class="attach"></span>
+                        </div>
+                    </div>
+                    <div class="bubble-check">
+                        <div class="bubble-checkbox">
+                            <div class="bubble-checkbox-select">
+                                <span class="bubble-checkbox-icon icon-check"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Member Bubble - Attached -->
+                <div class="received-bubble">
+                    <div class="bubble-attach">
+                        <div class="bubble-file-attach">
+                            <img src="img/nik2.png">
+                        </div>
+                        <div class="bubble-text-attach">
+                            <span>Thanks for headup ;) </span>
+                        </div>
+                        <div class="bubble-detail-attach">
+                            <span class="time">6:23 pm</span>
+                            <span class="status"></span>
+                            <span class="attach icon-attach"></span>
+                        </div>
+                    </div>
+                    <div class="bubble-check">
+                        <div class="bubble-checkbox">
+                            <div class="bubble-checkbox-select">
+                                <span class="bubble-checkbox-icon icon-check"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Admin Bubble - Attached -->
+                <div class="sent-bubble">
+                    <div class="bubble-attach">
+                        <div class="bubble-file-attach">
+                            <img src="img/nik.png">
+                        </div>
+                        <div class="bubble-text-attach">
+                            <span>Thanks for headup ;) </span>
+                        </div>
+                        <div class="bubble-detail-attach">
+                            <span class="time">6:23 pm</span>
+                            <span class="status icon-sent"></span>
+                            <span class="attach icon-attach"></span>
+                        </div>
+                    </div>
+                    <div class="bubble-check">
+                        <div class="bubble-checkbox">
+                            <div class="bubble-checkbox-select">
+                                <span class="bubble-checkbox-icon icon-check"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="float-chat-type-base">
+            <div id-modal="idChatUpload" class="float-attach-container" modal-btn="show">
+                <div class="float-attach-btn btn-taint icon-attach"></div>
+            </div>
+            {% include 'chat/chat-float-emoji-container.html' %}
+            <div class="type-sep"></div>
+            <div class="float-type-input-base">
+                <form>
+                    <input id="idChatInputFloat" class="float-type-input" required="">
+                    <label class="float-label-type-input"> Write a message...</label>
+                    </input>
+                </form>
+            </div>
+            <div class="float-type-send-container">
+                <div class="float-send-btn btn-taint icon-send"></div>
+            </div>
+        </div>
+    </div>
+    <div class="float-chat-btn icon-chatfill"></div>
+</div>

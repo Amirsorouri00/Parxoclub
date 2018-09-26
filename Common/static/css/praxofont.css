@@ -1,0 +1,389 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "praxo";
+    src: url("../font/Praxo/praxo.eot");
+    src: url("../font/Praxo/praxo.eot?#iefix") format("embedded-opentype"),
+    url("../font/Praxo/praxo.woff") format("woff"),
+    url("../font/Praxo/praxo.ttf") format("truetype"),
+    url("../font/Praxo/praxo.svg#praxo") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+[data-icon]:before {
+    font-family: "praxo" !important;
+    content: attr(data-icon);
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    text-decoration: none;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    font-family: "praxo" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    text-decoration: none;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add:before {
+    content: "\61";
+}
+
+.icon-addfill:before {
+    content: "\62";
+}
+
+.icon-alarm:before {
+    content: "\63";
+}
+
+.icon-alert:before {
+    content: "\64";
+}
+
+.icon-alertfill:before {
+    content: "\65";
+}
+
+.icon-attach:before {
+    content: "\66";
+}
+
+.icon-browse:before {
+    content: "\67";
+}
+
+.icon-browsefill:before {
+    content: "\68";
+}
+
+.icon-calendar:before {
+    content: "\69";
+}
+
+.icon-calendarfill:before {
+    content: "\6a";
+}
+
+.icon-chat:before {
+    content: "\6b";
+}
+
+.icon-chatfill:before {
+    content: "\6c";
+}
+
+.icon-check:before {
+    content: "\6d";
+}
+
+.icon-checkfill:before {
+    content: "\6e";
+}
+
+.icon-close:before {
+    content: "\6f";
+}
+
+.icon-closefill:before {
+    content: "\70";
+}
+
+.icon-dashboard:before {
+    content: "\71";
+}
+
+.icon-delivered:before {
+    content: "\72";
+}
+
+.icon-digestive:before {
+    content: "\73";
+}
+
+.icon-digestivefill:before {
+    content: "\74";
+}
+
+.icon-down:before {
+    content: "\75";
+}
+
+.icon-downfill:before {
+    content: "\76";
+}
+
+.icon-edit:before {
+    content: "\77";
+}
+
+.icon-editfill:before {
+    content: "\78";
+}
+
+.icon-emoji:before {
+    content: "\79";
+}
+
+.icon-emojifill:before {
+    content: "\7a";
+}
+
+.icon-heart:before {
+    content: "\41";
+}
+
+.icon-heartfill:before {
+    content: "\42";
+}
+
+.icon-hospital:before {
+    content: "\43";
+}
+
+.icon-hospitalfill:before {
+    content: "\44";
+}
+
+.icon-imaging:before {
+    content: "\45";
+}
+
+.icon-imagingfill:before {
+    content: "\46";
+}
+
+.icon-lab:before {
+    content: "\47";
+}
+
+.icon-labfill:before {
+    content: "\48";
+}
+
+.icon-left:before {
+    content: "\49";
+}
+
+.icon-left-fill:before {
+    content: "\4a";
+}
+
+.icon-logo:before {
+    content: "\4b";
+}
+
+.icon-logofill:before {
+    content: "\4c";
+}
+
+.icon-logolarge:before {
+    content: "\4d";
+}
+
+.icon-logolargefill:before {
+    content: "\4e";
+}
+
+.icon-logonormal:before {
+    content: "\4f";
+}
+
+.icon-medic:before {
+    content: "\50";
+}
+
+.icon-medicfill:before {
+    content: "\51";
+}
+
+.icon-member:before {
+    content: "\52";
+}
+
+.icon-memberfill:before {
+    content: "\53";
+}
+
+.icon-message:before {
+    content: "\54";
+}
+
+.icon-messagefill:before {
+    content: "\55";
+}
+
+.icon-news:before {
+    content: "\56";
+}
+
+.icon-newsfill:before {
+    content: "\57";
+}
+
+.icon-offline:before {
+    content: "\58";
+}
+
+.icon-online:before {
+    content: "\59";
+}
+
+.icon-password:before {
+    content: "\5a";
+}
+
+.icon-passwordfill:before {
+    content: "\30";
+}
+
+.icon-pc:before {
+    content: "\31";
+}
+
+.icon-pcfill:before {
+    content: "\32";
+}
+
+.icon-presc:before {
+    content: "\33";
+}
+
+.icon-prescfill:before {
+    content: "\34";
+}
+
+.icon-progress:before {
+    content: "\35";
+}
+
+.icon-refresh:before {
+    content: "\36";
+}
+
+.icon-refreshfill:before {
+    content: "\37";
+}
+
+.icon-rfid:before {
+    content: "\38";
+}
+
+.icon-rfidfill:before {
+    content: "\39";
+}
+
+.icon-right:before {
+    content: "\21";
+}
+
+.icon-rightfill:before {
+    content: "\22";
+}
+
+.icon-rotateleft:before {
+    content: "\23";
+}
+
+.icon-rotateright:before {
+    content: "\24";
+}
+
+.icon-search:before {
+    content: "\25";
+}
+
+.icon-searchfill:before {
+    content: "\26";
+}
+
+.icon-send:before {
+    content: "\27";
+}
+
+.icon-sendfill:before {
+    content: "\28";
+}
+
+.icon-sent:before {
+    content: "\29";
+}
+
+.icon-server:before {
+    content: "\2a";
+}
+
+.icon-serverfill:before {
+    content: "\2b";
+}
+
+.icon-setting:before {
+    content: "\2c";
+}
+
+.icon-settingfill:before {
+    content: "\2d";
+}
+
+.icon-stethoscope:before {
+    content: "\2e";
+}
+
+.icon-stethoscopefill:before {
+    content: "\2f";
+}
+
+.icon-time:before {
+    content: "\7b";
+}
+
+.icon-timefill:before {
+    content: "\5c";
+}
+
+.icon-trash:before {
+    content: "\5d";
+}
+
+.icon-trashfill:before {
+    content: "\5e";
+}
+
+.icon-up:before {
+    content: "\7e";
+}
+
+.icon-upfill:before {
+    content: "\3f";
+}
+
+.icon-location:before {
+    content: '\005f';
+}
+
+.icon-locationfill:before {
+    content: '\0060';
+}
+
+.icon-medicines:before {
+    content: '\007c';
+}
+
+.icon-medicinesfill:before {
+    content: '\007d';
+}
+.icon-groupfill:before {
+    content: '\005B';
+}

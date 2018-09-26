@@ -1,0 +1,559 @@
+{% extends "common/index.html" %} {% block title %} | Dashboard{% endblock %} {% block content %} {% load static %}
+<!-- Admin Dashboard -->
+<div class="dashboard-content">
+    <div class="dashboard-content-container">
+        <div class="overlay-scroll">
+            <div class="dashboard-1st">
+                <div class="dashboard-user-box">
+                    <div class="user-box-back1"></div>
+                    <div class="user-box-back2"></div>
+                    <div class="user-box-photo-container">
+                    </div>
+                    <div class="user-box-welcome">Welcome Farzad Karamouz!</div>
+                    <div class="user-box-icon-container">
+                        <span class="icon-chatfill">
+<div class="user-box-badge-container">
+    <div class="user-box-badge bg-yellow"><span>12</span></div>
+                </div>
+                </span>
+                <span class="icon-calendarfill">
+<div class="user-box-badge-container">
+    <div class="user-box-badge bg-blue">
+        <span>5</span>
+            </div>
+        </div>
+        </span>
+        <span class="icon-messagefill">
+<div class="user-box-badge-container">
+    <div class="user-box-badge bg-red"><span>2</span></div>
+</div>
+</span>
+</div>
+</div>
+<div class="dashboard-diagram-box">
+    <div class="line-chart-legend-box">
+        <div class="legend-box-title-container">
+            <div class="legend-box-title"><span>Legends</span></div>
+            <div class="legend-box-descript"><span>choose the visibilty of tasks</span></div>
+        </div>
+        <div class="legend-column-wrapper overlay-scroll">
+            <div class="legend-column">
+                <div class="legend-container">
+                    <div class="legend-color bg-yellow"></div>
+                    <div class="legend-title"><span>Laboratory</span></div>
+                    <div class="legend-toggle">
+                        <div class="single-toggle-container">
+                            <input id="idLegend1" class="chart-legend" chart-dataset="0" type="checkbox" checked>
+                            <label class="single-toggle-btn-base" tabindex="1" for="idLegend1">
+                                <div class="single-toggle-btn"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="legend-column">
+                <div class="legend-container">
+                    <div class="legend-color bg-blue"></div>
+                    <div class="legend-title"><span>Medicine Schedule</span></div>
+                    <div class="legend-toggle">
+                        <div class="single-toggle-container">
+                            <input id="idLegend2" class="chart-legend" chart-dataset="1" type="checkbox" checked>
+                            <label class="single-toggle-btn-base" tabindex="1" for="idLegend2">
+                                <div class="single-toggle-btn"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="legend-column">
+                <div class="legend-container">
+                    <div class="legend-color bg-red2"></div>
+                    <div class="legend-title"><span>Cardiography</span></div>
+                    <div class="legend-toggle">
+                        <div class="single-toggle-container">
+                            <input id="idLegend3" class="chart-legend" chart-dataset="2" type="checkbox" checked>
+                            <label class="single-toggle-btn-base" tabindex="1" for="idLegend3">
+                                <div class="single-toggle-btn"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="legend-column">
+                <div class="legend-container">
+                    <div class="legend-color bg-red2"></div>
+                    <div class="legend-title"><span>Cardiography</span></div>
+                    <div class="legend-toggle">
+                        <div class="single-toggle-container">
+                            <input id="idLegend4" class="chart-legend" chart-dataset="3" type="checkbox">
+                            <label class="single-toggle-btn-base" tabindex="1" for="idLegend4">
+                                <div class="single-toggle-btn"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="legend-column">
+                <div class="legend-container">
+                    <div class="legend-color bg-red2"></div>
+                    <div class="legend-title"><span>Cardiography</span></div>
+                    <div class="legend-toggle">
+                        <div class="single-toggle-container">
+                            <input id="idLegend5" class="chart-legend" chart-dataset="4" type="checkbox">
+                            <label class="single-toggle-btn-base" tabindex="1" for="idLegend5">
+                                <div class="single-toggle-btn"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="legend-column">
+                <div class="legend-container">
+                    <div class="legend-color bg-red2"></div>
+                    <div class="legend-title"><span>Cardiography</span></div>
+                    <div class="legend-toggle">
+                        <div class="single-toggle-container">
+                            <input id="idLegend6" class="chart-legend" chart-dataset="5" type="checkbox">
+                            <label class="single-toggle-btn-base" tabindex="1" for="idLegend6">
+                                <div class="single-toggle-btn"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="lineChart"></canvas>
+    <script type="text/javascript">
+    </script>
+</div>
+</div>
+<div class="dashboard-2nd">
+    <div class="dashboard-chat-box">
+        <div class="dashboard-chat-header">
+            <div class="dashboard-chat-header-base">
+                <div class="dashboard-chat-header-rect"></div>
+                <div class="dashboard-chat-header-circle icon-chatfill"></div>
+                <div class="dashboard-chat-header-title">Chats</div>
+            </div>
+        </div>
+        <div class="dashboard-chat-wrapper overlay-scroll">
+            <div class="dashboard-chat-padding"></div>
+            <div class="dashboard-chat-container">
+                <div class="dashboard-chat-photo-container">
+                    <div class="dashboard-chat-photo"></div>
+                </div>
+                <div class="dashboard-chat-content-container">
+                    <div class="dashboard-chat-content">
+                        <div class="name-dashboard-chat-content">
+                            <span class="user-name-dashboard-chat">Masoud Nourbakhsh</span>
+                            <span class="user-status-dashboard-chat icon-online"></span>
+                            <span class="user-deliver-dashboard-chat icon-sent"></span>
+                            <span class="user-time-dashboard-chat">3:15 pm</span>
+                        </div>
+                        <div class="text-dashboard-chat-content">
+                            <span class="text-dashboard-chat">As i said, photos will be send.</span>
+                            <span class="attach-dashboard-chat icon-attach"></span>
+                            <div class="dashboard-chat-badge-container">
+                                <div class="dashboard-chat-badge">
+                                    <span> 11 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-chat-container">
+                <div class="dashboard-chat-photo-container">
+                    <div class="dashboard-chat-photo"></div>
+                </div>
+                <div class="dashboard-chat-content-container">
+                    <div class="dashboard-chat-content">
+                        <div class="name-dashboard-chat-content">
+                            <span class="user-name-dashboard-chat">Masoud Nourbakhsh</span>
+                            <span class="user-status-dashboard-chat icon-online"></span>
+                            <span class="user-deliver-dashboard-chat icon-sent"></span>
+                            <span class="user-time-dashboard-chat">3:15 pm</span>
+                        </div>
+                        <div class="text-dashboard-chat-content">
+                            <span class="text-dashboard-chat">As i said, photos will be send.</span>
+                            <span class="attach-dashboard-chat icon-attach"></span>
+                            <div class="dashboard-chat-badge-container">
+                                <div class="dashboard-chat-badge">
+                                    <span> 11 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-chat-container">
+                <div class="dashboard-chat-photo-container">
+                    <div class="dashboard-chat-photo"></div>
+                </div>
+                <div class="dashboard-chat-content-container">
+                    <div class="dashboard-chat-content">
+                        <div class="name-dashboard-chat-content">
+                            <span class="user-name-dashboard-chat">Masoud Nourbakhsh</span>
+                            <span class="user-status-dashboard-chat icon-online"></span>
+                            <span class="user-deliver-dashboard-chat icon-sent"></span>
+                            <span class="user-time-dashboard-chat">3:15 pm</span>
+                        </div>
+                        <div class="text-dashboard-chat-content">
+                            <span class="text-dashboard-chat">As i said, photos will be send.</span>
+                            <span class="attach-dashboard-chat icon-attach"></span>
+                            <div class="dashboard-chat-badge-container">
+                                <div class="dashboard-chat-badge">
+                                    <span> 11 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-chat-container">
+                <div class="dashboard-chat-photo-container">
+                    <div class="dashboard-chat-photo"></div>
+                </div>
+                <div class="dashboard-chat-content-container">
+                    <div class="dashboard-chat-content">
+                        <div class="name-dashboard-chat-content">
+                            <span class="user-name-dashboard-chat">Masoud Nourbakhsh</span>
+                            <span class="user-status-dashboard-chat icon-online"></span>
+                            <span class="user-deliver-dashboard-chat icon-sent"></span>
+                            <span class="user-time-dashboard-chat">3:15 pm</span>
+                        </div>
+                        <div class="text-dashboard-chat-content">
+                            <span class="text-dashboard-chat">As i said, photos will be send.</span>
+                            <span class="attach-dashboard-chat icon-attach"></span>
+                            <div class="dashboard-chat-badge-container">
+                                <div class="dashboard-chat-badge">
+                                    <span> 11 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-chat-container">
+                <div class="dashboard-chat-photo-container">
+                    <div class="dashboard-chat-photo"></div>
+                </div>
+                <div class="dashboard-chat-content-container">
+                    <div class="dashboard-chat-content">
+                        <div class="name-dashboard-chat-content">
+                            <span class="user-name-dashboard-chat">Masoud Nourbakhsh</span>
+                            <span class="user-status-dashboard-chat icon-online"></span>
+                            <span class="user-deliver-dashboard-chat icon-sent"></span>
+                            <span class="user-time-dashboard-chat">3:15 pm</span>
+                        </div>
+                        <div class="text-dashboard-chat-content">
+                            <span class="text-dashboard-chat">As i said, photos will be send.</span>
+                            <span class="attach-dashboard-chat icon-attach"></span>
+                            <div class="dashboard-chat-badge-container">
+                                <div class="dashboard-chat-badge">
+                                    <span> 11 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-chat-container">
+                <div class="dashboard-chat-photo-container">
+                    <div class="dashboard-chat-photo"></div>
+                </div>
+                <div class="dashboard-chat-content-container">
+                    <div class="dashboard-chat-content">
+                        <div class="name-dashboard-chat-content">
+                            <span class="user-name-dashboard-chat">Masoud Nourbakhsh</span>
+                            <span class="user-status-dashboard-chat icon-online"></span>
+                            <span class="user-deliver-dashboard-chat icon-sent"></span>
+                            <span class="user-time-dashboard-chat">3:15 pm</span>
+                        </div>
+                        <div class="text-dashboard-chat-content">
+                            <span class="text-dashboard-chat">As i said, photos will be send.</span>
+                            <span class="attach-dashboard-chat icon-attach"></span>
+                            <div class="dashboard-chat-badge-container">
+                                <div class="dashboard-chat-badge">
+                                    <span> 11 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-chat-container">
+                <div class="dashboard-chat-photo-container">
+                    <div class="dashboard-chat-photo"></div>
+                </div>
+                <div class="dashboard-chat-content-container">
+                    <div class="dashboard-chat-content">
+                        <div class="name-dashboard-chat-content">
+                            <span class="user-name-dashboard-chat">Masoud Nourbakhsh</span>
+                            <span class="user-status-dashboard-chat icon-online"></span>
+                            <span class="user-deliver-dashboard-chat icon-sent"></span>
+                            <span class="user-time-dashboard-chat">3:15 pm</span>
+                        </div>
+                        <div class="text-dashboard-chat-content">
+                            <span class="text-dashboard-chat">As i said, photos will be send.</span>
+                            <span class="attach-dashboard-chat icon-attach"></span>
+                            <div class="dashboard-chat-badge-container">
+                                <div class="dashboard-chat-badge">
+                                    <span> 11 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-chat-container">
+                <div class="dashboard-chat-photo-container">
+                    <div class="dashboard-chat-photo"></div>
+                </div>
+                <div class="dashboard-chat-content-container">
+                    <div class="dashboard-chat-content">
+                        <div class="name-dashboard-chat-content">
+                            <span class="user-name-dashboard-chat">Masoud Nourbakhsh</span>
+                            <span class="user-status-dashboard-chat icon-online"></span>
+                            <span class="user-deliver-dashboard-chat icon-sent"></span>
+                            <span class="user-time-dashboard-chat">3:15 pm</span>
+                        </div>
+                        <div class="text-dashboard-chat-content">
+                            <span class="text-dashboard-chat">As i said, photos will be send.</span>
+                            <span class="attach-dashboard-chat icon-attach"></span>
+                            <div class="dashboard-chat-badge-container">
+                                <div class="dashboard-chat-badge">
+                                    <span> 11 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-chat-container">
+                <div class="dashboard-chat-photo-container">
+                    <div class="dashboard-chat-photo"></div>
+                </div>
+                <div class="dashboard-chat-content-container">
+                    <div class="dashboard-chat-content">
+                        <div class="name-dashboard-chat-content">
+                            <span class="user-name-dashboard-chat">Masoud Nourbakhsh</span>
+                            <span class="user-status-dashboard-chat icon-online"></span>
+                            <span class="user-deliver-dashboard-chat icon-sent"></span>
+                            <span class="user-time-dashboard-chat">3:15 pm</span>
+                        </div>
+                        <div class="text-dashboard-chat-content">
+                            <span class="text-dashboard-chat">As i said, photos will be send.</span>
+                            <span class="attach-dashboard-chat icon-attach"></span>
+                            <div class="dashboard-chat-badge-container">
+                                <div class="dashboard-chat-badge">
+                                    <span> 11 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-chat-container">
+                <div class="dashboard-chat-photo-container">
+                    <div class="dashboard-chat-photo"></div>
+                </div>
+                <div class="dashboard-chat-content-container">
+                    <div class="dashboard-chat-content">
+                        <div class="name-dashboard-chat-content">
+                            <span class="user-name-dashboard-chat">Masoud Nourbakhsh</span>
+                            <span class="user-status-dashboard-chat icon-online"></span>
+                            <span class="user-deliver-dashboard-chat icon-sent"></span>
+                            <span class="user-time-dashboard-chat">3:15 pm</span>
+                        </div>
+                        <div class="text-dashboard-chat-content">
+                            <span class="text-dashboard-chat">As i said, photos will be send.</span>
+                            <span class="attach-dashboard-chat icon-attach"></span>
+                            <div class="dashboard-chat-badge-container">
+                                <div class="dashboard-chat-badge">
+                                    <span> 11 </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-event-box">
+        <div class="dashboard-event-header">
+            <div class="dashboard-event-header-base">
+                <div class="dashboard-event-header-rect"></div>
+                <div class="dashboard-event-header-circle icon-calendarfill"></div>
+                <div class="dashboard-event-header-title">Events</div>
+            </div>
+        </div>
+        <div class="dashboard-even-wrapper overlay-scroll">
+            <div class="dashboard-event-padding"></div>
+            <div class="dashboard-event-container">
+                <div class="dashboard-event-icon-container">
+                    <div class="dashboard-event-icon icon-lab"></div>
+                </div>
+                <div class="dashboard-event-content-container">
+                    <div class="dashboard-event-content-box">
+                        <div class="dashboard-event-content-sep"></div>
+                        <div class="dashboard-event-content-sep2"></div>
+                        <div class="dashboard-event-content-rec">
+                            <div class="dashboard-event-title"><span>Design A Priscription schdl for Dr. Farmani</span></div>
+                            <div class="dashboard-event-hour"><span>10:45 am</span></div>
+                            <div class="dashboard-event-content"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-event-time-container">
+                        <div class="dashboard-event-time-icon icon-time bg-yellow"></div>
+                        <div class="dashboard-event-time-date"><span>Wed | 25 Dec 2017</span></div>
+                        <div class="dashboard-event-time-remain"><span>2 min later</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-event-container">
+                <div class="dashboard-event-icon-container">
+                    <div class="dashboard-event-icon icon-lab"></div>
+                </div>
+                <div class="dashboard-event-content-container">
+                    <div class="dashboard-event-content-box">
+                        <div class="dashboard-event-content-sep"></div>
+                        <div class="dashboard-event-content-sep2"></div>
+                        <div class="dashboard-event-content-rec">
+                            <div class="dashboard-event-title"><span>Design A Priscription schdl for Dr. Farmani</span></div>
+                            <div class="dashboard-event-hour"><span>10:45 am</span></div>
+                            <div class="dashboard-event-content"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-event-time-container">
+                        <div class="dashboard-event-time-icon icon-time bg-yellow"></div>
+                        <div class="dashboard-event-time-date"><span>Wed | 25 Dec 2017</span></div>
+                        <div class="dashboard-event-time-remain"><span>2 min later</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-event-container">
+                <div class="dashboard-event-icon-container">
+                    <div class="dashboard-event-icon icon-heart bg-cyan"></div>
+                </div>
+                <div class="dashboard-event-content-container">
+                    <div class="dashboard-event-content-box">
+                        <div class="dashboard-event-content-sep"></div>
+                        <div class="dashboard-event-content-sep2"></div>
+                        <div class="dashboard-event-content-rec">
+                            <div class="dashboard-event-title"><span>Design A Priscription schdl for Dr. Farmani</span></div>
+                            <div class="dashboard-event-hour"><span>10:45 am</span></div>
+                            <div class="dashboard-event-content"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-event-time-container">
+                        <div class="dashboard-event-time-icon icon-time  "></div>
+                        <div class="dashboard-event-time-date"><span>Wed | 25 Dec 2017</span></div>
+                        <div class="dashboard-event-time-remain"><span>2 hours ago</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-event-container">
+                <div class="dashboard-event-icon-container">
+                    <div class="dashboard-event-icon icon-lab"></div>
+                </div>
+                <div class="dashboard-event-content-container">
+                    <div class="dashboard-event-content-box">
+                        <div class="dashboard-event-content-sep"></div>
+                        <div class="dashboard-event-content-sep2"></div>
+                        <div class="dashboard-event-content-rec">
+                            <div class="dashboard-event-title"><span>Design A Priscription schdl for Dr. Farmani</span></div>
+                            <div class="dashboard-event-hour"><span>10:45 am</span></div>
+                            <div class="dashboard-event-content"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-event-time-container">
+                        <div class="dashboard-event-time-icon icon-time bg-yellow"></div>
+                        <div class="dashboard-event-time-date"><span>Wed | 25 Dec 2017</span></div>
+                        <div class="dashboard-event-time-remain"><span>2 min later</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-event-container">
+                <div class="dashboard-event-icon-container">
+                    <div class="dashboard-event-icon icon-digestive bg-yellow"></div>
+                </div>
+                <div class="dashboard-event-content-container">
+                    <div class="dashboard-event-content-box">
+                        <div class="dashboard-event-content-sep"></div>
+                        <div class="dashboard-event-content-sep2"></div>
+                        <div class="dashboard-event-content-rec">
+                            <div class="dashboard-event-title"><span>Design A Priscription schdl for Dr. Farmani</span></div>
+                            <div class="dashboard-event-hour"><span>10:45 am</span></div>
+                            <div class="dashboard-event-content"><span>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-event-time-container">
+                        <div class="dashboard-event-time-icon icon-time  "></div>
+                        <div class="dashboard-event-time-date"><span>Wed | 25 Dec 2017</span></div>
+                        <div class="dashboard-event-time-remain"><span>2 hours ago</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-event-padding end"></div>
+        </div>
+    </div>
+    <div class="dashboard-widget-box">
+        <div class="dashboard-widget-container">
+            <div class="dashboard-widget-base">
+                <div class="widget-icon ">
+                    <span class="icon-memberfill" style="font-size: 19px"></span>
+                </div>
+                <div class="widget-title">Members</div>
+                <div class="widget-count" id="membersCount"></div>
+            </div>
+        </div>
+        <div class="dashboard-widget-container two">
+            <div class="dashboard-widget-base bg-cyan">
+                <div class="widget-icon two ">
+                    <span class="icon-stethoscopefill"></span>
+                </div>
+                <div class="widget-title">Supervisors</div>
+                <div class="widget-count" id="supervisorsCount"></div>
+            </div>
+        </div>
+        <div class="dashboard-widget-container three">
+            <div class="dashboard-widget-base bg-yellow">
+                <div class="widget-icon three ">
+                    <span class="icon-calendarfill" style="font-size: 19px"></span>
+                </div>
+                <div class="widget-title">Tasks</div>
+                <div class="widget-chart">
+                    <canvas id="chart-area1">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-widget-container four">
+            <div class="dashboard-widget-base bg-red2">
+                <div class="widget-icon four">
+                    <span class="icon-groupfill" style="font-size: 26px"></span>
+                </div>
+                <div class="widget-title">Memberships</div>
+                <div class="widget-chart">
+                    <canvas id="chart-area2">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--     <div class="dashboard-3rd"></div> -->
+</div>
+<div class="dashboard-footer"></div>
+</div>
+</div>
+{% endblock %} {% block DashboardJavascript %}
+<script src="{% static 'js/chart.min.js' %}"></script>
+<script src="{% static 'js/countUp.min.js' %}"></script>
+<script src="{% static 'js/countUp-script.js' %}"></script>
+{% endblock %} {% block DashboardJavascript2 %}
+<script src="{% static 'js/demo-chart.js' %}"></script>
+<script src="{% static 'js/dashboard-script.js' %}"></script>
+{% endblock %}

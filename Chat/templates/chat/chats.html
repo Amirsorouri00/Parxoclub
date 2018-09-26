@@ -1,0 +1,65 @@
+{% extends "common/index.html" %} {% load static %} {% block SocketJavascript %}
+<script src="{% static '/socket.io-client/dist/socket.io.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/my-luxon.js' %}"></script>
+<script type="text/javascript">
+const user_id = '{{ user_id }}';
+const users = '{{users}}';
+</script>
+<!-- <script src="{% static '/luxon/build/node/luxon.js' %}"></script> -->
+{% endblock %}
+<!-- Title Block -->
+{% block title %} | ChatPanel{% endblock %}
+<!-- After Side Nav Block Objects in index.html  -->
+{% block after_side_nav_content %}
+<!-- Float Calender -->
+<!-- Chat Panel -->
+{% include 'chat/chat-user-chats-panel.html' %}
+<!-- Talk -->
+{% include 'chat/chat-talk-main-panel.html' %} {% endblock %}
+<!-- After mobile menu back Block Objects in index.html  -->
+{% block menu-back-after-content %}
+<!-- Show Event Modal -->
+{% include 'member/member-show-event-modal.html' %}
+<!-- Add Event Modal -->
+{% include 'member/member-add-event-modal.html' %}
+<!-- Edit Event Modal -->
+{% include 'member/member-edit-event-modal.html' %}
+<!-- Remove Event Modal -->
+{% include 'member/member-remove-event-modal.html' %}
+<!-- Chat Upload Modal -->
+{% include 'chat/chat-chat-upload-modal.html' %}
+<!-- Remove Chat Modal -->
+{% include 'chat/chat-remove-chat-modal.html' %} {% endblock %}{% block EndJavascript %}
+<script type="text/javascript">
+window.onload = chatready;
+
+function chatready() {
+    var scrollRoomMessages = $(".talk-base").overlayScrollbars({
+        className: "os-theme-dark",
+        sizeAutoCapable: true,
+        paddingAbsolute: true,
+        scrollbars: {
+            autoHide: "leave",
+            autoHideDelay: 500,
+        },
+        // callbacks: {
+        //     onInitialized: function() {
+        //         scrollRoomMessages.scroll({ y: "100%" }, 500);
+        //     }
+        // },
+    }).overlayScrollbars();
+    chat_scrollbar = scrollRoomMessages;
+    scrollRoomMessages.scroll({ y: "100%" }, 500);
+    scrollRoomMessages.scroll({ y: "-=100px" }, 500);
+}
+$(document).ready(function() {
+
+    Chat('', '', '', '', '');
+    //instance.scroll({ el: element, scroll: { x: "never" }, block: "end" });
+});
+</script>
+<!-- <script src="/node_modules/socket.io/socket.io.js"></script> -->
+<script>
+//const io = require('socket.io-client');
+</script>
+{% endblock %}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+           ╔╣╣╣╣╣╗╖┌   ╓╥╣╣╣╣╣╣╖
+         ╔╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╖
+         ╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╝
+          ╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╜
+           ╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╜     ╣╜╙╙╙╣═╣╜╙╙╙╣═  ╢╣╖  ╙╣╖ ╔╝└╓╣╜╙╙╣
+           ║╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣      ╣─╗╗╗╣ ╣═ ╣╗╣─ ╢╜ ╢╖  ╓╣╣╖  ╢    ║╬
+           ╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣     ╣─     ╣─  ╙╣═╢╜   ║═╢╜─ ╙╣═ ╨╣╗╣╜
+         ╓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣
+         ╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣
+         ╙╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╝
+           ╙╣╣╣╣╝╜└     ╙╙╣╣╣╣╜└
+ 
+ -->
+<html lang="en, fa">
+
+<head>
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="The Way We ... Flow">
+    <meta name="keywords" content="Praxo, praxo, PRAXO,P R &#923 X O, PR&#923XO, software, engineering, software engineering, programming, healthcare, health, hospital, Medical, HIS, LIS, Integrating HIS & LIS, Hospital information system, Laboratory Information System, web designing, UI, UX, Android, IOS, App development, Laboratory ">
+    <meta name="description" content="The Way We ... Flow | PRAXO">
+    <meta name="author" content="PRAXO">
+    <meta property="og:site_name" content="PRAXO">
+    <meta property="og:title" content="praxo.ir">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="The Way We ... Flow | PRAXO">
+    <meta property="og:image" content="http://www.praxo.ir/img/praxo.jpg">
+    <meta name="twitter:site" content="@praxoco">
+    <meta name="twitter:description" content="The Way We ... Flow | PRAXO">
+    <meta property="og:site_name" content="PRAXO">
+    <meta property="og:title" content="PRAXO">
+    <meta property="og:url" content="https://www.praxo.ir/">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="The Way We ... Flow | PRAXO">
+    <meta property="og:image" content="http://www.praxo.ir/img/praxo.jpg">
+    <meta name="msapplication-config" content="/favico/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- link -->
+    <link rel="canonical" href="http://www.praxo.ir/"> {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}" /> {% if rtl %}
+    <!-- RTL Styles -->
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style-rtl.css' %}" />{% endif %}
+    <link rel="stylesheet" type="text/css" href="{% static '/css/praxofont.css' %}">
+    <!-- Scripts -->
+    <script type="text/javascript" src="{% static '/js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static '/js/button.js' %}"></script>
+    <title>P R Λ X O{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    {% block content %} {% endblock %}
+
+    <body>
+        {% block javascript %} {% endblock %}
+
+</html>

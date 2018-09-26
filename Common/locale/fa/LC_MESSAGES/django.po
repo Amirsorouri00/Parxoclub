@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-17 19:12+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\templates\common\index-main-header.html:13
+msgid "Admin"
+msgstr "پیش‌"
+
+#: .\templates\common\index-main-header.html:14
+msgid "Dashboard"
+msgstr "خــوان"
+
+#: .\templates\common\index-main-header.html:35
+#: .\templates\common\index-main-header.html:46
+msgid "Username"
+msgstr "نام کاربری"
+
+#: .\templates\common\index-main-header.html:49
+msgid "Position/Title"
+msgstr "سِمت / عنوان"
+
+#: .\templates\common\index-main-header.html:54
+msgid "Log Out"
+msgstr "خــروج"
+
+#: .\templates\common\index-main-mobile-side-nav.html:8
+#: .\templates\common\index-mobile-menu-back.html:8
+msgid "Admin Dashboard"
+msgstr "پیش‌خــوان"
+
+#: .\templates\common\index-main-mobile-side-nav.html:14
+#: .\templates\common\index-mobile-menu-back.html:14
+msgid "Members"
+msgstr "اعضــا"
+
+#: .\templates\common\index-main-mobile-side-nav.html:20
+#: .\templates\common\index-mobile-menu-back.html:20
+msgid "Chat"
+msgstr "گفت‌و‌گو"
+
+#: .\templates\common\index-main-mobile-side-nav.html:30
+#: .\templates\common\index-mobile-menu-back.html:30
+msgid "Messages"
+msgstr "پیــام‌ها"
+
+#: .\templates\common\index-main-mobile-side-nav.html:40
+#: .\templates\common\index-mobile-menu-back.html:40
+msgid "Calendar"
+msgstr "تقویــم"
+
+#: .\templates\common\index-main-mobile-side-nav.html:51
+#: .\templates\common\index-mobile-menu-back.html:51
+msgid "News"
+msgstr "اخبار"
+
+#: .\templates\common\index-main-mobile-side-nav.html:62
+#: .\templates\common\index-mobile-menu-back.html:62
+msgid "Maintenance"
+msgstr "تنظیمات"

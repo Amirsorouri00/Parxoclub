@@ -1,0 +1,59 @@
+{% extends "member/base.html" %} {% load i18n %}{% block title %} | Login{% endblock %} {% block content %}
+<div class="main">
+    <div class="login-base">
+        <div class="login-pattern">
+            <div class="login-back-overlay">
+                <div class="login-container">
+                    <div class="login-logo"></div>
+                    <div class="login-text">{% trans "Welcome to PR&#923XO panel. please input your username and password to reach out your dashboard section." %} </div>
+                    <div class="login-input-container">
+                        <form action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
+                            <!-- Username -->
+                            <div class="login-input input-username">
+                                <input class="login-inputbox" type="text" name="username" id="idUsername" required="" tabindex="1">
+                                <label class="login-label"><span class="icon-member"></span>{% trans "Username" %}</label>
+                                <label class="login-border"></label>
+                                <div class="login-input-validation clr-gray04">
+                                    {% trans "Your Email/Membership ID" %}
+                                </div>
+                            </div>
+                            <!-- Password -->
+                            <div class="login-input input-password">
+                                <input class="login-inputbox" type="password" name="password" id="idPassword" required="" tabindex="1">
+                                <label class="login-label"><span class="icon-password"></span>{% trans "Password" %}</label>
+                                <label class="login-border"></label>
+                            </div>
+                            <div class="login-forget"><span>{% trans "Forgot password?" %}</span></div>
+                            <input type="hidden" name="next" id="idNext" value="{{ next }}" />
+                            <div class="login-submit">
+                                <button type="submit" class="login-btn btn-taint">
+                                    {% trans "Login" %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="login-copyright">{% trans "© 2017 PR&#923XO. All rights reserved." %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} {% load static %} {% block javascript %}
+<script type="text/javascript" src="{% static '/js/js.cookie.js' %}"></script>
+<script type="text/javascript" src="{% static '/js/all-ajax-functions.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('form').submit(function(event) {
+        // do stuff
+        event.preventDefault();
+        var context = '{{context}}';
+        var username = $("#idUsername").val();
+        var password = $("#idPassword").val();
+        var url = "/ajax/member/login/";
+        Login("POST", url, $("#idUsername").val(), $("#idPassword").val());
+        return false;
+    });
+});
+</script>
+{% endblock %}

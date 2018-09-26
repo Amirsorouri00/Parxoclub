@@ -1,0 +1,175 @@
+{% load i18n %}
+<!-- Modal Add User -->
+<div id="idAddUser" class="custom-modal">
+    <div class="modal-add-user">
+        <div class="header-add-user">
+            <div class="text-header-add-user"><span>Add New User</span></div>
+        </div>
+        <div class="add-user-top">
+            <div class="add-user-input">
+                {% if form_user.first_name.errors %}
+                <div class="doc-no-field-error">
+                    <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
+                    <ul class="no-field-error">
+                        <li class="no-field-detail clr-red"><span>•&#32;</span>Name must not be in other language than English.</li>
+                        <li class="no-field-detail clr-red"><span>•&#32;</span>Home Address must be in Tehran.</li>
+                        <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
+                    </ul>
+                </div>
+                {% endif %}
+                <div id="add-user-input-wrapper" class="add-user-input-wrapper overlay-scroll">
+                    <div class="doc-no-field-error-fake"></div>
+                    <form id="form1" action="{% url 'maintenance'%}" method="POST" enctype="multipart/form-data">
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>{% trans "First Name" %}</label>
+                            </div>
+                            <div class="input-box">
+                                <input id="maintenance_first_name_id" type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>{% trans "Last Name" %}</label>
+                            </div>
+                            <div class="input-box">
+                                <input id="maintenance_last_name_id" type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>{% trans "Birth Date" %}</label>
+                            </div>
+                            <div class="input-box">
+                                <input id="maintenance_birthdate_id" type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-toggle">
+                            <div class="toggle-container">
+                                <div class="toggle-title">{% trans "Gender" %}</div>
+                                <input id="idGender1" type="checkbox">
+                                <div class="toggle-option-first">{% trans "Female" %}</div>
+                                <label class="toggle-btn-base" tabindex="1" for="idGender1">
+                                    <div class="toggle-btn"></div>
+                                </label>
+                                <div class="toggle-option-second">{% trans "Male" %}</div>
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>{% trans "Email" %}</label>
+                            </div>
+                            <div class="input-box">
+                                <input id="maintenance_email_id" type="text" name="date" required="" tabindex="1">
+                            </div>
+                            <div class="input-validation">{% trans "example@mail.com" %}</div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>{% trans "Phone" %}</label>
+                            </div>
+                            <div class="input-box">
+                                <input id="maintenance_mobile_id" type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>{% trans "Address" %}</label>
+                            </div>
+                            <div class="input-box">
+                                <input id="maintenance_address_id" type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="field-error clr-red">
+                            <ul>
+                                <li>{% trans "Address most be in Tehran" %}</li>
+                                <li>{% trans "Street name is too short" %}</li>
+                            </ul>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>{% trans "Membership Type" %}</label>
+                            </div>
+                            <div class="input-box">
+                                <select id="maintenance_membership_type_id">
+                                    <option value="gold">{% trans "Gold" %}</option>
+                                    <option value="silver">{% trans "Silver" %}</option>
+                                    <option value="bronze">{% trans "Bronze" %}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>{% trans "Membership ID" %}</label>
+                            </div>
+                            <div class="input-box">
+                                <input id="maintenance_member_code_id" type="text" name="date" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="custom-check">
+                            <div class="check-label">
+                                <label>{% trans "User Type" %}</label>
+                            </div>
+                            <div class="check-option-base">
+                                <label class="check-box">
+                                    <div class="check-box-select">
+                                        <span class="check-box-icon icon-check"></span>
+                                    </div>
+                                </label>
+                                <div class="check-box-title">Patient</div>
+                            </div>
+                            <div class="check-option-base">
+                                <label class="check-box">
+                                    <div class="check-box-select">
+                                        <span class="check-box-icon icon-check"></span>
+                                    </div>
+                                </label>
+                                <div class="check-box-title">Physician</div>
+                            </div>
+                            <div class="check-option-base">
+                                <label class="check-box">
+                                    <div class="check-box-select">
+                                        <span class="check-box-icon icon-check"></span>
+                                    </div>
+                                </label>
+                                <div class="check-box-title">Supervisor</div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="add-user-input-padding"></div>
+                </div>
+            </div>
+            <div class="add-user-sep"></div>
+            <div class="add-user-photo-editor ">
+                <div class="news-photo-editor-container ">
+                    <div id="news-photo-editor" class="news-photo-editor" style="background-image: url();"></div>
+                    <div class="news-edit-btn-wrapper">
+                        <div class="news-edit-btn-container">
+                            <div title="Browse">
+                                <input preview="news-photo-editor" style="padding-left: 0.5em;" id="files" accept=".jpg,.png,.bmp" class="news-edit-btn  btn-taint icon-browse" type="file" name="files" required="" tabindex="1" multiple />
+                            </div>
+                        </div>
+                        <div class="news-edit-btn-container">
+                            <div id="idRotateLeft" class="news-edit-btn  btn-taint icon-rotateleft" title="Rotate left" tabindex="1"></div>
+                        </div>
+                        <div class="news-edit-btn-container">
+                            <div id="idRotateRight" class="news-edit-btn  btn-taint icon-rotateright" title="Rotate Right" tabindex="1"></div>
+                        </div>
+                        <div class="news-edit-btn-container">
+                            <div id="idNoPhoto" class="news-edit-btn  btn-taint icon-trash" title="Clear Photo" tabindex="1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="submit-add-user">
+            <div class="text-submit-btn-container " modal-close>
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container ">
+                <button form="form1" type="submit" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+{% load i18n %}
+<!-- Member Options Modal -->
+<div id="idEditMember" class="custom-modal">
+    <div class="modal-member-edit">
+        <div class="header-member-edit">
+            <div class="photo-container">
+            </div>
+        </div>
+        <div class="member-edit-input-base">
+            {% if form_user.first_name.errors %}
+            <div class="no-field-error-base">
+                <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
+                <ul class="no-field-error">
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Name must not be in other language than English.</li>
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Home Address must be in Tehran.</li>
+                    <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
+                </ul>
+            </div>
+            {% endif %}
+            <div class="overlay-scroll">
+                <!-- 
+                <div class="no-field-error-base-fake">
+                    <span class="no-field-title clr-red">Please correct the following errors and try again:</span>
+                    <ul class="no-field-error">
+                        <li class="no-field-detail clr-red"><span>•&#32;</span>Name must not be in other language than English.</li>
+                        <li class="no-field-detail clr-red"><span>•&#32;</span>Home Address must be in Tehran.</li>
+                        <li class="no-field-detail clr-red"><span>•&#32;</span>Not a valid phone number</li>
+                    </ul>
+                </div> -->
+                <form id="edit_form" user_id="" action="{% url 'maintenance_edit_user'%}" method="POST" enctype="multipart/form-data">
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>{% trans "First Name" %}</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="first_name" required="" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>{% trans "Last Name" %}</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="last_name" required="" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>{% trans "Birth Date" %}</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="birthdate" required="" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="custom-toggle">
+                        <div class="toggle-container">
+                            <div class="toggle-title">{% trans "Gender" %}</div>
+                            <input id="idGender" name="gender" type="checkbox">
+                            <div class="toggle-option-first">{% trans "Female" %}</div>
+                            <label class="toggle-btn-base" tabindex="1" for="idGender">
+                                <div class="toggle-btn"></div>
+                            </label>
+                            <div class="toggle-option-second">{% trans "Male" %}</div>
+                        </div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>{% trans "Email" %}</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="email" type="email" required="" tabindex="1">
+                        </div>
+                        <div class="input-validation">{% trans "example@mail.com" %}</div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>{% trans "Phone" %}</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="mobile" required="" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>{% trans "Address" %}</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="address" required="" tabindex="1">
+                        </div>
+                    </div>
+                    <div class="field-error clr-red">
+                        <ul>
+                            <li>{% trans "Address most be in Tehran" %}</li>
+                            <li>{% trans "Street name is too short" %}</li>
+                        </ul>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>{% trans "Membership Type" %}</label>
+                        </div>
+                        <div class="input-box">
+                            <select id="member_membership_type_id_edit" name="membership">
+                                <option value="gold">{% trans "Gold" %}</option>
+                                <option value="silver">{% trans "Silver" %}</option>
+                                <option value="bronze">{% trans "Bronze" %}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="custom-input">
+                        <div class="input-label">
+                            <label>{% trans "Membership ID" %}</label>
+                        </div>
+                        <div class="input-box">
+                            <input type="text" name="code" required="" tabindex="1">
+                        </div>
+                    </div>
+                </form>
+                <div class="member-edit-input-base-padding"></div>
+            </div>
+        </div>
+        <div class="submit-member-edit-base">
+            <div class="text-submit-btn-container" modal-close>
+                <div id="editFormCloseModal" class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container">
+                <button form="edit_form" type="submit" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

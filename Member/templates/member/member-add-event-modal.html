@@ -1,0 +1,68 @@
+{% load i18n %}
+<!-- Add Event Modal -->
+<div id="idAddEvent" class="custom-modal">
+    <div class="modal-edit-event">
+        <div class="header-edit-event">
+            <div class="event-icon-shake-container">
+                <div class="event-icon-shake icon-alarm"></div>
+            </div>
+        </div>
+        <div class="edit-event-input-base overlay-scroll">
+            <form>
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>{% trans "Event Type" %}</label>
+                    </div>
+                    <div class="input-box">
+                        <select>
+                            <option value="pharmacy">{% trans "Pharmacy" %}</option>
+                            <option value="laboratory">{% trans "Laboratory" %}</option>
+                            <option value="hospitolization">{% trans "Hospitolization" %}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>{% trans "Title" %}</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" name="date" required="" tabindex="1">
+                    </div>
+                </div>
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>{% trans "Time" %}</label>
+                    </div>
+                    <div class="input-box">
+                        <input type="Time" name="time" required="" tabindex="1">
+                    </div>
+                    <div class="input-validation">{% trans "Begin at" %}</div>
+                </div>
+                <div class="custom-input" style="margin-top: 5px;">
+                    <div class="input-box">
+                        <input type="Time" name="time" required="" tabindex="1">
+                    </div>
+                    <div class="input-validation">{% trans "Finish at" %}</div>
+                </div>
+                <div class="custom-textarea">
+                    <div class="textarea-label">
+                        <label>{% trans "Description" %}</label>
+                    </div>
+                    <div class="textarea-box">
+                        <textarea type="text" name="date" required="" tabindex="1" autocomplete="off"></textarea>
+                    </div>
+                </div>
+            </form>
+            <div class="event-edit-input-padding"></div>
+        </div>
+        <div class="submit-edit-event-base">
+            <div class="text-submit-btn-container " modal-close>
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container ">
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+            </div>
+        </div>
+    </div>
+</div>

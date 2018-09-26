@@ -1,0 +1,64 @@
+{% load i18n %}
+<!-- Modal Remove User -->
+<div id="idRemoveUser" class="custom-modal">
+    <div class="modal-remove-user">
+        <div class="header-remove-user">
+            <div class="photo-container"></div>
+        </div>
+        <div id="remove-user-input-wrapper" class="remove-user-info">
+            <div class="remove-warning">Are you sure about removing this user?</div>
+            <div class="remove-user-info-content overlay-scroll">
+                <div class="remove-user-info-padding"></div>
+                <div class="remove-user-detail">
+                    <span class="remove-user-title">{% trans "First Name" %}</span>
+                    <span id="remove-user-info-firstname" name="first_name" class="remove-user-subtitle"></span>
+                </div>
+                <div class="remove-user-detail">
+                    <span class="remove-user-title">{% trans "Last Name" %}</span>
+                    <span id="remove-user-info-lastname" name="last_name" class="remove-user-subtitle"></span>
+                </div>
+                <div class="remove-user-detail">
+                    <span class="remove-user-title">{% trans "Birth Date" %}</span>
+                    <span id="remove-user-info-birthdate" name="birtdate" class="remove-user-subtitle"></span>
+                </div>
+                <div class="remove-user-detail">
+                    <span class="remove-user-title">{% trans "Gender" %}</span>
+                    <span id="remove-user-info-gender" name="gender" class="remove-user-subtitle"></span>
+                </div>
+                <div class="remove-user-detail">
+                    <span class="remove-user-title">{% trans "Email" %}</span>
+                    <span id="remove-user-info-email" name="email" class="remove-user-subtitle"></span>
+                </div>
+                <div class="remove-user-detail">
+                    <span class="remove-user-title">{% trans "Phone" %}</span>
+                    <span id="remove-user-info-mobile" name="mobile" class="remove-user-subtitle"></span>
+                </div>
+                <div class="remove-user-detail">
+                    <span class="remove-user-title">{% trans "Address" %}</span>
+                    <span id="remove-user-info-address" name="address" class="remove-user-subtitle">No6-3th west allay-Motahari blvd-Payambar west-Sattari Highway-%s-Iran</span>
+                </div>
+                <div class="remove-user-detail">
+                    <span class="remove-user-title">{% trans "Membership" %}</span>
+                    <span id="remove-user-info-membership" name="membership" class="remove-user-subtitle">{% trans "Gold" %}</span>
+                </div>
+                <div class="remove-user-detail">
+                    <span class="remove-user-title">{% trans "ID" %}</span>
+                    <span id="remove-user-info-code" name="code" class="remove-user-subtitle">253498-58</span>
+                </div>
+                <div class="remove-user-detail">
+                    <span class="remove-user-title">{% trans "User Type" %}</span>
+                    <span id="remove-user-info-prefix" name="physician" class="remove-user-subtitle"> Patient<br>Supervisor</span>
+                </div>
+            </div>
+        </div>
+        <div class="submit-remove-user">
+            <div class="text-submit-btn-container " modal-close>
+                <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-close"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container ">
+                <button type="submit" id="remove_form" user_id="" action="{% url 'maintenance_remove_user'%}" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

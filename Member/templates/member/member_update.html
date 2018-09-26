@@ -1,0 +1,184 @@
+{% load static io %}
+
+<form action="{% url 'member_update' user.id %}" method="post" show-spinner 
+    data-pjax data-pjax-container="modal" data-pjax-success="successCallback">
+{% csrf_token %}
+
+    <div class="modal-member-edit">
+        <div class="header-member-edit">
+            <div class="photo-container" 
+                style="background-image: url({% profile_pic user.id|stringformat:"i" %})">
+            </div>
+        </div>
+        <div class="member-edit-input-base">
+            <div class="overlay-scroll">
+                {% comment %} First Name {% endcomment %}
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>{{form_user.first_name.label}}</label>
+                    </div>
+                    <div class="input-box">
+                        {{form_user.first_name}}
+                    </div>
+                </div>
+                {% if form_user.first_name.errors %}
+                <div class="field-error clr-red">{{form_user.first_name.errors}}</div>
+                {% endif %}
+                
+                {% comment %} Last Name {% endcomment %}
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>{{form_user.last_name.label}}</label>
+                    </div>
+                    <div class="input-box">
+                        {{form_user.last_name}}
+                    </div>
+                </div>
+                {% if form_user.last_name.errors %}
+                <div class="field-error clr-red">{{form_user.last_name.errors}}</div>
+                {% endif %}
+
+                {% comment %} Birthdate {% endcomment %}
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>{{form_profile.birthdate.label}}</label>
+                    </div>
+                    <div class="input-box">
+                        {{form_profile.birthdate}}
+                    </div>
+                </div>
+                {% if form_profile.birthdate.errors %}
+                <div class="field-error clr-red">{{form_profile.birthdate.errors}}</div>
+                {% endif %}
+
+                {% comment %} Gender {% endcomment %}
+                <div class="custom-toggle">
+                    <div class="toggle-container">
+                        <div class="toggle-title">{{form_profile.gender.label}}</div>
+                        {{form_profile.gender}}
+                        <div class="toggle-option-first">Female</div>
+                        <label class="toggle-btn-base" for="{{form_profile.gender.id_for_label}}" tabindex="1">
+                            <div class="toggle-btn">
+                            </div>
+                        </label>
+                        <div class="toggle-option-second">Male</div>
+                    </div>
+                </div>
+                {% if form_profile.gender.errors %}
+                <div class="field-error clr-red">{{form_profile.gender.errors}}</div>
+                {% endif %}
+
+                {% comment %} Email {% endcomment %}
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>Email</label>
+                    </div>
+                    <div class="input-box">
+                        {{form_user.email}}
+                    </div>
+                </div>
+                {% if form_user.email.errors %}
+                <div class="field-error clr-red">{{form_user.email.errors}}</div>
+                {% endif %}
+                
+                {% comment %} Mobile {% endcomment %}
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>{{form_profile.mobile.label}}</label>
+                    </div>
+                    <div class="input-box">
+                        {{form_profile.mobile}}
+                    </div>
+                </div>
+                {% if form_profile.mobile.errors %}
+                <div class="field-error clr-red">{{form_profile.mobile.errors}}</div>
+                {% endif %}
+                    
+                {% comment %} Address {% endcomment %}
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>{{form_profile.address.label}}</label>
+                    </div>
+                    <div class="input-box">
+                        {{form_profile.address}}
+                    </div>
+                </div>
+                {% if form_profile.address.errors %}
+                <div class="field-error clr-red">{{form_profile.address.errors}}</div>
+                {% endif %}
+
+                {% comment %} Membership Code {% endcomment %}
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>Membership ID</label>
+                    </div>
+                    <div class="input-box">
+                        {{form_member.code}}
+                    </div>
+                </div>
+                {% if form_member.code.errors %}
+                <div class="field-error clr-red">{{form_member.code.errors}}</div>
+                {% endif %}
+
+                {% comment %} Membership Type {% endcomment %}
+                <div class="custom-input">
+                    <div class="input-label">
+                        <label>Membership Type</label>
+                    </div>
+                    <div class="input-box">
+                        {{form_member.membership}}
+                    </div>
+                </div>
+                {% if form_member.membership.errors %}
+                <div class="field-error clr-red">{{form_member.membership.errors}}</div>
+                {% endif %}
+                    
+                <div class="member-edit-input-base-padding"></div>
+            </div>
+        </div>
+
+        <div class="submit-member-edit-base">
+            <div class="text-submit-btn-container" modal-close>
+                <div class="text-submit-btn btn-taint"><span class="icon-close clr-red fs-22"></span></div>
+            </div>
+            <div class="text-submit-btn-sep"></div>
+            <div class="text-submit-btn-container">
+                <button type="submit" class="text-submit-btn btn-taint">
+                    <span class="fs-22 clr-cyan icon-check"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spinner-base">
+            <div class="spinner-pattern-container">
+                <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern1">
+                <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern2">
+                <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern3"> 
+                <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern4">  
+                <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern5"> 
+                <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern6"> 
+                <img src="{% static 'img/spinnerPattern.svg' %}" class="spinner-pattern7">                                     
+            </div>
+            <div class="spinner-container">
+                <div class="spinner-logo"></div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $('.overlay-scroll').overlayScrollbars({ 
+        className       : "os-theme-dark",
+        sizeAutoCapable : true,
+        paddingAbsolute : true
+    });
+
+    function successCallback(options) {
+        $.pjax({
+            push: true,
+            url: "{% url 'member_doc' user.id %}", 
+            container: "#idMemberDocs",
+            successCallback: "initCarousel",
+        });
+    }
+</script>

@@ -1,0 +1,116 @@
+{% load i18n %}
+<!-- Chat Panel -->
+<div class="content-wrapper">
+    <div class="chat-panel">
+        <div class="header-chat">
+            <div class="icon-header-chat icon-chatfill"></div>
+            <span class="title-header-chat">{% trans "Chats" %}</span>
+            <div class="badge-container-header">
+                <div class="badge  bg-yellow">
+                    <span> 12 </span>
+                </div>
+            </div>
+        </div>
+        <div class="search-chat">
+            <form class="search-container">
+                <input id="search-box" class="search-box" type="text" name="search" required="">
+                <label class="search-label">{% trans "search" %}</label>
+            </form>
+        </div>
+        <div class="users-base-chat overlay-scroll">
+            <div class="user-chat">
+                <div class="photo-container-user-chat">
+                    <div class="photo-user-chat"></div>
+                </div>
+                <div class="chat-content">
+                    <div class="name-chat-content">
+                        <div class="user-name-chat"><span>Masoud Nourbakhsh</span></div>
+                        <span class="user-status-chat icon-offline"></span>
+                        <span class="user-deliver-chat icon-delivered"></span>
+                        <span class="user-time-chat">3:15 pm</span>
+                    </div>
+                    <div class="text-chat-content">
+                        <div class="text-chat"><span>As i said, photos will be send.</span></div>
+                        <span class="attach-chat icon-attach"></span>
+                        <div class="user-chat-badge-container">
+                            <div class="user-chat-badge">
+                                <span> 11 </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-chat">
+                <div class="photo-container-user-chat">
+                    <div class="photo-user-chat"></div>
+                </div>
+                <div class="chat-content">
+                    <div class="name-chat-content">
+                        <div class="user-name-chat"><span>Masoud Nourbakhsh</span></div>
+                        <span class="user-status-chat icon-online"></span>
+                        <span class="user-deliver-chat icon-sent"></span>
+                        <span class="user-time-chat">3:15 pm</span>
+                    </div>
+                    <div class="text-chat-content">
+                        <div class="text-chat"><span>As i said, photos will be send.</span></div>
+                        <span class="attach-chat icon-attach"></span>
+                        <div class="user-chat-badge-container">
+                            <div class="user-chat-badge">
+                                <span> 11 </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-grouping">
+                <span>{% trans "Contacts" %}</span>
+            </div>
+            <div class="user-chat ">
+                <div class="photo-container-user-chat">
+                    <div class="photo-user-chat"></div>
+                </div>
+                <div class="chat-content">
+                    <div class="name-chat-content">
+                        <div class="user-name-chat"><span>Masoud Nourbakhsh</span></div>
+                        <span class="user-status-chat icon-online"></span>
+                        <span class="user-deliver-chat icon-sent"></span>
+                        <span class="user-time-chat">3:15 pm</span>
+                    </div>
+                    <div class="text-chat-content">
+                        <div class="text-chat"><span>As i said, photos will be send.</span></div>
+                        <span class="attach-chat icon-attach"></span>
+                        <div class="user-chat-badge-container">
+                            <div class="user-chat-badge">
+                                <span> 11 </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% for user in users %}
+            <div class="user-chat " user_id="{{ user.id }}">
+                <div class="photo-container-user-chat">
+                    <div class="photo-user-chat"></div>
+                </div>
+                <div class="chat-content">
+                    <div class="name-chat-content">
+                        <div class="user-name-chat"><span>{{ user.first_name }} {{ user.last_name }}</span></div>
+                        <span class="user-status-chat icon-online"></span>
+                        <span class="user-deliver-chat icon-sent"></span>
+                        <span class="user-time-chat">3:15 pm</span>
+                    </div>
+                    <div class="text-chat-content">
+                        <div class="text-chat"><span>As i said, photos will be send.</span></div>
+                        <span class="attach-chat icon-attach"></span>
+                        <div class="user-chat-badge-container">
+                            <div class="user-chat-badge">
+                                <span> 11 </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

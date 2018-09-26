@@ -1,0 +1,376 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-17 20:26+0430\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\templates\Member\login.html:8
+msgid ""
+"Welcome to PR&#923XO panel. please input your username and password to reach "
+"out your dashboard section."
+msgstr ""
+"به پنل مدیریت پراکسو خوش آمدید. برای دسترسی به حساب خود، نام کاربری و "
+"گذرواژه را وارد کنید."
+
+#: .\templates\Member\login.html:15
+msgid "Username"
+msgstr "نام کاربری"
+
+#: .\templates\Member\login.html:18
+#, fuzzy
+#| msgid "Your Email/Membership"
+msgid "Your Email/Membership ID"
+msgstr "پست الکترونیک / کد عضویت"
+
+#: .\templates\Member\login.html:24
+msgid "Password"
+msgstr "گذرواژه"
+
+#: .\templates\Member\login.html:27
+msgid "Forgot password?"
+msgstr "فراموش کرده‌اید؟"
+
+#: .\templates\Member\login.html:31
+msgid "Login"
+msgstr "ورود"
+
+#: .\templates\Member\login.html:36
+msgid "© 2017 PR&#923XO. All rights reserved."
+msgstr "© ۱۳۹۶ | تمامی حقوق برای پراکســو محفوظ است."
+
+#: .\templates\Member\maintenance-add-user-modal.html:25
+#: .\templates\Member\maintenance-edit-user-modal.html:25
+#: .\templates\Member\maintenance-remove-user-modal.html:13
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:33
+#: .\templates\Member\member-member-info-modal.html:13
+msgid "First Name"
+msgstr "نام"
+
+#: .\templates\Member\maintenance-add-user-modal.html:33
+#: .\templates\Member\maintenance-edit-user-modal.html:33
+#: .\templates\Member\maintenance-remove-user-modal.html:17
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:41
+#: .\templates\Member\member-member-info-modal.html:17
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#: .\templates\Member\maintenance-add-user-modal.html:41
+#: .\templates\Member\maintenance-edit-user-modal.html:41
+#: .\templates\Member\maintenance-remove-user-modal.html:21
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:49
+#: .\templates\Member\member-member-info-modal.html:21
+msgid "Birth Date"
+msgstr "تاریخ تولد"
+
+#: .\templates\Member\maintenance-add-user-modal.html:49
+#: .\templates\Member\maintenance-edit-user-modal.html:49
+#: .\templates\Member\maintenance-remove-user-modal.html:25
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:57
+#: .\templates\Member\member-member-info-modal.html:25
+msgid "Gender"
+msgstr "جنسیت"
+
+#: .\templates\Member\maintenance-add-user-modal.html:51
+#: .\templates\Member\maintenance-edit-user-modal.html:51
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:59
+msgid "Female"
+msgstr "مونث"
+
+#: .\templates\Member\maintenance-add-user-modal.html:55
+#: .\templates\Member\maintenance-edit-user-modal.html:55
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:63
+#: .\templates\Member\member-information-content.html:13
+msgid "Male"
+msgstr "مذکر"
+
+#: .\templates\Member\maintenance-add-user-modal.html:60
+#: .\templates\Member\maintenance-edit-user-modal.html:60
+#: .\templates\Member\maintenance-remove-user-modal.html:29
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:68
+#: .\templates\Member\member-member-info-modal.html:29
+msgid "Email"
+msgstr "پست الکترونیک"
+
+#: .\templates\Member\maintenance-add-user-modal.html:65
+#: .\templates\Member\maintenance-edit-user-modal.html:65
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:73
+msgid "example@mail.com"
+msgstr ""
+
+#: .\templates\Member\maintenance-add-user-modal.html:69
+#: .\templates\Member\maintenance-edit-user-modal.html:69
+#: .\templates\Member\maintenance-remove-user-modal.html:33
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:77
+#: .\templates\Member\member-member-info-modal.html:33
+msgid "Phone"
+msgstr "شماره تماس"
+
+#: .\templates\Member\maintenance-add-user-modal.html:77
+#: .\templates\Member\maintenance-edit-user-modal.html:77
+#: .\templates\Member\maintenance-remove-user-modal.html:37
+#: .\templates\Member\member-member-info-modal.html:37
+msgid "Address"
+msgstr "آدرس"
+
+#: .\templates\Member\maintenance-add-user-modal.html:85
+#: .\templates\Member\maintenance-edit-user-modal.html:85
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:93
+msgid "Address most be in Tehran"
+msgstr " آدرس باید در تهران باشد"
+
+#: .\templates\Member\maintenance-add-user-modal.html:86
+#: .\templates\Member\maintenance-edit-user-modal.html:86
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:94
+msgid "Street name is too short"
+msgstr " نام خیابان بسیار کوتاه است"
+
+#: .\templates\Member\maintenance-add-user-modal.html:91
+#: .\templates\Member\maintenance-edit-user-modal.html:91
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:99
+msgid "Membership Type"
+msgstr "مدل عضویت"
+
+#: .\templates\Member\maintenance-add-user-modal.html:95
+#: .\templates\Member\maintenance-edit-user-modal.html:95
+#: .\templates\Member\maintenance-remove-user-modal.html:42
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:103
+msgid "Gold"
+msgstr "طلایی"
+
+#: .\templates\Member\maintenance-add-user-modal.html:96
+#: .\templates\Member\maintenance-edit-user-modal.html:96
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:104
+msgid "Silver"
+msgstr "نقره‌ای"
+
+#: .\templates\Member\maintenance-add-user-modal.html:97
+#: .\templates\Member\maintenance-edit-user-modal.html:97
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:105
+msgid "Bronze"
+msgstr "برنزی"
+
+#: .\templates\Member\maintenance-add-user-modal.html:103
+#: .\templates\Member\maintenance-edit-user-modal.html:103
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:111
+msgid "Membership ID"
+msgstr "شناسه عضویت"
+
+#: .\templates\Member\maintenance-add-user-modal.html:111
+#: .\templates\Member\maintenance-edit-user-modal.html:111
+#: .\templates\Member\maintenance-remove-user-modal.html:49
+#: .\templates\Member\member-member-info-modal.html:49
+msgid "User Type"
+msgstr "نوع کاربر"
+
+#: .\templates\Member\maintenance-panel-maintenance.html:7
+msgid "Maintenance"
+msgstr "تنظیمات"
+
+#: .\templates\Member\maintenance-panel-maintenance.html:15
+#, fuzzy
+#| msgid "Username"
+msgid "Users"
+msgstr "مدیریت اعضا"
+
+#: .\templates\Member\maintenance-panel-maintenance.html:26
+msgid "Prefixes"
+msgstr "پیشوندها"
+
+#: .\templates\Member\maintenance-panel-maintenance.html:34
+#, fuzzy
+#| msgid "Title"
+msgid "Titles"
+msgstr "عناوین اعضا"
+
+#: .\templates\Member\maintenance-panel-maintenance.html:37
+msgid "Branches"
+msgstr "عناوین شعبه‌ها"
+
+#: .\templates\Member\maintenance-panel-maintenance.html:40
+#, fuzzy
+#| msgid "Laboratory"
+msgid "Laboratories"
+msgstr "آزمایشگاه‌ها"
+
+#: .\templates\Member\maintenance-panel-maintenance.html:49
+msgid "Categories"
+msgstr "مدیریت دسته‌ها"
+
+#: .\templates\Member\maintenance-panel-maintenance.html:57
+#, fuzzy
+#| msgid "Members"
+msgid "Member Documents"
+msgstr "اعضــا"
+
+#: .\templates\Member\maintenance-remove-user-modal.html:41
+#: .\templates\Member\member-member-info-modal.html:41
+#, fuzzy
+#| msgid "Your Email/Membership"
+msgid "Membership"
+msgstr "پست الکترونیک / کد عضویت"
+
+#: .\templates\Member\maintenance-remove-user-modal.html:45
+#: .\templates\Member\member-member-info-modal.html:45
+msgid "ID"
+msgstr "شناسه"
+
+#: .\templates\Member\maintenance-user-form-header-search.html:4
+#: .\templates\Member\member-plane-search.html:7
+#: .\templates\Member\member-search-result-panel.html:8
+msgid "Search"
+msgstr "جستجو"
+
+#: .\templates\Member\member-add-event-modal.html:14
+#: .\templates\Member\member-edit-event-modal.html:14
+msgid "Event Type"
+msgstr "نوع رویداد"
+
+#: .\templates\Member\member-add-event-modal.html:18
+#: .\templates\Member\member-edit-event-modal.html:18
+msgid "Pharmacy"
+msgstr "داروخانه"
+
+#: .\templates\Member\member-add-event-modal.html:19
+#: .\templates\Member\member-edit-event-modal.html:19
+#: .\templates\Member\member-show-event-modal.html:18
+msgid "Laboratory"
+msgstr "آزمایشگاه"
+
+#: .\templates\Member\member-add-event-modal.html:20
+#: .\templates\Member\member-edit-event-modal.html:20
+msgid "Hospitolization"
+msgstr "بستری"
+
+#: .\templates\Member\member-add-event-modal.html:26
+#: .\templates\Member\member-edit-event-modal.html:26
+#: .\templates\Member\member-editdoc-modal.html:31
+#: .\templates\Member\member-newdoc-modal.html:30
+msgid "Title"
+msgstr "عنوان"
+
+#: .\templates\Member\member-add-event-modal.html:34
+#: .\templates\Member\member-edit-event-modal.html:34
+msgid "Time"
+msgstr "زمان"
+
+#: .\templates\Member\member-add-event-modal.html:39
+#: .\templates\Member\member-edit-event-modal.html:39
+msgid "Begin at"
+msgstr "شروع"
+
+#: .\templates\Member\member-add-event-modal.html:45
+#: .\templates\Member\member-edit-event-modal.html:45
+msgid "Finish at"
+msgstr "پایان"
+
+#: .\templates\Member\member-add-event-modal.html:49
+#: .\templates\Member\member-edit-event-modal.html:49
+msgid "Description"
+msgstr "توضیحات"
+
+#: .\templates\Member\member-change-photo-modal.html:7
+msgid "change photo of"
+msgstr "ویرایش عکس "
+
+#: .\templates\Member\member-detail-history.html:12
+msgid "Member History"
+msgstr " تاریخچه بیمار"
+
+#: .\templates\Member\member-detail-history.html:18
+msgid "Medical History"
+msgstr "تاریخچه پزشکی"
+
+#: .\templates\Member\member-detail-history.html:24
+msgid "Chief Complaint"
+msgstr "شکایت اصلی"
+
+#: .\templates\Member\member-detail-history.html:35
+msgid "Check Up"
+msgstr ""
+
+#: .\templates\Member\member-detail-history.html:41
+msgid "Past Medical History"
+msgstr "تاریخچه بیماری‌های قبلی"
+
+#: .\templates\Member\member-detail-history.html:62
+msgid "Drug History"
+msgstr "تاریخچه داروی مصرفی"
+
+#: .\templates\Member\member-detail-history.html:79
+msgid "Family History"
+msgstr "تاریخچه بیماری‌های خانوادگی"
+
+#: .\templates\Member\member-detail-history.html:99
+msgid "Checkup Tests"
+msgstr "تست‌های چکاپ"
+
+#: .\templates\Member\member-detail-history.html:116
+msgid "Specialists Visits"
+msgstr ""
+
+#: .\templates\Member\member-detail-history.html:133
+msgid "Lab & Pathology Results"
+msgstr "آزمایشگاه و پاتولوژی"
+
+#: .\templates\Member\member-detail-history.html:155
+msgid "Imaging"
+msgstr "تصویربرداری"
+
+#: .\templates\Member\member-detail-history.html:180
+msgid "Specialists History"
+msgstr "تاریخچه معاینات"
+
+#: .\templates\Member\member-edit-members(options,membership)-modal.html:85
+msgid "Members"
+msgstr "اعضــا"
+
+#: .\templates\Member\member-editdoc-modal.html:23
+#: .\templates\Member\member-newdoc-modal.html:22
+msgid "Date"
+msgstr "تاریخ"
+
+#: .\templates\Member\member-editdoc-modal.html:39
+#: .\templates\Member\member-newdoc-modal.html:38
+msgid "Supervisor"
+msgstr "سرپرست"
+
+#: .\templates\Member\member-editdoc-modal.html:47
+#: .\templates\Member\member-newdoc-modal.html:46
+msgid "site"
+msgstr "شعبه"
+
+#: .\templates\Member\member-information-content.html:7
+msgid "change"
+msgstr ""
+
+#: .\templates\Member\member-information-content.html:12
+msgid "Title / Position"
+msgstr "عنوان / سِمت"
+
+#: .\templates\Member\member-information-content.html:14
+#, fuzzy
+#| msgid "Your Email/Membership"
+msgid "Gold Membership"
+msgstr "پست الکترونیک / کد عضویت"
+
+#: .\templates\Member\member-remove-document-modal.html:5
+msgid "Are you sure about removing this field?"
+msgstr "آیا از حذف این سند اطمینان دارید؟"
+
+#: .\templates\Member\member-remove-event-modal.html:5
+msgid "Are you sure about removing this Event?"
+msgstr "آیا از حذف این رویداد اطمینان دارید؟"

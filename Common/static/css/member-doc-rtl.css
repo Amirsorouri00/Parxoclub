@@ -1,0 +1,65 @@
+.doc-upload-base {
+
+    border-right: 1px solid #dfe8f1;
+    border-left: none;
+}
+
+.upload-files-container {}
+
+.file-upload-row {}
+
+.server-storage {}
+
+.local-storage {}
+
+.file-upload-stored {}
+
+.thumbnail-container {
+    margin-right: 0px;
+    margin-left: auto;
+}
+
+.thumbnail-container img {}
+
+.file-upload-name {
+    padding-left: 0px;
+    padding-right: 10px;
+    margin-left: auto;
+    margin-right: 0px;
+    direction: ltr;
+}
+
+.file-upload-name span {}
+
+.file-upload-size {
+    padding-left: 0px;
+    padding-right: 10px;
+    margin-left: auto;
+    margin-right: 0px;
+    direction: ltr;
+}
+
+.file-upload-size span {
+    margin-left: 0px;
+}
+
+
+.file-upload-revert {
+    margin-left: 0px;
+    margin-right: auto;
+    box-shadow: inset -2px 0px 3px 0px rgba(9, 32, 36, 0.3);
+}
+
+.file-upload-trash {
+    margin-left: 0px;
+    margin-right: auto;
+}
+
+.file-upload-remove {
+    margin-left: 0px;
+    margin-right: auto;
+}
+
+.file-upload-remove:hover {}
+
+.file-upload-trash:hover {}

@@ -1,0 +1,33 @@
+{% load io %}
+
+<div class="overlay-scroll">
+    {% for item in search_result %}
+        {% with user_id=item.user_id|stringformat:"i" %}
+        <div class="result-item" data-pjax data-pjax-container="#idMemberDocs"
+            data-pjax-url="{% url 'member_doc' user_id %}" data-pjax-success="initCarousel">
+            <div class="photo-container">
+                <div class="photo" style="background-image: url({% profile_pic user_id %})"></div>
+            </div>
+            <div class="detail ">
+                <span class="name">{{item.user.first_name}} {{item.user.last_name}}</span>
+                <span class="position">{{item.code}}</span>
+            </div>
+        </div>
+        {% endwith %}
+    {% empty %}
+        <div class="nothing ">
+            <div class="nothing-container">
+                <div class="nothing-icon icon-alertfill"></div>
+                <div class="nothing-text">No results found!</div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<script type="text/javascript">
+    $('.overlay-scroll').overlayScrollbars({ 
+        className       : "os-theme-dark",
+        sizeAutoCapable : true,
+        paddingAbsolute : true
+    });
+</script>

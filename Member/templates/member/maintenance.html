@@ -1,0 +1,219 @@
+{% extends "common/index.html" %} {% load static %}
+<!-- Title Block -->
+{% block title %} | Maintenace{% endblock %}
+<!-- After Side Nav Block Objects in index.html  -->
+{% block after_side_nav_content %}
+<!-- Maintenance panel -->
+{% include 'member/maintenance-panel-maintenance.html' %}
+<!-- Maintenance Users -->
+{% include 'member/maintenance-user-maintenance.html' %} {% endblock %} {% block menu-back-after-content %}
+<!-- Modal Add User -->
+{% include 'member/maintenance-add-user-modal.html' %}
+<!-- Modal Edit User -->
+{% include 'member/maintenance-edit-user-modal.html' %}
+<!-- Modal Remove User -->
+{% include 'member/maintenance-remove-user-modal.html' %} {% endblock %} {% block EndJavascript %}
+<script src="{% static 'js/carousel.js' %}"></script>
+<script src="{% static 'js/large-carousel/zoomer.js' %}"></script>
+<script src="{% static 'js/large-carousel/mousewheel.js' %}"></script>
+<script src="{% static 'js/large-carousel/large-carousel-zoom.js' %}"></script>
+<script src="{% static 'js/large-carousel/zoomer.js' %}"></script>
+<script src="{% static 'js/resize-carousel.js' %}"></script>
+<script src="{% static 'js/quills.js' %}"></script>
+<script src="{% static 'js/quills-script-history.js' %}"></script>
+<script src="{% static 'js/froala.min.js' %}"></script>
+<script src="{% static 'js/cropper.min.js' %}"></script>
+<!-- New Functions for New Maintenance -->
+<script type="text/javascript">
+$(document).ready(function() {
+    Maintenance('', '', '', '', '');
+    SendData("POST", '{% url "all_user_info" %}', '', Bind, ErrorManagement, 'maintenance_page_all_user_info');
+    $('#form1').submit(function(event) {
+        // do stuff
+        event.preventDefault();
+        var context = '{{context}}';
+        var firstname = $("#maintenance_first_name_id").val();
+        var lastname = $("#maintenance_last_name_id").val();
+        var email = $("#maintenance_email_id").val();
+        var birthdate = $("#maintenance_birthdate_id").val();
+        var mobile = $("#maintenance_mobile_id").val();
+        var address = $("#maintenance_address_id").val();
+        var gender = $("#maintenance_gender_id").val();
+        var code = $("#maintenance_member_code_id").val();
+        var membership = $("#maintenance_membership_type_id").val();
+        var photo = document.getElementById('files'); //$("#files").files;
+        //console.dir('photo: ' + photo.files[0]);
+        var fd = new FormData();
+        fd.append('file', photo.files);
+        fd.append("first_name", firstname);
+        fd.append("last_name", lastname);
+        fd.append("email", email);
+        fd.append("username", email);
+        fd.append("birthdate", birthdate);
+        fd.append("mobile", mobile);
+        fd.append("code", code);
+        fd.append('photo_name', photo.files[0].name);
+        fd.append('photo', photo.files[0]);
+        // data = {
+        //     'first_name': firstname,
+        //     'last_name': lastname,
+        //     'email': email,
+        //     'username': email,
+        //     'birthdate': birthdate,
+        //     'mobile': mobile,
+        //     'address': address,
+        //     'gender': gender,
+        //     'code': code,
+        //     'membership': membership,
+        //     'photo': maintenance_add_user_photo,
+        //     'photo_name': photo.files[0].name,
+        // }
+        //console.log(fd);
+        //console.dir(data);
+        //var data = JSON.stringify(data, null, 2);
+        fileSendData("POST", $(this).attr('action'), fd, Bind, ErrorManagement, 'MaintenanceAddUserModalForm');
+        $('#news-photo-editor-edit').css({ 'background-image': 'url()' });
+        return false;
+    });
+});
+</script>
+<!-- /New Functions for New Maintenance -->
+<script type="text/javascript">
+$(document).ready(function() {
+    AddNewUserModalLiveChecks('', '', '', 'POST', '{% url "validate_email" %}');
+    //url = '/ajax/member/search';
+    $('.user-base-maintenance1').click(function() {
+        var userId = $(this).attr('user_id');
+        if ($(this).attr('id-modal') == 'idRemoveUser') { return } else {
+            data = { 'user_id': userId };
+            EditUserModalLiveChecks('', data, 'page', 'POST', '{% url "one_user_info" %}');
+        }
+    })
+    $('.user-maintenance-remove').click(function() {
+        var userId = $(this).attr('user_id');
+        data = { 'user_id': userId };
+        console.log('in page maintenance remove user: ' + data);
+        RemoveUserModalLiveChecks('', data, 'page', 'POST', '{% url "one_user_info" %}');
+    })
+    $("#idSearchBoxMember").keyup(function() {
+        MemberSearch($("#idSearchBoxMember"), "GET", "{% url 'mem_search'%}", $(this).val(), 'maintenance');
+    });
+    $(".maintenance-input-box").change(function() {
+        alert($(".maintenance-input-box option:selected").text());
+    });
+});
+
+$(function() {
+    $("#files, #files2").change(showPreviewImage_click);
+})
+
+function showPreviewImage_click(e) {
+    var inputFiles = this.files;
+    if (inputFiles == undefined || inputFiles.length == 0) return;
+    else {
+        preview = $(this).attr('preview').toString();
+        console.log('preview: ' + preview);
+        console.log($('#' + preview));
+        var inputFile = inputFiles[0];
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            //alert("I AM result: " + event.target.result);
+            content = event.target.result;
+            maintenance_add_user_photo = content;
+            // $('#news-photo-editor, #news-photo-editor_edit').css({ 'background-image': 'url(' + content + ')' });
+            $('#' + preview).css({ 'background-image': 'url(' + content + ')' });
+            // $(this).closest('#news-photo-editor').css({ 'background-image': 'url(' + event.target.result + ')' });
+            //img.title = '' + escape(theFile.name);
+            //$(this).closest('.news-photo-editor').append(img);
+        };
+        reader.onerror = function(event) {
+            alert("I AM ERROR: " + event.target.error.code);
+        };
+        reader.readAsDataURL(inputFile);
+    }
+}
+</script>
+<script type="text/javascript">
+var photo_blob = null;
+$(function() {
+    var $imageProfile = $('#add_user_modal_image');
+
+    initCropper($imageProfile, null)
+
+    $("#idRotateLeft").click(function() {
+        $imageProfile.cropper('rotate', -90);
+    });
+
+    $("#idRotateRight").click(function() {
+        $imageProfile.cropper('rotate', 90);
+    });
+
+    $("#idNoPhoto").click(function() {
+        $imageProfile.cropper('destroy');
+        $imageProfile.attr('default-photo', true);
+    });
+});
+
+function initCropper(image, src) {
+    image.cropper('destroy');
+
+    if (src != null)
+        image.attr('src', src);
+
+
+    if (image.attr('default-photo') == "true")
+        return;
+
+    image.cropper({
+        viewMode: 3,
+        dragMode: 'move',
+        aspectRatio: 1,
+        autoCropArea: 1,
+        wheelZoomRatio: 0.2,
+        restore: false,
+        guides: false,
+        highlight: false,
+        cropBoxMovable: false,
+        cropBoxResizable: false,
+
+        ready: function(e) {
+            if (src == null) {
+                var canvas_data = JSON.parse(document.getElementById('add_user_modal_image').value);
+                $(this).cropper('rotate', canvas_data['rotate']);
+                $(this).cropper('setCanvasData', canvas_data);
+            }
+            getCropOutput($(this));
+        },
+        crop: function(e) {
+            getCropOutput($(this));
+        }
+    });
+
+    function getCropOutput(image) {
+        var rotate = image.cropper('getImageData').rotate;
+        var canvas_data = image.cropper('getCanvasData');
+        canvas_data['rotate'] = rotate;
+        document.getElementById('add_user_modal_image').value = JSON.stringify(canvas_data);
+
+        image.cropper('getCroppedCanvas').toBlob(function(blob) {
+            photo_blob = blob;
+        });
+    }
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var $image = $('#add_user_modal_image');
+            $image.attr('default-photo', false);
+            initCropper($image, e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+<script type="text/javascript">
+/* Remove User Modal */
+</script>
+{% endblock %}

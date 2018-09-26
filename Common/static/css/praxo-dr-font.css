@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "praxo-dr";
+    src: url("../font/praxo-dr/praxo-dr.eot");
+    src: url("../font/praxo-dr/praxo-dr.eot?#iefix") format("embedded-opentype"),
+    url("../font/praxo-dr/praxo-dr.woff") format("woff"),
+    url("../font/praxo-dr/praxo-dr.ttf") format("truetype"),
+    url("../font/praxo-dr/praxo-dr.svg#praxo") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+[dr-icon]:before {
+  font-family: "praxo-dr" !important;
+  content: attr(dr-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-dr-"]:before,
+[class*=" icon-dr-"]:before {
+  font-family: "praxo-dr" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-dr-anethesiologist:before {
+  content: "\61";
+}
+.icon-dr-anethesiologistfill:before {
+  content: "\62";
+}
+.icon-dr-bone:before {
+  content: "\63";
+}
+.icon-dr-bonefill:before {
+  content: "\64";
+}
+.icon-dr-brain:before {
+  content: "\65";
+}
+.icon-dr-brainfill:before {
+  content: "\66";
+}
+.icon-dr-drheart:before {
+  content: "\67";
+}
+.icon-dr-drheartfill:before {
+  content: "\68";
+}
+.icon-dr-ear:before {
+  content: "\69";
+}
+.icon-dr-earfill:before {
+  content: "\6a";
+}
+.icon-dr-emergency:before {
+  content: "\6b";
+}
+.icon-dr-emergencyfill:before {
+  content: "\6c";
+}
+.icon-dr-nuclear:before {
+  content: "\6d";
+}
+.icon-dr-nuclearfill:before {
+  content: "\6e";
+}
+.icon-dr-orology:before {
+  content: "\6f";
+}
+.icon-dr-orologyfill:before {
+  content: "\70";
+}
+.icon-dr-orthoped:before {
+  content: "\71";
+}
+.icon-dr-orthopedfill:before {
+  content: "\72";
+}
+.icon-dr-pediatrician:before {
+  content: "\73";
+}
+.icon-dr-pediatricianfill:before {
+  content: "\74";
+}
+.icon-dr-women:before {
+  content: "\75";
+}
+.icon-dr-womenfill:before {
+  content: "\76";
+}

@@ -1,0 +1,33 @@
+{% extends "member/base.html" %}
+
+{% block content %}
+
+<!-- Member Documents -->
+<div id="idMemberDocs">
+    {% include 'club/members/document/index.html' %}
+</div>
+
+
+<!-- Search Panel -->
+<div class="search-result-wrapper">
+    <div class="search-result-panel">
+        <!-- Search Form -->
+        <div class="search">
+            <form class="container" method="get" action="{% url 'member_search' %}"
+                data-pjax-container="#idResultList" data-pjax>
+                {% csrf_token %}
+                <input id="idSearchBoxMember" type="text" name="member_search" tabindex="-1" autocomplete="off">
+                <label class="label">Search</label>
+            </form>
+        </div>
+        <!-- Search Results -->
+        <div id="idResultContainer" class="result-container">
+            <div id="idResultList" class="result-list" >
+                {% include 'club/members/member_list.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
