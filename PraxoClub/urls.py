@@ -28,6 +28,7 @@ urlpatterns = [
      # Ajax
     path('ajax/member/', include('Member.urls')),
     path('ajax/patientdoc/', include('PatientDoc.urls')),
+    path('', include('Member.urls')),
 ]
 
 
@@ -38,8 +39,10 @@ urlpatterns += i18n_patterns (
     path('member/', include('Member.urls')),
     path('calendar/', include('Calendar.urls', namespace='calendar2')),
     path('patientdoc/', include('PatientDoc.urls')),
+    path('news/', include('News.urls')),
      # path('admin/', admin.site.urls),
      # Ajax
     path('ajax/member/', include('Member.urls')),
     path('ajax/patientdoc/', include('PatientDoc.urls')),
+    path('', include('Member.urls')),
 )

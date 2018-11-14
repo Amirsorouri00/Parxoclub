@@ -1,5 +1,15 @@
 {% extends "common/index.html" %} {% load static %} {% block IndexCss %}
-<!-- No Additional Css files in Comparison to index needed. -->{% endblock %}
+<!-- No Additional Css files in Comparison to index needed. -->{% endblock %}{% block SocketJavascript %}
+<script type="text/javascript" src="{% static 'js/my-luxon.js' %}"></script>
+<script type="text/javascript">
+const user_id = '{{ user_id }}';
+const users = '{{users}}';
+const user_token = '{{ Token }}';
+</script><!-- <script src="{% static '/luxon/build/node/luxon.js' %}"></script> -->
+{% endblock %}
+{% block HeadJavascript %} 
+
+{% endblock %}
 <!-- Title Block -->
 {% block title %} | Calender{% endblock %}
 <!-- After Side Nav Block Objects in index.html -->
@@ -18,6 +28,8 @@
 {% include 'calendar/calendar-remove-event-modal.html' %} {% endblock %}{% block EndJavascript %}
 <script type="text/javascript">
 $(document).ready(function() {
+    day = $(".calendar-table-base table tbody tr .active");
+    GetOneDayEvents(day);
     Calendar('', '', '', '', '');
     SendData("GET", '/calendar/eventtypes/', '', Bind, ErrorManagement, 'CalendarGetData');
     $('#form1').submit(function(event) {

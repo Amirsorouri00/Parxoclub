@@ -1,4 +1,9 @@
-{% extends "common/index.html" %} {% load static %}
+{% extends "common/index.html" %} {% load static %}{% block SocketJavascript %}
+<script type="text/javascript" src="{% static 'js/my-luxon.js' %}"></script>
+<script type="text/javascript">
+const user_token = '{{ Token }}';
+</script><!-- <script src="{% static '/luxon/build/node/luxon.js' %}"></script> -->
+{% endblock %}
 <!-- Title Block -->
 {% block title %} | Maintenace{% endblock %}
 <!-- After Side Nav Block Objects in index.html  -->
@@ -80,7 +85,7 @@ $(document).ready(function() {
 <!-- /New Functions for New Maintenance -->
 <script type="text/javascript">
 $(document).ready(function() {
-    AddNewUserModalLiveChecks('', '', '', 'POST', '{% url "validate_email" %}');
+    //AddNewUserModalLiveChecks('', '', '', 'POST', '{% url "validate_email" %}');
     //url = '/ajax/member/search';
     $('.user-base-maintenance1').click(function() {
         var userId = $(this).attr('user_id');

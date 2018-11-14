@@ -1,17 +1,17 @@
-{% load i18n %}
+{% load i18n %}{% load static io %}
 <!-- Members Information Content -->
-<div class="info">
+<div class="info" style="display: none;">
     <div class="container">
         <div class="photo-container">
-            <div class="photo" id-modal="idChangePhoto" modal-btn="show">
+            <div class="photo" style="background-image: url('{% amir_profile_pic user_uuid False %}')" id-modal="idChangePhoto" modal-btn="show">
                 <div class="change-overlay">{% trans "change" %}</div>
             </div>
         </div>
         <div class="detail-container" user_id="">
             <span id-modal="idMemberInfo" class="detail-bold" modal-btn="show">Masoud Nourbakhsh</span>
-            <span class="detail">{% trans "Title / Position" %}</span>
-            <span class="detail">{% trans "Male" %} | 28</span>
-            <span class="detail">{% trans "Gold Membership" %}</span>
+            <span class="detail" name='position'>{% trans "Title / Position" %}</span>
+            <span class="detail" name='age|gender'>{% trans "Male" %} | 28</span>
+            <span class="detail" name='membership'>{% trans "Gold Membership" %}</span>
         </div>
     </div>
     <div class="member-options">

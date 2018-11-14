@@ -27,11 +27,11 @@
             <div class="calendar-event-container">
                 <div class="header-event-list">
                     <div class="icon-header-event-list icon-alarm"></div>
-                    <div class="date-header-event-list" value="2018-03-05">3 November 2017</div>
+                    <div class="date-header-event-list" event_panel_title="{{ event_panel_title }}" value="{{month_value}}"></div>
                 </div>
                 <div class="base-event-list">
                     <div class="overlay-scroll" style="height: 100%">
-                        <div class="event-detial" id-modal="idShowEvent" modal-btn="show">
+                        <!-- <div class="event-detial" id-modal="idShowEvent" modal-btn="show">
                             <div class="event-type-detail icon-labfill"></div>
                             <div class="event-time-detail w-30"><span>10 am - 11:30 am</span></div>
                             <div class="event-title-detail w-50"><span>Design A Priscription schdl for Dr. Farmani</span></div>
@@ -44,7 +44,16 @@
                             <div class="event-title-detail w-50"><span>Design A Priscription schdl for Dr. Farmani</span></div>
                             <div class="edit-event-detail-btn icon-edit" id-modal="idEditEvent" modal-btn="show"></div>
                             <div class="remove-event-detail-btn icon-close" id-modal="idRemoveEvent" modal-btn="show"></div>
+                        </div> -->
+                        {% for event in today_event_list %}
+                        <div class="event-detial" event_id = "{{ event.id }}" id-modal="idShowEvent" modal-btn="show">
+                            <div class="event-type-detail icon-labfill"></div>
+                            <div class="event-time-detail w-30"><span>{{ event.start_time|time:'H:i' }} - {{ event.end_time|time:'H:i' }}</span></div>
+                            <div class="event-title-detail w-50"><span>{{ event.event_note }}</span></div>
+                            <div class="edit-event-detail-btn icon-edit" id-modal="idEditEvent" modal-btn="show"></div>
+                            <div class="remove-event-detail-btn icon-close" id-modal="idRemoveEvent" modal-btn="show"></div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div id-modal="idAddEvent" class="btn-new-doc-container " modal-btn="show">

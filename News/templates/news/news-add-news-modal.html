@@ -1,0 +1,69 @@
+<!-- Add News Modal -->
+    <div id="idAddNews" class="custom-modal">
+        <div class="modal-add-news">
+            <div class="input-base-news">
+                <div class="header-add-news">
+                    <div class="title-header-add-news">News Editing Panel</div>
+                </div>
+                <div class="input-container-news">
+                    <div class="input-wrapper-news overlay-scroll">
+                        <form id="AddNewsForm" action="{% url 'add_news' %}" method="post"></form>
+                        <div class="custom-input">
+                            <div class="input-label">
+                                <label>Title</label>
+                            </div>
+                            <div class="input-box">
+                                <input id="title" type="text" name="title" required="" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="news-photo-editor-container">
+                            <div class="news-photo-editor"></div>
+                            <div class="news-edit-btn-wrapper">
+                                <div class="news-edit-btn-container">
+                                    <input id="AddNewsFiles" preview = "news-photo-editor" class="news-upload-input news-edit-btn  btn-taint icon-browse" type="file" accept=".jpg,.png,.bmp" title="Browse" multiple tabindex="1" />
+                                    <!-- <div class="news-edit-btn  btn-taint icon-browse" title="Browse" tabindex="1">
+                                    </div> -->
+                                </div>
+                                <div class="news-edit-btn-container">
+                                    <div class="news-edit-btn  btn-taint icon-rotateleft" title="Rotate left" tabindex="1"></div>
+                                </div>
+                                <div class="news-edit-btn-container">
+                                    <div class="news-edit-btn  btn-taint icon-rotateright" title="Rotate Right" tabindex="1"></div>
+                                </div>
+                                <div class="news-edit-btn-container">
+                                    <div class="news-edit-btn  btn-taint icon-trash" title="Clear Photo" tabindex="1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-submit-large-screen">
+                        <div class="text-submit-btn-container" modal-close>
+                            <div class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></div>
+                        </div>
+                        <div class="text-submit-btn-sep"></div>
+                        <div class="text-submit-btn-container">
+                            <button form="AddNewsForm" class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="editor-base-news">
+                <div>
+                    <div id="toolbar">
+                    </div>
+                    <div id="newsEditor" class="overlay-scroll">
+                        <p>Enter News...</p>
+                    </div>
+                </div>
+                <div class="news-submit-smal-screen">
+                    <div class="text-submit-btn-container" modal-close>
+                        <button form="AddNewsForm" class="text-submit-btn btn-taint"><span class="fs-22 clr-red icon-close"></span></button>
+                    </div>
+                    <div class="text-submit-btn-sep"></div>
+                    <div class="text-submit-btn-container">
+                        <div class="text-submit-btn btn-taint"><span class="fs-22 clr-cyan icon-check"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

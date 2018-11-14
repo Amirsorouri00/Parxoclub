@@ -8,13 +8,13 @@
                 <span class="title"> {% trans "Admin Dashboard" %}</span>
             </div>
         </a>
-        <a href="members.html">
+        <a href="{% url 'member' %}">
             <div class="column">
                 <span class="icon icon-member"></span>
                 <span class="title"> {% trans "Members" %}</span>
             </div>
         </a>
-        <a href="chats.html">
+        <a href="{% url 'chat' %}">
             <div class="column">
                 <span class="icon icon-chat"></span>
                 <span class="title"> {% trans "Chat" %} </span>
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <a href="calendar.html">
+        <a href="{% url 'calendar:calendar_get' %}">
             <div class="column">
                 <span class="icon icon-calendar"></span>
                 <span class="title"> {% trans "Calendar" %}</span>
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </a>
-        <a href="news.html">
+        <a href="{% url 'news' %}">
             <div class="column">
                 <span class="icon icon-news"></span>
                 <span class="title">{% trans "News" %}</span>
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </a>
-        <a href="maintenance.html">
+        <a href="{% url 'maintenance' %}">
             <div class="column">
                 <span class="icon icon-setting"></span>
                 <span class="title"> {% trans "Maintenance" %}</span>

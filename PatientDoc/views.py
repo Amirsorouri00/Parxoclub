@@ -7,9 +7,11 @@ from django.contrib.auth.models import User
 from django.db.models import Count
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.authentication import BasicAuthentication, \
     SessionAuthentication, TokenAuthentication
 from rest_framework.authtoken.models import Token
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.decorators import api_view, authentication_classes, \
     permission_classes
 from rest_framework.parsers import JSONParser
@@ -19,13 +21,14 @@ from rest_framework.views import APIView
 
 import datetime
 from .forms import DocumentForm
-from .models import DocCatSubmenu, DocCategories, Documents
+from .models import DocCatSubmenu, DocCategories, Documents, HistoryCategory, PatientHistory
 from .serializer import DocCategoriesSerializer, \
     DocCategoriesSubMenuSerializer, DocumentsSerializer, \
-    MemberPanelDocumentsListSerializer
+    MemberPanelDocumentsListSerializer, PatientHistorySerializer, GetUserHistorySerializer, OneUserHistorySerializer, \
+    HistoryCategorySerializer
 from Calendar.views import render_to_string
 from Common.constants import LORE_IPSUM
-from Member.models import Members, Memberships
+from Member.models import Members, Memberships, UserUUID
 from Member.serializer import MemberSerializer, TokenSerializer, \
     UserSerializer
 from PatientDoc.serializer import SpecialistsHistoryObject, \
@@ -34,8 +37,23 @@ from django.http import Http404, HttpResponse, JsonResponse
 from django.utils.translation import get_language_bidi
 from django.utils.translation import ugettext_lazy as _
 from django.utils import translation
+from rest_framework.authtoken.models import Token
+from .templatetags.patientio import get_document_picture, get_all_document_pictures, document_pic_name
 
-
+success = {
+    'modal': True, 
+    'notification': { 
+        'type': 'success',
+        'message': 'Updated successfully.'
+    }
+}
+error = {
+    'modal': False, 
+    'notification': { 
+        'type': 'error',
+        'message': 'user does not exist'
+    }
+}
 # Create your views here.
 
 #TODO list attache files should be concatenated with the json response
@@ -46,8 +64,8 @@ def list_atch_files(record_id):
         atch_files = os.listdir(folder_path)
     return atch_files
 
-def handle_uploaded_doc_files(record_id, files, extension):
-    upload_path = settings.DOC_UPLOAD_URL + '{}/'.format(record_id)
+def handle_uploaded_doc_files(user_id, record_id, files, extension):
+    upload_path = settings.DOC_UPLOAD_URL + '{}/{}/'.format(user_id, record_id)
     if not os.path.isdir(upload_path):
         os.makedirs(upload_path)
     for imgfile in files:
@@ -56,6 +74,38 @@ def handle_uploaded_doc_files(record_id, files, extension):
         with open(upload_path + filename + extension, 'wb+') as destination:
             for chunk in imgfile.chunks():
                 destination.write(chunk)
+
+# @api_view(['POST'])
+# @authentication_classes((SessionAuthentication,))
+# @permission_classes((IsAuthenticated,))
+# @csrf_exempt   
+def DocumentPicHandler(request):
+    if request.is_ajax():
+        if request.method == 'POST':
+            user_uuid = request.POST.get('user_uuid', None)
+            doc_uuid = request.POST.get('doc_uuid', None)
+            name = request.POST.get('name', None)
+            if name == '1':
+                #return HttpResponse('name')
+                #return HttpResponse(request.POST.get('name', None))
+                names = document_pic_name(user_uuid, doc_uuid)
+                return JsonResponse(names, safe=False)
+            else:
+                #return HttpResponse(request.POST.get('all', None))
+                
+                pictures = []
+                if request.POST.get('all', None) == '1':
+                    #return HttpResponse('all')
+                    pictures = get_all_document_pictures(user_uuid, doc_uuid)
+                else:
+                    #return HttpResponse('not all')
+                    filename = request.POST.get('file_name', None)
+                    pictures = get_document_picture(user_uuid, doc_uuid, filename)
+                return JsonResponse(pictures, safe=False)
+        else:
+            raise Http404
+    else: raise Http404
+
 
 @api_view(['GET'])
 @authentication_classes((SessionAuthentication, TokenAuthentication))
@@ -87,23 +137,26 @@ def DocumentFilter(request):
         subfilter_or_filter = request.POST.get('sub_or_not', None)
         if subfilter_or_filter == 'submenu':
             title = request.POST.get('title', None)
-            submenu_id = DocCatSubmenu.objects.get(name = title)
-            docs = Documents.objects.filter(doccatsubmenu = submenu_id, user_id = request.POST.get('user_id', None))
+            identifier = request.POST.get('id', None)
+            submenu = DocCatSubmenu.objects.get(id = identifier)
+            docs = Documents.objects.filter(doccatsubmenu = submenu, user_id = request.POST.get('user_id', None))
             if docs:    
                 docSerializer = MemberPanelDocumentsListSerializer(docs, many=True)
                 json = {'DocCats': docSerializer.data}
                 content = JSONRenderer().render(json)
                 return HttpResponse(content)
-            else: return HttpResponse(None)
+            else: return JsonResponse(error)
         elif subfilter_or_filter == 'menu':
             title = request.POST.get('title', None)
-            docs = Documents.objects.filter(title = title, user_id = request.POST.get('user_id', None))
+            identifier = request.POST.get('id', None)
+            categorymenu = DocCategories.objects.get(id = identifier)
+            docs = Documents.objects.filter(category = categorymenu, user_id = request.POST.get('user_id', None))
             if docs:
                 docSerializer = MemberPanelDocumentsListSerializer(docs, many=True)
                 json = {'DocCats': docSerializer.data}
                 content = JSONRenderer().render(json)
                 return HttpResponse(content) 
-            else: return HttpResponse(None)
+            else: return JsonResponse(error)
         else:
             raise Http404
     else:
@@ -122,20 +175,39 @@ def AddNewDocumentMemberPanel(request):
             #handling whole images have been sent from client still remained(it is just a for...)
             files = request.FILES.getlist('photo_0', False)
             photo_name = request.POST.get('photo_0_name', False)
-            physician = User.objects.get(last_name = request.POST.get('supervisor', None))
+            category_index = request.POST.get('category_index', False) 
+            item_index = request.POST.get('item_index', False) 
+            user_id = request.POST.get('user_id', None)
+            try:
+                uuid = UserUUID.objects.get(user_id = user_id)
+                category = DocCategories.objects.get(index = int(category_index))
+                submenu = DocCatSubmenu.objects.get(index = int(item_index), docCategories_id = category.id)
+                physician = User.objects.get(last_name = request.POST.get('supervisor', None))
+            except ObjectDoesNotExist:
+                uuid = None
+                physician = None
+                
+            if uuid is None:
+                return JsonResponse({
+                    'modal': 'false', 
+                    'notification': { 
+                        'type': 'error',
+                        'message': 'uuid or physician is none.'
+                    }
+                })
             document = Documents.objects.create(title = request.POST.get('title', None),
-                        date = request.POST.get('date', None), comment = LORE_IPSUM, user_id = request.POST.get('user_id', None),
-                        doccatsubmenu_id = 2, category_id = 7, physician_id = physician.id, attachment = 1)
+                        date = request.POST.get('date', None), comment = LORE_IPSUM, user_id = user_id,
+                        doccatsubmenu_id = submenu.id, category_id = category.id, physician_id = physician.id, attachment = 1)
             document.save()
-            handle_uploaded_doc_files(document.pk+1000, files, photo_name)
+            handle_uploaded_doc_files(uuid.user_uuid.hex, document.uuid_document.document_uuid, files, photo_name)
             return JsonResponse({
-            'modal': True, 
-            'notification': { 
-                'type': 'success',
-                'message': 'Updated successfully.'
-            }
-        })
-            return HttpResponse(request.FILES)
+                'modal': True, 
+                'notification': { 
+                    'type': 'success',
+                    'message': 'Updated successfully.'
+                }
+            })
+            #return HttpResponse(request.FILES)
         else:
             raise Http404
     else:
@@ -148,36 +220,51 @@ def AddNewDocumentMemberPanel(request):
 def EditDocumentMemberPanel(request):
     # Documents must be queried based on document title and user_id
     # Permission
-    return HttpResponse('EditDocumentMemberPanel')
     if request.is_ajax():
         if request.method == 'POST':
             #handling whole images have been sent from client still remained(it is just a for...)
             files = request.FILES.getlist('photo_0', False)
             photo_name = request.POST.get('photo_0_name', False)
-            physician = User.objects.filter(last_name = request.POST.get('supervisor', None))
-            document = Documents.objects.filter(title = request.POST.get('title', None), user_id = request.POST.get('user_id', None))
+            user_id = request.POST.get('user_id', None)
+            try:
+                uuid = UserUUID.objects.get(user_id = user_id)
+                physician = User.objects.get(last_name = request.POST.get('supervisor', None))
+                document = Documents.objects.get(id = request.POST.get('document_id', None), title = request.POST.get('title', None), user_id = user_id)
+            except ObjectDoesNotExist:
+                uuid = None
+                physician = None
+
+            if uuid is None:
+                return JsonResponse({
+                    'modal': false, 
+                    'notification': { 
+                        'type': 'error',
+                        'message': 'uuid or physician or document is none.'
+                    }
+                })
             if physician and document and files:
                 document.date = request.POST.get('date', None)
                 document.physician_id = physician.id
-                # document = Documents.objects.create(title = request.POST.get('title', None),
-                #             date = request.POST.get('date', None), comment = LORE_IPSUM, user_id = 2, 
-                #             doccatsubmenu_id = 2, category_id = 7, physician_id = physician.id, attachment = 1)
                 document.save()
-                handle_uploaded_doc_files(document.pk+1000, files, photo_name)
+                handle_uploaded_doc_files(uuid.user_uuid.hex, document.uuid_document.document_uuid, files, photo_name)
+                #handle_uploaded_doc_files(document.pk+1000, files, photo_name)
                 return JsonResponse({
-                'modal': True, 
-                'notification': { 
-                    'type': 'success',
-                    'message': 'Updated successfully.'
-                }
+                    'modal': True, 
+                    'notification': { 
+                        'type': 'success',
+                        'message': 'Updated successfully.'
+                    }
                 })
             else: 
                 return JsonResponse({
-                'modal': False, 
-                'notification': { 
-                    'type': 'error',
-                    'message': 'document and its dependencies does not exist'
-                }
+                    'modal': False, 
+                    'notification': { 
+                        'type': 'error',
+                        'message': 'document and its dependencies does not exist',
+                        'physician': physician.id,
+                        'document': document.id,
+                        'files': files
+                    }
                 })
         else:
             raise Http404
@@ -217,6 +304,9 @@ def RemoveDocumentMemberPanel(request):
     else:
         raise Http404
 
+@api_view(['POST', 'GET'])
+@authentication_classes((SessionAuthentication,))
+@permission_classes((IsAuthenticated,))
 def Categories(request):
     if request.is_ajax():
         cats = DocCategories.objects.all().order_by('index')
@@ -227,6 +317,20 @@ def Categories(request):
         return HttpResponse(content)
     else:
         return Http404
+
+@api_view(['POST', 'GET'])
+@authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
+def ServiceCategories(request):
+    if request.is_ajax():
+        cats = DocCategories.objects.all().order_by('index')
+        catSerializer = DocCategoriesSerializer(cats, many=True)
+        #return HttpResponse(catSerializer)
+        json = {'DocCats': catSerializer.data}
+        content = JSONRenderer().render(json)
+        return HttpResponse(content)
+    else:
+        return HttpResponse("content")
 
 def SpecialistsHistory(request):
     # 127.0.0.1:8000/patientdoc/specialists/history/
@@ -246,6 +350,10 @@ def SpecialistsHistory(request):
     else:
         return Http404
 
+
+@api_view(['POST', 'GET'])
+@authentication_classes((SessionAuthentication,))
+@permission_classes((IsAuthenticated,))
 def MemberDocuments(request, user_id):
     member_info = get_object_or_404(User, id=user_id)
     #cats = DocCategories.objects.all()
@@ -266,6 +374,33 @@ def MemberDocuments(request, user_id):
     else:
         raise Http404
 
+
+@api_view(['POST', 'GET'])
+@authentication_classes((TokenAuthentication,))
+@permission_classes((IsAuthenticated,))
+def ServiceMemberDocuments(request):
+    if request.is_ajax():
+        if request.user.is_authenticated:
+            member_info = get_object_or_404(User, username=request.user)
+            #cats = DocCategories.objects.all()
+            docs = Documents.objects.filter(user_id=member_info.id).order_by('date')
+            record_id = 0
+            if docs:
+                atch_files = list_atch_files(docs[0].id)
+        
+            #catSerializer = DocCategoriesSerializer(cats)
+            docSerializer = DocumentsSerializer(docs, many = True)
+            memSerializer = UserSerializer(member_info)
+            json = {'Docs': docSerializer.data,
+                'MemberInfo': memSerializer.data}
+            content = JSONRenderer().render(json)
+            #return JsonResponse(json, safe=False)
+            return HttpResponse(content) 
+        else:
+            return HttpResponse('Invalid User') 
+    else:
+        return HttpResponse('request must be the ajax type')
+
 def Dashboard(request):
     rtl = get_language_bidi()
     return render(request, 'patientdoc/dashboard.html', {'rtl':rtl})
@@ -282,11 +417,17 @@ def Member(request):
             SPANISH_LANGUAGE_CODE = request.POST.get('language', None)
             if SPANISH_LANGUAGE_CODE:    
                 translation.activate(SPANISH_LANGUAGE_CODE)
-                return render(request, 'member/member.html', {'rtl':get_language_bidi()})
+                username = request.user
+                user = User.objects.get(username = username)
+                user_uuid = User.objects.get(username = request.user).uuid_user.user_uuid
+                route_to_image = 'uploads/profilePics/'+ user_uuid.hex + '/' + 'amir.png'
+                return render(request, 'member/member.html', {'rtl':get_language_bidi(), 'Token':username, 'user_uuid': user_uuid.hex})
             else:
                 raise Http404
     else:
-        return render(request, 'member/member.html', {'rtl':get_language_bidi()})
+        user_uuid = User.objects.get(username = request.user).uuid_user.user_uuid
+        route_to_image = 'uploads/profilePics/'+ user_uuid.hex + '/' + 'amir.png'
+        return render(request, 'member/member.html', {'rtl':get_language_bidi(), 'Token':request.user, 'user_uuid': user_uuid.hex})
 
 @login_required(login_url="/authenticate/login/")
 def MemberFemale(request):
@@ -300,9 +441,10 @@ def MemberFemale(request):
             raise Http404    
     else:
         rtl = get_language_bidi()
-        return render(request, 'member/member.html', {'panel': 'panel', 'rtl':rtl})
+        username = request.user
+        user = User.objects.get(username = username)
+        return render(request, 'member/member.html', {'panel': 'panel', 'rtl':rtl, 'Token': user.auth_token})
         
-
 def DocCatMem(request, _id, _cat):
     member_info = get_object_or_404(Members, user_id=_id)
     cats = DocCategories.objects.get(id=_cat)
@@ -320,6 +462,112 @@ def DocCatMem(request, _id, _cat):
         content = JSONRenderer().render(json)
         #return JsonResponse(json, safe=False)
         return HttpResponse(content) 
+    else:
+        raise Http404
+
+def MemberHistoryDocument(request):
+    if request.method == 'POST':
+        if request.is_ajax():
+            return HttpResponse('MemberHistoryDocument')
+        else:
+            raise Http404
+    else:
+        raise Http404
+
+@api_view(['POST'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+@csrf_exempt
+def AddMemberHistory(request):
+    success = {
+                'modal': True, 
+                'notification': { 
+                    'type': 'success',
+                    'message': 'Updated successfully.'
+                }
+            }
+    error = {
+        'modal': False, 
+        'notification': { 
+            'type': 'error',
+            'message': 'user does not exist'
+        }
+    }
+    if request.method == 'POST':
+        if request.is_ajax():
+            #return HttpResponse(request.user())
+            user, patient_history, history_category = [None, None, None]
+            try:
+                history_category = HistoryCategory.objects.filter(name = request.POST.get('title', None))[:1].get()
+            except ObjectDoesNotExist:
+                #Check index must be added
+                history_category = HistoryCategory.objects.create(name = request.POST.get('title', None), rtl_name = 'فارسیه همین انگلیسیه')
+                history_category.save()
+            try:
+                user = User.objects.get(username = request.user)
+            except ObjectDoesNotExist:
+                return JsonResponse(error)
+            history = request.POST.get('history', None)
+            try:
+                patient_history = PatientHistory.objects.filter(user_id = user.id, category_id = history_category.id)[:1].get()
+                patient_history.context = history
+                patient_history.save()
+            except ObjectDoesNotExist:
+                patient_history = PatientHistory.objects.create(user_id = user.id, title = 'blob', context = history, category_id = history_category.id, user_created_id = user.id)
+                patient_history.save()
+
+            return JsonResponse(success)
+        else:
+            raise Http404
+    else:
+        raise Http404
+
+@api_view(['POST'])
+@authentication_classes((SessionAuthentication, TokenAuthentication))
+@permission_classes((IsAuthenticated,))
+@csrf_exempt
+def RemoveMemberHistory(request):
+    if request.method == 'POST':
+        if request.is_ajax():
+            return HttpResponse('RemoveMemberHistory')
+        else:
+            raise Http404
+    else:
+        raise Http404
+
+def HistoryCategoryService(request):
+    if request.method == 'POST':
+        if request.is_ajax():
+            raise Http404
+        else:
+            raise Http404
+    else:
+        history_category = HistoryCategory.objects.all()
+        history_category_serialize = HistoryCategorySerializer(history_category, many=True)
+        json = {'data': history_category_serialize.data}
+        content = JSONRenderer().render(json)
+        return HttpResponse(content)
+
+
+# @api_view(['POST'])
+# @authentication_classes((SessionAuthentication, TokenAuthentication))
+# @permission_classes((IsAuthenticated,))
+# @csrf_exempt
+def GetUserHistory(request):
+    if request.method == 'POST':
+        if request.is_ajax():
+            #username = request.user
+            user_id = request.POST.get('user_id', None)
+            #user = User.objects.get(username = username)
+            patient_histories = PatientHistory.objects.filter(user_id = user_id).values('category_id')            
+            history_categories = HistoryCategory.objects.filter(id__in = patient_histories)
+            history_categories_serialize = OneUserHistorySerializer(history_categories, many = True)
+            json = {'data': history_categories_serialize.data}
+            content = JSONRenderer().render(json)
+            return HttpResponse(content)
+            #return HttpResponse('GetUserHistory')
+        else:
+            raise Http404
     else:
         raise Http404
 

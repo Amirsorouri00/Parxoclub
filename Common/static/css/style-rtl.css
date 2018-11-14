@@ -1419,7 +1419,12 @@ d8'   .8P 88.  ... 88.  .88 88       88.  ... 88    88     88     88 88.  ...   
     left: auto;
     direction: rtl;
 }
-
+.search-result-wrapper.chat-search {
+    right: 0px;
+    top: 50px;
+    width: 100%;
+ 
+}
 .search-result-panel {}
 
 .search-result-panel .search {}

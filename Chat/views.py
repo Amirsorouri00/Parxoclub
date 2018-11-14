@@ -7,6 +7,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 from rest_framework.authentication import BasicAuthentication, \
     SessionAuthentication, TokenAuthentication
 from rest_framework.decorators import api_view, authentication_classes, \
@@ -49,8 +50,8 @@ def UserChats(request, userId):
         return HttpResponse(content)
 # Create your views here.
 
-@csrf_exempt
-@api_view(['POST', 'GET'])
+@login_required(login_url="/authenticate/login/")
+#@api_view(['POST'])
 @authentication_classes((SessionAuthentication, TokenAuthentication))
 @permission_classes((IsAuthenticated,))
 # @method_decorator(csrf_exempt, name='get')
@@ -81,12 +82,12 @@ def Chat(request):
                 translation.activate(SPANISH_LANGUAGE_CODE)
                 user = User.objects.get(username = request.user)
                 users = User.objects.all()
-                return render(request, 'chat/chats.html', {'user_id': user.id, 'users':users, 'rtl':translation.get_language_bidi()})
+                return render(request, 'chat/chats.html', {'user_id': user.uuid_user.user_uuid.hex, 'users':users, 'rtl':translation.get_language_bidi()})
             else: raise Http404
     else:
         user = User.objects.get(username = request.user)
         users = User.objects.all()
-        return render(request, 'chat/chats.html', {'user_id': user.id, 'users':users, 'rtl':translation.get_language_bidi()})
+        return render(request, 'chat/chats.html', {'user_id': user.uuid_user.user_uuid.hex, 'users':users, 'rtl':translation.get_language_bidi()})
 
 
 '''

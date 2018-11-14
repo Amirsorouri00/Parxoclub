@@ -25,7 +25,7 @@ SECRET_KEY = 'a#q)kcoi_z0&f7yqcb)c#@iw+cdb4a5#-5!48$krjv9&%4+(s5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '185.211.58.216', 'praxo-co.ir', 'www.praxo-co.ir', 'praxo.ir']
+ALLOWED_HOSTS = [ '185.211.58.216', 'praxo-co.ir', 'www.praxo-co.ir', 'praxo.ir', 'www.praxo.ir']
 
 
 # Application definition
@@ -40,11 +40,13 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     #'stream.apps.StreamConfig',
     'django.contrib.staticfiles',
+    'safedelete',
+    'Common',
     'channels', # Required for ChatApp
     'PatientDoc',
     'Member',
     'Chat',
-    'Common',
+    'News',
     'Calendar',
     'Log',
 ]
@@ -86,6 +88,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'PraxoClub.wsgi.application'
+ASGI_APPLICATION = 'PraxoClub.routing.application'
 
 
 # Database
@@ -108,11 +111,12 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    )
+    ]
+
 }
 
 
@@ -166,8 +170,10 @@ STATIC_URL = '/static/'
 #############################################################
 STATIC_URL = '/static/'
 # Path of static files in server
-PIC_UPLOAD_URL = './var/www/praxo-co.ir/static/uploads/profilePics/'
-DOC_UPLOAD_URL = './var/www/praxo-co.ir/static/uploads/docs/'
+PIC_UPLOAD_URL = '/var/www/praxo-co.ir/static/uploads/profilePics/'
+DOC_UPLOAD_URL = '/var/www/praxo-co.ir/static/uploads/docs/'
+NEWS_UPLOAD_URL = '/var/www/praxo-co.ir/static/uploads/news/'
+FILE_UPLOAD_URL = '/var/www/praxo-co.ir/static/uploads/files/'
 STATIC_ROOT = '/var/www/praxo-co.ir/static/'
 # Extra path of static files that django collectstatic looks for copy in STATIC_ROOT path.
 STATICFILES_DIRS = [

@@ -11,14 +11,43 @@
                 </div>
             </div>
         </div>
-        <div class="search-chat">
-            <form class="search-container">
-                <input id="search-box" class="search-box" type="text" name="search" required="">
-                <label class="search-label">{% trans "search" %}</label>
-            </form>
-        </div>
+        <!-- Search Results Panel -->
+            <div class="search-result-wrapper chat-search">
+                <div class="search-result-panel">
+                    <div class="search">
+                        <form class="container">
+                            <input id="idSearchBoxMember" type="text" name="search" required="" tabindex="-1" autocomplete="off">
+                            <label class="label">{% trans "Search" %}</label>
+                            <!-- <input class="button" type="reset"> -->
+                        </form>
+                    </div>
+                    <div id="idResultContainer" class="result-container">
+                        <div class="result-list">
+                            <div class="result-item">
+                                <div class="photo-container">
+                                    <div class="photo"></div>
+                                </div>
+                                <div class="detail">
+                                    <span class="name">Masoud Nourbakhsh</span>
+                                    <span class="position">Title/Position</span>
+                                </div>
+                            </div>
+                            <div class="result-item">
+                                <div class="photo-container">
+                                    <div class="photo"></div>
+                                </div>
+                                <div class="detail ">
+                                    <span class="name">Masoud Nourbakhsh</span>
+                                    <span class="position">Title/Position</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
         <div class="users-base-chat overlay-scroll">
-            <div class="user-chat">
+            <!-- <div class="user-chat">
                 <div class="photo-container-user-chat">
                     <div class="photo-user-chat"></div>
                 </div>
@@ -61,7 +90,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="chat-grouping">
                 <span>{% trans "Contacts" %}</span>
             </div>
@@ -88,7 +117,7 @@
                 </div>
             </div>
             {% for user in users %}
-            <div class="user-chat " user_id="{{ user.id }}">
+            <div class="user-chat " user_id="{{ user.uuid_user.user_uuid.hex }}">
                 <div class="photo-container-user-chat">
                     <div class="photo-user-chat"></div>
                 </div>

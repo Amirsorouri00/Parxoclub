@@ -7,11 +7,13 @@
         [{ 'direction': 'rtl' }], // text direction
         [{ 'font': [] }],
         [{ 'size': ['small', false, 'large', 'huge'] }], // custom dropdown         
-        ['image'], 
+        ['image'],
     ];
     var editor = new Quill('#historyEditor', {
         modules: {
+
             toolbar: toolbarOptions
+            //toolbar: '#toolbar'
         },
         theme: 'snow'
     });

@@ -23,13 +23,13 @@ $(function() {
     });
 });
 
-var userChatCurrent = null;
-$('.user-chat').click(function() {
-    if (userChatCurrent != null)
-        userChatCurrent.classList.toggle('active');
-    userChatCurrent = this;
-    userChatCurrent.classList.toggle('active');
-});
+// var userChatCurrent = null;
+// $('.user-chat').click(function() {
+//     if (userChatCurrent != null)
+//         userChatCurrent.classList.toggle('active');
+//     userChatCurrent = this;
+//     userChatCurrent.classList.toggle('active');
+// });
 
 var sideMenuCurrent = null;
 $('.sidemenu .base .column ').click(function() {

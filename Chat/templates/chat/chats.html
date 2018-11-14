@@ -1,9 +1,11 @@
 {% extends "common/index.html" %} {% load static %} {% block SocketJavascript %}
 <script src="{% static '/socket.io-client/dist/socket.io.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/my-luxon.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/axios.js' %}"></script>
 <script type="text/javascript">
 const user_id = '{{ user_id }}';
 const users = '{{users}}';
+const user_token = '{{ Token }}';
 </script>
 <!-- <script src="{% static '/luxon/build/node/luxon.js' %}"></script> -->
 {% endblock %}

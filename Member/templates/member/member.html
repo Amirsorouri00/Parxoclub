@@ -2,7 +2,46 @@
 <link rel="stylesheet" href="{% static 'css/praxo-dr-font.css' %}">
 <link rel="stylesheet" href="{% static 'css/slick.css' %}" />
 <link rel="stylesheet" href="{% static 'css/slick-theme.css' %}" />
-<link rel="stylesheet" href="{% static 'css/quills.css' %}"> {% endblock %}
+<link rel="stylesheet" href="{% static 'css/quills.css' %}"> {% endblock %}{% block SocketJavascript %}
+<script type="text/javascript">
+const user_token = '{{ Token }}';
+
+// class DocCatAjaxActiveClass {
+
+//   constructor() {
+//     this._column_index = 1;
+//     this._item_index = 1;
+//     this._icon_name = 'icon-timefill'
+//     this._panel_id = '#MemberDetailHistory'
+//     this._hide_id = '#MemberPanelDocumentDetail'
+//   }
+
+//   get column() {
+//     return this._column_index;
+//   }
+
+//   get item() {
+//     return this._item_index;
+//   }
+
+//   get icon() {
+//     return this._icon_name;
+//   }  
+
+//   get panel_id(){
+//     return this._panel_id;
+//   }
+
+//   get show_hide(){
+
+//   }
+// }
+//const users = '{{users}}';
+</script>
+<script src="{% static '/socket.io-client/dist/socket.io.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/my-luxon.js' %}"></script>{% endblock %}{% block HeadJavascript %}
+
+{% endblock %}
 <!-- Title Block -->
 {% block title %} | Member{% endblock %}
 <!-- After Side Nav Block Objects in index.html -->
@@ -18,13 +57,11 @@
 <!-- Member Search Plane -->
 {% include 'member/member-plane-search.html' %}
 <!-- Panel -->
-{% if panel %}
 <!-- In Panel -->
 {% include 'member/member-memberpanel-document-detail.html' %}
 <!-- Dashboard -->
-{% else %}
 <!-- Member Detail History -->
-{% include 'member/member-detail-history.html' %} {% endif %} {% endblock %}
+{% include 'member/member-detail-history.html' %} {% endblock %}
 <!-- After mobile menu back Block Objects in index.html  -->
 {% block menu-back-after-content %}
 <!-- Modal -->
@@ -52,18 +89,25 @@
 <!-- Modal Member Info -->
 {% include 'member/member-member-info-modal.html' %}
 <!-- Edit History Modal -->
-{% include 'patientdoc/patientdoc-edit-history-modal.html' %} {% endblock %} {% block EndJavascript %}
+{% include 'patientdoc/patientdoc-edit-history-modal.html' %} {% endblock %} {% block DashboardJavascript %}
+<script src="{% static 'js/quills.js' %}"></script>
+<script src="{% static 'js/quills-script-history.js' %}"></script>
+{% endblock %} {% block EndJavascript %}
 <script src="{% static 'js/carousel.js' %}"></script>
 <script src="{% static 'js/large-carousel/zoomer.js' %}"></script>
 <script src="{% static 'js/large-carousel/mousewheel.js' %}"></script>
 <script src="{% static 'js/large-carousel/large-carousel-zoom.js' %}"></script>
 <script src="{% static 'js/large-carousel/zoomer.js' %}"></script>
 <script src="{% static 'js/resize-carousel.js' %}"></script>
-<script src="{% static 'js/quills.js' %}"></script>
-<script src="{% static 'js/quills-script-history.js' %}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    $('.docs-main').hide()
+    $('#MemberCategoryMenu').hide()
+    $('.info').hide()
     DocumentCategories('GET', '{% url "doccategories" %}');
+    SendData("GET", '{% url "history_category" %}', '', Bind, ErrorManagement, 'HistoryCategory');
+    get_user_history_url = '{% url "get_user_history" %}';
+    // SendData("GET", '{% url "history_category" %}', '', Bind, ErrorManagement, 'HistoryCategory');
     Member('', '', '', '', '');
 });
 
@@ -80,16 +124,13 @@ function showPreviewImage_click(e) {
         console.log($('#' + preview));
         var inputFile = inputFiles[0];
         member_personal_image_file_temp = inputFile;
+        console.log('inputFile: ' + inputFile);
         var reader = new FileReader();
         reader.onload = function(event) {
-            //alert("I AM result: " + event.target.result);
             content = event.target.result;
             maintenance_add_user_photo = content;
-            // $('#news-photo-editor, #news-photo-editor_edit').css({ 'background-image': 'url(' + content + ')' });
-            $('.' + preview).css({ 'background-image': 'url(' + content + ')' });
-            // $(this).closest('#news-photo-editor').css({ 'background-image': 'url(' + event.target.result + ')' });
-            //img.title = '' + escape(theFile.name);
-            //$(this).closest('.news-photo-editor').append(img);
+            console.log('content: ' + content);
+            $('#' + preview).css({ 'background-image': 'url(' + content + ')' });
         };
         reader.onerror = function(event) {
             alert("I AM ERROR: " + event.target.error.code);
@@ -97,5 +138,39 @@ function showPreviewImage_click(e) {
         reader.readAsDataURL(inputFile);
     }
 }
+
+
+
+
+if ($(window).width() < 739) {
+    var transformRatio = 'translateX(-' + $(window).width() + 'px)';
+    $('body').on('click', ".member-menu .column .submenu .item ", function() {
+        $('.member-docs').css({
+            'transform': transformRatio,
+            'z-index': '100'
+        });
+    });
+    $('body').on('click', ".member-menu .column", function() {
+        var memberSubMenuCHeck = $(this).find('.submenu').length;
+        if (memberSubMenuCHeck != true) {
+            $('.member-docs').css({
+                'transform': transformRatio,
+                'z-index': '100'
+            });
+        }
+    });
+}
 </script>
+<!-- <script type="text/javascript">
+var options = {
+    debug: 'info',
+    modules: {
+        toolbar: '#toolbar'
+    },
+    placeholder: 'Compose an epic...',
+    readOnly: true,
+    theme: 'snow'
+};
+var editor = new Quill('#historyEditor', options);
+</script> -->
 {% endblock %}

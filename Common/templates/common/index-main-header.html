@@ -1,4 +1,4 @@
- {% load static %} {% load i18n %}
+ {% load static io %} {% load i18n %}
 <!-- Header -->
 <div class="header">
     <div class="nav">
@@ -17,7 +17,7 @@
     <div class="page">
         <div class="pattern"></div>
         <div id="idHeaderLangContainer" class="lang-container">
-            <span class="lang-name">{% get_current_language as LANGUAGE_CODE %} {{LANGUAGE_CODE|upper}}</span>
+            <span class="lang-name" lang_code="{{LANGUAGE_CODE}}">{% get_current_language as LANGUAGE_CODE %} {{LANGUAGE_CODE|upper}}</span>
             <div id="idLangExpander" class="lang-expander"></div>
         </div>
         <div id="idLangPanel" class="lang-panel" visible="false">
@@ -30,21 +30,25 @@
         </div>
         <div id="idHeaderUserContainer" class="user-container">
             <div class="seprator"></div>
-            <div class="photo"></div>
+            <div class="photo" style="background-image: url('{% amir_profile_pic user_uuid False %}')"></div>
             <span class="username">
                         <div class="overflow-ellipsis" style="max-width: 80px;">
-                            {% trans "Username" %}
+                            <!-- {% trans "Username" %}  -->
+                            <!-- {{ user.get_username }} -->
+                            {{ user.username }}
                         </div>
                     </span>
             <div id="idUserPanelExpander" class="expander"></div>
         </div>
         <div id="idUserPanel" class="user-panel" visible="false">
             <div id="idUserPanelContainer" class="container">
-                <div class="photo"></div>
+                <div class="photo" style="background-image: url('{% amir_profile_pic user_uuid False %}')"></div>
                 <div class="detail">
                     <span class="username">
                                 <div class="overflow-ellipsis" style="max-width: 400px;">
-                                   {% trans "Username" %} 
+                                   <!-- {% trans "Username" %}  -->
+                                   <!-- {{ user.get_username }} -->
+                                   {{ user.username }}
                                 </div>
                             </span>
                     <span class="position">{% trans "Position/Title" %}</span>

@@ -1,6 +1,49 @@
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
+
+import datetime
+from khayyam import JalaliDate, JalaliDatetime, TehranTimezone
+from django.utils import translation
+from django.utils.translation import get_language, \
+    get_supported_language_variant, ugettext_lazy as _
+
+class PraxoCalendarFunctions():
+    # language = ''
+    # mydate, mydatetime, January, February, mdays = [1,1,1,1,1]
+    
+    def __init__(self):
+        # language = self.SetLanguage()
+        # mydate, mydatetime, January, February, mdays = self.SetVars(self)
+        self.language = self.SetLanguage()
+        self.mydate, self.mydatetime, self.January, self.February, self.mdays = self.SetVars()
+    
+    def SetLanguage(self):
+        language = get_supported_language_variant(get_language(), strict=False)
+        return language
+
+    def SetVars(self):
+        language = self.SetLanguage()
+        if language == 'fa' or translation.get_language_bidi():
+            mydate = JalaliDate
+            mydatetime = JalaliDatetime
+            January = 1
+            February = 12
+            mdays = [0, 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29]
+            return mydate, mydatetime, January, February, mdays
+        else: 
+            mydate = datetime.date
+            mydatetime = datetime.datetime
+            January = 1
+            February = 2
+            mdays = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+            return mydate, mydatetime, January, February, mdays
+
+# class PraxoCalendarVariables(PraxoCalendarFunctions):
+#     language = SetLanguage()
+#     mydate, mydatetime, January, February, mdays = SetVars()
+
+
 LORE_IPSUM = 'Lorem ipsum dolor sit amet, ad viris mediocrem vis. Essent referrentur quo id, blandit recusabo in eos, mundi albucius ad duo. Sale utroque singulis pro at, mea affert dicunt no. Equidem hendrerit mediocritatem id vel, iudico alienum deserunt mea id. At eum eirmod vivendum.'
 
 

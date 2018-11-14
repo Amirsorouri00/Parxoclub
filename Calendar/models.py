@@ -1,18 +1,23 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
+from Common.models import SoftDeletionModel
+from safedelete.models import SafeDeleteModel
+from safedelete.models import HARD_DELETE_NOCASCADE, SOFT_DELETE, NO_DELETE
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 from Common.constants import EVENT_TYPE_COLOR_CHOICES
-
 # Create your models here.
 
 class EventType(models.Model):
+    #_safedelete_policy = NO_DELETE
     name = models.CharField(max_length=50)
-    color = models.CharField(max_length = 10 ,choices = EVENT_TYPE_COLOR_CHOICES, null = False)
+    rtl_name = models.CharField(max_length=50, default='تایپ', blank=True, null=True)
+    color = models.CharField(max_length = 10 ,choices = EVENT_TYPE_COLOR_CHOICES, blank = True, null = True)
 
 class Event(models.Model):
+    #_safedelete_policy = NO_DELETE
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, blank=True, null=True) #change to not nullable
     event_type =  models.ForeignKey(EventType, on_delete=models.PROTECT, blank=True, null=True)
     day_of_the_event = models.DateField(u'Day of the event', help_text=u'Day of the event')
@@ -20,6 +25,7 @@ class Event(models.Model):
     start_time = models.TimeField(u'Starting time', help_text=u'Starting time')
     end_time = models.TimeField(u'Final time', help_text=u'Final time')
     event_note = models.TextField(u'Textual Notes', help_text=u'Textual Notes', blank=True, null=True)
+    date_created = models.DateField()
 
     class Meta:
         verbose_name = u'Scheduling'

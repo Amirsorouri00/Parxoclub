@@ -1,0 +1,56 @@
+{% extends "common/index.html" %} {% load static %} {% block IndexCss %}
+<link rel="stylesheet" href="{% static 'css/quills.css' %}"> {% endblock %} {% block SocketJavascript %}
+<script type="text/javascript" src="{% static 'js/my-luxon.js' %}"></script>
+<script type="text/javascript">
+const user_token = '{{ Token }}';
+</script><!-- <script src="{% static '/luxon/build/node/luxon.js' %}"></script> -->
+{% endblock %}
+<!-- Title Block -->
+{% block title %} | News{% endblock %}
+<!-- After Side Nav Block Objects in index.html  -->
+{% block after_side_nav_content %}
+<!-- News wrapper -->
+{% include 'news/news-wrapper.html' %} {% endblock %}
+
+{% block menu-back-after-content %}
+<!-- Modal Add News -->
+{% include 'news/news-add-news-modal.html' %} {% endblock %} {% block EndJavascript %} 
+
+<script type="text/javascript">
+$(document).ready(function() {
+	SendData("GET", '{% url "get_all_news" %}', '', Bind, ErrorManagement, 'GetAllNews');
+    News('', '', '', '', '');
+});
+
+$(function() {
+    $("#AddNewsFiles").change(showPreviewImage_click);
+})
+
+function showPreviewImage_click(e) {
+    var inputFiles = this.files;
+    if (inputFiles == undefined || inputFiles.length == 0) return;
+    else {
+        preview = $(this).attr('preview').toString();
+        console.log('preview: ' + preview);
+        console.log($('#' + preview));
+        var inputFile = inputFiles[0];
+        member_personal_image_file_temp = inputFile;
+        console.log('inputFile: ' + inputFile);
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            content = event.target.result;
+            maintenance_add_user_photo = content;
+            console.log('content: ' + content);
+            $('#' + preview).css({ 'background-image': 'url(' + content + ')' });
+        };
+        reader.onerror = function(event) {
+            alert("I AM ERROR: " + event.target.error.code);
+        };
+        reader.readAsDataURL(inputFile);
+    }
+}
+</script>
+{% endblock %} {% block DashboardJavascript %}
+<script src="{% static 'js/quills.js' %}"></script>
+<script src="{% static 'js/quills-script-news.js' %}"></script>
+{% endblock %} 

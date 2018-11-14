@@ -7,10 +7,10 @@
             <div class="text-header-change-photo">{% trans "change photo of" %} <span>Tahmine Molaei</span></div>
         </div>
         <form id="changeUserPhotoModal" action="{% url 'change_user_photo'%}" method="Post" enctype="multipart/form-data" class="photo-editor-container">
-            <div class="photo-editor" style="background-image: url();"></div>
+            <div id="changeUserPhotoModalPreview" class="photo-editor" style="background-image: url();"></div>
             <div class="edit-btn-wrapper">
                 <div class="edit-btn-container">
-                    <input id="personal_photo_change" preview="photo-editor" class="edit-btn btn-taint icon-browse" type="file" accept=".jpg,.png,.bmp" style="padding-left: 0.5em;" title="Browse" tabindex="1">
+                    <input id="personal_photo_change" preview="changeUserPhotoModalPreview" class="edit-btn btn-taint icon-browse" type="file" accept=".jpg,.png,.bmp" style="padding-left: 0.5em;" title="Browse" tabindex="1">
                 </div>
                 <div class="edit-btn-container">
                     <div class="edit-btn  btn-taint icon-rotateleft" title="Rotate left" tabindex="1"></div>
